@@ -133,6 +133,8 @@ print('------Dilating WM mask')
 aryData = skimrp.binary_dilation(aryData)
 aryData = skimrp.binary_dilation(aryData)
 aryData = skimrp.binary_dilation(aryData)
+aryData = skimrp.binary_dilation(aryData)
+aryData = skimrp.binary_dilation(aryData)
 
 # Save mask:
 
