@@ -14,13 +14,13 @@ echo "-BBR registration"
 ### Define session IDs & paths
 
 # Parent directory:
-strParent="/home/john/Desktop/20151130_02_distcor_02092016/"
+strParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/"
 
 # Subdirectories:
-strSub01="${strParent}mp2rage/03_reg/07_up/"
-strSub02="${strParent}mp2rage/03_reg/08_bbr_prep/"
-strSub03="${strParent}mp2rage/03_reg/09_bbr/"
-strSub04="${strParent}mp2rage/03_reg/10_inv_bbr/"
+strSub01="${strParent}mp2rage/03_reg/07_reg/01_in/"
+strSub02="${strParent}mp2rage/03_reg/07_reg/02_bbr_prep/"
+strSub03="${strParent}mp2rage/03_reg/07_reg/03_bbr/"
+strSub04="${strParent}mp2rage/03_reg/07_reg/04_inv_bbr/"
 
 # Combined mean:
 strCombMean="combined_mean"
@@ -31,14 +31,14 @@ strInv2="mp2rage_inv2"
 strPdw="mp2rage_pdw"
 strT1w="mp2rage_t1w"
 
+# Brain mask for T1w mp2rage image:
+strMaskBrainT1w="bbrmask"
+
 # # White matter mask:
 # strMaskWm="wm_mask_for_bbr"
 
-# Brain mask for T1w mp2rage image:
-strMaskBrainT1w="brain_mask_t1w_for_bbr_v03_down"
-
-# # Brain mask for combined mean image:
-# strMaskBrainCombMean="brain_mask_combmean_for_bbr_v01"
+# Brain mask for combined mean image:
+strMaskBrainCombMean="bbrmask"
 #-------------------------------------------------------------------------------
 
 
@@ -51,13 +51,15 @@ fslmaths \
 ${strSub01}${strT1w} \
 -mul \
 ${strSub02}${strMaskBrainT1w} \
-${strSub02}${strT1w}_brain
+${strSub02}${strT1w}_brain &
 
-#fslmaths \
-#${strSub01}${strCombMean} \
-#-mul \
-#${strSub02}${strMaskBrainCombMean} \
-#${strSub02}${strCombMean}_brain &
+fslmaths \
+${strSub01}${strCombMean} \
+-mul \
+${strSub02}${strMaskBrainCombMean} \
+${strSub02}${strCombMean}_brain &
+
+wait
 
 echo "---Done"
 #-------------------------------------------------------------------------------
@@ -69,7 +71,7 @@ echo "---Done"
 echo "---Calculate transformation matrix"
 
 epi_reg \
---epi=${strSub01}${strCombMean} \
+--epi=${strSub02}${strCombMean}_brain \
 --t1=${strSub01}${strT1w} \
 --t1brain=${strSub02}${strT1w}_brain \
 --out=${strSub03}bbr_reg
@@ -136,4 +138,3 @@ echo "---Done"
 
 
 # To be followed by semi-manual segmentation.
-
