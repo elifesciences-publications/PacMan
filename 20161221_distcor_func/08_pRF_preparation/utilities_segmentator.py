@@ -21,6 +21,7 @@ from __future__ import division
 import numpy as np
 import warnings
 
+
 def aniso_diff_3D(stack, niter=1, kappa=50, gamma=0.1, step=(1., 1., 1.),
                   option=1, ploton=False):
     """3D anisotropic diffusion based smoothing.
@@ -28,7 +29,7 @@ def aniso_diff_3D(stack, niter=1, kappa=50, gamma=0.1, step=(1., 1., 1.),
     Acknowledgements
     ----------------
     This script is adapted from a stackoverflow  post by user ali_m:
-    [1] http://stackoverflow.com/questions/10802611/anisotropic-diffusion-2d-image
+    [1] http://stackoverflow.com/questions/10802611/anisotropic-diffusion-2d-image  #noqa
     [2] http://pastebin.com/sBsPX4Y7
 
     Parameters

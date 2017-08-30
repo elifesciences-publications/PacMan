@@ -62,7 +62,7 @@ for idxIn in range(varNumIn):
 
     print('--Loading data')
 
-    # Path of current nii file:    
+    # Path of current nii file:
     strNiiTmp = lstFunc[idxIn].format(strPrnt)
 
     print(('---Loading functional data: ' + strNiiTmp))
@@ -104,7 +104,7 @@ for idxIn in range(varNumIn):
     # set all values outside the mask to zero; however, if some of the nii
     # data points have low intensities close to zero this may not properly
     # restrict the smoothing operation. Thus, we set the datapoints outside
-    # the mask to a much lower value. 
+    # the mask to a much lower value.
     aryNii[aryNiiMsk, :] = -10000.0
 
     # *************************************************************************
@@ -169,7 +169,6 @@ for idxIn in range(varNumIn):
                                                 step=(1.0, 1.0, 1.0),
                                                 option=1,
                                                 ploton=False)
-
 
         # Increment status indicator counter:
         varCntSts02 = varCntSts02 + 1

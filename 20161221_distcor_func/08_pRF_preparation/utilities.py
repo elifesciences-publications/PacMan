@@ -17,14 +17,14 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import numpy as np
+import numpy as np  #noqa
 import nibabel as nb
 
 
 def fncLoadNii(strPathIn):
     """
     Load nii file.
-    
+
     Parameters
     ----------
     strPathIn : str
@@ -51,4 +51,3 @@ def fncLoadNii(strPathIn):
     aryAff = objNii.affine
     # Output nii data as numpy array and header:
     return aryNii, objHdr, aryAff
-
