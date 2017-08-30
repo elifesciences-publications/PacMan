@@ -22,7 +22,7 @@
 import numpy as np
 import nibabel as nb
 from utilities import fncLoadNii
-from aniso_smooth import aniso_diff_3D
+from utilities_segmentator import aniso_diff_3D
 
 
 # *****************************************************************************
@@ -54,8 +54,6 @@ strSuff = '_aniso_smth.nii.gz'
 # *** Loop through input files
 
 print('-Smoothing of functional data within grey matter mask.')
-
-idxIn = 0
 
 for idxIn in range(varNumIn):
 
@@ -110,25 +108,79 @@ for idxIn in range(varNumIn):
     aryNii[aryNiiMsk, :] = -10000.0
 
     # *************************************************************************
-    # *** Smoothing
-
-    print('--Applying smoothing')
+    # *** Prepare status indicator
 
     # Number of volumes (time points):
     varNumVol = aryNii.shape[3]
 
+    varStsStpSze = 20
+
+    # Vector with pRF values at which to give status feedback:
+    vecStatVol = np.linspace(0,
+                             varNumVol,
+                             num=(varStsStpSze+1),
+                             endpoint=True)
+    vecStatVol = np.ceil(vecStatVol)
+    vecStatVol = vecStatVol.astype(int)
+
+    # Vector with corresponding percentage values at which to give status
+    # feedback:
+    vecStatPrc = np.linspace(0,
+                             100,
+                             num=(varStsStpSze+1),
+                             endpoint=True)
+    vecStatPrc = np.ceil(vecStatPrc)
+    vecStatPrc = vecStatPrc.astype(int)
+
+    # Counter for status indicator:
+    varCntSts01 = 0
+    varCntSts02 = 0
+
+    # *************************************************************************
+    # *** Smoothing
+
+    print('--Applying smoothing')
+
     for idxVol in range(varNumVol):
 
-        print(('---Volume ' + str(idxVol) + ' of ' + str(varNumVol)))
+        # Status indicator:
+        if varCntSts02 == vecStatVol[varCntSts01]:
+
+            # Prepare status message:
+            strStsMsg = ('------------Progress: ' +
+                         str(vecStatPrc[varCntSts01]) +
+                         ' % --- ' +
+                         str(vecStatVol[varCntSts01]) +
+                         ' volumes out of ' +
+                         str(varNumVol))
+
+            print(strStsMsg)
+
+            # Only increment counter if the last value has not been
+            # reached yet:
+            if varCntSts01 < varStsStpSze:
+                varCntSts01 = varCntSts01 + int(1)
 
         # Apply smoothing to current volume:
         aryNii[:, :, :, idxVol] = aniso_diff_3D(aryNii[:, :, :, idxVol],
-                                                niter=1,
-                                                kappa=50,
+                                                niter=3,
+                                                kappa=70,
                                                 gamma=0.1,
                                                 step=(1.0, 1.0, 1.0),
                                                 option=1,
                                                 ploton=False)
+
+
+        # Increment status indicator counter:
+        varCntSts02 = varCntSts02 + 1
+
+    # *************************************************************************
+    # *** Post-processing
+
+    print('--Post-processing')
+
+    # Set masked-out values back to zero:
+    aryNii[aryNiiMsk, :] = 0.0
 
     # *************************************************************************
     # *** Save result
