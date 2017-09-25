@@ -65,7 +65,7 @@ varYmax = 5.19
 varYstep = 40.0
 
 # Minimum pRF size in degree of visual angle:
-varSdMin = 0.2
+varSdMin = 0.1
 
 # In order to calculate the overlap between the visual stimulus and each
 # voxel's receptive field more accurately, we supersample the visual stimulus
@@ -73,7 +73,7 @@ varSdMin = 0.2
 # 40 sampling points along the x or y axis for the pRF fitting, we use
 # 40 * 10 = 400 sampling points along this dimension for the calculation of the
 # overlap):
-varSupSmp = 2.0
+varSupSmp = 5.0
 
 # Radius of PacMan [degrees of visual angel]:
 varPacRad = 5.0
