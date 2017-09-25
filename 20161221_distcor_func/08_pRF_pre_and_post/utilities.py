@@ -44,7 +44,7 @@ def fncLoadNii(strPathIn):
     # Load nii file (this doesn't load the data into memory yet):
     objNii = nb.load(strPathIn)
     # Load data into array:
-    aryNii = objNii.get_data()
+    aryNii = objNii.get_data().astype(np.float32)
     # Get headers:
     objHdr = objNii.header
     # Get 'affine':
