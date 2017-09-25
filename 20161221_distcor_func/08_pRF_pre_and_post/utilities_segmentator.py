@@ -150,7 +150,7 @@ def aniso_diff_3D(stack, niter=1, kappa=50, gamma=0.1, step=(1., 1., 1.),
             S = gS*deltaS
 
             # subtract a copy that has been shifted 'Up/North/West' by one
-            # pixel. don't as questions. just do it. trust me.
+            # pixel.
             UD[:] = D
             NS[:] = S
             EW[:] = E
