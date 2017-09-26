@@ -29,25 +29,26 @@ from utilities_segmentator import aniso_diff_3D
 # *** Parameters
 
 # Parent path of input data:
-strPrnt = '/home/john/Documents/20161221/'
+strPrnt = '/home/john/Desktop/20161221_smth/'
 
 # Path of functional runs to perform smoothing on (parent path left open):
-lstFunc = ['{}func_regAcrssRuns_cube/func_07.nii',
-           '{}func_regAcrssRuns_cube/func_08.nii',
-           '{}func_regAcrssRuns_cube/func_09.nii',
-           '{}func_regAcrssRuns_cube/func_10.nii']
+lstFunc = ['{}func_07_up.nii',
+           '{}func_08_up.nii',
+           '{}func_09_up.nii',
+           '{}func_10_up.nii']
 
 varNumIn = len(lstFunc)
 
 # List of grey matter masks to restrict smoothing (parent path left open):
-lstMsk = ['{}retinotopy/mask/20161221_mp2rage_seg_v26_gm_down_bin.nii.gz'] * varNumIn
+lstMsk = ['{}20161221_mp2rage_seg_v26_gm.nii.gz'] \
+         * varNumIn
 
 # Value of grey matter within mask (smoothing will be restricted to these
 # regions):
 varMsk = 1
 
 # Suffix for output files (will be saved in same directory as input files):
-strSuff = '_aniso_smth.nii.gz'
+strSuff = '_aniso_smth_n4_k90_g0p2.nii'
 
 
 # *****************************************************************************
@@ -163,7 +164,7 @@ for idxIn in range(varNumIn):
 
         # Apply smoothing to current volume:
         aryNii[:, :, :, idxVol] = aniso_diff_3D(aryNii[:, :, :, idxVol],
-                                                niter=2,
+                                                niter=4,
                                                 kappa=90,
                                                 gamma=0.2,
                                                 step=(1.0, 1.0, 1.0),

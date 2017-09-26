@@ -2,7 +2,7 @@
 
 echo "-----------PART 1: 1st level feat:-----------"
 
-str_path="/home/john/PhD/Analysis_Scripts/Analysis_Scripts_347_10012017/Miscellaneous/PacMan/20161221_distcor_func/02_feat/level_1_fsf/"
+str_path="/home/john/PhD/GitHub/PacMan/20161221_distcor_func/02_feat/level_1_fsf/"
 
 echo "feat on runs 01 to 06"
 date
@@ -15,4 +15,3 @@ feat "${str_path}feat_level_1_func_06.fsf" &
 wait
 date
 echo "done"
-

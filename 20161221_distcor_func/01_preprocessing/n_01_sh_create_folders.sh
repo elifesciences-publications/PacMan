@@ -58,10 +58,9 @@ then
 	mkdir "${str_path_parent}/nii_distcor/func_op_inv"
 	mkdir "${str_path_parent}/nii_distcor/func_regAcrssRuns"
 	mkdir "${str_path_parent}/nii_distcor/func_regAcrssRuns_cube"
-	mkdir "${str_path_parent}/nii_distcor/func_regAcrssRuns_cube_up"
-	mkdir "${str_path_parent}/nii_distcor/func_regAcrssRuns_cube_averages"
 	mkdir "${str_path_parent}/nii_distcor/func_regAcrssRuns_cube_tSNR"
-	mkdir "${str_path_parent}/nii_distcor/func_regAcrssRuns_cube_tSNR_up"
+  mkdir "${str_path_parent}/nii_distcor/func_regAcrssRuns_cube_up"
+	mkdir "${str_path_parent}/nii_distcor/func_regAcrssRuns_cube_up_tSNR"
 	mkdir "${str_path_parent}/nii_distcor/func_regAcrssRuns_tsnr"
 	mkdir "${str_path_parent}/nii_distcor/func_regWithinRun"
 	mkdir "${str_path_parent}/nii_distcor/func_regWithinRun_op"
@@ -144,4 +143,3 @@ else
 	echo "Directory for ${str_session_ID} does already exist."
 fi
 #-------------------------------------------------------------------------------
-
