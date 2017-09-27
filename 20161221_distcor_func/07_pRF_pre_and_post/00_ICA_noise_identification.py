@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 """
 Identify noise components in MELODIC output.
 
@@ -7,6 +8,7 @@ The purpose of this script is to help identify noise components in MELODIC ICA
 output. To this end, independent components are sorted based on the ratio of
 intensity within and outside of grey matter.
 """
+
 
 # Part of PacMan library
 # Copyright (C) 2017  Ingo Marquardt
@@ -23,6 +25,7 @@ intensity within and outside of grey matter.
 #
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 # *****************************************************************************
 # *** Import modules
@@ -62,9 +65,6 @@ aryMsk, _, _ = fncLoadNii(strPathMsk)
 aryMsk = np.greater(aryMsk,
                     np.min(aryMsk))
 # *****************************************************************************
-
-
-idxRun = '07'
 
 
 # *****************************************************************************
@@ -112,14 +112,32 @@ for idxRun in lstRun:
     # *************************************************************************
     # *** Export results (text)
 
-#    # Vector for x-data:
-#    vecX = np.arange(0.0, vecRatio.shape[0])
-#
-#    # Put array with ICA ratios into pandas dataframe:
-#    pd.DataFrame(data=aryRatio,    # values
-#                 index=data[1:,0],    # 1st column as index
-#                 columns=data[0,1:])  # 1st row as the column names
+    # Vector for x-data:
+    vecX = np.arange(0, vecRatio.shape[0], dtype=np.int16)
 
+    # Put array with ICA ratios into pandas dataframe:
+    pndRatio = pd.DataFrame(data=aryRatio,
+                            index=vecX,
+                            columns=['Component', 'Ratio'])
+
+    # Change datatype of components column:
+    pndRatio['Component'] = pndRatio['Component'].astype(np.int16)
+
+    # Round ratio values:
+    pndRatio['Ratio'] = np.around(pndRatio['Ratio'], decimals=3)
+
+    # Temporary path for output file:
+    strPathTmp = (strPathOut + 'ICA_ratio_' + idxRun + '.txt')
+
+    # Save dataframe to text file:
+    pndRatio.to_csv(strPathTmp, header=True, index=False, sep='\t')
+
+    # Convert dataframe to unicode object (latex formatting):
+    # uniRatio = pndRatio.to_latex()
+    # Save to disk:
+    # fleRatio = open(strPathTmp, 'w')
+    # fleRatio.write(uniRatio)
+    # fleRatio.close()
     # *************************************************************************
 
     # *************************************************************************
