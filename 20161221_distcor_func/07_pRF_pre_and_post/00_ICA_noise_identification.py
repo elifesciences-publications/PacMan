@@ -110,6 +110,39 @@ for idxRun in lstRun:
     # *************************************************************************
 
     # *************************************************************************
+    # *** Indicies of highest ratios
+
+    # Percentile threshold:
+    varThr = 75.0
+
+    # Pecentile:
+    varPrcnt = np.percentile(aryRatio[:, 1], varThr)
+
+    # Array indicies of ratios above percentile:
+    vecLgcPrcnt = np.greater(aryRatio[:, 1], varPrcnt)
+
+    # Indicies of MELODIC ICA components above percentile:
+    vecUpIdx = aryRatio[vecLgcPrcnt, 0].astype(np.int16)
+
+    # Temporary path for output file:
+    strPathTmp = (strPathOut + 'ICA_remove_' + idxRun + '.txt')
+
+    # Header with information:
+    strHdrTmp = ('ICA components to remove, based on upper '
+                 + str(varThr)
+                 + 'th percentile for run '
+                 + idxRun
+                 + ': ')
+
+    # Save to text file:
+    np.savetxt(strPathTmp,
+               vecUpIdx,
+               fmt='%i',
+               newline=',',  # delimiter=',',
+               header=strHdrTmp)
+    # *************************************************************************
+
+    # *************************************************************************
     # *** Export results (text)
 
     # Vector for x-data:
