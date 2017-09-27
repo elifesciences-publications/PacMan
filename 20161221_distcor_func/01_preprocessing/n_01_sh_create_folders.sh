@@ -96,6 +96,7 @@ then
 	mkdir "${str_path_parent}/nii_distcor/retinotopy/pRF_results"
 	mkdir "${str_path_parent}/nii_distcor/retinotopy/pRF_results_up"
 	mkdir "${str_path_parent}/nii_distcor/retinotopy/pRF_stimuli"
+	mkdir "${str_path_parent}/nii_distcor/retinotopy/ICA_noise_analysis"
 
 	# Create subfolders for SPM - across runs moco:
 	mkdir "${str_path_parent}/nii_distcor/spm_regAcrssRuns"

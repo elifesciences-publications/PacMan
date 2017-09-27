@@ -2,19 +2,19 @@
 
 
 ################################################################################
-# The purpose of this script is to preprocess the data of the Parametric       #
-# Contrast Experiment. The following steps are performed in this script:       #
-#   - Copy files into SPM directory tree                                       #
-#   - Remove input files                                                       #
-# Motion correction and registrations are performed with SPM afterwards.       #
+# The purpose of this script is to change the file type of the functional time #
+# series that have been motion corrected and registered with SPM back to       #
+# compressed nii and save the results to ".../nii/func_regWithinRun/".         #
+#                                                                              #
+# IMPORTANT: The uncompressed nii files produced by SPM are subsequently       #
+#            deleted in order so save disk space.                              #
 ################################################################################
 
 
 #-------------------------------------------------------------------------------
 # Define session IDs & paths:
 
-# Parent directory:
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/"
+strPathParent="/home/john/Desktop/20161221_topup_test/"
 
 # Functional runs (input):
 arySessionIDs=(func_01 \
@@ -29,38 +29,47 @@ arySessionIDs=(func_01 \
                func_10)
 
 # Input directory:
-strPathInput="${strPathParent}func/"
+strPathInput="${strPathParent}spm_regAcrssRuns/"
 
-# SPM directory:
-strPathSpmParent="${strPathParent}spm_regWithinRun/"
+# Output directory:
+strPathOutput="${strPathParent}func_regAcrssRuns/"
 #-------------------------------------------------------------------------------
 
 
 #-------------------------------------------------------------------------------
-# Change filetype and save resulting nii file to SPM directory:
+# Change filetype and save results to ".../nii/func_reg/":
 
-# SPM requires *.nii files as input, not *.nii.gz.
 
-echo "------Change filetype and save resulting nii file to SPM directory:------"
+echo "------------Compress SPM output and delete uncompressed files------------"
 date
 
 for index01 in ${arySessionIDs[@]}
 do
-	strTmp01="${strPathInput}${index01}"
-	strTmp02="${strPathSpmParent}${index01}/${index01}"
+	echo "-----------------------------------------------------------------"
+	echo "---Processing ${index01}"
 
-	echo "---fslchfiletype on: ${strTmp01}"
-	echo "-------------output: ${strTmp02}"
-	echo "---fslchfiletype NIFTI ${strTmp01} ${strTmp02}"
-	fslchfiletype NIFTI ${strTmp01} ${strTmp02}
+	strTmp01="${strPathInput}${index01}/r${index01}"
+	strTmp02="${strPathOutput}${index01}"
+	echo "------fslchfiletype on: ${strTmp01}"
+	echo "----------------output: ${strTmp02}"
+	echo "------fslchfiletype NIFTI_GZ ${strTmp01} ${strTmp02}"
+	fslchfiletype NIFTI_GZ ${strTmp01} ${strTmp02}
 
-	# Remove func_roi:
-	echo "---rm ${strTmp01}.nii.gz"
-	rm "${strTmp01}.nii.gz"
+	echo "---Removing uncompressed nii files"
+
+	# The time series that motion corretion was performed on:
+	strTmp03="${strPathInput}${index01}/${index01}.nii"
+
+	# The time series that has been 'resliced':
+	strTmp04="${strPathInput}${index01}/r${index01}.nii"
+
+	echo "------rm ${strTmp03}"
+	rm ${strTmp03}
+
+	echo "------rm ${strTmp04}"
+	rm ${strTmp04}
 done
 
 date
 echo "done"
 #-------------------------------------------------------------------------------
-
-

@@ -1,0 +1,7 @@
+func_07
+
+file:///media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/feat_level_1/func_07.feat/filtered_func_data.ica/report/IC_1.html
+
+Components to remove:
+
+1,2,3,4,5,7,15
