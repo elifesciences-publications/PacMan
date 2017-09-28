@@ -29,18 +29,18 @@ from utilities_segmentator import aniso_diff_3D
 # *** Parameters
 
 # Parent path of input data:
-strPrnt = '/home/john/Desktop/20161221_smth/'
+strPrnt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/'
 
 # Path of functional runs to perform smoothing on (parent path left open):
-lstFunc = ['{}func_07_up.nii',
-           '{}func_08_up.nii',
-           '{}func_09_up.nii',
-           '{}func_10_up.nii']
+lstFunc = ['{}func_regAcrssRuns_cube_denoise/func_07_up.nii.gz',
+           '{}func_regAcrssRuns_cube_denoise/func_08_up.nii.gz',
+           '{}func_regAcrssRuns_cube_denoise/func_09_up.nii.gz',
+           '{}func_regAcrssRuns_cube_denoise/func_10_up.nii.gz']
 
 varNumIn = len(lstFunc)
 
 # List of grey matter masks to restrict smoothing (parent path left open):
-lstMsk = ['{}20161221_mp2rage_seg_v26_gm.nii.gz'] \
+lstMsk = ['{}mp2rage/04_seg/02_up/20161221_mp2rage_seg_v26.nii.gz'] \
          * varNumIn
 
 # Value of grey matter within mask (smoothing will be restricted to these
@@ -48,7 +48,7 @@ lstMsk = ['{}20161221_mp2rage_seg_v26_gm.nii.gz'] \
 varMsk = 1
 
 # Suffix for output files (will be saved in same directory as input files):
-strSuff = '_aniso_smth_n4_k90_g0p2.nii'
+strSuff = '_aniso_smth_n3_k90_g0p2.nii.gz'
 
 
 # *****************************************************************************
@@ -164,7 +164,7 @@ for idxIn in range(varNumIn):
 
         # Apply smoothing to current volume:
         aryNii[:, :, :, idxVol] = aniso_diff_3D(aryNii[:, :, :, idxVol],
-                                                niter=4,
+                                                niter=3,
                                                 kappa=90,
                                                 gamma=0.2,
                                                 step=(1.0, 1.0, 1.0),
