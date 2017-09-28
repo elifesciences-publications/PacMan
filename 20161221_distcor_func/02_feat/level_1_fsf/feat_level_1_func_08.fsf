@@ -30,7 +30,7 @@ set fmri(featwatcher_yn) 0
 set fmri(sscleanup_yn) 0
 
 # Output directory
-set fmri(outputdir) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/feat_level_1/func_pRF/"
+set fmri(outputdir) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/feat_level_1/func_08"
 
 # TR(s)
 set fmri(tr) 2.832
@@ -45,7 +45,7 @@ set fmri(ndelete) 0
 set fmri(tagfirst) 1
 
 # Number of first-level analyses
-set fmri(multiple) 4
+set fmri(multiple) 1
 
 # Higher-level input type
 # 1 : Inputs are lower-level FEAT directories
@@ -267,16 +267,7 @@ set fmri(totalVoxels) 233416040
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/func_regAcrssRuns_cube/func_07"
-
-# 4D AVW data or FEAT directory (2)
-set feat_files(2) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/func_regAcrssRuns_cube/func_08"
-
-# 4D AVW data or FEAT directory (3)
-set feat_files(3) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/func_regAcrssRuns_cube/func_09"
-
-# 4D AVW data or FEAT directory (4)
-set feat_files(4) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/func_regAcrssRuns_cube/func_10"
+set feat_files(1) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/func_regAcrssRuns_cube/func_08"
 
 # Add confound EVs text file
 set fmri(confoundevs) 0
