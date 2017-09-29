@@ -40,19 +40,19 @@ print('-Stimulus-pRF overlap calculation')
 # *** Define parameters
 
 # Path of nii file with x-coordinates of pRFs:
-strNiiX = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results/pRF_results_x_pos.nii'  #noqa
+strNiiX = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_x_pos_up.nii.gz'  #noqa
 
 # Path of nii file with y-coordinates of pRFs:
-strNiiY = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results/pRF_results_y_pos.nii'  #noqa
+strNiiY = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_y_pos_up.nii.gz'  #noqa
 
 # Path of nii file with pRF size estimates (SD):
-strNiiSd = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results/pRF_results_SD.nii'  #noqa
+strNiiSd = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_SD_up.nii.gz'  #noqa
 
 # Path of nii file with R2 values:
-strNiiR2 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results/pRF_results_R2.nii'  #noqa
+strNiiR2 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_R2_up.nii.gz'  #noqa
 
 # Output file base name:
-strNiiOt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results/pRF_results_'  #noqa
+strNiiOt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_'  #noqa
 
 # Define the area  of the visual field that was covered by the pRF mapping
 # stimuli (this is the area of the visual field for which pRFs are defined) in
@@ -73,7 +73,7 @@ varSdMin = 0.1
 # 40 sampling points along the x or y axis for the pRF fitting, we use
 # 40 * 10 = 400 sampling points along this dimension for the calculation of the
 # overlap):
-varSupSmp = 5.0
+varSupSmp = 4.0  # 5.0
 
 # Radius of PacMan [degrees of visual angel]:
 varPacRad = 5.0
@@ -559,8 +559,8 @@ for idxHmf in range(2):  #noqa
         strHmf = 'right'
 
     # Save nii to disk:
-    nib.save(niiOtRatio, (strNiiOt + 'ovrlp_ratio_' + strHmf + '.nii'))
-    nib.save(niiOtCentre, (strNiiOt + 'ovrlp_ctnr_' + strHmf + '.nii'))
+    nib.save(niiOtRatio, (strNiiOt + 'ovrlp_ratio_' + strHmf + '_up.nii.gz'))
+    nib.save(niiOtCentre, (strNiiOt + 'ovrlp_ctnr_' + strHmf + '_up.nii.gz'))
 
     # Export overlap ratio images:
     for idxMsk in range(0, varNumMsk):
@@ -577,7 +577,7 @@ for idxHmf in range(2):  #noqa
                   + str(lstOvrlp[idxMsk])
                   + 'prct_'
                   + strHmf
-                  + '.nii')
+                  + '_up.nii.gz')
         nib.save(niiOtTmp, strTmp)
     # *************************************************************************
 
