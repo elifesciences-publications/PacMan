@@ -44,8 +44,8 @@ dicSubId = {'20161221': 9,
             '20161221': 9}
 
 # Paths with files to be renamed (subject ID left open):
-lstPths = ['/home/john/PhD/PacMan_Depth_Data/{}/cbs_distcor/lh/',
-           '/home/john/PhD/PacMan_Depth_Data/{}/cbs_distcor/rh/']  #noqa
+lstPths = ['/home/john/PhD/PacMan_Depth_Data/20161221/cbs_distcor/lh_extrasession_retinotopy/',
+           '/home/john/PhD/PacMan_Depth_Data/20161221/cbs_distcor/rh_extrasession_retinotopy/']  #noqa
 
 # File type (suffix):
 strFleTpe = '.vtk'
