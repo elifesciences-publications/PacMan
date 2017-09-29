@@ -40,19 +40,19 @@ print('-Stimulus-pRF overlap calculation')
 # *** Define parameters
 
 # Path of nii file with x-coordinates of pRFs:
-strNiiX = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_x_pos_up.nii.gz'  #noqa
+strNiiX = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy_extrasession/for_depthsampling/pRF_results_x_pos_up.nii.gz'  #noqa
 
 # Path of nii file with y-coordinates of pRFs:
-strNiiY = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_y_pos_up.nii.gz'  #noqa
+strNiiY = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy_extrasession/for_depthsampling/pRF_results_y_pos_up.nii.gz'  #noqa
 
 # Path of nii file with pRF size estimates (SD):
-strNiiSd = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_SD_up.nii.gz'  #noqa
+strNiiSd = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy_extrasession/for_depthsampling/pRF_results_SD_up.nii.gz'  #noqa
 
 # Path of nii file with R2 values:
-strNiiR2 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_R2_up.nii.gz'  #noqa
+strNiiR2 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy_extrasession/for_depthsampling/pRF_results_R2_up.nii.gz'  #noqa
 
 # Output file base name:
-strNiiOt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_'  #noqa
+strNiiOt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy_extrasession/for_depthsampling/pRF_results_'  #noqa
 
 # Define the area  of the visual field that was covered by the pRF mapping
 # stimuli (this is the area of the visual field for which pRFs are defined) in
