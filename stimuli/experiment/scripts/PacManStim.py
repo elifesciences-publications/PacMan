@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-   #noqa
 """
 Experimental stimuli for Pac-Man project, to be run in Psychopy.
 """
@@ -6,26 +6,26 @@ Experimental stimuli for Pac-Man project, to be run in Psychopy.
 # Part of Pac-Man library
 # Copyright (C) 2017 Marian Schneider & Ingo Marquardt
 #
-# This program is free software: you can redisvarTribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free Software
-# Foundation, either version 3 of the License, or (at your option) any later
-# version.
+# This program is free software: you can redisvarTribute it and/or modify it
+# under the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option) any
+# later version.
 #
-# This program is disvarTributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-# details.
+# This program is disvarTributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+# more details.
 #
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import datetime
 import numpy as np
-from psychopy import visual, event, core, objMontors, data, gui, logging, misc
+from psychopy import visual, core, monitors, logging, event, gui, data
 
-
-# %%
-"""EXPERIMENTAL PARAMETERS"""
+# -----------------------------------------------------------------------------
+# *** Define general parameters
 
 # Length of target events [s]:
 varDurTar = 0.8
@@ -36,30 +36,40 @@ varTr = 2.079
 # Oscillation frequency of Pac-Man, cycles per TR:
 varFrq = 2
 
-# Distance between observer and objMontor [cm]:
+# Distance between observer and monitor [cm]:
 varMonDist = 99.0  # [99.0] for 7T scanner
-# Width of objMontor [cm]:
+# Width of monitor [cm]:
 varMonWdth = 30.0  # [30.0] for 7T scanner
-# Width of objMontor [pixels]:
+# Width of monitor [pixels]:
 varPixX = 1920.0  # [1920.0] for 7T scanner
-# Height of objMontor [pixels]:
+# Height of monitor [pixels]:
 varPixY = 1200.0  # [1200.0] for 7T scanner
 
 # Size of Pac-Man [degree of visual angle]:
 varPacSze = 7.0
 
-# Pac-Man colour:
-vecPacClr = [0.0, 0.0, 0.0]
+# Background colour:
+lstBckgrd = [-0.7, -0.7, -0.7]
 
-# %%
-"""GUI"""
+# Pac-Man colour:
+lstPacClr = [0.0, 0.0, 0.0]
+
+# Time (in seconds) that participants have to respond to a target event in
+# order for the event to be logged as a hit:
+varRspLogTme = 2.0
+# -----------------------------------------------------------------------------
+
+
+# -----------------------------------------------------------------------------
+# *** GUI
 
 # Name of the experiment:
 strExpNme = 'PacManStim'
 
 # Dictionary with experiment metadata:
 dicExpInfo = {'Run': [str(x).zfill(2) for x in range(1, 11)],
-              'Subject_ID': 'Pilot'}
+              'Subject_ID': 'Pilot',
+              'Test mode': [False, True]}
 
 # Pop-up GUI to let the user select parameters:
 objGui = gui.DlgFromDict(dictionary=dicExpInfo,
@@ -69,9 +79,32 @@ objGui = gui.DlgFromDict(dictionary=dicExpInfo,
 if objGui.OK is False:
     core.quit()
 
+# Testing (if True, timer is displayed):
+lgcTest = dicExpInfo['Test mode']
+# -----------------------------------------------------------------------------
 
-# %%
-"""LOGGING"""
+
+# -----------------------------------------------------------------------------
+# *** Logging
+
+# Set clock:
+objClck = core.Clock()
+
+# Switch that is used to control the logging of target events:
+varSwtTrgtLog = 1
+
+# Control the logging of participant responses:
+varSwtRspLog = 0
+
+# The key that the participant has to press after a target event:
+strTrgtKey = '1'
+
+# Counter for correct/incorrect responses:
+varCntHit = 0  # Counter for hits
+varCntMis = 0  # Counter for misses
+
+# Set clock for logging:
+logging.setDefaultClock(objClck)
 
 # Add time stamp and experiment name to metadata:
 dicExpInfo['Date'] = data.getDateStr().encode('utf-8')
@@ -83,10 +116,20 @@ strPthMain = os.path.dirname(os.path.abspath(__file__))
 # Get parent path:
 strPthPrnt = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-# Name of subject folder:
-strPthSub = (strPthPrnt
+# Path of logging folder (parent to subject folder):
+strPthLog = (strPthPrnt
              + os.path.sep
-             + 'Log_{}'.format(dicExpInfo['Subject_ID'])
+             + 'log')
+
+# If it does not exist, create subject folder for logging information
+# pertaining to this session:
+if not os.path.isdir(strPthLog):
+    os.makedirs(strPthLog)
+
+# Path of subject folder:
+strPthSub = (strPthLog
+             + os.path.sep
+             + str(dicExpInfo['Subject_ID'])
              )
 
 # If it does not exist, create subject folder for logging information
@@ -104,43 +147,47 @@ strPthLog = (strPthSub
              )
 
 # Create a log file and set logging verbosity:
-fleLog = logging.fleLog(strPthLog +'.log', level=logging.WARNING)
+fleLog = logging.LogFile(strPthLog + '.log', level=logging.WARNING)
+
+# Log parent path:
+fleLog.write('Parent path: ' + strPthPrnt + '\n')
 
 # Set console logging verbosity:
 logging.console.setLevel(logging.WARNING)
 
 # Array for logging of key presses:
 aryKeys = np.array([], dtype=np.float32)
+# -----------------------------------------------------------------------------
 
 
-# %%
-"""MONITOR and WINDOW"""
+# -----------------------------------------------------------------------------
+# *** Setup
 
 # Create monitor object:
-objMon = objMontors.objMontor('default_monitor',
-                              width=varMonWdth,
-                              distance=varMonDist)
+objMon = monitors.Monitor('Screen_7T_NOVA_32_Channel_Coil',
+                          width=varMonWdth,
+                          distance=varMonDist)
 
 # Set size of monitor:
 objMon.setSizePix([varPixX, varPixY])
 
 # Log monitor info:
 fleLog.write(('Monitor_Distance: varMonDist = '
-             + str(varMonDist)
-             + ' cm'
-             + '\n'))
-fleLog.write(('Monitor width: varMonWdth ='
-             + str(varMonWdth)
-             + ' cm'
-             + '\n'))
+              + str(varMonDist)
+              + ' cm'
+              + '\n'))
+fleLog.write(('Monitor width: varMonWdth = '
+              + str(varMonWdth)
+              + ' cm'
+              + '\n'))
 fleLog.write(('Monitor width: varPixX = '
-             + str(varPixX)
-             + ' pixels'
-             + '\n'))
+              + str(varPixX)
+              + ' pixels'
+              + '\n'))
 fleLog.write(('Monitor height: varPixY = '
-             + str(varPixY)
-             + ' pixels'
-             + '\n'))
+              + str(varPixY)
+              + ' pixels'
+              + '\n'))
 
 # Set screen:
 objWin = visual.Window(
@@ -150,73 +197,19 @@ objWin = visual.Window(
     allowGUI=False,
     allowStencil=True,
     fullscr=True,
-    objMontor=objMon,
-    color=[0.0, 0.0, 0.0],
+    monitor=objMon,
+    color=lstBckgrd,
     colorSpace='rgb',
     units='deg',
     blendMode='avg'
     )
+# -----------------------------------------------------------------------------
 
 
-# %%
-"""CONDITIONS and aryDur"""
+# -----------------------------------------------------------------------------
+# *** Experimental stimuli
 
-# Path to design matrix:
-strPthDsgn = (strPthPrnt
-              + os.path.sep
-              + 'design_matrices'
-              + os.path.sep
-              + 'PacMan_run_'
-              + str(dicExpInfo['Run'])
-              + '_eventmatrix.txt')
-
-# Read design matrix:
-aryDsgn = np.loadtxt(strPthDsgn, delimiter=' ', unpack=False)
-
-# First row of design matrix contains conditions, coded as integers:
-aryCon = aryDsgn[:, 0].astype(np.int16)
-
-# Second row of design matrix contains onset times:
-aryOn = aryDsgn[:, 1].astype(np.float32)
-
-# Third row of design matrix contains durations:
-aryDur = aryDsgn[:, 2].astype(np.float32)
-
-# Array for target event onset times:
-aryTrgt = aryOn[np.equal(aryCon, int(2))]
-
-# Target events (change in fixation dot colour) are coded as '2'. These will be
-# dealt with separately. Take them out of the design matrix:
-aryOn = aryOn[np.not_equal(aryCon, int(2))]
-aryDur = aryDur[np.not_equal(aryCon, int(2))]
-aryCon = aryCon[np.not_equal(aryCon, int(2))]
-
-# Write design matrix information to log file:
-fleLog.write(('Condition order (1=Rest, 3,4,5...=Stimulus levels): '
-              + str(aryCon)
-              + '\n'))
-fleLog.write(('Condition onset times [s]: '
-              + str(aryOn)
-              + '\n'))
-fleLog.write(('Condition durations [s]: '
-              + str(aryDur)
-              + '\n'))
-fleLog.write(('Target onset times [s]: '
-              + str(aryTrgt)
-              + '\n'))
-fleLog.write(('Target duration [s]: '
-              + str(varDurTar)
-              + '\n'))
-
-
-# %%
-"""STIMULI"""
-
-# "Both 'Pacman' and the control figure had a luminance value of 503 cd/m2.
-# During the dynamic period, the figures oscillated sinusoidally with a half
-# period of 480 ms."
-
-# Orientation of Pac-Man figure:
+# Initial orientation of Pac-Man figure:
 varPacOri = 125
 
 # Pacman figure:
@@ -235,7 +228,7 @@ objPacStim = visual.RadialStim(
     angularRes=100,
     visibleWedge=(0, 290),
     colorSpace='rgb',
-    color=vecPacClr,
+    color=lstPacClr,
     interpolate=True,
     autoLog=False,
     )
@@ -247,7 +240,7 @@ objPacIn = visual.GratingStim(
     units='deg',
     size=(0.5),
     mask='none',
-    color=vecPacClr,
+    color=lstPacClr,
     colorSpace='rgb',
     ori=0,
     autoLog=False,
@@ -256,434 +249,530 @@ objPacIn = visual.GratingStim(
 # Fixation dot:
 objFix = visual.Circle(
     objWin,
-    units='pix',
-    radius=2,
-    fillColor= [1.0, 0.0, 0.0],
-    lineColor =[1.0, 0.0, 0.0],
+    units='deg',
+    pos=(0, 0),
+    radius=0.04,
+    edges=24,
+    fillColor=[1.0, 0.0, 0.0],
+    fillColorSpace='rgb',
+    lineColor=[1.0, 0.0, 0.0],
+    lineColorSpace='rgb',
+    lineWidth=0.0,
+    interpolate=True,
     autoLog=False,
     )
 
 # Fication dot surround:
 objFixSrd = visual.Circle(
     objWin,
-    units='pix',
-    radius=7,
+    units='deg',
+    pos=(0, 0),
+    radius=0.07,
+    edges=24,
     fillColor=[0.5, 0.5, 0.0],
-    lineColor =[0.0, 0.0, 0.0],
+    fillColorSpace='rgb',
+    lineColor=[0.5, 0.5, 0.0],
+    lineColorSpace='rgb',
+    lineWidth=0.0,
+    interpolate=True,
     autoLog=False,
     )
 
-# Welcome message:
-objTxtWlcm = visual.TextStim(
-    win=objWin,
-    colorSpace='rgb',
-    color=[1.0, 1.0, 1.0],
-    height=0.5,
-    text = 'Experiment will start soon.'
+# Target:
+objTarget = visual.Circle(
+    objWin,
+    units='deg',
+    pos=(0, 0),
+    edges=24,
+    radius=0.07,
+    fillColor=[0.8, 0.1, 0.1],
+    fillColorSpace='rgb',
+    lineColor=[0.8, 0.1, 0.1],
+    lineColorSpace='rgb',
+    lineWidth=0.0,
+    interpolate=True,
+    autoLog=False
     )
+# -----------------------------------------------------------------------------
 
 
-# %%
-"""TIME, TIMING and CLOCKS"""
+# -----------------------------------------------------------------------------
+# *** Auxiliary stimuli
 
-# parameters
-totalTime = np.sum(aryDur)
-fleLog.write('TotalTime=' + unicode(totalTime) + '\n')
+# Message:
+objTxtWlcm = visual.TextStim(objWin,
+                             text='Please wait a moment.',
+                             font="Courier New",
+                             pos=(0, 0),
+                             color=(1.0, 1.0, 1.0),
+                             colorSpace='rgb',
+                             opacity=1.0,
+                             contrast=1.0,
+                             ori=0.0,
+                             height=0.8,
+                             antialias=True,
+                             alignHoriz='center',
+                             alignVert='center',
+                             flipHoriz=False,
+                             flipVert=False,
+                             autoLog=False
+                             )
 
-# give system time to settle before it checks screen refresh rate
-core.wait(0.5)
+# Timer (only displayed in testing mode):
+if lgcTest:
+    # The text for the timer:
+    objTxtTmr = visual.TextStim(objWin,
+                                text='Time',
+                                font="Courier New",
+                                pos=(0, -5.0),
+                                color=[1.0, 1.0, 1.0],
+                                colorSpace='rgb',
+                                opacity=1.0,
+                                contrast=1.0,
+                                ori=0.0,
+                                height=0.4,
+                                antialias=True,
+                                alignHoriz='center',
+                                alignVert='center',
+                                flipHoriz=False,
+                                flipVert=False,
+                                autoLog=False
+                                )
 
-# get screen refresh rate
-refr_rate=objWin.getActualFrameRate()
+    # Background rectangle to increase visibility of the text:
+    objRect = visual.Rect(objWin,
+                          pos=(0, -5.0),
+                          width=2.5,
+                          height=0.6,
+                          lineColorSpace='rgb',
+                          fillColorSpace='rgb',
+                          units='deg',
+                          lineWidth=1.0,
+                          lineColor=[-0.7, -0.7, -0.7],
+                          fillColor=[-0.7, -0.7, -0.7],
+                          autoLog=False
+                          )
+# -----------------------------------------------------------------------------
 
-if refr_rate!=None:
-    print 'refresh rate: %i' %refr_rate
-    frameDur = 1.0/round(refr_rate)
-    print 'actual frame dur: %f' %frameDur
-else:
-    # couldnt get reliable measure, guess
-    frameDur = 1.0/60.0
-    print 'fake frame dur: %f' %frameDur
 
-fleLog.write('RefreshRate=' + unicode(refr_rate) + '\n')
-fleLog.write('FrameDuration=' + unicode(frameDur) + '\n')
+# -----------------------------------------------------------------------------
+# *** Trials
 
-# define clock
-clock = core.Clock()
-logging.setDefaultClock(clock)
+# Load event matrix from text file:
+strPthDsgn = (strPthPrnt
+              + os.path.sep
+              + 'design_matrices'
+              + os.path.sep
+              + 'PacMan_run_'
+              + str(dicExpInfo['Run'])
+              + '_eventmatrix.txt')
 
-#%%
-"""FUNCTIONS"""
+# Read design matrix:
+aryDesign = np.loadtxt(strPthDsgn, delimiter=' ', unpack=False)
 
-# target function
-nrOfTargetFrames = int(varDurTar/frameDur)
-print "number of target frames"
-print nrOfTargetFrames
+# Total number of events:
+varNumEvnts = aryDesign.shape[0]
 
-# set initial value for target counter
-mtargetCounter = nrOfTargetFrames+1;
-def target(mtargetCounter):
-    t = clock.getTime()
-    # first time in target interval? reset target counter to 0!
-    if sum(t >= aryTrgt) + sum(t< aryTrgt+frameDur) == len(aryTrgt)+1:
-        mtargetCounter = 0
-    # below number of target frames? display target!
-    if mtargetCounter < nrOfTargetFrames:
-        # change color fix dot surround to red
-        objFixSrd.fillColor = [0.5,0.0,0.0]
-        objFixSrd.lineColor = [0.5,0.0,0.0]
-        if ET:
-            TargetText = 'TargetFrame'+svarTr(mtargetCounter)
-            vpx.VPX_SendCommand('dataFile_InsertSvarTring ' + TargetText)
-    # above number of target frames? dont display target!
+# Because indexing starts with 0, we have to adjust the number of events:
+varNumEvnts = (varNumEvnts - 1)
+# -----------------------------------------------------------------------------
+
+
+# -----------------------------------------------------------------------------
+# *** Function definitions
+
+def func_exit():
+    """
+    Check whether exit-keys have been pressed.
+
+    The exit keys are 'e' and 'x'; they have to be pressed at the same time.
+    This is supposed to make it less likely that they experiment is aborted
+    unpurposely.
+    """
+    # Check keyboard, save output to temporary string:
+    strExit = event.getKeys(keyList=['e', 'x'], timeStamped=False)
+
+    # Whether the list has the correct length (if nothing has happened strExit
+    # will have length zero):
+    if len(strExit) != 0:
+
+        if ('e' in strExit) and ('x' in strExit):
+
+            # Log end of experiment:
+            logging.data('------Experiment aborted by user.------')
+
+            # Make the mouse cursor visible again:
+            event.Mouse(visible=True)
+
+            # Close everyting:
+            objWin.close()
+            core.quit()
+            monitors.quit()
+            logging.quit()
+            event.quit()
+
+            return 1
+
+        else:
+            return 0
+
     else:
-        # keep color fix dot surround yellow
-        objFixSrd.fillColor = [0.5,0.5,0.0]
-        objFixSrd.lineColor = [0.5,0.5,0.0]
-
-    # update mtargetCounter
-    mtargetCounter = mtargetCounter + 1
-
-    return mtargetCounter
+        return 0
+# -----------------------------------------------------------------------------
 
 
-#%%
-"""SETUP FOR EYEvarTrACKER"""
-if ET:
-    # EyevarTracker CONSTANTS (see vpx.h for full listing)
-    VPX_STATUS_ViewPointIsRunning = 1
-    EYE_A = 0
-    VPX_DAT_FRESH = 2
-    # load dll
-    # psychoph lab
-    #vpxDllPath = "C:\ViewPoint 2.9.2.5\Interfaces\Windows\ViewPointClient Ethernet Interface\VPX_InterApp.dll"
-    # this has to be in same folder as viewPointClient.exe
-    # scanner
-    vpxDllPath = "C:\ViewPointClient\ViewPoint 2.8.6.21\Interfaces\Windows\ViewPointClient Ethernet Interface\VPX_InterApp.dll"
+# -----------------------------------------------------------------------------
+# *** Presentation
 
-
-# CONNECT TO EYEvarTrACKER
-if ET:
-    #  Load the ViewPoint library
-    vpxDll = vpxDllPath
-    if ( not os.access(vpxDll,os.F_OK) ):
-        print("WARNING: Invalid vpxDll path; you need to edit the .py file")
-        core.quit()
-    cdll.LoadLibrary( vpxDll )
-    vpx = CDLL( vpxDll )
-    vpx.VPX_SendCommand('say "Hello from EVS Localiser Script" ')
-    if ( vpx.VPX_GetStatus(VPX_STATUS_ViewPointIsRunning) < 1 ):
-        print("ViewPoint is not running")
-        core.quit()
-
-# define ROI
-if ET:
-    vpx.VPX_SendCommand('sevarTrOI_AllOff')
-    # define cenvarTral "fixation" ROI
-    vpx.VPX_SendCommand('sevarTrOI_RealRect 1 0.45 0.45 0.55 0.55')
-
-
-#%%
-"""INIT EYEvarTrACKER"""
-#if ET:
-#    #Allows asynchrously (on its own line) insert marker into datafile
-#    vpx.VPX_SendCommand('dataFile_AsynchMarkerData Yes')
-#    #Allows synchrously (same line) insert svarTring into datafile
-#    vpx.VPX_SendCommand('datafile_AsynchSvarTringData No')
-
-if ET:
-    # open and use new data file and give it a name
-#    vpx.VPX_SendCommand('dataFile_NewUnique')
-#    vpx.VPX_SendCommand('dataFile_NewName Laminae2p0')
-    FileName =svarTr(dicExpInfo['Subject_ID'])+'_' + dicExpInfo['Experiment_Name']+'_'+'Run' + '_'+svarTr(dicExpInfo['Run'])+'_'+svarTr(dicExpInfo['Date'])+'.txt'
-    vpx.VPX_SendCommand('dataFile_NewName ' + FileName)
-
-
-#%%
-"""RENDER_LOOP"""
-# Create Counters
-i = 0 # counter for blocks
-#miniCounter = -1 # counter for mini blocks
-# give system time to settle before stimulus presentation
-core.wait(0.5)
-
-#wait for scanner varTrigger
+# Draw wait message:
 objTxtWlcm.draw()
 objWin.flip()
-event.waitKeys(keyList=['5'], timeStamped=False)
-# set switch
-motionSwitch = False
-# reset clock
-clock.reset()
-logging.data('StartOfRun'+ unicode(dicExpInfo['Run']))
 
-while clock.getTime()<totalTime:
+# Hide the mouse cursor:
+event.Mouse(visible=False)
 
-    if aryCon[i] == 1: # rest
-        motionSwitch = False
-        objPacStim.opacity = 0
-        objPacIn.opacity = 0
+# Wait for scanner trigger pulse & set clock after receiving trigger pulse
+# (scanner trigger pulse is received as button press ('5')):
+strTrgr = ['0']
+while strTrgr[0][0] != '5':
+    # Check for keypress:
+    strTmp = event.getKeys(keyList=['5'], timeStamped=False)
+    # Whether the list has the correct length (if nothing has happened, strTmp
+    # will have length zero):
+    if len(strTmp) == 1:
+        strTrgr = strTmp[0][0]
 
-    elif aryCon[i] == 3: # pacman stim static
-        motionSwitch = False
-        objPacStim.opacity = 1
-        objPacIn.opacity = 1
-        objPacStim.ori = varPacOri
-        objPacIn.ori = 0
+# Trigger pulse received, reset clock:
+objClck.reset(newT=0.0)
 
-    elif aryCon[i] == 4: # pacman stim move
-        motionSwitch = True
-        objPacStim.opacity = 1
-        objPacIn.opacity = 1
-        objPacStim.ori = varPacOri
-        objPacIn.ori = 0
+# Main timer which represents the starting point of the experiment:
+objTme01 = objClck.getTime()
 
-    if ET:
-        # insert Start marker S into datafile to mark start of condition
-        vpx.VPX_SendCommand('dataFile_InsertMarker S')
-        BlockText = 'StartOfCondition'+svarTr(aryCon[i])
-        vpx.VPX_SendCommand('dataFile_InsertSvarTring ' + BlockText)
+# Timer that is used to control the logging of stimulus events:
+objTme03 = objClck.getTime()
 
-    while clock.getTime()<np.sum(aryDur[0:i+1]):
+# Start of the experiment:
+for idx01 in range(0, varNumEvnts):  #noqa
 
-        if motionSwitch:
-            t = clock.getTime()-np.sum(aryDur[0:i])
-            oriUpdate = np.sin(np.deg2rad(t*(360/varTr)*varFrq))*35
-            objPacStim.ori = varPacOri + oriUpdate
-            objPacIn.ori = oriUpdate
+    # Check whether exit keys have been pressed:
+    if func_exit() == 1:
+        break
 
-        # update target
-        mtargetCounter= target(mtargetCounter)
+    # Index for execution of target events:
+    varIdxTrgt = 1
 
-        # draw background
-        NoiseBackgrd.draw()
+    # The first colume of the event matrix signifies the event type (REST is
+    # coded as '1', STIMULUS as '3', and TARGET events are coded as '2'):
+    varTmpEvntType = aryDesign[idx01][0]
 
-        # draw pacman
-        objPacStim.draw()
-        objPacIn.draw()
+    # The second column of the event matrix signifies the time (in seconds)
+    # when the event starts:
+    varTmpEvntStrt = aryDesign[idx01][1]
 
-        # draw fixation point surround
-        objFixSrd.draw()
+    # The third column of the event matrix signifies the duration (in seconds)
+    # of the event:
+    varTmpEvntDur = aryDesign[idx01][2]
 
-        # draw fixation point
-        objFix.draw()
+    # Get the time:
+    objTme02 = objClck.getTime()
 
-        # draw convarTrol text
-        # convarTrolText.setText(clock.getTime())
-        # convarTrolText.draw()
+    # Is the upcoming event a REST BLOCK?
+    if varTmpEvntType == 1:
 
-        objWin.flip()
+        # Log beginning of rest block:
+        strTmp = ('REST_start_of_block_'
+                  + str(idx01 + 1)
+                  + '_scheduled_for:_'
+                  + str(varTmpEvntStrt))
+        logging.data(strTmp)
 
-        #handle key presses each frame
-        for keys in event.getKeys():
-            if keys[0]in ['escape','q']:
-                objWin.close()
-                if ET:
-                    vpx.VPX_SendCommand('dataFile_Close')
-                core.quit()
-            elif keys in ['1']:
-                aryKeys = np.append([aryKeys],[clock.getTime()])
-                logging.data(msg='Key1 pressed')
-                if ET:
-                    # insert marker B into datafile to mark button press
-                    vpx.VPX_SendCommand('dataFile_InsertMarker B')
-                    BlockText = 'ButtonPress1'
-                    vpx.VPX_SendCommand('dataFile_InsertSvarTring ' + BlockText)
+        # Switch for target (show target or not?):
+        varSwtTrgt = 0
 
+        # Continue with the rest block?
+        while objTme02 < (objTme01 + varTmpEvntStrt + varTmpEvntDur):
 
-    # send marker to eye varTracker
-    if ET:
-        # insert marker E into datafile to mark end of condition
-        vpx.VPX_SendCommand('dataFile_InsertMarker E')
-        BlockText = 'EndOfCondition'+svarTr(aryCon[i])
-        vpx.VPX_SendCommand('dataFile_InsertSvarTring ' + BlockText)
+            # Draw fixation dot:
+            objFix.draw(win=objWin)
+            objFixSrd.draw(win=objWin)
 
-    # update counter
-    i = i + 1
-    motionSwitch = False
+            # Draw target?
+            if varSwtTrgt == 1:
 
-# log end of run
-logging.data('EndOfRun'+ unicode(dicExpInfo['Run']))
-# close the eyevarTracker data file
-if ET:
-    vpx.VPX_SendCommand('dataFile_Close')
+                    # Draw target:
+                    objTarget.draw()
 
-#%%
-"""TARGET DETECTION RESULTS"""
-# calculate target detection results
-# create an array 'targetDetected' for showing which aryTrgt were detected
-targetDetected = np.zeros(len(aryTrgt))
-if len(aryKeys) == 0:
-    # if no buttons were pressed
-    print "No keys were pressed/registered"
-    aryTrgtDet = 0
-else:
-    # if buttons were pressed:
-    for index, target in enumerate(aryTrgt):
-        for TimeKeyPress in aryKeys:
-            if float(TimeKeyPress)>=float(target) and float(TimeKeyPress)<=float(target)+2:
-                targetDetected[index] = 1
+                    # Log target?
+                    if varSwtTrgtLog == 1:
 
-logging.data('ArrayOfDetectedaryTrgt'+ unicode(targetDetected))
-print 'Array Of Detected aryTrgt:'
-print targetDetected
+                        # Log target event:
+                        strTmp = ('TARGET_scheduled_for:_'
+                                  + str(var_temp_target_start))
+                        logging.data(strTmp)
 
-# number of detected aryTrgt
-aryTrgtDet = sum(targetDetected)
-logging.data('NumberOfDetectedaryTrgt'+ unicode(aryTrgtDet))
-# detection ratio
-DetecvarTratio = aryTrgtDet/len(targetDetected)
-logging.data('RatioOfDetectedaryTrgt'+ unicode(DetecvarTratio))
+                        # Switch off (so that the target event is only logged
+                        # once):
+                        varSwtTrgtLog = 0
 
-# display target detection results to Subject_ID
-resultText = 'You have detected %i out of %i aryTrgt.' %(aryTrgtDet,len(aryTrgt))
-print resultText
-logging.data(resultText)
-# also display a motivational slogan
-if DetecvarTratio >= 0.95:
-    feedbackText = 'Excellent! Keep up the good work'
-elif DetecvarTratio < 0.95 and DetecvarTratio > 0.85:
-    feedbackText = 'Well done! Keep up the good work'
-elif DetecvarTratio < 0.8 and DetecvarTratio > 0.65:
-    feedbackText = 'Please varTry to focus more'
-else:
-    feedbackText = 'You really need to focus more!'
+                        # Once after target onset we set varSwtRspLog to
+                        # one so that the participant's respond can be logged:
+                        varSwtRspLog = 1
 
-targetText = visual.TextStim(
-    win=objWin,
-    color='white',
-    height=0.5,
-    pos=(0.0, 0.0),
-    autoLog=False,
-    )
-targetText.setText(resultText+feedbackText)
-fleLog.write(unicode(resultText) + '\n')
-fleLog.write(unicode(feedbackText) + '\n')
-targetText.draw()
-objWin.flip()
-core.wait(5)
+                        # Likewise, just after target onset we set the timer
+                        # for response logging to the current time so that the
+                        # response will only be counted as a hit in a specified
+                        # time interval after target onset:
+                        objTme03 = objClck.getTime()
+
+            # Timer (only displayed in testing mode):
+            if lgcTest:
+
+                # Set time since experiment onset as message text:
+                objTxtTmr.text = str(np.around(objTme02, 1)) + ' s'
+
+                # Draw background rectangle:
+                objRect.draw()
+                # Draw text:
+                objTxtTmr.draw()
+
+            # Flip drawn objects to screen:
+            objWin.flip()
+
+            # Check whether exit keys have been pressed:
+            if func_exit() == 1:
+                break
+
+            # Check for and log participant's response:
+            objTme02 = objClck.getTime()
+            strRsps = event.getKeys(keyList=[strTrgtKey], timeStamped=False)
+
+            if (varSwtRspLog == 1) and \
+            (objTme02 <= (objTme03 + varRspLogTme)):
+                # Check whether the list has the correct length:
+                if len(strRsps) == 1:
+                    if strRsps[0] == strTrgtKey:
+                        logging.data('Hit') # Log hit
+                        varCntHit += 1 # Count hit
+                        # After logging the hit, we have to switch off the
+                        # response logging, so that the same hit is nor logged
+                        # over and over again:
+                        varSwtRspLog = 0
+                    else:
+                        print('Fatal error - key press.')
+                        logging.data('Fatal error - key press.')
+            elif (varSwtRspLog == 1) and \
+            (objTme02 > (objTme03 + varRspLogTme)):
+                logging.data('Miss') # Log miss
+                varCntMis += 1 # Count miss
+                # If the subject does not respond to the target within time, we
+                # log this as a miss and set varSwtRspLog to zero (so
+                # that the response won't be logged as a hit anymore
+                # afterwards):
+                varSwtRspLog = 0
+            # Check whether it's time to show a target on the next frame:
+            # Is the upcoming event a target?
+            if aryDesign[idx01+varIdxTrgt][0] == 2:
+                var_temp_target_start = aryDesign[idx01+varIdxTrgt][1]
+                # Has the start time of the target event been reached?
+                if objTme02 >= (objTme01 + var_temp_target_start):
+                    varSwtTrgt = 1
+                    # Has the end time of the target event been reached?
+                    if objTme02 >= \
+                    (objTme01 + var_temp_target_start + varDurTar):
+                        # Switch the target off:
+                        varSwtTrgt = 0
+                        # Switch on the logging of the target event (so that
+                        # the next target event will be logged):
+                        varSwtTrgtLog = 1
+                        # Only increase the index if the end of the design
+                        # matrix has not been reached yet:
+                        if (idx01 + varIdxTrgt) < varNumEvnts:
+                            # Increase the index to check whether the next
+                            # event in the design matrix is also a target
+                            # event:
+                            varIdxTrgt = varIdxTrgt + 1
+            objTme02 = objClck.getTime()
+        # Log end of rest block:
+        strTmp = ('REST_end_of_event_' + unicode(idx01 + 1))
+        logging.data(strTmp)
+    # Is the upcoming event a STIMULUS BLOCK?
+    elif varTmpEvntType == 3:
+        # Log beginning of stimulus block:
+        strTmp = ('STIMULUS_start_of_block_' + \
+                    unicode(idx01 + 1) + \
+                    '_scheduled_for:_' + \
+                    unicode(varTmpEvntStrt))
+        logging.data(strTmp)
+        # Switch stimulus flicker:
+        var_switch_flc = 1
+        # Switch target:
+        varSwtTrgt = 0
+        # Timer that is used for the stimulus flicker:
+        tme_5 = objClck.getTime()
+        # Continue with the stimulus block?
+        while objTme02 < (objTme01 + varTmpEvntStrt + varTmpEvntDur):
+            # Draw main stimulus:
+            if var_switch_comp == 0:
+                if var_switch_flc == 1:
+                    vsl_stim_by_01.draw()
+                elif var_switch_flc == 2:
+                    vsl_stim_by_02.draw()
+                elif var_switch_flc == 3:
+                    vsl_stim_by_03.draw()
+                elif var_switch_flc == 4:
+                    vsl_stim_by_04.draw()
+            elif var_switch_comp == 1:
+                if var_switch_flc == 1:
+                    vsl_stim_rg_01.draw()
+                elif var_switch_flc == 2:
+                    vsl_stim_rg_02.draw()
+                elif var_switch_flc == 3:
+                    vsl_stim_rg_03.draw()
+                elif var_switch_flc == 4:
+                    vsl_stim_rg_04.draw()
+            # Check whether it's time to switch polarity of the stimulus:
+            if objTme02 >= (tme_5 + var_stim_dur):
+                # Switch the switch:
+                if var_switch_flc < 4:
+                    var_switch_flc = var_switch_flc + 1
+                    # Timer that is used for the stimulus flicker:
+                    tme_5 = objClck.getTime()
+                elif var_switch_flc == 4:
+                    var_switch_flc = 1
+                    # Timer that is used for the stimulus flicker:
+                    tme_5 = objClck.getTime()
+                else:
+                    print('Fatal error - stimulus flicker.')
+                    logging.data('Fatal error - stimulus flicker.')
+            # Fixation cross and (if necessary) the target:
+            vsl_fixation.draw(win=objWin)
+            if varSwtTrgt == 1:
+                    objTarget.draw()
+                    if varSwtTrgtLog == 1:
+                        # Log target event:
+                        strTmp = ('TARGET_scheduled_for:_' + \
+                                    unicode(var_temp_target_start)) # analysis:ignore
+                        logging.data(strTmp)
+                        # Switch off (so that the target event is only logged
+                        # once):
+                        varSwtTrgtLog = 0
+                        # Once after target onset we set varSwtRspLog to
+                        # one so that the participant's respond can be logged:
+                        varSwtRspLog = 1
+                        # Likewise, just after target onset we set the timer
+                        # for response logging to the current time so that the
+                        # response will only be counted as a hit in a specified
+                        # time interval after target onset:
+                        objTme03 = objClck.getTime()
+            # Timer (only displayed in testing mode):
+            if lgcTest:
+                # Set time since experiment onset as message text:
+                objTxtTmr.text = str(np.around(objTme02, 1)) + ' s'
+                # Draw background rectangle:
+                objRect.draw()
+                # Draw text:
+                objTxtTmr.draw()
+            objWin.flip()
+            # Check whether exit keys have been pressed:
+            if func_exit() == 1:
+                break
+            # Check for and log participant's response:
+            objTme02 = objClck.getTime()
+            strRsps = event.getKeys(keyList=[strTrgtKey], timeStamped=False)
+            if (varSwtRspLog == 1) and \
+            (objTme02 <= (objTme03 + varRspLogTme)):
+                # Check whether the list has the correct length:
+                if len(strRsps) == 1:
+                    if strRsps[0] == strTrgtKey:
+                        logging.data('Hit') # Log hit
+                        varCntHit += 1 # Count hit
+                        # After logging the hit, we have to switch off the
+                        # response logging, so that the same hit is nor logged
+                        # over and over again:
+                        varSwtRspLog = 0
+                    else:
+                        print('Fatal error - key press.')
+                        logging.data('Fatal error - key press.')
+            elif (varSwtRspLog == 1) and \
+            (objTme02 > (objTme03 + varRspLogTme)):
+                logging.data('Miss') # Log miss
+                varCntMis += 1 # Count miss
+                # If the subject does not respond to the target within time, we
+                # log this as a miss and set varSwtRspLog to zero (so
+                # that the response won't be logged as a hit anymore
+                # afterwards):
+                varSwtRspLog = 0
+            # Check whether it's time to show a target on the next frame:
+            # Is the upcoming event a target?
+            if aryDesign[idx01+varIdxTrgt][0] == 2:
+                var_temp_target_start = aryDesign[idx01+varIdxTrgt][1]
+                # Has the start time of the target event been reached?
+                if objTme02 >= (objTme01 + var_temp_target_start):
+                    varSwtTrgt = 1
+                    # Has the end time of the target event been reached?
+                    if objTme02 >= \
+                    (objTme01 + var_temp_target_start + varDurTar):
+                        # Switch the target off:
+                        varSwtTrgt = 0
+                        # Switch on the logging of the target event (so that
+                        # the next target event will be logged):
+                        varSwtTrgtLog = 1
+                        # Only increase the index if the end of the design
+                        # matrix has not been reached yet:
+                        if (idx01 + varIdxTrgt) < varNumEvnts:
+                            # Increase the index to check whether the next
+                            # event in the design matrix is also a target
+                            # event:
+                            varIdxTrgt = varIdxTrgt + 1
+            objTme02 = objClck.getTime()
+        # Log end of stimulus block:
+        strTmp = ('STIMULUS_end_of_event_' + unicode(idx01 + 1))
+        logging.data(strTmp)
+        # Switch the stimulus component switch for the next stimulus block (so
+        # that a red-green block is followed by a blue-yellow block, and vice
+        # versa):
+        if var_switch_comp == 0:
+            var_switch_comp = 1
+        elif var_switch_comp == 1:
+            var_switch_comp = 0
+# Present participant with feedback on her target detection performance:
+str_feedback = ('You have detected ' + \
+                unicode(varCntHit) + \
+                ' targets out of ' + \
+                unicode(varCntHit + varCntMis))
+objTxtTmr = visual.TextStim(objWin,
+                            text=str_feedback,
+                            font="Courier New",
+                            pos=(0, 0),
+                            color=(1.0, 1.0, 1.0),
+                            colorSpace='rgb',
+                            opacity=1.0,
+                            contrast=1.0,
+                            ori=0.0,
+                            height=0.5,
+                            antialias=True,
+                            alignHoriz='center',
+                            alignVert='center',
+                            flipHoriz=False,
+                            flipVert=False,
+                            autoLog = False)
+tme_4 = objClck.getTime()
+while objTme02 < (tme_4 + 3.0):
+    objTxtTmr.draw()
+    objWin.flip()
+    objTme02 = objClck.getTime()
+# Log total number of hits and misses:
+logging.data('------End of the experiment.------')
+logging.data(('Number_of_hits_=_' + unicode(varCntHit)))
+logging.data(('Number_of_misses_=_' + unicode(varCntMis)))
+# -----------------------------------------------------------------------------
+# *** End of the experiment
+# Make the mouse cursor visible again:
+event.Mouse(visible=True)
+# Close everyting:
 objWin.close()
-
-#%%
-"""SAVE DATA"""
-# log important parameters
-varTry:
-    fleLog.write('varDurTaration=' + unicode(varDurTar) + '\n')
-    fleLog.write('aryKeys=' + unicode(aryKeys) + '\n')
-except:
-    print '(Important parameters could not be logged.)'
-
-# create a pickle file with important arrays
-varTry:
-    os.chdir(outFolderName)
-    # create python dictionary containing important arrays
-    output = {'ExperimentName'     : dicExpInfo['Experiment_Name'],
-              'Date'               : dicExpInfo['Date'],
-              'SubjectID'          : dicExpInfo['Subject_ID'],
-              'Run_Number'         : dicExpInfo['Run'],
-              'Conditions'         : aryCon,
-              'aryDur'          : aryDur,
-              'KeyPresses'         : aryKeys,
-              'DetectedaryTrgt'    : targetDetected,
-              'EyevarTrackerUsed'     : dicExpInfo['EyevarTracker'],
-              }
-    # save dictionary as a pickle in output folder
-    misc.toFile(outFileName +'.pickle', output)
-    print 'Pickle data saved as: '+ outFileName +'.pickle'
-    print "***"
-    os.chdir(strPthMain)
-except:
-    print '(OUTPUT folder could not be created.)'
-
-# create prt files for BV
-varTry:
-    os.chdir(prtFolderName)
-
-    aryDurMsec = (aryDur*1000)
-    aryDurMsec = aryDurMsec.astype(int)
-
-    # Set Conditions Names
-    CondNames = ['Rest',
-                 'PacmanStimStat',
-                 'PacmanStimDyn',
-                 ]
-
-    # Number code the aryCon, i.e. Fixation = -1, Static = 0, etc.
-    from collections import OrderedDict
-    stimTypeDict=OrderedDict()
-    stimTypeDict[CondNames[0]] = [1]
-    stimTypeDict[CondNames[1]] = [3]
-    stimTypeDict[CondNames[2]] = [4]
-
-
-    # Color code the aryCon
-    colourTypeDict ={
-        CondNames[0] : '64 64 64',
-        CondNames[1] : '255 0 0',
-        CondNames[2] : '0 255 0',
-        }
-
-    # Defining a function will reduce the code length significantly.
-    def idxAppend(iteration, enumeration, dictName, outDict):
-         if int(enumeration) in range(stimTypeDict[dictName][0],
-                                      stimTypeDict[dictName][-1]+1
-                                      ):
-            outDict = outDict.setdefault(dictName, [])
-            outDict.append( iteration )
-
-    # Reorganization of the protocol array (finding and saving the indices)
-    outIdxDict = {}  # an empty dictionary
-
-    # Please take a deeper breath.
-    for i, j in enumerate(aryCon):
-        for k in stimTypeDict:  # iterate through each key in dict
-            idxAppend(i, j, k, outIdxDict)
-
-    print outIdxDict
-
-    # Creation of the Brainvoyager .prt custom text file
-    prtName = '%s_%s_Run%s_%s.prt' %(dicExpInfo['Subject_ID'],dicExpInfo['Experiment_Name'],dicExpInfo['Run'], dicExpInfo['Date'])
-
-    file = open(prtName,'w')
-    header = ['FileVersion: 2\n',
-           'ResolutionOfTime: msec\n',
-           'Experiment: %s\n'%strExpNme,
-           'BackgroundColor: 0 0 0\n',
-           'TextColor: 255 255 202\n',
-           'TimeCourseColor: 255 255 255\n',
-           'TimeCourseThick: 3\n',
-           'ReferenceFuncColor: 192 192 192\n',
-           'ReferenceFuncThick: 2\n'
-           'NrOfConditions: %s\n' %svarTr(len(stimTypeDict))
-           ]
-
-    file.writelines(header)
-
-    # Conditions/predictors
-    for i in stimTypeDict:  # iterate through each key in stim. type dict
-        h = i
-
-        # Write the condition/predictor name and put the Nr. of repetitions
-        file.writelines(['\n',
-                         i+'\n',
-                         svarTr(len(outIdxDict[i]))
-                         ])
-
-        # iterate through each element, define onset and end of each condition
-        for j in outIdxDict[i]:
-            onset = int( sum(aryDurMsec[0:j+1]) - aryDurMsec[j] + 1 )
-            file.write('\n')
-            file.write(svarTr( onset ))
-            file.write(' ')
-            file.write(svarTr( onset + aryDurMsec[j]-1 ))
-        # contiditon color
-        file.write('\nColor: %s\n' %colourTypeDict[h])
-    file.close()
-    print 'PRT files saved as: ' + prtFolderName + '\\' + prtName
-    os.chdir(strPthMain)
-except:
-    print '(PRT files could not be created.)'
-
-#%%
-"""FINISH"""
 core.quit()
+monitors.quit()
+logging.quit()
+event.quit()
+# -----------------------------------------------------------------------------
