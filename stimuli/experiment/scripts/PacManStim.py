@@ -3,18 +3,18 @@
 Experimental stimuli for Pac-Man project, to be run in Psychopy.
 """
 
-# Part of Pac-Man library
+# Part of py_pRF_mapping library
 # Copyright (C) 2017 Marian Schneider & Ingo Marquardt
 #
-# This program is free software: you can redisvarTribute it and/or modify it
-# under the terms of the GNU General Public License as published by the Free
-# Software Foundation, either version 3 of the License, or (at your option) any
-# later version.
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
 #
-# This program is disvarTributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-# more details.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
 #
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
@@ -30,11 +30,15 @@ from psychopy import visual, core, monitors, logging, event, gui, data
 # Length of target events [s]:
 varDurTar = 0.8
 
-# fMRI volume TR [s]:
-varTr = 2.079
+# Akin et al. (2014): "the figures oscillated sinusoidally with a half period
+# of 480 ms". Thus, one full oscillation cycle took 960 ms, and the oscillation
+# frequency was ca. 1.04 Hz. Our TR is 2.079, which is ca. 0.96 Hz.
 
-# Oscillation frequency of Pac-Man, cycles per TR:
-varFrq = 2.0
+# Oscillation frequency of Pac-Man; cycles per second:
+varFrq = 0.96 * (1.0 / 3.0)
+
+# Maximum displacement of Pac-Man (relative to horizontal meridian) in degrees:
+varOscMax = 35.0
 
 # Distance between observer and monitor [cm]:
 varMonDist = 99.0  # [99.0] for 7T scanner
@@ -66,11 +70,16 @@ varHitTme = 2.0
 # Name of the experiment:
 strExpNme = 'PacManStim'
 
+# Get date string as default session name:
+strDate = str(datetime.datetime.now())
+lstDate = strDate[0:10].split('-')
+strDate = (lstDate[0] + lstDate[1] + lstDate[2])
+
 # Dictionary with experiment metadata:
 dicExpInfo = {'Run': [str(x).zfill(2) for x in range(1, 11)],
-              'Subject_ID': 'Pilot',
               'Test mode': [False, True],
-              'Pac-Man': ['Dynamic', 'Static']}
+              'Pac-Man': ['Dynamic', 'Static'],
+              'Subject_ID': strDate}
 
 # Pop-up GUI to let the user select parameters:
 objGui = gui.DlgFromDict(dictionary=dicExpInfo,
@@ -154,7 +163,7 @@ strPthLog = (strPthSub
              )
 
 # Create a log file and set logging verbosity:
-fleLog = logging.LogFile(strPthLog + '.log', level=logging.WARNING)
+fleLog = logging.LogFile(strPthLog + '.log', level=logging.DATA)
 
 # Log parent path:
 fleLog.write('Parent path: ' + strPthPrnt + '\n')
@@ -179,7 +188,7 @@ objMon = monitors.Monitor('Screen_7T_NOVA_32_Channel_Coil',
 objMon.setSizePix([varPixX, varPixY])
 
 # Log monitor info:
-fleLog.write(('Monitor_Distance: varMonDist = '
+fleLog.write(('Monitor distance: varMonDist = '
               + str(varMonDist)
               + ' cm'
               + '\n'))
@@ -217,14 +226,14 @@ objWin = visual.Window(
 # *** Experimental stimuli
 
 # Initial orientation of Pac-Man figure:
-varPacOri = 125
+varPacOri = 125.0
 
 # Pacman figure:
 objPacStim = visual.RadialStim(
     win=objWin,
     mask='none',
     units='deg',
-    pos=(0, 0),
+    pos=(0.0, 0.0),
     size=varPacSze,
     radialCycles=0,
     angularCycles=0,
@@ -257,15 +266,15 @@ objPacIn = visual.GratingStim(
 objFix = visual.Circle(
     objWin,
     units='deg',
-    pos=(0, 0),
-    radius=0.04,
+    pos=(0.0, 0.0),
+    radius=0.05,
     edges=24,
-    fillColor=[1.0, 0.0, 0.0],
+    fillColor=[-0.69, 0.83, 0.63],
     fillColorSpace='rgb',
-    lineColor=[1.0, 0.0, 0.0],
+    lineColor=[-0.69, 0.83, 0.63],
     lineColorSpace='rgb',
     lineWidth=0.0,
-    interpolate=True,
+    interpolate=False,
     autoLog=False,
     )
 
@@ -273,15 +282,15 @@ objFix = visual.Circle(
 objFixSrd = visual.Circle(
     objWin,
     units='deg',
-    pos=(0, 0),
-    radius=0.07,
+    pos=(0.0, 0.0),
+    radius=0.09,
     edges=24,
-    fillColor=[0.5, 0.5, 0.0],
+    fillColor=[0.95, 0.04, -1.0],
     fillColorSpace='rgb',
-    lineColor=[0.5, 0.5, 0.0],
+    lineColor=[0.95, 0.04, -1.0],
     lineColorSpace='rgb',
     lineWidth=0.0,
-    interpolate=True,
+    interpolate=False,
     autoLog=False,
     )
 
@@ -289,16 +298,16 @@ objFixSrd = visual.Circle(
 objTarget = visual.Circle(
     objWin,
     units='deg',
-    pos=(0, 0),
+    pos=(0.0, 0.0),
     edges=24,
-    radius=0.07,
-    fillColor=[0.8, 0.1, 0.1],
+    radius=0.09,
+    fillColor=[0.95, 0.04, -1.0],
     fillColorSpace='rgb',
-    lineColor=[0.8, 0.1, 0.1],
+    lineColor=[0.95, 0.04, -1.0],
     lineColorSpace='rgb',
     lineWidth=0.0,
-    interpolate=True,
-    autoLog=False
+    interpolate=False,
+    autoLog=False,
     )
 # -----------------------------------------------------------------------------
 
@@ -310,7 +319,7 @@ objTarget = visual.Circle(
 objTxtWlcm = visual.TextStim(objWin,
                              text='Please wait a moment.',
                              font="Courier New",
-                             pos=(0, 0),
+                             pos=(0.0, 0.0),
                              color=(1.0, 1.0, 1.0),
                              colorSpace='rgb',
                              opacity=1.0,
@@ -488,11 +497,11 @@ for idx01 in range(0, varNumEvnts):  #noqa
     if varTmpEvntType == 1:
 
         # Log beginning of rest block:
-        lstTmp = ('REST_start_of_block_'
+        strTmp = ('REST start of block '
                   + str(idx01 + 1)
-                  + '_scheduled_for:_'
+                  + ' scheduled for: '
                   + str(varTmpEvntStrt))
-        logging.data(lstTmp)
+        logging.data(strTmp)
 
         # Switch for target (show target or not?):
         varSwtTrgt = 0
@@ -501,22 +510,22 @@ for idx01 in range(0, varNumEvnts):  #noqa
         while varTme02 < (varTme01 + varTmpEvntStrt + varTmpEvntDur):
 
             # Draw fixation dot:
-            objFix.draw(win=objWin)
             objFixSrd.draw(win=objWin)
+            objFix.draw(win=objWin)
 
             # Draw target?
             if varSwtTrgt == 1:
 
                     # Draw target:
-                    objTarget.draw()
+                    objTarget.draw(win=objWin)
 
                     # Log target?
                     if varSwtTrgtLog == 1:
 
                         # Log target event:
-                        lstTmp = ('TARGET_scheduled_for:_'
+                        strTmp = ('TARGET scheduled for: '
                                   + str(varTmpTrgtStrt))
-                        logging.data(lstTmp)
+                        logging.data(strTmp)
 
                         # Switch off (so that the target event is only logged
                         # once):
@@ -628,16 +637,16 @@ for idx01 in range(0, varNumEvnts):  #noqa
             varTme02 = objClck.getTime()
 
         # Log end of rest block:
-        strTmp = ('REST_end_of_event_' + str(idx01 + 1))
+        strTmp = ('REST end of event ' + str(idx01 + 1))
         logging.data(strTmp)
 
     # Is the upcoming event a STIMULUS BLOCK?
     elif varTmpEvntType == 3:
 
         # Log beginning of stimulus block:
-        strTmp = ('STIMULUS_start_of_block_'
+        strTmp = ('STIMULUS start of block '
                   + str(idx01 + 1)
-                  + '_scheduled_for:_'
+                  + ' scheduled for: '
                   + str(varTmpEvntStrt))
         logging.data(strTmp)
 
@@ -653,14 +662,20 @@ for idx01 in range(0, varNumEvnts):  #noqa
                 # Time since start of current stimulus block:
                 varTme05 = objClck.getTime() - varTmpEvntStrt
 
-                # New orientation:
-                varPacOriUpdt = np.sin(
-                                       np.deg2rad(varTme05
-                                                  * (360.0 / float(varTr))
-                                                  * float(varFrq)
-                                                  )
-                                       ) * 35.0
-                objPacStim.ori = varPacOri + varPacOriUpdt
+                # Pac-Man orientation as a function of time:
+                varPacOriUpdt = np.multiply(
+                                            np.sin(
+                                                    np.deg2rad(
+                                                               float(varTme05)
+                                                               * 360.0
+                                                               * float(varFrq)
+                                                               )
+                                                   ),
+                                            float(varOscMax)
+                                            )
+
+                # Update Pac-Man object:
+                objPacStim.ori = float(varPacOri) + varPacOriUpdt
                 objPacIn.ori = varPacOriUpdt
 
             # Draw Pac-Man:
@@ -668,22 +683,22 @@ for idx01 in range(0, varNumEvnts):  #noqa
             objPacIn.draw()
 
             # Draw fixation dot:
-            objFix.draw(win=objWin)
             objFixSrd.draw(win=objWin)
+            objFix.draw(win=objWin)
 
             # Draw target?
             if varSwtTrgt == 1:
 
                     # Draw target:
-                    objTarget.draw()
+                    objTarget.draw(win=objWin)
 
                     # Log target?
                     if varSwtTrgtLog == 1:
 
                         # Log target event:
-                        lstTmp = ('TARGET_scheduled_for:_'
+                        strTmp = ('TARGET scheduled for: '
                                   + str(varTmpTrgtStrt))
-                        logging.data(lstTmp)
+                        logging.data(strTmp)
 
                         # Switch off (so that the target event is only logged
                         # once):
@@ -795,8 +810,14 @@ for idx01 in range(0, varNumEvnts):  #noqa
             varTme02 = objClck.getTime()
 
         # Log end of stimulus block:
-        lstTmp = ('STIMULUS_end_of_event_' + unicode(idx01 + 1))
-        logging.data(lstTmp)
+        strTmp = ('STIMULUS end of event ' + unicode(idx01 + 1))
+        logging.data(strTmp)
+
+# -----------------------------------------------------------------------------
+
+
+# -----------------------------------------------------------------------------
+# *** Feedback
 
 # Ratio of hits:
 varHitRatio = float(varCntHit) / float(varCntHit + varCntMis)
@@ -831,7 +852,7 @@ else:
 objTxtTmr = visual.TextStim(objWin,
                             text=strFeedback,
                             font="Courier New",
-                            pos=(0, 0),
+                            pos=(0.0, 0.0),
                             color=(1.0, 1.0, 1.0),
                             colorSpace='rgb',
                             opacity=1.0,
@@ -854,8 +875,12 @@ while varTme02 < (varTme04 + 3.0):
 
 # Log total number of hits and misses:
 logging.data('------End of the experiment.------')
-logging.data(('Number_of_hits_=_' + str(varCntHit)))
-logging.data(('Number_of_misses_=_' + str(varCntMis)))
+logging.data(('Number of hits: ' + str(varCntHit)))
+logging.data(('Number of misses: ' + str(varCntMis)))
+logging.data(('Percentage of hits: '
+              + str(np.around((varHitRatio * 100.0), decimals=1))))
+# -----------------------------------------------------------------------------
+
 
 # -----------------------------------------------------------------------------
 # *** End of the experiment
