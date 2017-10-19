@@ -394,273 +394,273 @@ def fnc_target(varCntTrgt):
     return varCntTrgt
 
 
-#
-#
-##%%
-#"""RENDER_LOOP"""
-## Create Counters
-#i = 0 # counter for blocks
-##miniCounter = -1 # counter for mini blocks
-## give system time to settle before stimulus presentation
-#core.wait(0.5)
-#
-##wait for scanner varTrigger
-#objTxtWlcm.draw()
-#objWin.flip()
-#event.waitKeys(keyList=['5'], timeStamped=False)
-## set switch
-#motionSwitch = False
-## reset objClck
-#objClck.reset()
-#logging.data('StartOfRun'+ unicode(dicExpInfo['Run']))
-#
-#while objClck.getTime()<varDurTtl:
-#
-#    if aryCon[i] == 1: # rest
-#        motionSwitch = False
-#        objPacStim.opacity = 0
-#        objPacIn.opacity = 0
-#
-#    elif aryCon[i] == 3: # pacman stim static
-#        motionSwitch = False
-#        objPacStim.opacity = 1
-#        objPacIn.opacity = 1
-#        objPacStim.ori = varPacOri
-#        objPacIn.ori = 0
-#
-#    elif aryCon[i] == 4: # pacman stim move
-#        motionSwitch = True
-#        objPacStim.opacity = 1
-#        objPacIn.opacity = 1
-#        objPacStim.ori = varPacOri
-#        objPacIn.ori = 0
-#
-#
-#
-#    while objClck.getTime()<np.sum(aryDur[0:i+1]):
-#
-#        if motionSwitch:
-#            t = objClck.getTime()-np.sum(aryDur[0:i])
-#            oriUpdate = np.sin(np.deg2rad(t*(360/varTr)*varFrq))*35
-#            objPacStim.ori = varPacOri + oriUpdate
-#            objPacIn.ori = oriUpdate
-#
-#        # update target
-#        varCntTrgt= fnc_target(varCntTrgt)
-#
-#        # draw background
-#        NoiseBackgrd.draw()
-#
-#        # draw pacman
-#        objPacStim.draw()
-#        objPacIn.draw()
-#
-#        # draw fixation point surround
-#        objFixSrd.draw()
-#
-#        # draw fixation point
-#        objFix.draw()
-#
-#        objWin.flip()
-#
-#        #handle key presses each frame
-#        for keys in event.getKeys():
-#            if keys[0]in ['escape','q']:
-#                objWin.close()
-#
-#                core.quit()
-#            elif keys in ['1']:
-#                aryKeys = np.append([aryKeys],[objClck.getTime()])
-#                logging.data(msg='Key1 pressed')
-#
-#
-#.
-#
-#    # update counter
-#    i = i + 1
-#    motionSwitch = False
-#
-## log end of run
-#logging.data('EndOfRun'+ unicode(dicExpInfo['Run']))
-## close the eyevarTracker data file
-#if ET:
-#    vpx.VPX_SendCommand('dataFile_Close')
-#
-##%%
-#"""TARGET DETECTION RESULTS"""
-## calculate target detection results
-## create an array 'targetDetected' for showing which aryTrgt were detected
-#targetDetected = np.zeros(len(aryTrgt))
-#if len(aryKeys) == 0:
-#    # if no buttons were pressed
-#    print "No keys were pressed/registered"
-#    aryTrgtDet = 0
-#else:
-#    # if buttons were pressed:
-#    for index, target in enumerate(aryTrgt):
-#        for TimeKeyPress in aryKeys:
-#            if float(TimeKeyPress)>=float(target) and float(TimeKeyPress)<=float(target)+2:
-#                targetDetected[index] = 1
-#
-#logging.data('ArrayOfDetectedaryTrgt'+ unicode(targetDetected))
-#print 'Array Of Detected aryTrgt:'
-#print targetDetected
-#
-## number of detected aryTrgt
-#aryTrgtDet = sum(targetDetected)
-#logging.data('NumberOfDetectedaryTrgt'+ unicode(aryTrgtDet))
-## detection ratio
-#DetecvarTratio = aryTrgtDet/len(targetDetected)
-#logging.data('RatioOfDetectedaryTrgt'+ unicode(DetecvarTratio))
-#
-## display target detection results to Subject_ID
-#resultText = 'You have detected %i out of %i aryTrgt.' %(aryTrgtDet,len(aryTrgt))
-#print resultText
-#logging.data(resultText)
-## also display a motivational slogan
-#if DetecvarTratio >= 0.95:
-#    feedbackText = 'Excellent! Keep up the good work'
-#elif DetecvarTratio < 0.95 and DetecvarTratio > 0.85:
-#    feedbackText = 'Well done! Keep up the good work'
-#elif DetecvarTratio < 0.8 and DetecvarTratio > 0.65:
-#    feedbackText = 'Please varTry to focus more'
-#else:
-#    feedbackText = 'You really need to focus more!'
-#
-#targetText = visual.TextStim(
-#    win=objWin,
-#    color='white',
-#    height=0.5,
-#    pos=(0.0, 0.0),
-#    autoLog=False,
-#    )
-#targetText.setText(resultText+feedbackText)
-#fleLog.write(unicode(resultText) + '\n')
-#fleLog.write(unicode(feedbackText) + '\n')
-#targetText.draw()
-#objWin.flip()
-#core.wait(5)
-#objWin.close()
-#
-##%%
-#"""SAVE DATA"""
-## log important parameters
-#try:
-#    fleLog.write('varDurTaration=' + unicode(varDurTar) + '\n')
-#    fleLog.write('aryKeys=' + unicode(aryKeys) + '\n')
-#except:
-#    print '(Important parameters could not be logged.)'
-#
-## create a pickle file with important arrays
-#try:
-#    os.chdir(outFolderName)
-#    # create python dictionary containing important arrays
-#    output = {'ExperimentName'     : dicExpInfo['Experiment_Name'],
-#              'Date'               : dicExpInfo['Date'],
-#              'SubjectID'          : dicExpInfo['Subject_ID'],
-#              'Run_Number'         : dicExpInfo['Run'],
-#              'Conditions'         : aryCon,
-#              'aryDur'          : aryDur,
-#              'KeyPresses'         : aryKeys,
-#              'DetectedaryTrgt'    : targetDetected,
-#              'EyevarTrackerUsed'     : dicExpInfo['EyevarTracker'],
-#              }
-#    # save dictionary as a pickle in output folder
-#    misc.toFile(outFileName +'.pickle', output)
-#    print 'Pickle data saved as: '+ outFileName +'.pickle'
-#    print "***"
-#    os.chdir(strPthMain)
-#except:
-#    print '(OUTPUT folder could not be created.)'
-#
-## create prt files for BV
-#try:
-#    os.chdir(prtFolderName)
-#
-#    aryDurMsec = (aryDur*1000)
-#    aryDurMsec = aryDurMsec.astype(int)
-#
-#    # Set Conditions Names
-#    CondNames = ['Rest',
-#                 'PacmanStimStat',
-#                 'PacmanStimDyn',
-#                 ]
-#
-#    # Number code the aryCon, i.e. Fixation = -1, Static = 0, etc.
-#    from collections import OrderedDict
-#    stimTypeDict=OrderedDict()
-#    stimTypeDict[CondNames[0]] = [1]
-#    stimTypeDict[CondNames[1]] = [3]
-#    stimTypeDict[CondNames[2]] = [4]
-#
-#
-#    # Color code the aryCon
-#    colourTypeDict ={
-#        CondNames[0] : '64 64 64',
-#        CondNames[1] : '255 0 0',
-#        CondNames[2] : '0 255 0',
-#        }
-#
-#    # Defining a function will reduce the code length significantly.
-#    def idxAppend(iteration, enumeration, dictName, outDict):
-#         if int(enumeration) in range(stimTypeDict[dictName][0],
-#                                      stimTypeDict[dictName][-1]+1
-#                                      ):
-#            outDict = outDict.setdefault(dictName, [])
-#            outDict.append( iteration )
-#
-#    # Reorganization of the protocol array (finding and saving the indices)
-#    outIdxDict = {}  # an empty dictionary
-#
-#    # Please take a deeper breath.
-#    for i, j in enumerate(aryCon):
-#        for k in stimTypeDict:  # iterate through each key in dict
-#            idxAppend(i, j, k, outIdxDict)
-#
-#    print outIdxDict
-#
-#    # Creation of the Brainvoyager .prt custom text file
-#    prtName = '%s_%s_Run%s_%s.prt' %(dicExpInfo['Subject_ID'],dicExpInfo['Experiment_Name'],dicExpInfo['Run'], dicExpInfo['Date'])
-#
-#    file = open(prtName,'w')
-#    header = ['FileVersion: 2\n',
-#           'ResolutionOfTime: msec\n',
-#           'Experiment: %s\n'%strExpNme,
-#           'BackgroundColor: 0 0 0\n',
-#           'TextColor: 255 255 202\n',
-#           'TimeCourseColor: 255 255 255\n',
-#           'TimeCourseThick: 3\n',
-#           'ReferenceFuncColor: 192 192 192\n',
-#           'ReferenceFuncThick: 2\n'
-#           'NrOfConditions: %s\n' %svarTr(len(stimTypeDict))
-#           ]
-#
-#    file.writelines(header)
-#
-#    # Conditions/predictors
-#    for i in stimTypeDict:  # iterate through each key in stim. type dict
-#        h = i
-#
-#        # Write the condition/predictor name and put the Nr. of repetitions
-#        file.writelines(['\n',
-#                         i+'\n',
-#                         svarTr(len(outIdxDict[i]))
-#                         ])
-#
-#        # iterate through each element, define onset and end of each condition
-#        for j in outIdxDict[i]:
-#            onset = int( sum(aryDurMsec[0:j+1]) - aryDurMsec[j] + 1 )
-#            file.write('\n')
-#            file.write(svarTr( onset ))
-#            file.write(' ')
-#            file.write(svarTr( onset + aryDurMsec[j]-1 ))
-#        # contiditon color
-#        file.write('\nColor: %s\n' %colourTypeDict[h])
-#    file.close()
-#    print 'PRT files saved as: ' + prtFolderName + '\\' + prtName
-#    os.chdir(strPthMain)
-#except:
-#    print '(PRT files could not be created.)'
+
+
+#%%
+"""RENDER_LOOP"""
+# Create Counters
+i = 0 # counter for blocks
+#miniCounter = -1 # counter for mini blocks
+# give system time to settle before stimulus presentation
+core.wait(0.5)
+
+#wait for scanner varTrigger
+objTxtWlcm.draw()
+objWin.flip()
+event.waitKeys(keyList=['5'], timeStamped=False)
+# set switch
+motionSwitch = False
+# reset objClck
+objClck.reset()
+logging.data('StartOfRun'+ unicode(dicExpInfo['Run']))
+
+while objClck.getTime()<varDurTtl:
+
+    if aryCon[i] == 1: # rest
+        motionSwitch = False
+        objPacStim.opacity = 0
+        objPacIn.opacity = 0
+
+    elif aryCon[i] == 3: # pacman stim static
+        motionSwitch = False
+        objPacStim.opacity = 1
+        objPacIn.opacity = 1
+        objPacStim.ori = varPacOri
+        objPacIn.ori = 0
+
+    elif aryCon[i] == 4: # pacman stim move
+        motionSwitch = True
+        objPacStim.opacity = 1
+        objPacIn.opacity = 1
+        objPacStim.ori = varPacOri
+        objPacIn.ori = 0
+
+
+
+    while objClck.getTime()<np.sum(aryDur[0:i+1]):
+
+        if motionSwitch:
+            t = objClck.getTime()-np.sum(aryDur[0:i])
+            oriUpdate = np.sin(np.deg2rad(t*(360/varTr)*varFrq))*35
+            objPacStim.ori = varPacOri + oriUpdate
+            objPacIn.ori = oriUpdate
+
+        # update target
+        varCntTrgt= fnc_target(varCntTrgt)
+
+        # draw background
+        NoiseBackgrd.draw()
+
+        # draw pacman
+        objPacStim.draw()
+        objPacIn.draw()
+
+        # draw fixation point surround
+        objFixSrd.draw()
+
+        # draw fixation point
+        objFix.draw()
+
+        objWin.flip()
+
+        #handle key presses each frame
+        for keys in event.getKeys():
+            if keys[0]in ['escape','q']:
+                objWin.close()
+
+                core.quit()
+            elif keys in ['1']:
+                aryKeys = np.append([aryKeys],[objClck.getTime()])
+                logging.data(msg='Key1 pressed')
+
+
+.
+
+    # update counter
+    i = i + 1
+    motionSwitch = False
+
+# log end of run
+logging.data('EndOfRun'+ unicode(dicExpInfo['Run']))
+# close the eyevarTracker data file
+if ET:
+    vpx.VPX_SendCommand('dataFile_Close')
+
+#%%
+"""TARGET DETECTION RESULTS"""
+# calculate target detection results
+# create an array 'targetDetected' for showing which aryTrgt were detected
+targetDetected = np.zeros(len(aryTrgt))
+if len(aryKeys) == 0:
+    # if no buttons were pressed
+    print "No keys were pressed/registered"
+    aryTrgtDet = 0
+else:
+    # if buttons were pressed:
+    for index, target in enumerate(aryTrgt):
+        for TimeKeyPress in aryKeys:
+            if float(TimeKeyPress)>=float(target) and float(TimeKeyPress)<=float(target)+2:
+                targetDetected[index] = 1
+
+logging.data('ArrayOfDetectedaryTrgt'+ unicode(targetDetected))
+print 'Array Of Detected aryTrgt:'
+print targetDetected
+
+# number of detected aryTrgt
+aryTrgtDet = sum(targetDetected)
+logging.data('NumberOfDetectedaryTrgt'+ unicode(aryTrgtDet))
+# detection ratio
+DetecvarTratio = aryTrgtDet/len(targetDetected)
+logging.data('RatioOfDetectedaryTrgt'+ unicode(DetecvarTratio))
+
+# display target detection results to Subject_ID
+resultText = 'You have detected %i out of %i aryTrgt.' %(aryTrgtDet,len(aryTrgt))
+print resultText
+logging.data(resultText)
+# also display a motivational slogan
+if DetecvarTratio >= 0.95:
+    feedbackText = 'Excellent! Keep up the good work'
+elif DetecvarTratio < 0.95 and DetecvarTratio > 0.85:
+    feedbackText = 'Well done! Keep up the good work'
+elif DetecvarTratio < 0.8 and DetecvarTratio > 0.65:
+    feedbackText = 'Please varTry to focus more'
+else:
+    feedbackText = 'You really need to focus more!'
+
+targetText = visual.TextStim(
+    win=objWin,
+    color='white',
+    height=0.5,
+    pos=(0.0, 0.0),
+    autoLog=False,
+    )
+targetText.setText(resultText+feedbackText)
+fleLog.write(unicode(resultText) + '\n')
+fleLog.write(unicode(feedbackText) + '\n')
+targetText.draw()
+objWin.flip()
+core.wait(5)
+objWin.close()
+
+#%%
+"""SAVE DATA"""
+# log important parameters
+try:
+    fleLog.write('varDurTaration=' + unicode(varDurTar) + '\n')
+    fleLog.write('aryKeys=' + unicode(aryKeys) + '\n')
+except:
+    print '(Important parameters could not be logged.)'
+
+# create a pickle file with important arrays
+try:
+    os.chdir(outFolderName)
+    # create python dictionary containing important arrays
+    output = {'ExperimentName'     : dicExpInfo['Experiment_Name'],
+              'Date'               : dicExpInfo['Date'],
+              'SubjectID'          : dicExpInfo['Subject_ID'],
+              'Run_Number'         : dicExpInfo['Run'],
+              'Conditions'         : aryCon,
+              'aryDur'          : aryDur,
+              'KeyPresses'         : aryKeys,
+              'DetectedaryTrgt'    : targetDetected,
+              'EyevarTrackerUsed'     : dicExpInfo['EyevarTracker'],
+              }
+    # save dictionary as a pickle in output folder
+    misc.toFile(outFileName +'.pickle', output)
+    print 'Pickle data saved as: '+ outFileName +'.pickle'
+    print "***"
+    os.chdir(strPthMain)
+except:
+    print '(OUTPUT folder could not be created.)'
+
+# create prt files for BV
+try:
+    os.chdir(prtFolderName)
+
+    aryDurMsec = (aryDur*1000)
+    aryDurMsec = aryDurMsec.astype(int)
+
+    # Set Conditions Names
+    CondNames = ['Rest',
+                 'PacmanStimStat',
+                 'PacmanStimDyn',
+                 ]
+
+    # Number code the aryCon, i.e. Fixation = -1, Static = 0, etc.
+    from collections import OrderedDict
+    stimTypeDict=OrderedDict()
+    stimTypeDict[CondNames[0]] = [1]
+    stimTypeDict[CondNames[1]] = [3]
+    stimTypeDict[CondNames[2]] = [4]
+
+
+    # Color code the aryCon
+    colourTypeDict ={
+        CondNames[0] : '64 64 64',
+        CondNames[1] : '255 0 0',
+        CondNames[2] : '0 255 0',
+        }
+
+    # Defining a function will reduce the code length significantly.
+    def idxAppend(iteration, enumeration, dictName, outDict):
+         if int(enumeration) in range(stimTypeDict[dictName][0],
+                                      stimTypeDict[dictName][-1]+1
+                                      ):
+            outDict = outDict.setdefault(dictName, [])
+            outDict.append( iteration )
+
+    # Reorganization of the protocol array (finding and saving the indices)
+    outIdxDict = {}  # an empty dictionary
+
+    # Please take a deeper breath.
+    for i, j in enumerate(aryCon):
+        for k in stimTypeDict:  # iterate through each key in dict
+            idxAppend(i, j, k, outIdxDict)
+
+    print outIdxDict
+
+    # Creation of the Brainvoyager .prt custom text file
+    prtName = '%s_%s_Run%s_%s.prt' %(dicExpInfo['Subject_ID'],dicExpInfo['Experiment_Name'],dicExpInfo['Run'], dicExpInfo['Date'])
+
+    file = open(prtName,'w')
+    header = ['FileVersion: 2\n',
+           'ResolutionOfTime: msec\n',
+           'Experiment: %s\n'%strExpNme,
+           'BackgroundColor: 0 0 0\n',
+           'TextColor: 255 255 202\n',
+           'TimeCourseColor: 255 255 255\n',
+           'TimeCourseThick: 3\n',
+           'ReferenceFuncColor: 192 192 192\n',
+           'ReferenceFuncThick: 2\n'
+           'NrOfConditions: %s\n' %svarTr(len(stimTypeDict))
+           ]
+
+    file.writelines(header)
+
+    # Conditions/predictors
+    for i in stimTypeDict:  # iterate through each key in stim. type dict
+        h = i
+
+        # Write the condition/predictor name and put the Nr. of repetitions
+        file.writelines(['\n',
+                         i+'\n',
+                         svarTr(len(outIdxDict[i]))
+                         ])
+
+        # iterate through each element, define onset and end of each condition
+        for j in outIdxDict[i]:
+            onset = int( sum(aryDurMsec[0:j+1]) - aryDurMsec[j] + 1 )
+            file.write('\n')
+            file.write(svarTr( onset ))
+            file.write(' ')
+            file.write(svarTr( onset + aryDurMsec[j]-1 ))
+        # contiditon color
+        file.write('\nColor: %s\n' %colourTypeDict[h])
+    file.close()
+    print 'PRT files saved as: ' + prtFolderName + '\\' + prtName
+    os.chdir(strPthMain)
+except:
+    print '(PRT files could not be created.)'
 
 #%%
 """FINISH"""
