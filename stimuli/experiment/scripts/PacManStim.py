@@ -35,7 +35,7 @@ varDurTar = 0.8
 # frequency was ca. 1.04 Hz. Our TR is 2.079, which is ca. 0.96 Hz.
 
 # Oscillation frequency of Pac-Man; cycles per second:
-varFrq = 0.96
+varFrq = 0.6  # 0.96
 
 # Maximum displacement of Pac-Man (relative to horizontal meridian) in degrees:
 varOscMax = 35.0
@@ -75,8 +75,12 @@ strDate = str(datetime.datetime.now())
 lstDate = strDate[0:10].split('-')
 strDate = (lstDate[0] + lstDate[1] + lstDate[2])
 
+# List with runs to choose from:
+lstRuns = [str(x).zfill(2) for x in range(1, 11)]
+lstRuns.append('Dummy')
+
 # Dictionary with experiment metadata:
-dicExpInfo = {'Run': [str(x).zfill(2) for x in range(1, 11)],
+dicExpInfo = {'Run': lstRuns,
               'Test mode': [False, True],
               'Pac-Man': ['Dynamic', 'Static'],
               'Subject_ID': strDate}
@@ -225,40 +229,96 @@ objWin = visual.Window(
 # -----------------------------------------------------------------------------
 # *** Experimental stimuli
 
-# Initial orientation of Pac-Man figure:
-varPacOri = 125.0
+# Size of Pac-Man's 'mouth' [deg]:
+varMouth = 70.0
 
-# Pacman figure:
-objPacStim = visual.RadialStim(
+# Because of artefacts at the border (flickering), Pac-Man cannot be a simple
+# rotating wedege. Instead, it has to be put together from three components:
+# (1) Left wedge, (2) upper 'lip', (3) lower 'lip'.
+
+# Note that the angular resolution of the stimulus ('angularRes') has to be
+# high enough for a smooth oscillation.
+
+# Wedge size (in degree) of upper 'lip':
+tplWdgUp = (0.0, (90.0 - (0.5 * varMouth)))
+
+# Wedge size (in degree) of lower 'lip':
+tplWdgLw = ((90.0 + (0.5 * varMouth)), 180.0)
+
+# (1) PacMan - left wedge:
+objPacLft = visual.RadialStim(
     win=objWin,
-    mask='none',
+    mask=None,
     units='deg',
     pos=(0.0, 0.0),
     size=varPacSze,
     radialCycles=0,
     angularCycles=0,
-    radialPhase=0,
-    angularPhase=0,
-    ori=varPacOri,
+    radialPhase=0.0,
+    angularPhase=0.0,
+    ori=175.0,
     texRes=64,
-    angularRes=100,
-    visibleWedge=(0, 290),
+    angularRes=360,
+    visibleWedge=(0.0, 190.0),
     colorSpace='rgb',
     color=lstPacClr,
-    interpolate=True,
+    interpolate=False,
     autoLog=False,
     )
 
-# Inner part of Pac-Man [?]:
+# (2) PacMan - upper 'lip':
+objPacUp = visual.RadialStim(
+    win=objWin,
+    mask=None,
+    units='deg',
+    pos=(0.0, 0.0),
+    size=varPacSze,
+    radialCycles=0,
+    angularCycles=0,
+    radialPhase=0.0,
+    angularPhase=0.0,
+    ori=0.0,
+    texRes=64,
+    angularRes=720,
+    visibleWedge=tplWdgUp,
+    colorSpace='rgb',
+    color=lstPacClr,
+    interpolate=False,
+    autoLog=False,
+    )
+
+# (3) PacMan - lower 'lip':
+objPacLow = visual.RadialStim(
+    win=objWin,
+    mask=None,
+    units='deg',
+    pos=(0.0, 0.0),
+    size=varPacSze,
+    radialCycles=0,
+    angularCycles=0,
+    radialPhase=0.0,
+    angularPhase=0.0,
+    ori=0.0,
+    texRes=64,
+    angularRes=720,
+    visibleWedge=tplWdgLw,
+    colorSpace='rgb',
+    color=lstPacClr,
+    interpolate=False,
+    autoLog=False,
+    )
+
+# Inner part of Pac-Man:
 objPacIn = visual.GratingStim(
     win=objWin,
-    tex='none',
+    tex=None,
     units='deg',
     size=(0.5),
-    mask='none',
-    color=lstPacClr,
+    mask=None,
     colorSpace='rgb',
-    ori=0,
+    color=lstPacClr,
+    interpolate=False,
+    ori=0.0,
     autoLog=False,
     )
 
@@ -320,7 +380,7 @@ objTxtWlcm = visual.TextStim(objWin,
                              text='Please wait a moment.',
                              font="Courier New",
                              pos=(0.0, 0.0),
-                             color=(1.0, 1.0, 1.0),
+                             color=[1.0, 1.0, 1.0],
                              colorSpace='rgb',
                              opacity=1.0,
                              contrast=1.0,
@@ -674,13 +734,24 @@ for idx01 in range(0, varNumEvnts):  #noqa
                                             float(varOscMax)
                                             )
 
+                # New values for 'mouth' opening of upper 'lip':
+                tplWdgUpTmp = (tplWdgUp[0],
+                               tplWdgUp[1] + varPacOriUpdt)
+
+                # New values for 'mouth' opening of lower 'lip':
+                tplWdgLwTmp = (tplWdgLw[0] + varPacOriUpdt,
+                               tplWdgLw[1])
+
                 # Update Pac-Man object:
-                objPacStim.ori = float(varPacOri) + varPacOriUpdt
+                objPacUp.visibleWedge = tplWdgUpTmp
+                objPacLow.visibleWedge = tplWdgLwTmp
                 objPacIn.ori = varPacOriUpdt
 
             # Draw Pac-Man:
-            objPacStim.draw()
-            objPacIn.draw()
+            objPacUp.draw(win=objWin)
+            objPacLow.draw(win=objWin)
+            objPacLft.draw(win=objWin)
+            objPacIn.draw(win=objWin)
 
             # Draw fixation dot:
             objFixSrd.draw(win=objWin)
@@ -819,66 +890,70 @@ for idx01 in range(0, varNumEvnts):  #noqa
 # -----------------------------------------------------------------------------
 # *** Feedback
 
-# Ratio of hits:
-varHitRatio = float(varCntHit) / float(varCntHit + varCntMis)
-
-# Present participant with feedback on her target detection performance:
-if 0.99 < varHitRatio:
-    # Perfect performance:
-    strFeedback = ('You have detected '
-                   + str(varCntHit)
-                   + ' targets out of '
-                   + str(varCntHit + varCntMis)
-                   + '\n'
-                   + 'Keep up the good work :)')
-elif 0.9 < varHitRatio:
-    # OKish performance:
-    strFeedback = ('You have detected '
-                   + str(varCntHit)
-                   + ' targets out of '
-                   + str(varCntHit + varCntMis)
-                   + '\n'
-                   + 'There is still room for improvement.')
-else:
-    # Low performance:
-    strFeedback = ('You have detected '
-                   + str(varCntHit)
-                   + ' targets out of '
-                   + str(varCntHit + varCntMis)
-                   + '\n'
-                   + 'Please try to focus more.')
-
-# Create text object:
-objTxtTmr = visual.TextStim(objWin,
-                            text=strFeedback,
-                            font="Courier New",
-                            pos=(0.0, 0.0),
-                            color=(1.0, 1.0, 1.0),
-                            colorSpace='rgb',
-                            opacity=1.0,
-                            contrast=1.0,
-                            ori=0.0,
-                            height=0.5,
-                            antialias=True,
-                            alignHoriz='center',
-                            alignVert='center',
-                            flipHoriz=False,
-                            flipVert=False,
-                            autoLog=False)
-
-# Show feedback text:
-varTme04 = objClck.getTime()
-while varTme02 < (varTme04 + 3.0):
-    objTxtTmr.draw()
-    objWin.flip()
-    varTme02 = objClck.getTime()
-
-# Log total number of hits and misses:
 logging.data('------End of the experiment.------')
-logging.data(('Number of hits: ' + str(varCntHit)))
-logging.data(('Number of misses: ' + str(varCntMis)))
-logging.data(('Percentage of hits: '
-              + str(np.around((varHitRatio * 100.0), decimals=1))))
+
+# Performance feedback only if there were any targets:
+if 0.0 < float(varCntHit + varCntMis):
+
+    # Ratio of hits:
+    varHitRatio = float(varCntHit) / float(varCntHit + varCntMis)
+
+    # Present participant with feedback on her target detection performance:
+    if 0.99 < varHitRatio:
+        # Perfect performance:
+        strFeedback = ('You have detected '
+                       + str(varCntHit)
+                       + ' targets out of '
+                       + str(varCntHit + varCntMis)
+                       + '\n'
+                       + 'Keep up the good work :)')
+    elif 0.9 < varHitRatio:
+        # OKish performance:
+        strFeedback = ('You have detected '
+                       + str(varCntHit)
+                       + ' targets out of '
+                       + str(varCntHit + varCntMis)
+                       + '\n'
+                       + 'There is still room for improvement.')
+    else:
+        # Low performance:
+        strFeedback = ('You have detected '
+                       + str(varCntHit)
+                       + ' targets out of '
+                       + str(varCntHit + varCntMis)
+                       + '\n'
+                       + 'Please try to focus more.')
+
+    # Create text object:
+    objTxtTmr = visual.TextStim(objWin,
+                                text=strFeedback,
+                                font="Courier New",
+                                pos=(0.0, 0.0),
+                                color=(1.0, 1.0, 1.0),
+                                colorSpace='rgb',
+                                opacity=1.0,
+                                contrast=1.0,
+                                ori=0.0,
+                                height=0.5,
+                                antialias=True,
+                                alignHoriz='center',
+                                alignVert='center',
+                                flipHoriz=False,
+                                flipVert=False,
+                                autoLog=False)
+
+    # Show feedback text:
+    varTme04 = objClck.getTime()
+    while varTme02 < (varTme04 + 3.0):
+        objTxtTmr.draw()
+        objWin.flip()
+        varTme02 = objClck.getTime()
+
+    # Log total number of hits and misses:
+    logging.data(('Number of hits: ' + str(varCntHit)))
+    logging.data(('Number of misses: ' + str(varCntMis)))
+    logging.data(('Percentage of hits: '
+                  + str(np.around((varHitRatio * 100.0), decimals=1))))
 # -----------------------------------------------------------------------------
 
 
