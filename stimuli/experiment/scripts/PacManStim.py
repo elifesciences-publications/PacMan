@@ -83,7 +83,7 @@ lstRuns.append('Dummy')
 dicExpInfo = {'Run': lstRuns,
               'Stimulus': ['PacMan', 'Control'],
               'Condition': ['Dynamic', 'Static'],
-              'Test mode': [False, True],
+              'Test mode': ['No', 'Yes'],
               'Subject_ID': strDate}
 
 # Pop-up GUI to let the user select parameters:
@@ -95,7 +95,10 @@ if objGui.OK is False:
     core.quit()
 
 # Testing (if True, timer is displayed):
-lgcTest = dicExpInfo['Test mode']
+if dicExpInfo['Test mode'] == 'Yes':
+    lgcTest = True
+else:
+    lgcTest = False
 
 # Switch controlling the motion of the stimulus:
 if dicExpInfo['Condition'] == 'Dynamic':
