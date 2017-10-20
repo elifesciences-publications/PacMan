@@ -644,10 +644,6 @@ for idx01 in range(0, varNumEvnts):  #noqa
                         # over and over again:
                         varSwtRspLog = 0
 
-                    else:
-                        print('Wrong key pressed.')
-                        logging.data('Wrong key pressed.')
-
             elif (varSwtRspLog == 1) and (varTme02 > (varTme03 + varHitTme)):
 
                 # Log miss:
@@ -827,10 +823,6 @@ for idx01 in range(0, varNumEvnts):  #noqa
                         # response logging, so that the same hit is nor logged
                         # over and over again:
                         varSwtRspLog = 0
-
-                    else:
-                        print('Wrong key pressed.')
-                        logging.data('Wrong key pressed.')
 
             elif (varSwtRspLog == 1) and (varTme02 > (varTme03 + varHitTme)):
 
