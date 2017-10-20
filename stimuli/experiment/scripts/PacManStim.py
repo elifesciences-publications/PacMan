@@ -284,13 +284,14 @@ if lgcCntrl:
         )
 
     # Aperture for control stimulus 'tongue':
-    # objCntrlAprt = visual.Aperture(
-    #     win=objWin,
-    #     size=1.0,
-    #     units='deg',
-    #     shape='square',
-    #     inverted=True)
-    # objCntrlAprt.enabled = False
+    objCntrlAprt = visual.Aperture(
+        win=objWin,
+        size=1.0,
+        units='deg',
+        shape='square',
+        inverted=True,
+        )
+    objCntrlAprt.enabled = False
 
 else:
 
@@ -800,8 +801,9 @@ for idx01 in range(0, varNumEvnts):  #noqa
                 if lgcCntrl:
 
                     # Update control stimulus:
-                    # objCntrlAprt.ori = varPacOriUpdt
-                    print(' ')
+                    objCntrlTng.ori = varPacOriUpdt
+                    objCntrlAprt.ori = varPacOriUpdt
+                    objCntrlAprt.enabled = False
 
                 else:
 
@@ -823,13 +825,9 @@ for idx01 in range(0, varNumEvnts):  #noqa
                 # Draw control stimulus:
                 objCntrlLft.draw(win=objWin)
                 objPacIn.draw(win=objWin)
-                objCntrlTng.ori = varPacOriUpdt
-
-                #objCntrlAprt.enabled = True
-
+                objCntrlAprt.enabled = True
                 objCntrlTng.draw(win=objWin)
-
-                #objCntrlAprt.enabled = False
+                objCntrlAprt.enabled = False
 
             else:
 
