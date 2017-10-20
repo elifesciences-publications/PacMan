@@ -68,7 +68,7 @@ varHitTme = 2.0
 # *** GUI
 
 # Name of the experiment:
-strExpNme = 'PacManStim'
+strExpNme = 'PacMan'
 
 # Get date string as default session name:
 strDate = str(datetime.datetime.now())
@@ -81,8 +81,9 @@ lstRuns.append('Dummy')
 
 # Dictionary with experiment metadata:
 dicExpInfo = {'Run': lstRuns,
+              'Stimulus': ['PacMan', 'Control'],
+              'Condition': ['Dynamic', 'Static'],
               'Test mode': [False, True],
-              'Pac-Man': ['Dynamic', 'Static'],
               'Subject_ID': strDate}
 
 # Pop-up GUI to let the user select parameters:
@@ -96,11 +97,17 @@ if objGui.OK is False:
 # Testing (if True, timer is displayed):
 lgcTest = dicExpInfo['Test mode']
 
-# Switch controlling the motion of Pac-Man:
-if dicExpInfo['Pac-Man'] == 'Dynamic':
+# Switch controlling the motion of the stimulus:
+if dicExpInfo['Condition'] == 'Dynamic':
     lgcMotion = True
 else:
     lgcMotion = False
+
+# Switch controlling the stimulus (PacMan or control):
+if dicExpInfo['Stimulus'] == 'PacMan':
+    lgcCntrl = False
+else:
+    lgcCntrl = True
 # -----------------------------------------------------------------------------
 
 
@@ -229,84 +236,144 @@ objWin = visual.Window(
 # -----------------------------------------------------------------------------
 # *** Experimental stimuli
 
-# Size of Pac-Man's 'mouth' [deg]:
-varMouth = 70.0
+# Control condition or PacMan?
+if lgcCntrl:
 
-# Because of artefacts at the border (flickering), Pac-Man cannot be a simple
-# rotating wedege. Instead, it has to be put together from three components:
-# (1) Left wedge, (2) upper 'lip', (3) lower 'lip'.
+    # Control condition.
 
-# Note that the angular resolution of the stimulus ('angularRes') has to be
-# high enough for a smooth oscillation.
+    # Static wedge on left side:
+    objCntrlLft = visual.RadialStim(
+        win=objWin,
+        mask=None,
+        units='deg',
+        pos=(0.0, 0.0),
+        size=varPacSze,
+        radialCycles=0,
+        angularCycles=0,
+        radialPhase=0.0,
+        angularPhase=0.0,
+        ori=160.0,
+        texRes=64,
+        angularRes=360,
+        visibleWedge=(0.0, 220.0),
+        colorSpace='rgb',
+        color=lstPacClr,
+        interpolate=False,
+        autoLog=False,
+        )
 
-# Wedge size (in degree) of upper 'lip':
-tplWdgUp = (0.0, (90.0 - (0.5 * varMouth)))
+    # Control stimulus 'tongue':
+    objCntrlTng = visual.RadialStim(
+        win=objWin,
+        mask=None,
+        units='deg',
+        pos=(0.0, 0.0),
+        size=varPacSze,
+        radialCycles=0,
+        angularCycles=0,
+        radialPhase=0.0,
+        angularPhase=0.0,
+        ori=0.0,
+        texRes=64,
+        angularRes=720,
+        visibleWedge=(60.0, 120.0),  # (55.0, 125.0),
+        colorSpace='rgb',
+        color=lstPacClr,
+        interpolate=False,
+        autoLog=False,
+        )
 
-# Wedge size (in degree) of lower 'lip':
-tplWdgLw = ((90.0 + (0.5 * varMouth)), 180.0)
+    # Aperture for control stimulus 'tongue':
+    # objCntrlAprt = visual.Aperture(
+    #     win=objWin,
+    #     size=1.0,
+    #     units='deg',
+    #     shape='square',
+    #     inverted=True)
+    # objCntrlAprt.enabled = False
 
-# (1) PacMan - left wedge:
-objPacLft = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=(0.0, 0.0),
-    size=varPacSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=175.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 190.0),
-    colorSpace='rgb',
-    color=lstPacClr,
-    interpolate=False,
-    autoLog=False,
-    )
+else:
 
-# (2) PacMan - upper 'lip':
-objPacUp = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=(0.0, 0.0),
-    size=varPacSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=0.0,
-    texRes=64,
-    angularRes=720,
-    visibleWedge=tplWdgUp,
-    colorSpace='rgb',
-    color=lstPacClr,
-    interpolate=False,
-    autoLog=False,
-    )
+    # PacMan condition.
 
-# (3) PacMan - lower 'lip':
-objPacLow = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=(0.0, 0.0),
-    size=varPacSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=0.0,
-    texRes=64,
-    angularRes=720,
-    visibleWedge=tplWdgLw,
-    colorSpace='rgb',
-    color=lstPacClr,
-    interpolate=False,
-    autoLog=False,
-    )
+    # Size of Pac-Man's 'mouth' [deg]:
+    varMouth = 70.0
+
+    # Because of artefacts at the border (flickering), Pac-Man cannot be a
+    # simple rotating wedege. Instead, it has to be put together from three
+    # components: (1) Left wedge, (2) upper 'lip', (3) lower 'lip'.
+
+    # Note that the angular resolution of the stimulus ('angularRes') has to be
+    # high enough for a smooth oscillation.
+
+    # Wedge size (in degree) of upper 'lip':
+    tplWdgUp = (0.0, (90.0 - (0.5 * varMouth)))
+
+    # Wedge size (in degree) of lower 'lip':
+    tplWdgLw = ((90.0 + (0.5 * varMouth)), 180.0)
+
+    # (1) PacMan - left wedge:
+    objPacLft = visual.RadialStim(
+        win=objWin,
+        mask=None,
+        units='deg',
+        pos=(0.0, 0.0),
+        size=varPacSze,
+        radialCycles=0,
+        angularCycles=0,
+        radialPhase=0.0,
+        angularPhase=0.0,
+        ori=175.0,
+        texRes=64,
+        angularRes=360,
+        visibleWedge=(0.0, 190.0),
+        colorSpace='rgb',
+        color=lstPacClr,
+        interpolate=False,
+        autoLog=False,
+        )
+
+    # (2) PacMan - upper 'lip':
+    objPacUp = visual.RadialStim(
+        win=objWin,
+        mask=None,
+        units='deg',
+        pos=(0.0, 0.0),
+        size=varPacSze,
+        radialCycles=0,
+        angularCycles=0,
+        radialPhase=0.0,
+        angularPhase=0.0,
+        ori=0.0,
+        texRes=64,
+        angularRes=720,
+        visibleWedge=tplWdgUp,
+        colorSpace='rgb',
+        color=lstPacClr,
+        interpolate=False,
+        autoLog=False,
+        )
+
+    # (3) PacMan - lower 'lip':
+    objPacLow = visual.RadialStim(
+        win=objWin,
+        mask=None,
+        units='deg',
+        pos=(0.0, 0.0),
+        size=varPacSze,
+        radialCycles=0,
+        angularCycles=0,
+        radialPhase=0.0,
+        angularPhase=0.0,
+        ori=0.0,
+        texRes=64,
+        angularRes=720,
+        visibleWedge=tplWdgLw,
+        colorSpace='rgb',
+        color=lstPacClr,
+        interpolate=False,
+        autoLog=False,
+        )
 
 # Inner part of Pac-Man:
 objPacIn = visual.GratingStim(
@@ -730,24 +797,47 @@ for idx01 in range(0, varNumEvnts):  #noqa
                                             float(varOscMax)
                                             )
 
-                # New values for 'mouth' opening of upper 'lip':
-                tplWdgUpTmp = (tplWdgUp[0],
-                               tplWdgUp[1] + varPacOriUpdt)
+                if lgcCntrl:
 
-                # New values for 'mouth' opening of lower 'lip':
-                tplWdgLwTmp = (tplWdgLw[0] + varPacOriUpdt,
-                               tplWdgLw[1])
+                    # Update control stimulus:
+                    # objCntrlAprt.ori = varPacOriUpdt
+                    print(' ')
 
-                # Update Pac-Man object:
-                objPacUp.visibleWedge = tplWdgUpTmp
-                objPacLow.visibleWedge = tplWdgLwTmp
-                objPacIn.ori = varPacOriUpdt
+                else:
 
-            # Draw Pac-Man:
-            objPacUp.draw(win=objWin)
-            objPacLow.draw(win=objWin)
-            objPacLft.draw(win=objWin)
-            objPacIn.draw(win=objWin)
+                    # New values for 'mouth' opening of upper 'lip':
+                    tplWdgUpTmp = (tplWdgUp[0],
+                                   tplWdgUp[1] + varPacOriUpdt)
+
+                    # New values for 'mouth' opening of lower 'lip':
+                    tplWdgLwTmp = (tplWdgLw[0] + varPacOriUpdt,
+                                   tplWdgLw[1])
+
+                    # Update Pac-Man object:
+                    objPacUp.visibleWedge = tplWdgUpTmp
+                    objPacLow.visibleWedge = tplWdgLwTmp
+                    objPacIn.ori = varPacOriUpdt
+
+            if lgcCntrl:
+
+                # Draw control stimulus:
+                objCntrlLft.draw(win=objWin)
+                objPacIn.draw(win=objWin)
+                objCntrlTng.ori = varPacOriUpdt
+
+                #objCntrlAprt.enabled = True
+
+                objCntrlTng.draw(win=objWin)
+
+                #objCntrlAprt.enabled = False
+
+            else:
+
+                # Draw Pac-Man:
+                objPacUp.draw(win=objWin)
+                objPacLow.draw(win=objWin)
+                objPacLft.draw(win=objWin)
+                objPacIn.draw(win=objWin)
 
             # Draw fixation dot:
             objFixSrd.draw(win=objWin)
