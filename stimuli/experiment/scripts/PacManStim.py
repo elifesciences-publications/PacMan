@@ -35,7 +35,7 @@ varDurTar = 0.8
 # frequency was ca. 1.04 Hz. Our TR is 2.079, which is ca. 0.96 Hz.
 
 # Oscillation frequency of Pac-Man; cycles per second:
-varFrq = 0.96 * (1.0 / 3.0)
+varFrq = 0.96
 
 # Maximum displacement of Pac-Man (relative to horizontal meridian) in degrees:
 varOscMax = 35.0
