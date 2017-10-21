@@ -35,7 +35,7 @@ varDurTar = 0.8
 # frequency was ca. 1.04 Hz. Our TR is 2.079, which is ca. 0.96 Hz.
 
 # Oscillation frequency of Pac-Man; cycles per second:
-varFrq = 0.7  # 0.96
+varFrq = 0.8
 
 # Maximum displacement of Pac-Man (relative to horizontal meridian) in degrees:
 varOscMax = 35.0
@@ -379,6 +379,23 @@ else:
         autoLog=False,
         )
 
+# Path to PNG file containing background image:
+strPthBckgrd = (strPthPrnt
+                + os.path.sep
+                + 'miscellanea'
+                + os.path.sep
+                + 'texture_background.png')
+
+# Random noise texture background (to enhance PacMan illusion through better
+# figure ground segregation).
+objBckgrd = visual.ImageStim(
+    objWin,
+    image=strPthBckgrd,
+    units='deg',
+    pos=(0.0, 0.0),
+    interpolate=False,
+    )
+
 # Inner part of Pac-Man:
 objPacIn = visual.GratingStim(
     win=objWin,
@@ -640,6 +657,9 @@ for idx01 in range(0, varNumEvnts):  #noqa
         # Continue with the rest block?
         while varTme02 < (varTme01 + varTmpEvntStrt + varTmpEvntDur):
 
+            # Draw background:
+            objBckgrd.draw(win=objWin)
+
             # Draw fixation dot:
             objFixSrd.draw(win=objWin)
             objFix.draw(win=objWin)
@@ -782,6 +802,9 @@ for idx01 in range(0, varNumEvnts):  #noqa
 
         # Continue with the stimulus block?
         while varTme02 < (varTme01 + varTmpEvntStrt + varTmpEvntDur):
+
+            # Draw background:
+            objBckgrd.draw(win=objWin)
 
             # Dynamic condition (i.e. is Pac-Man supposed to rotate)?
             if lgcMotion:
