@@ -112,7 +112,7 @@ for index_9 = 1:numel(ary_prefix)
         % Number of different durations that the rest blocks can have:
         var_num_rest_dur = numel(vec_dur_blk_rest);
         % Number of stimulus blocks:
-        var_num_blk_stim = 14; % Needs to be an even number (for jitter)
+        var_num_blk_stim = 18; % Needs to be an even number (for jitter)
         % Minimum interval (in seconds) between the onset of a target and
         % the onset of a new condition (rest or stimulus). (This is to
         % avoid problems with the timing of events (and their logging) in
