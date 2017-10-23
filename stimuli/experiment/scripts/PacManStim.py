@@ -35,7 +35,7 @@ varDurTar = 0.8
 # frequency was ca. 1.04 Hz. Our TR is 2.079, which is ca. 0.96 Hz.
 
 # Oscillation frequency of Pac-Man; cycles per second:
-varFrq = 0.8
+varFrq = 0.85
 
 # Maximum displacement of Pac-Man (relative to horizontal meridian) in degrees:
 varOscMax = 35.0
@@ -45,12 +45,12 @@ varMonDist = 99.0  # [99.0] for 7T scanner
 # Width of monitor [cm]:
 varMonWdth = 30.0  # [30.0] for 7T scanner
 # Width of monitor [pixels]:
-varPixX = 1920.0  # [1920.0] for 7T scanner
+varPixX = 1920  # [1920.0] for 7T scanner
 # Height of monitor [pixels]:
-varPixY = 1200.0  # [1200.0] for 7T scanner
+varPixY = 1200  # [1200.0] for 7T scanner
 
 # Size of Pac-Man [degree of visual angle]:
-varPacSze = 7.0
+varPacSze = 7.5
 
 # Background colour:
 lstBckgrd = [-0.7, -0.7, -0.7]
@@ -536,9 +536,6 @@ aryDesign = np.loadtxt(strPthDsgn, delimiter=' ', unpack=False)
 
 # Total number of events:
 varNumEvnts = aryDesign.shape[0]
-
-# Because indexing starts with 0, we have to adjust the number of events:
-varNumEvnts = (varNumEvnts - 1)
 # -----------------------------------------------------------------------------
 
 
