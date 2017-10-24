@@ -4,7 +4,7 @@
 --warpres=20.0,16.0,8.0,4.0,3.2,2.4,1.6,0.8,0.8
 # Subsampling level (a value of 2 indicates that a 2x2x2 neighbourhood is collapsed to 1 voxel)
 #-subsamp=2,2,2,2,2,1,1,1,1
---subsamp=2,2,2,2,2,1,1,1,1
+--subsamp=2,2,2,2,1,1,1,1,1
 # FWHM of gaussian smoothing
 #-fwhm=8,6,4,3,3,2,1,0,0
 --fwhm=8,6,4,3,2,2,1,0,0
