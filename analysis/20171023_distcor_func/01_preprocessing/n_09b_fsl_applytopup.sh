@@ -18,32 +18,23 @@ echo "-Distortion correction"
 strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/"
 
 # Functional runs (input & output):
-aryRun=(func_01 \
-        func_02 \
-        func_03 \
-        func_04 \
-        func_05 \
-        func_06 \
-        func_07 \
-        func_08 \
-        func_09 \
-        func_10)
+aryRun=(func_00)
 
 # Path for 'datain' text file with acquisition parameters for applytopup (see
 # TOPUP documentation for details):
-strDatain02="/home/john/PhD/Analysis_Scripts/Analysis_Scripts_344_06012017/Miscellaneous/PacMan/20171023_distcor_func/01_preprocessing/n_09b_datain_applytopup.txt"
+strDatain02="/home/john/PhD/GitHub/PacMan/analysis/20171023_distcor_func/01_preprocessing/n_09c_datain_applytopup.txt"
 
 # Parallelisation factor:
 varPar=4
 
 # Path of images to be undistorted (input):
-strPathFunc="${strPathParent}func_regWithinRun/"
+strPathFunc="${strPathParent}func_se_reg/"
 
 # Path for bias field (input):
 strPathRes01="${strPathParent}func_distcorField/"
 
 # Path for undistorted images (output):
-strPathRes02="${strPathParent}func_distcorUnwrp/"
+strPathRes02="${strPathParent}func_reg_distcorUnwrp/"
 #-------------------------------------------------------------------------------
 
 
@@ -73,7 +64,7 @@ do
 	--imain=${strPathFunc}${aryRun[idxRun]} \
 	--datain=${strDatain02} \
 	--inindex=1 \
-	--topup=${strPathRes01}${aryRun[idxRun]} \
+	--topup=${strPathRes01}func_00 \
 	--out=${strPathRes02}${aryRun[idxRun]} \
 	--method=jac &
 
@@ -94,5 +85,3 @@ done
 wait
 date
 #-------------------------------------------------------------------------------
-
-
