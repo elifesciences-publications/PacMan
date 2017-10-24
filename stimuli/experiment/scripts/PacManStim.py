@@ -536,6 +536,8 @@ aryDesign = np.loadtxt(strPthDsgn, delimiter=' ', unpack=False)
 
 # Total number of events:
 varNumEvnts = aryDesign.shape[0]
+strTmp = ('Number of events: varNumEvnts = ' + str(varNumEvnts))
+logging.data(strTmp)
 # -----------------------------------------------------------------------------
 
 
@@ -627,9 +629,8 @@ for idx01 in range(0, varNumEvnts):  #noqa
     varTmpEvntType = aryDesign[idx01][0]
 
     # The second column of the event matrix signifies the time (in seconds)
-    # when the event starts (if it is not a target event):
-    if varTmpEvntType is not 2:
-        varTmpEvntStrt = aryDesign[idx01][1]
+    # when the event starts:
+    varTmpEvntStrt = aryDesign[idx01][1]
 
     # The third column of the event matrix signifies the duration (in seconds)
     # of the event:
