@@ -108,6 +108,7 @@ then
 	# Create SPM subfolders for SE run - opposite-phase-polarity:
 	mkdir "${str_path_parent}/nii_distcor/spm_reg_op"
 	mkdir "${str_path_parent}/nii_distcor/spm_reg_op/func_00_inv"
+	mkdir "${str_path_parent}/nii_distcor/spm_reg_op/spm_reg_moco_params"
 
 	mkdir "${str_path_parent}/nii_distcor/spm_reg_reference_weighting"
 	mkdir "${str_path_parent}/nii_distcor/spm_reg_moco_params"
