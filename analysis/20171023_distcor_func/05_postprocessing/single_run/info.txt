@@ -1,0 +1,2 @@
+Single run maps for depth-sampling (to get an indication of noise level of
+depth profiles).
