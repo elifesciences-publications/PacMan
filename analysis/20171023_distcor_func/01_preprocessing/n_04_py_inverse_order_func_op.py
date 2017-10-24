@@ -29,7 +29,7 @@ import nibabel as nib
 lstPathIn = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/func_se_op/func_00.nii.gz']
 
 # Output file paths:
-lstPathOt = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/func_se_op/func_00_inv.nii.gz']
+lstPathOt = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/func_se_op_inv/func_00.nii.gz']
 # *****************************************************************************
 
 

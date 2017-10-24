@@ -1,17 +1,17 @@
 #!/bin/sh
 
 
-################################################################################
-# The purpose of this script is to change the file type of the functional time #
-# series that have been motion corrected and registered with SPM back to       #
-# compressed nii and save the results to ".../nii/func_regWithinRun_op/".      #
-#                                                                              #
-# IMPORTANT: The uncompressed nii files produced by SPM are subsequently       #
-#            deleted in order so save disk space.                              #
-################################################################################
+###############################################################################
+# The purpose of this script is to change the file type of the functional     #
+# time series that have been motion corrected and registered with SPM back to #
+# compressed nii.                                                             #
+#                                                                             #
+# IMPORTANT: The uncompressed nii files produced by SPM are subsequently      #
+#            deleted in order so save disk space.                             #
+###############################################################################
 
 
-#-------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 # Define session IDs & paths:
 
 strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/"
@@ -25,22 +25,20 @@ arySessionIDs=(func_01 \
                func_06 \
                func_07 \
                func_08 \
-               func_09 \
-               func_10)
+               func_09)
 
 # Input directory:
-strPathInput="${strPathParent}spm_regWithinRun_op/"
+strPathInput="${strPathParent}spm_reg/"
 
 # Output directory:
-strPathOutput="${strPathParent}func_regWithinRun_op/"
-#-------------------------------------------------------------------------------
+strPathOutput="${strPathParent}func_reg/"
+#------------------------------------------------------------------------------
 
 
-#-------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 # Change filetype and save results to ".../nii/func_reg/":
 
-
-echo "------------Compress SPM output and delete uncompressed files------------"
+echo "-----------Compress SPM output and delete uncompressed files-----------"
 date
 
 for index01 in ${arySessionIDs[@]}
@@ -72,6 +70,4 @@ done
 
 date
 echo "done"
-#-------------------------------------------------------------------------------
-
-
+#------------------------------------------------------------------------------

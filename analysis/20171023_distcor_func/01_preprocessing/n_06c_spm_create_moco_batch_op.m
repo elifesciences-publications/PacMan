@@ -5,7 +5,7 @@
 % by SPM.
 %--------------------------------------------------------------------------
 % NOTE: This version is used for creating a moco batch for opposite phase
-% polarity data, assuming the file name to be 'func_00_inv'.
+% polarity data, assuming the file name to be 'func_00'.
 %--------------------------------------------------------------------------
 % Ingo Marquardt, 2017
 %--------------------------------------------------------------------------
@@ -36,12 +36,12 @@ for index_01 = 1:varNumRuns
         strTmp = strcat(strPathParent, ...
             'func_0', ...
             num2str(index_01 - 1), ...  % NOTE: Adjusted to account for 'func_00'
-            '_inv/');
+            '/');
     else
         strTmp = strcat(strPathParent, ...
             'func_', ...
             num2str(index_01 - 1), ...  % NOTE: Adjusted to account for 'func_00'
-            '_inv/');
+            '/');
     end
     cllPathFunc{index_01} = spm_select('ExtList', ...
         strTmp, ...

@@ -59,7 +59,10 @@ then
 	mkdir "${str_path_parent}/nii_distcor/func_reg_cube_tsnr"
 
 	mkdir "${str_path_parent}/nii_distcor/func_se"
+	mkdir "${str_path_parent}/nii_distcor/func_se_reg"
   mkdir "${str_path_parent}/nii_distcor/func_se_op"
+  mkdir "${str_path_parent}/nii_distcor/func_se_op_inv"
+  mkdir "${str_path_parent}/nii_distcor/func_se_op_inv_reg"
 	mkdir "${str_path_parent}/nii_distcor/func_se_merged"
 
 	mkdir "${str_path_parent}/nii_distcor/mp2rage"
@@ -107,7 +110,7 @@ then
 
 	# Create SPM subfolders for SE run - opposite-phase-polarity:
 	mkdir "${str_path_parent}/nii_distcor/spm_reg_op"
-	mkdir "${str_path_parent}/nii_distcor/spm_reg_op/func_00_inv"
+	mkdir "${str_path_parent}/nii_distcor/spm_reg_op/func_00"
 	mkdir "${str_path_parent}/nii_distcor/spm_reg_op/spm_reg_moco_params"
 
 	mkdir "${str_path_parent}/nii_distcor/spm_reg_reference_weighting"

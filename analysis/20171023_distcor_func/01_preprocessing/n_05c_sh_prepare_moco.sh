@@ -16,10 +16,10 @@
 strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/"
 
 # Functional runs (input):
-arySessionIDs=(func_00_inv)
+arySessionIDs=(func_00)
 
 # Input directory:
-strPathInput="${strPathParent}func_se_op/"
+strPathInput="${strPathParent}func_se_op_inv/"
 
 # SPM directory:
 strPathSpmParent="${strPathParent}spm_reg_op/"
