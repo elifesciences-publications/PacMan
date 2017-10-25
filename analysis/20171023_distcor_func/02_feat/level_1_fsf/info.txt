@@ -1,2 +1,1 @@
-For the pRF runs (func_07, func_08, func_09, func_10), FEAT is used only for
-filtering.
+For the pRF run (func_07), FEAT is used only for filtering.

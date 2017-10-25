@@ -1,0 +1,34 @@
+### Missing REST block
+
+In session 20171023, the last rest block of every functional run was skipped
+because of a bug. The volumes corresponding to this last rest block were
+cropped from the functional time series (after preprocessing, in the folder
+`func_reg_distcorUnwrp`. However, this has no implications for the FSL EV
+files, because rest blocks are not modelled anyway.
+
+
+### pRF mapping & additional control condition
+
+Summary:
+
+- func_07 is the pRF mapping run.
+- func_08 and func_09 contain an additional control condition ('PacMan static').
+
+Full story:
+
+Also, in session 20171023, the retinotopic mapping run is referred to as
+func_07. The last two runs, correpsonding to an additional control condition
+('PacMan static'), are named func_08 and func_09. However, for those runs the
+design matrices named `PacMan_run_07_eventmatrix.txt` and
+`PacMan_run_08_eventmatrix.txt` were used for stimulus presentation. For
+simplicity, the respective design matrices were renamed:
+
+`PacMan_run_07_eventmatrix.txt` --> `PacMan_run_08_eventmatrix.txt`
+
+and 
+
+`PacMan_run_08_eventmatrix.txt` --> `PacMan_run_09_eventmatrix.txt`
+
+In case of doubt, the original stimulus logs can be consulted:
+
+~/20171023/log/stimuli/PacMan/log/20171023/
