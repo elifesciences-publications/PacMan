@@ -20,7 +20,7 @@
 # Define session IDs & paths:
 
 # The parent directory:
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/"
+strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/"
 
 # The directory with the first level feat results:
 strPathFeat="${strPathParent}feat_level_1/"
@@ -31,13 +31,15 @@ aryFeatIDs=(func_01.feat \
             func_03.feat \
             func_04.feat \
             func_05.feat \
-            func_06.feat)
+            func_06.feat \
+            func_08.feat \
+            func_09.feat)
 
 # The path of the 'standard' image:
-strPathStd="${strPathParent}func_regAcrssRuns_cube_tSNR/combined_mean.nii.gz"
+strPathStd="${strPathParent}func_reg_tsnr/combined_mean.nii.gz"
 
 # The path of the identity matrix:
-strPathMatIdent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/FSL_MRI_Metadata/mat_reg_identity"
+strPathMatIdent="/home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/mat_reg_identity"
 #-------------------------------------------------------------------------------
 
 

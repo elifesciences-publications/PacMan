@@ -17,16 +17,19 @@ arySessionIDs=(func_01 \
                func_03 \
                func_04 \
                func_05 \
-               func_06)
+               func_06 \
+               func_07 \
+               func_08 \
+               func_09)
 
 # Parent path:
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/"
+strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/"
 
 # Path to feat directories:
 strPathInput="${strPathParent}feat_level_1/"
 
 # Output directory:
-strPathOutput="${strPathParent}func_regAcrssRuns_cube_tSNR/"
+strPathOutput="${strPathParent}func_reg_tsnr/"
 #-------------------------------------------------------------------------------
 
 
