@@ -22,10 +22,8 @@ import numpy as np
 # I.e., if REST is coded as 1 and TARGET as 2, REST needs to be first, and
 # TARGET second in this list, etc.
 
-# PacMan version 03
-
 # Input directory:
-strPathInput  = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/FSL_MRI_Metadata/version_03/'  #noqa
+strPathInput  = '/home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/version_03/'  #noqa
 
 # Output directory:
 strPathOutput = strPathInput
@@ -33,24 +31,17 @@ strPathOutput = strPathInput
 # Input file name (with run number left open):
 strFleNme = 'PacMan_run_{}_eventmatrix.txt'
 
-# PacMan version 03; runs 01, 03, 05
-if True:
-    lstEventTypes = ['Rest',
-                     'Target',
-                     'PacMan_Dynamic']
-    lstRuns = ['01', '03', '05']
-# PacMan version 03; runs 02, 04, 06
-if False:
-    lstEventTypes = ['Rest',
-                     'Target',
-                     'Control_Dynamic']
-    lstRuns = ['02', '04', '06']
-# PacMan version 03; runs 08, 09
-if False:
-    lstEventTypes = ['Rest',
-                     'Target',
-                     'PacMan_Static']
-    lstRuns = ['08', '09']
+# PacMan version 03:
+# * Runs 01, 03, 05 are 'PacMan_Dynamic'
+# * Runs 02, 04, 06 are 'Control_Dynamic'
+# * Runs 08, 09 are 'PacMan_Static'
+# This has to be considered when setting up the 2nd level feat analysis.
+lstEventTypes = ['Rest',
+                 'Target',
+                 'Stimulus']
+
+# List of runs (run 07 is the pRF mapping run):
+lstRuns = ['01', '02', '03', '04', '05', '06', '08', '09']
 
 # The number of different event types in the event matrix file. For each type
 # a separate EV file will be created.
