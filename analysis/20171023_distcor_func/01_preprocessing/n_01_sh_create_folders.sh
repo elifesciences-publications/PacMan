@@ -43,9 +43,6 @@ then
 	mkdir "${str_path_parent}"
 	mkdir "${str_path_parent}/nii_distcor"
 
-	mkdir "${str_path_parent}/nii_distcor/evc_cubes"
-	mkdir "${str_path_parent}/nii_distcor/evc_cubes/for_feat"
-
 	mkdir "${str_path_parent}/nii_distcor/feat_level_1"
 	mkdir "${str_path_parent}/nii_distcor/feat_level_2"
 
@@ -54,9 +51,6 @@ then
 	mkdir "${str_path_parent}/nii_distcor/func_reg"
 	mkdir "${str_path_parent}/nii_distcor/func_reg_tsnr"
 	mkdir "${str_path_parent}/nii_distcor/func_reg_distcorUnwrp"
-	mkdir "${str_path_parent}/nii_distcor/func_reg_roi"
-	mkdir "${str_path_parent}/nii_distcor/func_reg_cube"
-	mkdir "${str_path_parent}/nii_distcor/func_reg_cube_tsnr"
 
 	mkdir "${str_path_parent}/nii_distcor/func_se"
 	mkdir "${str_path_parent}/nii_distcor/func_se_reg"

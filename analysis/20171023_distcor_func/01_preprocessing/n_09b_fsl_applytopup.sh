@@ -25,7 +25,7 @@ aryRun=(func_00)
 strDatain02="/home/john/PhD/GitHub/PacMan/analysis/20171023_distcor_func/01_preprocessing/n_09c_datain_applytopup.txt"
 
 # Parallelisation factor:
-varPar=4
+varPar=1
 
 # Path of images to be undistorted (input):
 strPathFunc="${strPathParent}func_se_reg/"

@@ -29,7 +29,7 @@ strPathCnf="/home/john/PhD/GitHub/PacMan/analysis/20171023_distcor_func/01_prepr
 strDatain01="/home/john/PhD/GitHub/PacMan/analysis/20171023_distcor_func/01_preprocessing/n_08c_datain_topup.txt"
 
 # Parallelisation factor:
-varPar=10
+varPar=1
 
 # Path of images to be undistorted (input):
 strPathFunc="${strPathParent}func_se_reg/"

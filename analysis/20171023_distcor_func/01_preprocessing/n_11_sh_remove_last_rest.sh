@@ -1,14 +1,11 @@
 #!/bin/sh
 
 
-################################################################################
-# The purpose of this script is to perform distortion correction on opposite   #
-# phase-encoding data. The input data need to be motion-corrected beforehands. #
-# You may use a modified topup configuration file for better results.          #
-################################################################################
-
-
-echo "-Distortion correction"
+###############################################################################
+# In session 20171023, the last rest block of every functional run was        #
+# skipped because of a bug. The purpose of this script is to remove the last  #
+# 10 volumes corresponding to the last rest block from the timeseries.        #
+###############################################################################
 
 
 #------------------------------------------------------------------------------
@@ -17,32 +14,22 @@ echo "-Distortion correction"
 # Parent directory"
 strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/"
 
-# Functional runs (input & output):
+# Functional runs (input & output). NOTE: func_07 is not included because it is
+# the pRF mapping run.
 aryRun=(func_01 \
         func_02 \
         func_03 \
         func_04 \
         func_05 \
         func_06 \
-        func_07 \
         func_08 \
         func_09)
 
-# Path for 'datain' text file with acquisition parameters for applytopup (see
-# TOPUP documentation for details):
-strDatain02="/home/john/PhD/GitHub/PacMan/analysis/20171023_distcor_func/01_preprocessing/n_09c_datain_applytopup.txt"
+# Path of images to be cropped:
+strPathFunc="${strPathParent}func_reg_distcorUnwrp/"
 
 # Parallelisation factor:
 varPar=5
-
-# Path of images to be undistorted (input):
-strPathFunc="${strPathParent}func_reg/"
-
-# Path for bias field (input):
-strPathRes01="${strPathParent}func_distcorField/"
-
-# Path for undistorted images (output):
-strPathRes02="${strPathParent}func_reg_distcorUnwrp/"
 #------------------------------------------------------------------------------
 
 
@@ -57,9 +44,9 @@ varNumRun=${#aryRun[@]}
 
 
 #------------------------------------------------------------------------------
-# Apply distortion correction:
+# Crop
 
-echo "---Apply distortion correction"
+echo "-Remove volumes corresponding to missing REST condition"
 date
 
 # Parallelisation over runs:
@@ -68,13 +55,10 @@ do
 
 	#echo "------Run: ${aryRun[idxRun]}" &
 
-	applytopup \
-	--imain=${strPathFunc}${aryRun[idxRun]} \
-	--datain=${strDatain02} \
-	--inindex=1 \
-	--topup=${strPathRes01}func_00 \
-	--out=${strPathRes02}${aryRun[idxRun]} \
-	--method=jac &
+	fslroi \
+	${strPathFunc}${aryRun[idxRun]} \
+	${strPathFunc}${aryRun[idxRun]} \
+	0 240 &
 
 	# Check whether it's time to issue a wait command (if the modulus of the
 	# index and the parallelisation-value is zero):
