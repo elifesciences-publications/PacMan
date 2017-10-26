@@ -1,14 +1,14 @@
 #!/bin/sh
 
 
-################################################################################
-# The purpose of this script is to create a directory tree for the PacMan      #
-# Experiment.                                                                  #
-################################################################################
+###############################################################################
+# The purpose of this script is to create a directory tree for the PacMan     #
+# Experiment.                                                                 #
+###############################################################################
 
 
-#-------------------------------------------------------------------------------
-### Define parameters:
+# -----------------------------------------------------------------------------
+# *** Define parameters:
 
 # Define session ID of the new session:
 str_session_ID="19680801_distcor"
@@ -26,11 +26,11 @@ ary_run_IDs=(func_01 \
              func_07 \
              func_08 \
              func_09)
-#-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
-#-------------------------------------------------------------------------------
-### Create folders:
+# -----------------------------------------------------------------------------
+# *** Create folders:
 
 # Number of runs:
 #var_include=${#ary_run_IDs[@]}
@@ -65,17 +65,16 @@ then
 	mkdir "${str_path_parent}/nii_distcor/mp2rage/02_spm_bf_correction"
 	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg"
 	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/01_in"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/02_reorient2std"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/03_brainmask"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_prereg"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_prereg/combined_mean"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_prereg/mp2rage_other"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_prereg/mp2rage_t1w"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/05_reg"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/05_reg/01_in"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/05_reg/02_bbr_prep"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/05_reg/03_bbr"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/05_reg/04_inv_bbr"
+	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/02_brainmask"
+	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/03_prereg"
+	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/03_prereg/combined_mean"
+	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/03_prereg/mp2rage_other"
+	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/03_prereg/mp2rage_t1w"
+	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_reg"
+	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_reg/01_in"
+	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_reg/02_bbr_prep"
+	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_reg/03_bbr"
+	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_reg/04_inv_bbr"
 	mkdir "${str_path_parent}/nii_distcor/mp2rage/04_seg"
 	mkdir "${str_path_parent}/nii_distcor/mp2rage/04_seg/01_native_space"
 	mkdir "${str_path_parent}/nii_distcor/mp2rage/04_seg/02_up"
@@ -119,4 +118,4 @@ then
 else
 	echo "Directory for ${str_session_ID} does already exist."
 fi
-#-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------

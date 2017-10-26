@@ -1,27 +1,24 @@
 #!/bin/sh
 
-################################################################################
-# The purpose of this script is to prepare the mp2rage to combined mean        #
-# registration pipeline. As a preparation, the mp2rage component images have   #
-# to be placed in the first subdirectory (i.e. ".../01_in/"), with the         #
-# following file names: mp2rage_t1, mp2rage_inv2, mp2rage_pdw, mp2rage_t1w.    #
-# Also, in order for FAST bias field estimation to work, a brain mask needs to #
-# be provided.                                                                 #
-################################################################################
+###############################################################################
+# The purpose of this script is to prepare the mp2rage to combined mean       #
+# registration pipeline. As a preparation, the mp2rage component images have  #
+# to be placed in the first subdirectory (i.e. ".../01_in/"), with the        #
+# following file names: mp2rage_t1, mp2rage_inv1, mp2rage_pdw, mp2rage_t1w.   #
+# Also, a brain mask needs to be provided.                                    #
+###############################################################################
 
 
-#-------------------------------------------------------------------------------
-### Define session IDs & paths
+# -----------------------------------------------------------------------------
+# *** Define session IDs & paths
 
 # Parent directory:
-strParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/"
+strParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/"
 
 # Subdirectories:
 strSub01="${strParent}mp2rage/03_reg/01_in/"
-strSub02="${strParent}mp2rage/03_reg/02_reorient2std/"
-strSub03="${strParent}mp2rage/03_reg/03_brainmask/"
-strSub04="${strParent}mp2rage/03_reg/04_biasfieldremoval/"
-strSub05="${strParent}mp2rage/03_reg/05_prereg/"
+strSub03="${strParent}mp2rage/03_reg/02_brainmask/"
+strSub05="${strParent}mp2rage/03_reg/03_prereg/"
 
 # Combined mean image:
 strCombmean="combined_mean"
@@ -31,7 +28,7 @@ strBrainMsk="mp2rage_pdw_brainmask"
 
 # Names of mp2rage image components (without file suffix):
 strT1="mp2rage_t1"
-strInv2="mp2rage_inv2"
+strInv2="mp2rage_inv1"
 strPdw="mp2rage_pdw"
 strT1w="mp2rage_t1w"
 
@@ -39,14 +36,14 @@ strT1w="mp2rage_t1w"
 strSpmDirRef="combined_mean/"
 strSpmDirOtr="mp2rage_other/"
 strSpmDirSrc="mp2rage_t1w/"
-#-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 echo "-Registration preparation"
 
 
-#-------------------------------------------------------------------------------
-### Reorient to standard
+# -----------------------------------------------------------------------------
+# *** Reorient to standard
 
 echo "---Reorient to standard"
 
@@ -59,11 +56,11 @@ fslreorient2std ${strSub01}${strBrainMsk} ${strSub02}${strBrainMsk} &
 
 wait
 echo "---Done"
-#-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
-#-------------------------------------------------------------------------------
-### Brain masking
+# -----------------------------------------------------------------------------
+# *** Brain masking
 
 echo "------Apply brain mask"
 
@@ -106,11 +103,11 @@ rm ${strSub02}${strT1w}.nii.gz
 rm ${strSub02}${strBrainMsk}.nii.gz
 
 echo "---Done"
-#-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
-#-------------------------------------------------------------------------------
-### Bias field removal on PDw image
+# -----------------------------------------------------------------------------
+# *** Bias field removal on PDw image
 
 echo "---Bias field removal on PDw image"
 
@@ -140,11 +137,11 @@ echo "------Removing input file"
 rm ${strSub03}${strPdw}.nii.gz
 
 echo "---Done"
-#-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
-#-------------------------------------------------------------------------------
-### Copy results into SPM directory for preregistration
+# -----------------------------------------------------------------------------
+# *** Copy results into SPM directory for preregistration
 
 echo "---Copy results into SPM directory for preregistration"
 
@@ -167,5 +164,4 @@ rm ${strSub03}${strT1w}.nii.gz
 rm ${strSub04}${strPdw}.nii.gz
 
 echo "---Done"
-#-------------------------------------------------------------------------------
-
+# -----------------------------------------------------------------------------

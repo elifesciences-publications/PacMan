@@ -1,7 +1,0 @@
-Please create a liberal brain masked based on the PDw mp2rage image. For this,
-apply retinex to the original PDw image, and use itksnap for creation of the
-mask afterwards.
-
-This brain mask should not miss any brain tissue and should include some
-non-brain tissue (skull etc.), it is only needed to remove noise outside the
-head for the pre-registration.
