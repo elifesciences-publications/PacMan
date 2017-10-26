@@ -5,7 +5,7 @@
 # The purpose of this script is to prepare the mp2rage to combined mean       #
 # registration pipeline. As a preparation, the mp2rage component images have  #
 # to be placed in the first subdirectory (i.e. ".../01_in/"), with the        #
-# following file names: mp2rage_t1, mp2rage_inv1, mp2rage_pdw, mp2rage_t1w.   #
+# following file names: mp2rage_t1, mp2rage_inv1, mp2rage_pdw, mp2rage_uni.   #
 # Also, the mean EPI image and a brain mask need to be provided (see previous #
 # steps).                                                                     #
 ###############################################################################
@@ -32,7 +32,7 @@ strBrainMsk="n_04b_20171023_pwd_brainmask"
 strT1="mp2rage_t1"
 strInv2="mp2rage_inv1"
 strPdw="mp2rage_pdw"
-strT1w="mp2rage_t1w"
+strT1w="mp2rage_uni"
 
 # SPM directory names:
 strSpmDirRef="combined_mean/"
@@ -85,7 +85,6 @@ rm ${strSub01}${strT1}.nii.gz
 rm ${strSub01}${strInv2}.nii.gz
 rm ${strSub01}${strPdw}.nii.gz
 rm ${strSub01}${strT1w}.nii.gz
-rm ${strSub02}${strBrainMsk}.nii.gz
 
 echo "---Done"
 # -----------------------------------------------------------------------------
@@ -99,7 +98,7 @@ echo "---Copy results into SPM directory for preregistration"
 fslchfiletype NIFTI ${strSub02}${strT1w} ${strSub03}${strSpmDirSrc}${strT1w} &
 fslchfiletype NIFTI ${strSub02}${strT1} ${strSub03}${strSpmDirOtr}${strT1} &
 fslchfiletype NIFTI ${strSub02}${strInv2} ${strSub03}${strSpmDirOtr}${strInv2} &
-fslchfiletype NIFTI ${strSub04}${strPdw} ${strSub03}${strSpmDirOtr}${strPdw} &
+fslchfiletype NIFTI ${strSub02}${strPdw} ${strSub03}${strSpmDirOtr}${strPdw} &
 
 # Copy combined mean:
 fslchfiletype NIFTI ${strSub01}${strCombmean} ${strSub03}${strSpmDirRef}${strCombmean} &
@@ -111,7 +110,7 @@ echo "------Removing input files"
 rm ${strSub02}${strT1}.nii.gz
 rm ${strSub02}${strInv2}.nii.gz
 rm ${strSub02}${strT1w}.nii.gz
-rm ${strSub04}${strPdw}.nii.gz
+rm ${strSub02}${strPdw}.nii.gz
 
 echo "---Done"
 # -----------------------------------------------------------------------------

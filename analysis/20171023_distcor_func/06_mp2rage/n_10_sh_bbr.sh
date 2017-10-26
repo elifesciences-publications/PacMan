@@ -1,26 +1,26 @@
 #!/bin/sh
 
 
-################################################################################
-# The purpose of this script is to perform boundary-based registration using   #
-# the FSL epi-reg function.                                                    #
-################################################################################
+###############################################################################
+# The purpose of this script is to perform boundary-based registration using  #
+# the FSL epi-reg function.                                                   #
+###############################################################################
 
 
 echo "-BBR registration"
 
 
-#-------------------------------------------------------------------------------
-### Define session IDs & paths
+# -----------------------------------------------------------------------------
+# *** Define session IDs & paths
 
 # Parent directory:
-strParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/"
+strParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/"
 
 # Subdirectories:
-strSub01="${strParent}mp2rage/03_reg/07_reg/01_in/"
-strSub02="${strParent}mp2rage/03_reg/07_reg/02_bbr_prep/"
-strSub03="${strParent}mp2rage/03_reg/07_reg/03_bbr/"
-strSub04="${strParent}mp2rage/03_reg/07_reg/04_inv_bbr/"
+strSub01="${strParent}mp2rage/03_reg/04_reg/01_in/"
+strSub02="${strParent}mp2rage/03_reg/04_reg/02_bbr_prep/"
+strSub03="${strParent}mp2rage/03_reg/04_reg/03_bbr/"
+strSub04="${strParent}mp2rage/03_reg/04_reg/04_inv_bbr/"
 
 # Combined mean:
 strCombMean="combined_mean"
@@ -29,7 +29,7 @@ strCombMean="combined_mean"
 strT1="mp2rage_t1"
 strInv2="mp2rage_inv2"
 strPdw="mp2rage_pdw"
-strT1w="mp2rage_t1w"
+strT1w="mp2rage_uni"
 
 # Brain mask for T1w mp2rage image:
 strMaskBrainT1w="bbrmask"
@@ -39,11 +39,11 @@ strMaskBrainT1w="bbrmask"
 
 # Brain mask for combined mean image:
 strMaskBrainCombMean="bbrmask"
-#-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
-#-------------------------------------------------------------------------------
-### Apply brain mask
+# -----------------------------------------------------------------------------
+# *** Apply brain mask
 
 echo "---Apply brain mask"
 
@@ -62,11 +62,11 @@ ${strSub02}${strCombMean}_brain &
 wait
 
 echo "---Done"
-#-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
-#-------------------------------------------------------------------------------
-### Calculate transformation matrix
+# -----------------------------------------------------------------------------
+# *** Calculate transformation matrix
 
 echo "---Calculate transformation matrix"
 
@@ -78,11 +78,11 @@ epi_reg \
 #--wmseg=${strSub02}${strMaskWm}
 
 echo "---Done"
-#-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
-#-------------------------------------------------------------------------------
-### Apply inverse transformation matrix
+# -----------------------------------------------------------------------------
+# *** Apply inverse transformation matrix
 
 echo "---Apply inverse transformation matrix"
 
@@ -134,7 +134,7 @@ flirt \
 
 wait
 echo "---Done"
-#-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 # To be followed by semi-manual segmentation.

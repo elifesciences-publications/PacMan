@@ -4,9 +4,9 @@
 Prepare BBR.
 
 The purpose of this script is to prepare boundary based registration. Relevant
-files are copies, a wm masked is created, opening operation applied, and the
+files are copied, a wm masked is created, opening operation applied, and the
 mask is dilated.
-(C) Ingo Marquardt, 07.02.2017
+(C) Ingo Marquardt, 2017
 """
 
 
@@ -26,21 +26,21 @@ from shutil import copyfile
 # *** Define parameters
 
 # Path & filename of combined mean image:
-strPthCombMean = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/func_regAcrssRuns_cube_tSNR/'  #noqa
+strPthCombMean = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/mp2rage/03_reg/01_in/'  #noqa
 strCombMean = 'combined_mean'
 
 # Path & filenames of mp2rage images:
-strPathIn = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/mp2rage/03_reg/06_crop/'  #noqa
+strPathIn = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/mp2rage/03_reg/04_reg/01_in/'  #noqa
 strT1 = 'mp2rage_t1'
 strInv2 = 'mp2rage_inv2'
 strPdw = 'mp2rage_pdw'
-strT1w = 'mp2rage_t1w'
+strT1w = 'mp2rage_uni'
 
 # BBR directory I (BBR input files):
-strPthBbr01 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/mp2rage/03_reg/07_reg/01_in/'  #noqa
+strPthBbr01 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/mp2rage/03_reg/04_reg/01_in/'  #noqa
 
 # BBR directory II (brainmask):
-strPthBbr02 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/mp2rage/03_reg/07_reg/02_bbr_prep/'  #noqa
+strPthBbr02 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/mp2rage/03_reg/04_reg/02_bbr_prep/'  #noqa
 
 # Cluster size threshold:
 varCluSzeThr = 200
@@ -56,16 +56,6 @@ print('---Copying files')
 
 copyfile((strPthCombMean + strCombMean + '.nii.gz'),
          (strPthBbr01 + strCombMean + '.nii.gz'))
-copyfile((strPathIn + strT1 + '.nii.gz'),
-         (strPthBbr01 + strT1 + '.nii.gz'))
-copyfile((strPathIn + strT1 + '.nii.gz'),
-         (strPthBbr02 + strT1 + '.nii.gz'))
-copyfile((strPathIn + strInv2 + '.nii.gz'),
-         (strPthBbr01 + strInv2 + '.nii.gz'))
-copyfile((strPathIn + strPdw + '.nii.gz'),
-         (strPthBbr01 + strPdw + '.nii.gz'))
-copyfile((strPathIn + strT1w + '.nii.gz'),
-         (strPthBbr01 + strT1w + '.nii.gz'))
 # *****************************************************************************
 
 
@@ -85,7 +75,7 @@ print('---Creating brain mask for BBR')
 
 # (1) Threshold the T1 image at an intensity of 1000
 print('------Threshold the T1 image')
-strBshCmd = ('fslmaths ' + strPthBbr02 + strT1 + ' -thr 1000 ' + strPthBbr02
+strBshCmd = ('fslmaths ' + strPthBbr01 + strT1 + ' -thr 1000 ' + strPthBbr02
              + strT1 + '_thr')
 os.system(strBshCmd)
 

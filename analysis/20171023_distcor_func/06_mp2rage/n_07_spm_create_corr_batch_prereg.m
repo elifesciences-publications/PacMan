@@ -4,21 +4,21 @@
 %--------------------------------------------------------------------------
 % NOTE: The input images have to be in UNCOMPRESSED nii format for SPM.
 %--------------------------------------------------------------------------
-% Ingo Marquardt, 06/09/2016
+% Ingo Marquardt, 2017
 %--------------------------------------------------------------------------
 %% Define variable parameters:
 clear;
 % Directory of reference image (combined mean):
-strPathRef = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/mp2rage/03_reg/05_prereg/combined_mean/';
+strPathRef = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/mp2rage/03_reg/03_prereg/combined_mean/';
 % Directory of source image (T1-weighted mp2rage image):
-strPathSrc = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/mp2rage/03_reg/05_prereg/mp2rage_t1w/';
+strPathSrc = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/mp2rage/03_reg/03_prereg/mp2rage_t1w/';
 % Directory of other images to be registered along source image (T1, PDw,
 % INV2):
-strPathOtr = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/mp2rage/03_reg/05_prereg/mp2rage_other/';
+strPathOtr = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/mp2rage/03_reg/03_prereg/mp2rage_other/';
 % Name of the 'SPM batch' to be created:
-strPathBatch = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/mp2rage/03_reg/05_prereg/spm_moco_batch.mat';
+strPathBatch = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/mp2rage/03_reg/03_prereg/spm_moco_batch.mat';
 % Resolution of input images in mm (is assumed to be isotropic):
-varRes = 0.8;
+varRes = 0.4;
 %--------------------------------------------------------------------------
 %% Prepare input - referenec image:
 % The cell array with the file name of the mean M0 image:
@@ -63,13 +63,13 @@ matlabbatch{1}.spm.spatial.coreg.estwrite.source = cllPathSrc;
 matlabbatch{1}.spm.spatial.coreg.estwrite.other = cllPathOtr;
 matlabbatch{1}.spm.spatial.coreg.estwrite.eoptions.cost_fun = 'nmi';
 matlabbatch{1}.spm.spatial.coreg.estwrite.eoptions.sep = ...
-    [10*varRes, 5*varRes, 4*varRes, 3*varRes, 2*varRes, 1*varRes];
+    [20 * varRes, 10*varRes, 5*varRes, 4*varRes, 3*varRes, 2*varRes, 1*varRes];
 matlabbatch{1}.spm.spatial.coreg.estwrite.eoptions.tol = ...
     [0.02 0.02 0.02 0.001 0.001 0.001 0.01 0.01 0.01 0.001 0.001 0.001];
 matlabbatch{1}.spm.spatial.coreg.estwrite.eoptions.fwhm = ...
     [8*varRes, 8*varRes];
 % Secondly, the parameters for the reslicing:
-matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.interp = 5;
+matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.interp = 1;
 matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.wrap = [0 0 0];
 matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.mask = 1;
 matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.prefix = 'r';
