@@ -13,8 +13,11 @@
 
 echo "---Define parameters"
 
-# Session parent directory:
-strPathTarget="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/stat_maps/"
+# Input directory:
+strPthIn="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/stat_maps/"
+
+# Output directory:
+strPthOut="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/stat_maps_up/"
 
 # Upsampling factor (e.g. 0.5 for half the previous voxel size, 0.25 for a
 # quater of the previous voxel size):
@@ -36,11 +39,8 @@ strPathOrig=( $(pwd) )
 
 # cd into target directory and create list of images to be processed, only
 # taking into account compressed nii files:
-cd "${strPathTarget}"
+cd "${strPthIn}"
 aryIn=( $(ls | grep nii.gz) )
-
-# Old version without filtering for *.nii.gz files:
-# aryIn=( $(ls) )
 
 # Check number of files to be processed:
 varNumIn=${#aryIn[@]}
@@ -48,13 +48,16 @@ varNumIn=${#aryIn[@]}
 # Since indexing starts from zero, we subtract one:
 varNumIn=$((varNumIn - 1))
 
-for index_01 in $(seq 0 $varNumIn)
+for idx01 in $(seq 0 $varNumIn)
 do
 	# Define temporary path of current input image:
-	strTmpIn="${strPathTarget}${aryIn[index_01]}"
+	strTmpIn="${strPthIn}${aryIn[idx01]::-7}"
+
+	# Temporary output path:
+	strTmpOut="${strPthOut}${aryIn[idx01]::-7}"
 
 	echo "--------------------------------------------------------------------"
-	echo "------Processing ${aryIn[index_01]}"
+	echo "------Processing ${aryIn[idx01]}"
 	date
 
 	# Get dimensions of current input image:
@@ -106,7 +109,7 @@ do
 	fslcreatehd \
 	${varDim01} ${varDim02} ${varDim03} ${strDim04} \
 	${varPixdim01} ${varPixdim02} ${varPixdim03} ${strPixdim04} 0 0 0 16 \
-	${strTmpIn::-7}_tmp_hdr
+	${strTmpIn}_tmp_hdr
 
 	echo "------Upsampling"
 
@@ -114,13 +117,13 @@ do
 	flirt \
 	-in ${strTmpIn} \
 	-applyxfm -init /usr/share/fsl/5.0/etc/flirtsch/ident.mat \
-	-out ${strTmpIn::-7}_up \
+	-out ${strTmpOut} \
 	-paddingsize 0.0 \
 	-interp nearestneighbour \
-	-ref ${strTmpIn::-7}_tmp_hdr
+	-ref ${strTmpIn}_tmp_hdr
 
 	# Remove temporary header image:
-	rm ${strTmpIn::-7}_tmp_hdr.nii.gz
+	rm ${strTmpIn}_tmp_hdr.nii.gz
 
 # cd back to original directory:
 cd "${strPathOrig}"

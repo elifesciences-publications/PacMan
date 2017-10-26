@@ -33,7 +33,7 @@ for index01 in ${lstIn[@]}
 do
 
 	strTmpIn="${strPathParent01}${index01}${strPathParent02}"
-	strTmpOut="${strPathOutput}${index01}_pe1.nii.nii.gz"
+	strTmpOut="${strPathOutput}${index01}_pe1.nii.gz"
 	echo "------cp ${strTmpIn} ${strTmpOut}"
 	cp ${strTmpIn} ${strTmpOut}
 
