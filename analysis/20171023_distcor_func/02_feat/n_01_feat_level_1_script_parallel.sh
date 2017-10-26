@@ -7,6 +7,7 @@ echo "-----------First level feat:-----------"
 echo "---Main experimental runs"
 
 date
+
 feat "${str_path}feat_level_1_func_01.fsf" &
 feat "${str_path}feat_level_1_func_02.fsf" &
 feat "${str_path}feat_level_1_func_03.fsf" &
