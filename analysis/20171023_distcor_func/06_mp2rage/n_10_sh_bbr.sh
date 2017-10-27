@@ -27,7 +27,7 @@ strCombMean="combined_mean"
 
 # MP2RAGE images:
 strT1="mp2rage_t1"
-strInv2="mp2rage_inv2"
+strInv2="mp2rage_inv1"
 strPdw="mp2rage_pdw"
 strT1w="mp2rage_uni"
 

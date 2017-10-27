@@ -76,8 +76,6 @@ then
 	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_reg/03_bbr"
 	mkdir "${str_path_parent}/nii_distcor/mp2rage/03_reg/04_reg/04_inv_bbr"
 	mkdir "${str_path_parent}/nii_distcor/mp2rage/04_seg"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/04_seg/01_native_space"
-	mkdir "${str_path_parent}/nii_distcor/mp2rage/04_seg/02_up"
 
 	mkdir "${str_path_parent}/nii_distcor/raw_data"
 
