@@ -80,6 +80,7 @@ then
 	mkdir "${str_path_parent}/nii_distcor/raw_data"
 
 	mkdir "${str_path_parent}/nii_distcor/retinotopy"
+	mkdir "${str_path_parent}/nii_distcor/retinotopy/func_prepro"
 	mkdir "${str_path_parent}/nii_distcor/retinotopy/mask"
 	mkdir "${str_path_parent}/nii_distcor/retinotopy/pRF_results"
 	mkdir "${str_path_parent}/nii_distcor/retinotopy/pRF_results_up"

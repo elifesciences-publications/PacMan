@@ -40,19 +40,19 @@ print('-Stimulus-pRF overlap calculation')
 # *** Define parameters
 
 # Path of nii file with x-coordinates of pRFs:
-strNiiX = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_x_pos_up.nii.gz'  #noqa
+strNiiX = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/retinotopy/pRF_results_up/pRF_results_x_pos.nii.gz'  #noqa
 
 # Path of nii file with y-coordinates of pRFs:
-strNiiY = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_y_pos_up.nii.gz'  #noqa
+strNiiY = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/retinotopy/pRF_results_up/pRF_results_y_pos.nii.gz'  #noqa
 
 # Path of nii file with pRF size estimates (SD):
-strNiiSd = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_SD_up.nii.gz'  #noqa
+strNiiSd = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/retinotopy/pRF_results_up/pRF_results_SD.nii.gz'  #noqa
 
 # Path of nii file with R2 values:
-strNiiR2 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_R2_up.nii.gz'  #noqa
+strNiiR2 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/retinotopy/pRF_results_up/pRF_results_R2.nii.gz'  #noqa
 
 # Output file base name:
-strNiiOt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/retinotopy/pRF_results_up/pRF_results_'  #noqa
+strNiiOt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/retinotopy/pRF_results_up/pRF_results_'  #noqa
 
 # Define the area  of the visual field that was covered by the pRF mapping
 # stimuli (this is the area of the visual field for which pRFs are defined) in
@@ -65,7 +65,7 @@ varYmax = 5.19
 varYstep = 40.0
 
 # Minimum pRF size in degree of visual angle:
-varSdMin = 0.1
+varSdMin = 0.2
 
 # In order to calculate the overlap between the visual stimulus and each
 # voxel's receptive field more accurately, we supersample the visual stimulus
@@ -76,7 +76,7 @@ varSdMin = 0.1
 varSupSmp = 5.0
 
 # Radius of PacMan [degrees of visual angel]:
-varPacRad = 4.0  # PacMan is 5.0, but we include safety margin
+varPacRad = 2.75  # Radius of PacMan is 3.75, but we include a safety margin
 
 # Safety margin of voxels to exclude around vertical meridian:
 varMrgn = 1.0
@@ -559,8 +559,8 @@ for idxHmf in range(2):  #noqa
         strHmf = 'right'
 
     # Save nii to disk:
-    nib.save(niiOtRatio, (strNiiOt + 'ovrlp_ratio_' + strHmf + '_up.nii.gz'))
-    nib.save(niiOtCentre, (strNiiOt + 'ovrlp_ctnr_' + strHmf + '_up.nii.gz'))
+    nib.save(niiOtRatio, (strNiiOt + 'ovrlp_ratio_' + strHmf + '.nii.gz'))
+    nib.save(niiOtCentre, (strNiiOt + 'ovrlp_ctnr_' + strHmf + '.nii.gz'))
 
     # Export overlap ratio images:
     for idxMsk in range(0, varNumMsk):
@@ -577,7 +577,7 @@ for idxHmf in range(2):  #noqa
                   + str(lstOvrlp[idxMsk])
                   + 'prct_'
                   + strHmf
-                  + '_up.nii.gz')
+                  + '.nii.gz')
         nib.save(niiOtTmp, strTmp)
     # *************************************************************************
 

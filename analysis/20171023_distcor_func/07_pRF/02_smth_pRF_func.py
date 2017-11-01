@@ -21,7 +21,7 @@
 
 import numpy as np
 import nibabel as nb
-from utilities import fncLoadNii
+from utilities import load_nii
 from utilities_segmentator import aniso_diff_3D
 
 
@@ -29,19 +29,15 @@ from utilities_segmentator import aniso_diff_3D
 # *** Parameters
 
 # Parent path of input data:
-strPrnt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20161221/nii_distcor/'
+strPrnt = '/home/john/Desktop/tmp/'
 
 # Path of functional runs to perform smoothing on (parent path left open):
-lstFunc = ['{}func_regAcrssRuns_cube_denoise/func_07_up.nii.gz',
-           '{}func_regAcrssRuns_cube_denoise/func_08_up.nii.gz',
-           '{}func_regAcrssRuns_cube_denoise/func_09_up.nii.gz',
-           '{}func_regAcrssRuns_cube_denoise/func_10_up.nii.gz']
+lstFunc = ['{}retinotopy/func_prepro/filtered_func_up.nii']
 
 varNumIn = len(lstFunc)
 
 # List of grey matter masks to restrict smoothing (parent path left open):
-lstMsk = ['{}mp2rage/04_seg/02_up/20161221_mp2rage_seg_v26.nii.gz'] \
-         * varNumIn
+lstMsk = ['{}mp2rage/04_seg/20171023_mp2rage_seg_v27.nii.gz']
 
 # Value of grey matter within mask (smoothing will be restricted to these
 # regions):
@@ -69,7 +65,7 @@ for idxIn in range(varNumIn):
     print(('---Loading functional data: ' + strNiiTmp))
 
     # Load nii:
-    aryNii, objHdr, aryAff = fncLoadNii(strNiiTmp)
+    aryNii, objHdr, aryAff = load_nii(strNiiTmp)
 
     # Reduce precision:
     if type(aryNii[0, 0, 0, 0]) == np.float16:
@@ -87,7 +83,7 @@ for idxIn in range(varNumIn):
     print(('---Loading mask: ' + strNiiTmp))
 
     # Load nii:
-    aryNiiMsk, _, _ = fncLoadNii(strNiiTmp)
+    aryNiiMsk, _, _ = load_nii(strNiiTmp)
 
     # *************************************************************************
     # *** Apply mask

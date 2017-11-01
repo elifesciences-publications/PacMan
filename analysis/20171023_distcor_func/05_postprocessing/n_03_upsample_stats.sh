@@ -125,8 +125,8 @@ do
 	# Remove temporary header image:
 	rm ${strTmpIn}_tmp_hdr.nii.gz
 
+done
+
 # cd back to original directory:
 cd "${strPathOrig}"
-
-done
 #-------------------------------------------------------------------------------
