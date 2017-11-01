@@ -15,7 +15,8 @@ strPathParent01="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/f
 lstIn=(feat_level_2_Control_Dynamic \
        feat_level_2_PacMan_Dynamic \
        feat_level_2_PacMan_Dynamic_minus_Control_Dynamic \
-       feat_level_2_PacMan_Static)
+       feat_level_2_PacMan_Static \
+       feat_level_2_PacMan_Dynamic_minus_PacMan_Static)
 
 strPathParent02=".gfeat/cope1.feat/stats/pe1.nii.gz"
 

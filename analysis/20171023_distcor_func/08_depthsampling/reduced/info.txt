@@ -1,2 +1,0 @@
-Level 2 (across-runs) FEAT with reduced number of runs, in order to test how
-stable results are with less data.

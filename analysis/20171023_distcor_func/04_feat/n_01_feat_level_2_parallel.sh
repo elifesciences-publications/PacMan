@@ -10,6 +10,7 @@ feat "${str_path}feat_level_2_Control_Dynamic.fsf" &
 feat "${str_path}feat_level_2_PacMan_Dynamic.fsf" &
 feat "${str_path}feat_level_2_PacMan_Dynamic_minus_Control_Dynamic.fsf" &
 feat "${str_path}feat_level_2_PacMan_Static.fsf" &
+feat "${str_path}feat_level_2_PacMan_Dynamic_minus_PacMan_Static.fsf" &
 wait
 
 date
