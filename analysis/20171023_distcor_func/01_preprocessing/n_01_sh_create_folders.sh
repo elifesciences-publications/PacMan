@@ -51,6 +51,7 @@ then
 	mkdir "${str_path_parent}/nii_distcor/func_reg"
 	mkdir "${str_path_parent}/nii_distcor/func_reg_tsnr"
 	mkdir "${str_path_parent}/nii_distcor/func_reg_distcorUnwrp"
+	mkdir "${str_path_parent}/nii_distcor/func_reg_averages"
 
 	mkdir "${str_path_parent}/nii_distcor/func_se"
 	mkdir "${str_path_parent}/nii_distcor/func_se_reg"
