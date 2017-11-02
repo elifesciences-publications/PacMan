@@ -649,7 +649,7 @@ for idx01 in range(0, varNumEvnts):  #noqa
                   + str(varTmpEvntStrt))
         logging.data(strTmp)
 
-        # Switch for target (show target or not?):
+        # Switch target (show target or not?):
         varSwtTrgt = 0
 
         # Continue with the rest block?
@@ -747,8 +747,13 @@ for idx01 in range(0, varNumEvnts):  #noqa
                 varSwtRspLog = 0
 
             # Check whether it's time to show a target on the next frame. Is
-            # the upcoming event a target?
-            if aryDesign[idx01+varIdxTrgt][0] == 2:
+            # the upcoming event a target? We first need to check whether the
+            # end of the design matrix has not been reached yet. This can
+            # happen if there is no target event in the last condition block,
+            # and the variable `varIdxTrgt` has been incremented in the second
+            # last condition block.
+            if (((idx01 + varIdxTrgt) < varNumEvnts) and
+                    aryDesign[idx01+varIdxTrgt][0] == 2):
 
                 # Onset time of upcoming target:
                 varTmpTrgtStrt = aryDesign[idx01+varIdxTrgt][1]
@@ -795,7 +800,7 @@ for idx01 in range(0, varNumEvnts):  #noqa
                   + str(varTmpEvntStrt))
         logging.data(strTmp)
 
-        # Switch target:
+        # Switch target (show target or not?):
         varSwtTrgt = 0
 
         # Continue with the stimulus block?
@@ -950,8 +955,13 @@ for idx01 in range(0, varNumEvnts):  #noqa
                 varSwtRspLog = 0
 
             # Check whether it's time to show a target on the next frame. Is
-            # the upcoming event a target?
-            if aryDesign[idx01+varIdxTrgt][0] == 2:
+            # the upcoming event a target? We first need to check whether the
+            # end of the design matrix has not been reached yet. This can
+            # happen if there is no target event in the last condition block,
+            # and the variable `varIdxTrgt` has been incremented in the second
+            # last condition block.
+            if (((idx01 + varIdxTrgt) < varNumEvnts) and
+                    aryDesign[idx01+varIdxTrgt][0] == 2):
 
                 # Onset time of upcoming target:
                 varTmpTrgtStrt = aryDesign[idx01+varIdxTrgt][1]
