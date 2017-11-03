@@ -43,7 +43,7 @@ lstIn_02 = ['EV_func_08_Stimulus.txt',
 strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/func_reg_averages/'  #noqa
 
 # Output file name:
-strOutFileName = 'ERA_PacMan_Static.nii'
+strOutFileName = 'ERA_PacMan_Static.nii.gz'
 
 # Volume TR of input nii files:
 varTR = 2.079
@@ -235,11 +235,6 @@ for index_02 in range(0, varNumIn_01):
     # -------------------------------------------------------------------------
     # *** Normalisation
 
-    print('')
-    print('BEFORE')
-    print('aryTmpBlcks.shape')
-    print(aryTmpBlcks.shape)
-
     if lgcNorm:
 
         # Get prestimulus baseline:
@@ -259,11 +254,6 @@ for index_02 in range(0, varNumIn_01):
         # the prestimulus baseline:
         aryTmpBlcks[aryNonZero] = np.divide(aryTmpBlcks[aryNonZero],
                                             aryBseMne[aryNonZero, None])
-
-    print('')
-    print('AFTER')
-    print('aryTmpBlcks.shape')
-    print(aryTmpBlcks.shape)
 
     # -------------------------------------------------------------------------
     # *** Save segment
