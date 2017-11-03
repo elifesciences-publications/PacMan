@@ -112,8 +112,10 @@ then
 
 	mkdir "${str_path_parent}/cbs_distcor"
 	mkdir "${str_path_parent}/cbs_distcor/lh"
+	mkdir "${str_path_parent}/cbs_distcor/lh_era"
 	mkdir "${str_path_parent}/cbs_distcor/results"
 	mkdir "${str_path_parent}/cbs_distcor/rh"
+	mkdir "${str_path_parent}/cbs_distcor/rh_era"
 
 else
 	echo "Directory for ${str_session_ID} does already exist."

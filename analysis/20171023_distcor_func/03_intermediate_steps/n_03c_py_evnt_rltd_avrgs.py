@@ -59,6 +59,17 @@ varVolsPre = 5.0
 # end of the condition block:
 varVolsPst = 18.711 / varTR
 
+# Normalise time segments? If True, segments are normalised trial-by-trial;
+# i.e. each time-course segment is divided by its own pre-stimulus baseline
+# before averaging across trials.
+lgcNorm = True
+
+# If normalisation is performed, which time points to use as baseline, relative
+# to the stimulus condition onset. (I.e., if you specify -3 and 0, the three
+# volumes preceeding the onset of the stimulus are used - the interval is
+# non-inclusive at the end.)
+tplBase = (-3, 0)
+
 # Whether or not to also produces individual event-related segments for each
 # trial:
 lgcSegs = False
@@ -221,10 +232,46 @@ for index_02 in range(0, varNumIn_01):
         aryTmpBlcks[index_03, :, :, :, :] = \
             np.copy(aryTmpRun[:, :, :, varTmpStr:varTmpStp])
 
-        # ---------------------------------------------------------------------
-        # *** Save segment
+    # -------------------------------------------------------------------------
+    # *** Normalisation
 
-        if lgcSegs:
+    print('')
+    print('BEFORE')
+    print('aryTmpBlcks.shape')
+    print(aryTmpBlcks.shape)
+
+    if lgcNorm:
+
+        # Get prestimulus baseline:
+        aryBse = np.copy(aryTmpBlcks[:, :, :, :,
+                                     int(varVolsPre + tplBase[0]):
+                                     int(varVolsPre + tplBase[1])]
+                         )
+
+        # Mean for each voxel over time (i.e. over the pre-stimulus
+        # baseline):
+        aryBseMne = np.mean(aryBse, axis=4)
+
+        # Get indicies of voxels that have a non-zero prestimulus baseline:
+        aryNonZero = np.not_equal(aryBseMne, 0.0)
+
+        # Divide all voxels that are non-zero in the pre-stimulus baseline by
+        # the prestimulus baseline:
+        aryTmpBlcks[aryNonZero] = np.divide(aryTmpBlcks[aryNonZero],
+                                            aryBseMne[aryNonZero, None])
+
+    print('')
+    print('AFTER')
+    print('aryTmpBlcks.shape')
+    print(aryTmpBlcks.shape)
+
+    # -------------------------------------------------------------------------
+    # *** Save segment
+
+    if lgcSegs:
+
+        # Loop through runs again in order to save segments:
+        for index_03 in range(0, varTmpNumBlck):
 
             # Create temporary array for current segment:
             aryTmpTrial = np.copy(aryTmpRun[:, :, :, varTmpStr:varTmpStp])
