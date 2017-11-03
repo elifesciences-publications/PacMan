@@ -1,0 +1,12 @@
+### Missing REST block
+
+In session 20171023, the last rest block of every functional run was skipped
+because of a bug. The volumes corresponding to this last rest block were
+cropped from the functional time series (after preprocessing, in the folder
+`func_reg_distcorUnwrp`. However, this has no implications for the FSL EV
+files, because rest blocks are not modelled anyway, and the respective EV fiels
+are in `~/FSL_MRI_Metadata/version_03`. In this folder, there is a version of
+the EV files where the last stimulus block of each run has been removed, so
+that it can be ignored when creating event-related averages (because the last
+stimulus block is not followed by a rest block and is therefore not useful for
+event-related averages).
