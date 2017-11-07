@@ -182,6 +182,12 @@ fleLog = logging.LogFile(strPthLog + '.log', level=logging.DATA)
 # Log parent path:
 fleLog.write('Parent path: ' + strPthPrnt + '\n')
 
+# Log condition:
+fleLog.write('Stimulus: ' + dicExpInfo['Stimulus'] + '\n')
+fleLog.write('Condition: ' + dicExpInfo['Condition'] + '\n')
+fleLog.write('Test mode: ' + dicExpInfo['Test mode'] + '\n')
+fleLog.write('Subject_ID: ' + dicExpInfo['Subject_ID'] + '\n')
+
 # Set console logging verbosity:
 logging.console.setLevel(logging.WARNING)
 
