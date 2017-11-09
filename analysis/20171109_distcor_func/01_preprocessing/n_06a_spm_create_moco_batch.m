@@ -15,7 +15,7 @@ clear;
 % Path of the SPM moco directory:
 strPathParent = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/spm_reg/';
 % The number of functional runs:
-varNumRuns = 10;
+varNumRuns = 9;
 % Name of the 'SPM batch' to be created:
 strPathOut = [strPathParent, 'spm_moco_batch.mat'];
 %--------------------------------------------------------------------------
