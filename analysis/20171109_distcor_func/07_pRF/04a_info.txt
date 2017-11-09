@@ -1,0 +1,5 @@
+###########################################
+# Perform pRF finding with pyprf library. #
+###########################################
+
+pyprf -config /home/john/PhD/GitHub/PacMan/analysis/20171109_distcor_func/07_pRF/04b_pRF_config.csv
