@@ -1,0 +1,6 @@
+In session 20171109, there was an additional, improvised 8th run with long rest
+and stimulus blocks (50 s and 25 s, respectively). The purpose of this run was
+to investigate the temporal dynamics of the negative fMRI signal. The respetive
+design matrix is called `PacMan_run_Long_eventmatrix.txt` in the experiment
+folder (`~/05_PacMan/20171109/log/PacMan/experiment/design_matrices/`). It is
+renamed to `PacMan_run_08_eventmatrix.txt` here.
