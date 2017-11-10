@@ -15,7 +15,6 @@ feat "${str_path}feat_level_1_func_04.fsf" &
 feat "${str_path}feat_level_1_func_05.fsf" &
 feat "${str_path}feat_level_1_func_06.fsf" &
 feat "${str_path}feat_level_1_func_08.fsf" &
-feat "${str_path}feat_level_1_func_09.fsf" &
 wait
 
 date
