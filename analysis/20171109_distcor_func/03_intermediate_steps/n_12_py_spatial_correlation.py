@@ -33,7 +33,7 @@ varThr = 0.93
 # Dictionary with subject IDs and run IDs for each subject. (For some subjects,
 # runs are excluded at an earlier stage, e.g. because of low behavioural
 # performance.)
-dicSubId = {'20171109': ['01', '02', '03', '04', '05', '06', '07', '08', '09']}
+dicSubId = {'20171109': ['01', '02', '03', '04', '05', '06', '07', '08']}
 
 # The path of the 3D reference images (subject ID left open):
 strPathRef = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/func_reg_tsnr/combined_mean.nii.gz')  #noqa
