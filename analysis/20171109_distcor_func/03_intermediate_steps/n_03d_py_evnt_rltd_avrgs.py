@@ -1,5 +1,9 @@
 """
-Create event related averages from 4D nii files.
+Create event related averages from 4D nii files for jittered event onsets.
+
+In this version, the nii files are UPSAMPLED in the temporal dimension before
+creating event-related averages, in order to allow for condition onsets that
+are not synchronised to the fMRI sampling rate (i.e. the TR).
 
 Create average time courses from 4D nii files. The inputs to this script are a
 list of 4D nii files, and a corresponding list of design matrices in FSL's
@@ -16,6 +20,7 @@ import copy
 import time
 import numpy as np
 import nibabel as nb
+from scipy.interpolate import interp1d
 
 # -----------------------------------------------------------------------------
 # *** Check time
@@ -41,7 +46,11 @@ lstIn_02 = ['EV_func_08_Stimulus.txt']
 strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/func_reg_averages/'  #noqa
 
 # Output file name:
-strOutFileName = 'ERA_PacMan_Static.nii.gz'
+strOutFileName = 'ERA_PacMan_Dynamic_Long.nii.gz'
+
+# Upsampling factor for temporal interpolation (e.g., if `varUp = 10`, there
+# will be 10 time points for every volume):
+varUp = 10
 
 # Volume TR of input nii files:
 varTR = 2.079
@@ -51,11 +60,11 @@ varTR = 2.079
 # of each block from the design matrices (EV files). In order for the averaging
 # to work (and in order for it to be sensible in a conceptual sense), all
 # blocks that are included in the average need to have the same duration.
-varVolsPre = 5.0
+varVolsPre = 5
 
 # Number of volumes that will be included in the average segment after the
 # end of the condition block:
-varVolsPst = 18.711 / varTR
+varVolsPst = 23
 
 # Normalise time segments? If True, segments are normalised trial-by-trial;
 # i.e. each time-course segment is divided by its own pre-stimulus baseline
@@ -157,14 +166,20 @@ for index_02 in range(0, varNumIn_01):
         # Get header of first input image (headers, and therefore image
         # dimensions, are assummed to be identical across runs):
         hdr_01 = niiTmp.header
+
         # Image dimensions:
         aryDim = np.copy(hdr_01['dim'])
+
         # Calculate length of segments to be created during the averaging:
         varSegDur = int(np.around(
-                                  (lstEV[0][0, 1] / varTR) +
-                                  varVolsPre +
-                                  varVolsPst
+                                  (float(lstEV[0][0, 1]) / float(varTR)) +
+                                  float(varVolsPre) +
+                                  float(varVolsPst)
                                   ))
+
+        # Number of time points after upsampling:
+        varSegDurUp = varSegDur * int(varUp)
+
         # Array that will be filled with the individual average time series of
         # all runs:
         aryRunsAvrgs = np.zeros((
@@ -172,10 +187,33 @@ for index_02 in range(0, varNumIn_01):
                                  aryDim[1],
                                  aryDim[2],
                                  aryDim[3],
-                                 varSegDur
-                                 ))
+                                 varSegDurUp
+                                 )).astype(np.float32)
 
     # -------------------------------------------------------------------------
+    # *** Preparations for temporal interpolation (upsampling)
+
+    # Number of volumes (before upsampling):
+    varNumVol = aryDim[4]
+
+    # Position of original datapoints (before interpolation):
+    vecPosOrig = np.linspace(0.0,
+                             float(varNumVol),
+                             num=varNumVol,
+                             endpoint=False)
+
+    # Create function for interpolation:
+    func_interp = interp1d(vecPosOrig,
+                           aryTmpRun,
+                           kind='linear',
+                           axis=3,
+                           fill_value='extrapolate')
+
+    # -------------------------------------------------------------------------
+    # *** Loop through blocks
+
+    print('------Creating segments for each block')
+
     # Array that will be filled with segments (of condition blocks) of the
     # current run:
     aryTmpBlcks = np.zeros((
@@ -183,13 +221,9 @@ for index_02 in range(0, varNumIn_01):
                             aryDim[1],
                             aryDim[2],
                             aryDim[3],
-                            varSegDur
-                            ))
-
-    # -------------------------------------------------------------------------
-    # *** Loop through blocks
-
-    print('------Creating segments for each block')
+                            varSegDurUp
+                            ),
+                            dtype=np.float32)
 
     for index_03 in range(0, varTmpNumBlck):
 
@@ -202,13 +236,13 @@ for index_02 in range(0, varNumIn_01):
         varTmpStr = lstEV[index_02][index_03, 0]
 
         # Convert start time to volumes:
-        varTmpStr = varTmpStr / varTR
+        varTmpStr = float(varTmpStr) / float(varTR)
 
         # Duration of current block (in seconds, as in EV file):
         varTmpDur = lstEV[index_02][index_03, 1]
 
         # Convert duration to volumes:
-        varTmpDur = varTmpDur / varTR
+        varTmpDur = float(varTmpDur) / float(varTR)
 
         # Stop time of current condition:
         varTmpStp = varTmpStr + varTmpDur
@@ -219,31 +253,45 @@ for index_02 in range(0, varNumIn_01):
         # Add post-condition interval to stop time:
         varTmpStp = varTmpStp + varVolsPst
 
-        # We need to remove rounding error from the start and stop indices, and
-        # convert them to integers:
-        varTmpStr = int(np.around(varTmpStr, 0))
-        varTmpStp = int(np.around(varTmpStp, 0))
+        print(' ')
+        print('varTmpStr')
+        print(varTmpStr)
+        print('varTmpStp')
+        print(varTmpStp)
+        print(' ')
+        print('(varTmpStr * varTR)')
+        print((varTmpStr * varTR))
+        print('(varTmpStp * varTR)')
+        print((varTmpStp * varTR))
 
         # ---------------------------------------------------------------------
-        # *** Cut segment pertaining to current block
+        # *** Temporal interpolation of current segment
 
+        # Positions at which to sample (interpolate) time series:
+        vecPosIntp = np.linspace(varTmpStr,
+                                 varTmpStp,
+                                 num=varSegDurUp,
+                                 endpoint=True)
+    
+        # Apply interpolation function:
         aryTmpBlcks[index_03, :, :, :, :] = \
-            np.copy(aryTmpRun[:, :, :, varTmpStr:varTmpStp])
+            func_interp(vecPosIntp).astype(np.float32)
 
     # -------------------------------------------------------------------------
     # *** Normalisation
 
     if lgcNorm:
 
+        # Start and stop indicies of baseline interval:
+        varBseStr = int(np.around((varVolsPre + tplBase[0]) * varUp))
+        varBseStp = int(np.around((varVolsPre + tplBase[1]) * varUp))
+        
         # Get prestimulus baseline:
-        aryBse = np.copy(aryTmpBlcks[:, :, :, :,
-                                     int(varVolsPre + tplBase[0]):
-                                     int(varVolsPre + tplBase[1])]
-                         )
+        aryBse = aryTmpBlcks[:, :, :, :, varBseStr:varBseStp]
 
         # Mean for each voxel over time (i.e. over the pre-stimulus
         # baseline):
-        aryBseMne = np.mean(aryBse, axis=4)
+        aryBseMne = np.mean(aryBse, axis=4).astype(np.float32)
 
         # Get indicies of voxels that have a non-zero prestimulus baseline:
         aryNonZero = np.not_equal(aryBseMne, 0.0)
@@ -251,18 +299,24 @@ for index_02 in range(0, varNumIn_01):
         # Divide all voxels that are non-zero in the pre-stimulus baseline by
         # the prestimulus baseline:
         aryTmpBlcks[aryNonZero] = np.divide(aryTmpBlcks[aryNonZero],
-                                            aryBseMne[aryNonZero, None])
+                                            aryBseMne[aryNonZero, None]
+                                            ).astype(np.float32)
 
     # -------------------------------------------------------------------------
     # *** Save segment
 
     if lgcSegs:
 
+        # WORK IN PROGRESS
+
         # Loop through runs again in order to save segments:
         for index_03 in range(0, varTmpNumBlck):
 
+            # Start and stop indicies of segment:
+            # ...
+
             # Create temporary array for current segment:
-            aryTmpTrial = np.copy(aryTmpRun[:, :, :, varTmpStr:varTmpStp])
+            # ...
 
             # Since the resulting 4D nii file that contains the segment differs
             # from the input image in the time dimension, we have to adjust the
@@ -317,13 +371,13 @@ for index_02 in range(0, varNumIn_01):
     # dimensional array:
     aryTmp = np.sum(aryTmpBlcks,
                     axis=0,
-                    keepdims=False)
+                    keepdims=False).astype(np.float32)
 
     # Divide by number of blocks:
-    aryTmp = np.true_divide(aryTmp, varTmpNumBlck)
+    aryTmp = np.true_divide(aryTmp, varTmpNumBlck).astype(np.float32)
 
     # Append array to list:
-    aryRunsAvrgs[index_02, :, :, :, :] = np.copy(aryTmp)
+    aryRunsAvrgs[index_02, :, :, :, :] = np.copy(aryTmp).astype(np.float32)
 
 # -----------------------------------------------------------------------------
 # *** Calculate average across runs
@@ -334,10 +388,10 @@ print('---Calculating average across runs')
 # producing a four-dimensional array:
 aryAvrg = np.sum(aryRunsAvrgs,
                  axis=0,
-                 keepdims=False)
+                 keepdims=False).astype(np.float32)
 
 # Divide by number of runs:
-aryAvrg = np.true_divide(aryAvrg, varNumIn_01)
+aryAvrg = np.true_divide(aryAvrg, varNumIn_01).astype(np.float32)
 
 # -----------------------------------------------------------------------------
 # *** Save result
