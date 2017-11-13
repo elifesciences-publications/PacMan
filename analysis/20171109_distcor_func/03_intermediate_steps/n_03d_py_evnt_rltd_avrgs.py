@@ -28,22 +28,20 @@ varTme_01 = time.clock()
 strPathParent = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/feat_level_1/'  #noqa
 
 # List of 4D nii files (location within parent directory):
-lstIn_01 = ['func_01.feat/filtered_func_data.nii.gz',
-            'func_04.feat/filtered_func_data.nii.gz']
+lstIn_01 = ['func_08.feat/filtered_func_data.nii.gz']
 
 # Directory containing design matrices (EV files):
 strPathEV = '/home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/version_03c/'  #noqa
 
 # List of design matrices (EV files), in the same order as input 4D nii files
 # (location within parent directory):
-lstIn_02 = ['EV_func_01_Stimulus.txt',
-            'EV_func_04_Stimulus.txt']
+lstIn_02 = ['EV_func_08_Stimulus.txt']
 
 # Output directory:
 strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/func_reg_averages/'  #noqa
 
 # Output file name:
-strOutFileName = 'ERA_PacMan_Dynamic.nii.gz'
+strOutFileName = 'ERA_PacMan_Static.nii.gz'
 
 # Volume TR of input nii files:
 varTR = 2.079

@@ -12,7 +12,7 @@ script calculates and plots the correlation between the reference nii images
 and all volumes of the respective 4D nii file. In this way the quality of
 motion correction can be assessed.
 
-(C) Ingo Marquardt, 16.05.2016
+(C) Ingo Marquardt, 2016
 """
 
 

@@ -2,9 +2,7 @@
 
 
 ################################################################################
-# The purpose of this script is to calculate the tSNR of the functional time   #
-# series of the LGN Functional Mapping experiment. The input to this script is #
-# the 'filtered functional data'  from level 1 feat directories.               #
+# Calculate tSNR of functional time series.                                    #
 ################################################################################
 
 

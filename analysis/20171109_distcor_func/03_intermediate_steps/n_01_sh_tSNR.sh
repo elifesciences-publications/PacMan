@@ -2,9 +2,7 @@
 
 
 ################################################################################
-# The purpose of this script is to calculate the tSNR of the functional time   #
-# series of the LGN Functional Mapping experiment. The input to this script is #
-# the 'filtered functional data'  from level 1 feat directories.               #
+# Calculate tSNR of functional time series.                                    #
 ################################################################################
 
 
@@ -19,8 +17,7 @@ arySessionIDs=(func_01 \
                func_05 \
                func_06 \
                func_07 \
-               func_08 \
-               func_09)
+               func_08)
 
 # Parent path:
 strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/"
