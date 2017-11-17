@@ -3,7 +3,7 @@
 
 ###############################################################################
 # The purpose of this script is to copy results of SPM bias field correction, #
-# and remove redundant files.                                               #
+# and remove redundant files.                                                 #
 ###############################################################################
 
 
@@ -28,21 +28,21 @@ aryIn=(mp2rage_inv1 \
 
 
 ##------------------------------------------------------------------------------
-## *** Copy files
-#
-## Loop through files:
-#for strTmp in ${aryIn[@]}
-#do
-#	# Input file:
-#  strTmpPthIn="${strPthPrnt}${strPthIn}m${strTmp}"
-#
-#  # Output file:
-#  strTmpPthOut="${strPthPrnt}${strPthOut}${strTmp}"
-#
-#  # Change file type to nii.gz:
-#  fslchfiletype NIFTI_GZ ${strTmpPthIn} ${strTmpPthOut}
-#done
-##------------------------------------------------------------------------------
+# *** Copy files
+
+# Loop through files:
+for strTmp in ${aryIn[@]}
+do
+  # Input file:
+  strTmpPthIn="${strPthPrnt}${strPthIn}m${strTmp}"
+
+  # Output file:
+  strTmpPthOut="${strPthPrnt}${strPthOut}${strTmp}"
+
+  # Change file type to nii.gz:
+  fslchfiletype NIFTI_GZ ${strTmpPthIn} ${strTmpPthOut}
+done
+#------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------
