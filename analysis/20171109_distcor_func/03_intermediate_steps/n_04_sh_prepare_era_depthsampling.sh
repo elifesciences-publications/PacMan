@@ -23,8 +23,9 @@ arySubIDs=(20171109)
 strIn="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/SUBJECT_ID/nii_distcor/func_reg_averages/"
 
 # Input file names (within parent directory):
-aryNiiIn=(ERA_PacMan_Dynamic \
-          ERA_Control_Dynamic \
+aryNiiIn=(ERA_Control_Dynamic \
+          ERA_PacMan_Dynamic \
+          ERA_PacMan_Dynamic_Long \
           ERA_PacMan_Static)
 
 # Output parent directory ('SUBJECT_ID' will be replaced):
