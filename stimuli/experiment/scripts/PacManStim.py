@@ -470,23 +470,23 @@ objTarget = visual.Circle(
 # *** Auxiliary stimuli
 
 # Message:
-objTxtWlcm = visual.TextStim(objWin,
-                             text='Please wait a moment.',
-                             font="Courier New",
-                             pos=(0.0, 0.0),
-                             color=[1.0, 1.0, 1.0],
-                             colorSpace='rgb',
-                             opacity=1.0,
-                             contrast=1.0,
-                             ori=0.0,
-                             height=0.8,
-                             antialias=True,
-                             alignHoriz='center',
-                             alignVert='center',
-                             flipHoriz=False,
-                             flipVert=False,
-                             autoLog=False
-                             )
+# objTxtWlcm = visual.TextStim(objWin,
+#                              text='Please wait a moment.',
+#                              font="Courier New",
+#                              pos=(0.0, 0.0),
+#                              color=[1.0, 1.0, 1.0],
+#                              colorSpace='rgb',
+#                              opacity=1.0,
+#                              contrast=1.0,
+#                              ori=0.0,
+#                              height=0.8,
+#                              antialias=True,
+#                              alignHoriz='center',
+#                              alignVert='center',
+#                              flipHoriz=False,
+#                              flipVert=False,
+#                              autoLog=False
+#                              )
 
 # Timer (only displayed in testing mode):
 if lgcTest:
@@ -593,8 +593,13 @@ def func_exit():
 # -----------------------------------------------------------------------------
 # *** Presentation
 
-# Draw wait message:
-objTxtWlcm.draw()
+# Draw background:
+objBckgrd.draw(win=objWin)
+
+# Draw fixation dot:
+objFixSrd.draw(win=objWin)
+objFix.draw(win=objWin)
+
 objWin.flip()
 
 # Hide the mouse cursor:
