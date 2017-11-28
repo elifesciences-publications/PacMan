@@ -61,10 +61,17 @@ fslreorient2std ${strRaw}cmrrmbep2dseRLs006a001 ${sreSeOp}func_00
 #------------------------------------------------------------------------------
 # *** Copy mp2rage images
 
-fslreorient2std ${strRaw}mp2rage07isop2s014a1001 ${strAnat}mp2rage_inv1
-fslreorient2std ${strRaw}mp2rage07isop2s015a1001 ${strAnat}mp2rage_inv1_phase
-fslreorient2std ${strRaw}mp2rage07isop2s016a1001 ${strAnat}mp2rage_pdw
-fslreorient2std ${strRaw}mp2rage07isop2s017a1001 ${strAnat}mp2rage_pdw_phase
-fslreorient2std ${strRaw}mp2rage07isop2s018a1001 ${strAnat}mp2rage_t1
-fslreorient2std ${strRaw}mp2rage07isop2s019a1001 ${strAnat}mp2rage_uni
+# fslreorient2std ${strRaw}mp2rage07isop2s014a1001 ${strAnat}mp2rage_inv1
+# fslreorient2std ${strRaw}mp2rage07isop2s015a1001 ${strAnat}mp2rage_inv1_phase
+# fslreorient2std ${strRaw}mp2rage07isop2s016a1001 ${strAnat}mp2rage_pdw
+# fslreorient2std ${strRaw}mp2rage07isop2s017a1001 ${strAnat}mp2rage_pdw_phase
+# fslreorient2std ${strRaw}mp2rage07isop2s018a1001 ${strAnat}mp2rage_t1
+# fslreorient2std ${strRaw}mp2rage07isop2s019a1001 ${strAnat}mp2rage_uni
+
+# The mp2rage images obtained during session 20171109 were of inferior quality.
+# Extrassession mp2rage images are used for segmentaion instead.
+fslreorient2std /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/raw_data_extrasession/mp2rage_inv1.nii.gz ${strAnat}mp2rage_inv1
+fslreorient2std /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/raw_data_extrasession/mp2rage_pdw.nii.gz ${strAnat}mp2rage_pdw
+fslreorient2std /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/raw_data_extrasession/mp2rage_t1.nii.gz ${strAnat}mp2rage_t1
+fslreorient2std /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/raw_data_extrasession/mp2rage_uni.nii.gz ${strAnat}mp2rage_uni
 #------------------------------------------------------------------------------
