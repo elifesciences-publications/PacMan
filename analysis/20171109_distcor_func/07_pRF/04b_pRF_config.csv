@@ -84,7 +84,8 @@ varVslSpcSzeY = 300
 lstPathNiiFunc = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/retinotopy/func_prepro/filtered_func_aniso_smth_n3_k90_g0p2.nii.gz']  #noqa
 
 # Path of mask (to restrict pRF model finding):
-strPathNiiMask = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/retinotopy/mask/gm_mask.nii.gz'  #noqa
+# strPathNiiMask = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/retinotopy/mask/gm_mask.nii.gz'  #noqa
+strPathNiiMask = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/retinotopy/mask/brainmask.nii.gz'  #noqa
 
 # Output basename:
 strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/retinotopy/pRF_results/pRF_results'  #noqa

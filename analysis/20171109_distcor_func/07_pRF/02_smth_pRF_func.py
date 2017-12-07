@@ -37,7 +37,7 @@ lstFunc = ['{}retinotopy/func_prepro/filtered_func_up.nii']
 varNumIn = len(lstFunc)
 
 # List of grey matter masks to restrict smoothing (parent path left open):
-lstMsk = ['{}mp2rage/04_seg/20171109_mp2rage_seg_v27.nii.gz']
+lstMsk = ['{}mp2rage/04_seg/20171109_mp2rage_seg_v30.nii.gz']
 
 # Value of grey matter within mask (smoothing will be restricted to these
 # regions):
