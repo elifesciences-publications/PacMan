@@ -78,6 +78,7 @@ strDate = (lstDate[0] + lstDate[1] + lstDate[2])
 # List with runs to choose from:
 lstRuns = [str(x).zfill(2) for x in range(1, 11)]
 lstRuns.append('Dummy')
+lstRuns.append('Long')
 
 # Dictionary with experiment metadata:
 dicExpInfo = {'Run': lstRuns,
