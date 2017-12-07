@@ -40,8 +40,7 @@ from os import rename
 # %% Define parameters
 
 # Subject IDs & number of prefixes to remove for that subject:
-dicSubId = {'20161221': 9,
-            '20161221': 9}
+dicSubId = {'20161221': 9}
 
 # Paths with files to be renamed (subject ID left open):
 lstPths = ['/home/john/PhD/PacMan_Depth_Data/20161221/cbs_distcor/lh_extrasession_retinotopy/',
