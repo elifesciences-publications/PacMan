@@ -1,0 +1,31 @@
+version_01:
+
+Outdated, pilot experiments conducted in 2015
+
+version_02:
+
+Outdated, pilot experiments conducted in 2015
+
+version_03a:
+
+20171023 with extra runs:
+- 3 * PacMan Dynamic
+- 3 * Control dynamic
+- 2 * PacMan Static
+
+version_03b:
+
+20171023 EV files for creation of event related averages (because last rest
+block was skipped during the experiment).
+
+version_03c:
+
+20171109 (and later), following number of runs:
+- 2 * PacMan Dynamic
+- 2 * Control dynamic
+- 2 * PacMan Static
+- 1 * PacMan Dynamic Long (50 s rest, 25 s stimulus)
+
+
+---
+See info.txt files in respective folders for more details.
