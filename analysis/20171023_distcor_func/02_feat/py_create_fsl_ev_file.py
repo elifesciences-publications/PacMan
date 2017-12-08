@@ -23,7 +23,7 @@ import numpy as np
 # TARGET second in this list, etc.
 
 # Input directory:
-strPathInput  = '/home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/version_03/'  #noqa
+strPathInput  = '/home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/version_03a/'  #noqa
 
 # Output directory:
 strPathOutput = strPathInput
