@@ -23,7 +23,7 @@ import numpy as np
 # TARGET second in this list, etc.
 
 # Input directory:
-strPathInput  = '/home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/version_03c_transients/'  #noqa
+strPathInput  = '/home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/version_03a_transients/'  #noqa
 
 # Output directory:
 strPathOutput = strPathInput
@@ -31,17 +31,17 @@ strPathOutput = strPathInput
 # Input file name (with run number left open):
 strFleNme = 'PacMan_run_{}_eventmatrix.txt'
 
-# PacMan version 03c:
+# PacMan version 03a:
 # * Runs 01, 03, 05 are 'PacMan_Dynamic'
 # * Runs 02, 04, 06 are 'Control_Dynamic'
-# * Run 08 is 'PacMan_Dynamic' with long rest and stimulus blocks
+# * Runs 08, 09 are 'PacMan_Static'
 # This has to be considered when setting up the 2nd level feat analysis.
 lstEventTypes = ['Rest',
                  'Target',
                  'Stimulus']
 
 # List of runs (run 07 is the pRF mapping run):
-lstRuns = ['01', '02', '03', '04', '05', '06', '08']
+lstRuns = ['01', '02', '03', '04', '05', '06', '08', '09']
 
 # The number of different event types in the event matrix file. For each type
 # a separate EV file will be created.

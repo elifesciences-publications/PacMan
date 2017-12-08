@@ -26,6 +26,9 @@ version_03c:
 - 2 * PacMan Static
 - 1 * PacMan Dynamic Long (50 s rest, 25 s stimulus)
 
+version_03c_transients:
+
+Same as version_03c, but with transient onset and offset responses.
 
 ---
 See info.txt files in respective folders for more details.

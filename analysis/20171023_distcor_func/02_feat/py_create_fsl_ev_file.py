@@ -31,7 +31,7 @@ strPathOutput = strPathInput
 # Input file name (with run number left open):
 strFleNme = 'PacMan_run_{}_eventmatrix.txt'
 
-# PacMan version 03:
+# PacMan version 03a:
 # * Runs 01, 03, 05 are 'PacMan_Dynamic'
 # * Runs 02, 04, 06 are 'Control_Dynamic'
 # * Runs 08, 09 are 'PacMan_Static'
