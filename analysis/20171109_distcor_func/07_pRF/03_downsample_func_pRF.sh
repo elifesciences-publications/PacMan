@@ -10,10 +10,10 @@
 # *** Define parameters:
 
 # Input file - without file extension:
-strPthIn="/home/john/Desktop/tmp/retinotopy/func_prepro/filtered_func_up_aniso_smth_n3_k90_g0p2"
+strPthIn="/home/john/Desktop/tmp/retinotopy/func_prepro/filtered_func_up_aniso_smth_n6_k90_g0p2"
 
 # Output file:
-strPthOut="/home/john/Desktop/tmp/retinotopy/func_prepro/filtered_func_aniso_smth_n3_k90_g0p2.nii.gz"
+strPthOut="/home/john/Desktop/tmp/retinotopy/func_prepro/filtered_func_aniso_smth_n6_k90_g0p2.nii.gz"
 
 # Upsampling factor (e.g. 0.5 for half the previous voxel size, 0.25 for a
 # quater of the previous voxel size):

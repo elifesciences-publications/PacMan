@@ -37,14 +37,14 @@ lstFunc = ['{}retinotopy/func_prepro/filtered_func_up.nii']
 varNumIn = len(lstFunc)
 
 # List of grey matter masks to restrict smoothing (parent path left open):
-lstMsk = ['{}mp2rage/04_seg/20171109_mp2rage_seg_v30.nii.gz']
+lstMsk = ['{}mp2rage/04_seg/20171109_mp2rage_seg_v35.nii.gz']
 
 # Value of grey matter within mask (smoothing will be restricted to these
 # regions):
 varMsk = 1
 
 # Suffix for output files (will be saved in same directory as input files):
-strSuff = '_aniso_smth_n3_k90_g0p2.nii.gz'
+strSuff = '_aniso_smth_n6_k90_g0p2.nii.gz'
 
 
 # *****************************************************************************
@@ -160,7 +160,7 @@ for idxIn in range(varNumIn):
 
         # Apply smoothing to current volume:
         aryNii[:, :, :, idxVol] = aniso_diff_3D(aryNii[:, :, :, idxVol],
-                                                niter=3,
+                                                niter=6,
                                                 kappa=90,
                                                 gamma=0.2,
                                                 step=(1.0, 1.0, 1.0),
