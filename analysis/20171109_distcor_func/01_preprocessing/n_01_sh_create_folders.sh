@@ -45,6 +45,9 @@ then
 	mkdir "${str_path_parent}/nii_distcor/feat_level_1"
 	mkdir "${str_path_parent}/nii_distcor/feat_level_2"
 
+	mkdir "${str_path_parent}/nii_distcor/feat_level_1_trans"
+	mkdir "${str_path_parent}/nii_distcor/feat_level_2_trans"
+
 	mkdir "${str_path_parent}/nii_distcor/func"
 	mkdir "${str_path_parent}/nii_distcor/func_distcorField"
 	mkdir "${str_path_parent}/nii_distcor/func_reg"

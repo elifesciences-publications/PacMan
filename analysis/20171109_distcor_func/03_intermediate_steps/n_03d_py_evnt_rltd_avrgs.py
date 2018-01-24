@@ -223,7 +223,7 @@ for index_02 in range(0, varNumIn_01):
                             aryDim[3],
                             varSegDurUp
                             ),
-                            dtype=np.float32)
+                           dtype=np.float32)
 
     for index_03 in range(0, varTmpNumBlck):
 
@@ -272,7 +272,7 @@ for index_02 in range(0, varNumIn_01):
                                  varTmpStp,
                                  num=varSegDurUp,
                                  endpoint=True)
-    
+
         # Apply interpolation function:
         aryTmpBlcks[index_03, :, :, :, :] = \
             func_interp(vecPosIntp).astype(np.float32)
@@ -285,7 +285,7 @@ for index_02 in range(0, varNumIn_01):
         # Start and stop indicies of baseline interval:
         varBseStr = int(np.around((varVolsPre + tplBase[0]) * varUp))
         varBseStp = int(np.around((varVolsPre + tplBase[1]) * varUp))
-        
+
         # Get prestimulus baseline:
         aryBse = aryTmpBlcks[:, :, :, :, varBseStr:varBseStp]
 
