@@ -118,19 +118,18 @@ for idxRun in range(0, varNumRuns):
             # type:
             if int(idxCon + 1) == varTmp:
 
-                ## Create EV file entry for ONSET response event
+                # ## Create EV file entry for ONSET response event
 
                 # First column of the output matrix (time point of start of
                 # event):
                 aryOutput[varTmpCount, 0] = aryData[idxTrial, 1]
 
-
-                ## Create EV file entry for OFFSET response event
+                # ## Create EV file entry for OFFSET response event
 
                 # First column of the output matrix (time point of start of
                 # event):
-                aryOutput[(varTmpCount + 1), 0] = np.sum([aryData[idxTrial,1],
-                                                          aryData[idxTrial,2]])
+                aryOutput[(varTmpCount + 1), 0] = np.sum([aryData[idxTrial, 1],
+                                                          aryData[idxTrial, 2]])
 
                 # Second column of the output matrix (duration of the event)
                 # remains filled with ones (because the onset response is

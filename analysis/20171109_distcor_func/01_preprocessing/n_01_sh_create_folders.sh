@@ -112,6 +112,9 @@ then
 	mkdir "${str_path_parent}/nii_distcor/stat_maps"
 	mkdir "${str_path_parent}/nii_distcor/stat_maps_up"
 
+	mkdir "${str_path_parent}/nii_distcor/stat_maps_trans"
+	mkdir "${str_path_parent}/nii_distcor/stat_maps_trans_up"
+
 	mkdir "${str_path_parent}/cbs_distcor"
 	mkdir "${str_path_parent}/cbs_distcor/lh"
 	mkdir "${str_path_parent}/cbs_distcor/lh_era"
