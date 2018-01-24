@@ -119,7 +119,7 @@ do
 	-applyxfm -init /usr/share/fsl/5.0/etc/flirtsch/ident.mat \
 	-out ${strTmpOut} \
 	-paddingsize 0.0 \
-	-interp nearestneighbour \
+	-interp trilinear \
 	-ref ${strTmpIn}_tmp_hdr
 
 	# Remove temporary header image:
