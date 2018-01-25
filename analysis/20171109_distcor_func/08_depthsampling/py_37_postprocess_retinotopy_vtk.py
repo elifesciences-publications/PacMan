@@ -26,13 +26,13 @@ print('-VTK masking')
 # *** Define parameters
 
 # Path of the vtk file to be masked:
-strVtkIn = '/home/john/PhD/PacMan_Depth_Data/20171109/cbs_distcor/rh/polar_angle_smoothdata.vtk'
+strVtkIn = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/rh/polar_angle_smoothdata.vtk'
 
 # Output file path:
-strVtkOt = '/home/john/PhD/PacMan_Depth_Data/20171109/cbs_distcor/rh/polar_angle_smoothdata_thr.vtk'
+strVtkOt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/rh/polar_angle_smoothdata_thr.vtk'
 
 # Path of the vtk file used for thresholding (reference):
-strVtkRf = '/home/john/PhD/PacMan_Depth_Data/20171109/cbs_distcor/rh/R2_midGM_smoothdata.vtk'
+strVtkRf = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/rh/R2_midGM_smoothdata.vtk'
 
 # Lower threhold (vertices with a value below this in the reference image will
 # be set to the substitute value in the input vtk file):
