@@ -122,14 +122,14 @@ then
 	mkdir "${str_path_parent}/cbs_distcor/lh_era/control_dynamic"
 	mkdir "${str_path_parent}/cbs_distcor/lh_era/pacman_dynamic"
 	mkdir "${str_path_parent}/cbs_distcor/lh_era/pacman_static"
-	mkdir "${str_path_parent}/cbs_distcor/lh_era_long"
+	mkdir "${str_path_parent}/cbs_distcor/lh_era/pacman_dynamic_long"
 
 	mkdir "${str_path_parent}/cbs_distcor/rh"
 	mkdir "${str_path_parent}/cbs_distcor/rh_era"
 	mkdir "${str_path_parent}/cbs_distcor/rh_era/control_dynamic"
 	mkdir "${str_path_parent}/cbs_distcor/rh_era/pacman_dynamic"
 	mkdir "${str_path_parent}/cbs_distcor/rh_era/pacman_static"
-	mkdir "${str_path_parent}/cbs_distcor/rh_era_long"
+	mkdir "${str_path_parent}/cbs_distcor/rh_era/pacman_dynamic_long"
 
 else
 	echo "Directory for ${str_session_ID} does already exist."
