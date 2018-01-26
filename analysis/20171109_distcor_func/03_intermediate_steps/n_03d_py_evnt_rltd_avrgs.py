@@ -84,6 +84,8 @@ if lgcSegs:
     # Basename for segments:
     strSegs = 'NA'
 
+aa1 = varVolsPre + varVolsPst + (25.0 / varTR)
+
 # -----------------------------------------------------------------------------
 # *** Preparations
 
@@ -276,6 +278,12 @@ for index_02 in range(0, varNumIn_01):
         # Apply interpolation function:
         aryTmpBlcks[index_03, :, :, :, :] = \
             func_interp(vecPosIntp).astype(np.float32)
+
+        # Before upsampling:
+        # aa1 = aryTmpRun[131, 15, 74,
+        #                 int(np.around(varTmpStr)):int(np.around(varTmpStp))]
+        # After upsampling:
+        # aa2 = aryTmpBlcks[0, 131, 15, 74, :]
 
     # -------------------------------------------------------------------------
     # *** Normalisation
