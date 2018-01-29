@@ -5,9 +5,9 @@
 ################################################################################
 
 # Analysis parent directory:
-strPathPrnt="/home/john/PhD/GitHub/PacMan/analysis/20171109_distcor_func/"
+strPathPrnt="/home/john/PhD/GitHub/PacMan/analysis/20171211_distcor_func/"
 
-echo "-ParCon Analysis Pipleline --- 20171109"
+echo "-ParCon Analysis Pipleline --- 20171211"
 date
 
 echo "---Manual: Prepare directory tree using:"
@@ -64,13 +64,13 @@ date
 echo "---Automatic: Run SPM motion correction on functional data"
 echo "   > ~/01_preprocessing/n_06a_spm_create_moco_batch.m"
 matlab -nodisplay -nojvm -nosplash -nodesktop \
-  -r "run('/home/john/PhD/GitHub/PacMan/analysis/20171109_distcor_func/01_preprocessing/n_06a_spm_create_moco_batch.m');"
+  -r "run('/home/john/PhD/GitHub/PacMan/analysis/20171211_distcor_func/01_preprocessing/n_06a_spm_create_moco_batch.m');"
 date
 
 echo "---Automatic: Run SPM motion correction on opposite-phase polarity data"
 echo "   > ~/01_preprocessing/n_06c_spm_create_moco_batch_op.m"
 matlab -nodisplay -nojvm -nosplash -nodesktop \
-  -r "run('/home/john/PhD/GitHub/PacMan/analysis/20171109_distcor_func/01_preprocessing/n_06c_spm_create_moco_batch_op.m');"
+  -r "run('/home/john/PhD/GitHub/PacMan/analysis/20171211_distcor_func/01_preprocessing/n_06c_spm_create_moco_batch_op.m');"
 date
 
 echo "---Automatic: Copy moco results"
@@ -248,7 +248,7 @@ date
 echo "---Automatic: Register MP2RAGE image to mean EPI"
 echo "   > ~/06_mp2rage/n_07_spm_create_corr_batch_prereg.m"
 matlab -nodisplay -nojvm -nosplash -nodesktop \
-  -r "run('/home/john/PhD/GitHub/PacMan/analysis/20171109_distcor_func/06_mp2rage/n_07_spm_create_corr_batch_prereg.m');"
+  -r "run('/home/john/PhD/GitHub/PacMan/analysis/20171211_distcor_func/06_mp2rage/n_07_spm_create_corr_batch_prereg.m');"
 date
 
 echo "---Automatic: Postprocess SPM registration results."
