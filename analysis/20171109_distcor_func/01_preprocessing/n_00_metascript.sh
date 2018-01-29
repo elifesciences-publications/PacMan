@@ -11,13 +11,13 @@ echo "-ParCon Analysis Pipleline --- 20171109"
 date
 
 echo "---Manual: Prepare directory tree using:"
-echo "   > n_01_sh_create_folders.sh"
+echo "   > ~/01_preprocessing/n_01_sh_create_folders.sh"
 echo "   Type 'go' to continue"
 read -r -s -d $'g'
 read -r -s -d $'o'
 
 echo "---Manual: DICOM to nii conversion using:"
-echo "   > n_02_sh_dcm2nii"
+echo "   > ~/01_preprocessing/n_02_sh_dcm2nii"
 echo "   Type 'go' to continue"
 read -r -s -d $'g'
 read -r -s -d $'o'
@@ -26,24 +26,24 @@ echo "---Manual:"
 echo "   (1) Adjust file names in n_03_sh_reorient.sh so that functional"
 echo "       and anatomical data is renamed correctly."
 echo "   (2) Run:"
-echo "       > n_03_sh_reorient.sh"
+echo "       > ~/01_preprocessing/n_03_sh_reorient.sh"
 echo "   Type 'go' to continue"
 read -r -s -d $'g'
 read -r -s -d $'o'
 date
 
 echo "---Automatic: Reverse order of opposite PE images"
-echo "   > n_04_inverse_order_func_op"
+echo "   > ~/01_preprocessing/n_04_inverse_order_func_op"
 python ${strPathPrnt}01_preprocessing/n_04_py_inverse_order_func_op.py
 date
 
 echo "---Automatic: Prepare moco"
-echo "   > n_05a_sh_fsl_preprocessing"
+echo "   > ~/01_preprocessing/n_05a_sh_fsl_preprocessing"
 source ${strPathPrnt}01_preprocessing/n_05a_sh_prepare_moco.sh
 date
 
 echo "---Automatic: Prepare moco of opposite PE images"
-echo "   > n_05b_sh_fsl_preprocessing_1"
+echo "   > ~/01_preprocessing/n_05b_sh_fsl_preprocessing_1"
 source ${strPathPrnt}01_preprocessing/n_05b_sh_prepare_moco.sh
 source ${strPathPrnt}01_preprocessing/n_05c_sh_prepare_moco.sh
 date
@@ -60,29 +60,29 @@ read -r -s -d $'o'
 date
 
 echo "---Automatic: Run SPM motion correction on functional data"
-echo "   > n_06a_spm_create_moco_batch.m"
+echo "   > ~/01_preprocessing/n_06a_spm_create_moco_batch.m"
 matlab -nodisplay -nojvm -nosplash -nodesktop \
   -r "run('/home/john/PhD/GitHub/PacMan/analysis/20171109_distcor_func/01_preprocessing/n_06a_spm_create_moco_batch.m');"
 date
 
 echo "---Automatic: Run SPM motion correction on opposite-phase polarity data"
-echo "   > n_06c_spm_create_moco_batch_op.m"
+echo "   > ~/01_preprocessing/n_06c_spm_create_moco_batch_op.m"
 matlab -nodisplay -nojvm -nosplash -nodesktop \
   -r "run('/home/john/PhD/GitHub/PacMan/analysis/20171109_distcor_func/01_preprocessing/n_06c_spm_create_moco_batch_op.m');"
 date
 
 echo "---Automatic: Copy moco results"
-echo "   > n_07a_sh_postprocess_moco.sh"
+echo "   > ~/01_preprocessing/n_07a_sh_postprocess_moco.sh"
 source ${strPathPrnt}01_preprocessing/n_07a_sh_postprocess_moco.sh
 date
 
 echo "---Automatic: Copy moco results of SE EPI images"
-echo "   > n_07b_sh_postprocess_moco.sh"
+echo "   > ~/01_preprocessing/n_07b_sh_postprocess_moco.sh"
 source ${strPathPrnt}01_preprocessing/n_07b_sh_postprocess_moco.sh
 date
 
 echo "---Automatic: Copy moco results of opposite-phase polarity SE EPI images"
-echo "   > n_07c_sh_postprocess_moco.sh"
+echo "   > ~/01_preprocessing/n_07c_sh_postprocess_moco.sh"
 source ${strPathPrnt}01_preprocessing/n_07c_sh_postprocess_moco.sh
 date
 
@@ -105,32 +105,32 @@ date
 #read -r -s -d $'o'
 
 echo "---Automatic: Calculate fieldmaps"
-echo "   > n_08a_sh_fsl_topup.sh"
+echo "   > ~/01_preprocessing/n_08a_sh_fsl_topup.sh"
 source ${strPathPrnt}01_preprocessing/n_08a_sh_fsl_topup.sh
 date
 
 echo "---Automatic: Apply TOPUP on functional data"
-echo "   > n_09a_fsl_applytopup.sh"
+echo "   > ~/01_preprocessing/n_09a_fsl_applytopup.sh"
 source ${strPathPrnt}01_preprocessing/n_09a_fsl_applytopup.sh
 date
 
 echo "---Automatic: Apply TOPUP on SE EPI data"
-echo "   > n_09b_fsl_applytopup.sh"
+echo "   > ~/01_preprocessing/n_09b_fsl_applytopup.sh"
 source ${strPathPrnt}01_preprocessing/n_09b_fsl_applytopup.sh
 date
 
 echo "---Automatic: Create mean undistorted SE EPI image."
-echo "   > n_10_sh_mean_se.sh"
+echo "   > ~/01_preprocessing/n_10_sh_mean_se.sh"
 source ${strPathPrnt}01_preprocessing/n_10_sh_mean_se.sh
 date
 
 echo "---Automatic: 1st level FSL FEAT with sustained predictors."
-echo "   > n_01_feat_level_1_script_parallel.sh"
+echo "   > ~/01_preprocessing/n_01_feat_level_1_script_parallel.sh"
 source ${strPathPrnt}02_feat/n_01_feat_level_1_script_parallel.sh
 date
 
 echo "---Automatic: 1st level FSL FEAT with transient predictors."
-echo "   > n_02_feat_level_1_script_parallel_trans.sh"
+echo "   > ~/01_preprocessing/n_02_feat_level_1_script_parallel_trans.sh"
 source ${strPathPrnt}02_feat/n_02_feat_level_1_script_parallel_trans.sh
 date
 
@@ -213,7 +213,7 @@ source ${strPathPrnt}06_mp2rage/n_01_prepare_spm_bf_correction.sh
 date
 
 echo "---Manual: Create and run SPM bias field correction batch."
-echo "   > n_01_sh_create_folders.sh"
+echo "   > ~/06_mp2rage/n_01_sh_create_folders.sh"
 echo "   Type 'go' to continue"
 read -r -s -d $'g'
 read -r -s -d $'o'
