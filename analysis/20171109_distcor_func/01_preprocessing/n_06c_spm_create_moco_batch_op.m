@@ -82,3 +82,14 @@ matlabbatch{1}.spm.spatial.realign.estwrite.data = ...
 %% Save SPM batch file:
 save(strPathOut, 'matlabbatch');
 %--------------------------------------------------------------------------
+%% Perform motion correction
+% Initialise "job configuration":
+spm_jobman('initcfg');
+% Run 'job':
+spm_jobman('run', matlabbatch);
+%--------------------------------------------------------------------------
+%% Exit matlab
+% Because this matlab scrit gets called from command line, we have to
+% include an exit statement:
+exit
+%--------------------------------------------------------------------------

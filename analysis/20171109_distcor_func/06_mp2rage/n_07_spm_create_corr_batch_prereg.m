@@ -77,3 +77,14 @@ matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.prefix = 'r';
 %% Save SPM batch file:
 save(strPathBatch, 'matlabbatch');
 %--------------------------------------------------------------------------
+%% Perform registration
+% Initialise "job configuration":
+spm_jobman('initcfg');
+% Run 'job':
+spm_jobman('run', matlabbatch);
+%--------------------------------------------------------------------------
+%% Exit matlab
+% Because this matlab scrit gets called from command line, we have to
+% include an exit statement:
+exit
+%--------------------------------------------------------------------------

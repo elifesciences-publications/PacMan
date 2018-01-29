@@ -2,8 +2,7 @@
 
 
 ###############################################################################
-# The purpose of this script is to copy input files for SPM bias field        #
-# correction.                                                                 #
+# Copy input files for SPM bias field correction.                             #
 ###############################################################################
 
 

@@ -4,8 +4,7 @@
 ###############################################################################
 # The purpose of this script is to calculate field maps for distortion        #
 # correction from opposite-phase-polarity data. The input data need to be     #
-# motion-corrected beforehands. You may use a modified topup configuration    #
-# file for better results.                                                    #
+# motion-corrected beforehands. A modified topup configuration may be used.   #
 ###############################################################################
 
 

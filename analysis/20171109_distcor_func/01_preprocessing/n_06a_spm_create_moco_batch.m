@@ -53,8 +53,6 @@ for index_01 = 1:varNumRuns
 end
 %--------------------------------------------------------------------------
 %% Prepare parameters for motion correction
-% Initialise jobs configuration:
-% spm_jobman('initcfg');
 % Clear old batches:
 clear matlabbatch;
 % Here we determine the settings for the SPM registrations. See SPM manual
@@ -82,4 +80,15 @@ matlabbatch{1}.spm.spatial.realign.estwrite.data = ...
 %--------------------------------------------------------------------------
 %% Save SPM batch file:
 save(strPathOut, 'matlabbatch');
+%--------------------------------------------------------------------------
+%% Perform motion correction
+% Initialise "job configuration":
+spm_jobman('initcfg');
+% Run 'job':
+spm_jobman('run', matlabbatch);
+%--------------------------------------------------------------------------
+%% Exit matlab
+% Because this matlab scrit gets called from command line, we have to
+% include an exit statement:
+exit
 %--------------------------------------------------------------------------

@@ -7,7 +7,7 @@
 # compressed nii.                                                             #
 #                                                                             #
 # IMPORTANT: The uncompressed nii files produced by SPM are subsequently      #
-#            deleted in order so save disk space.                             #
+#            deleted in order so conserve disk space.                         #
 ###############################################################################
 
 
