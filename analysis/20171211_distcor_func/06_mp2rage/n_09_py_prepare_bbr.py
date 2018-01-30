@@ -108,14 +108,22 @@ aryData = skimrp.binary_opening(aryData)
 # (5) Apply cluster size threshold
 print('------Apply cluster size threshold')
 
-# Find connected clusters:
+# Find connected clusters
+
+# Create labelled clusters:
 aryData = label(aryData, connectivity=2)
-labels, counts = np.unique(aryData, return_counts=True)
+
+# Vectors of cluster labels & number of voxels in each cluster:
+vecLbls, vecCnt = np.unique(aryData, return_counts=True)
+
+# Labels and label indicies of same data type:
+aryData = aryData.astype(np.int64)
+vecLbls = vecLbls.astype(np.int64)
 
 # Applying connected clusters threshold:
-for i, (i_label, i_count) in enumerate(zip(labels[1:], counts[1:])):
-    if i_count < varCluSzeThr:
-        aryData[aryData == i_label] = 0
+for idxClst in vecLbls:
+    if np.less(vecCnt[idxClst], varCluSzeThr):
+        aryData[aryData == idxClst] = 0
 aryData[aryData != 0] = 1
 
 # (6) Dilate WM mask
