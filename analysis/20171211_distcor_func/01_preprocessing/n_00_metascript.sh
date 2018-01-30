@@ -209,6 +209,33 @@ echo "   > ~/05_postprocessing/n_08_upsample_stats_trans.sh"
 source ${strPathPrnt}05_postprocessing/n_08_upsample_stats_trans.sh
 date
 
+echo "---Automatic: Prepare pRF analysis."
+echo "   > ~/07_pRF/01_py_prepare_prf.py"
+python ${strPathPrnt}07_pRF/01_py_prepare_prf.py
+date
+
+echo "---Automatic: Activate py_devel virtual environment for pRF analysis."
+source activate py_devel
+date
+
+echo "---Automatic: Perform pRF analysis with pyprf"
+pyprf -config ${strPathPrnt}07_pRF/02_pRF_config_volumesmoothing.csv
+date
+
+echo "---Automatic: Activate default python environment (py_main)."
+source activate py_main
+date
+
+echo "---Automatic: Upsample pRF results."
+echo "   > ~/07_pRF/03_upsample_retinotopy.sh"
+source ${strPathPrnt}07_pRF/03_upsample_retinotopy.sh
+date
+
+echo "---Automatic: Calculate overlap between voxel pRFs and stimulus."
+echo "   > ~/07_pRF/04_PacMan_pRF_overlap.py"
+python ${strPathPrnt}07_pRF/04_PacMan_pRF_overlap.py
+date
+
 echo "---Automatic: Copy input files for SPM bias field correction."
 echo "   > ~/06_mp2rage/n_01_prepare_spm_bf_correction.sh"
 source ${strPathPrnt}06_mp2rage/n_01_prepare_spm_bf_correction.sh
@@ -273,7 +300,6 @@ date
 
 echo "---Manual:"
 echo "   (1) Tissue type segmentation."
-echo "   (2) pRF analysis."
-echo "   (3) Cortical depth sampling."
+echo "   (2) Cortical depth sampling."
 
 echo "-Done"

@@ -57,7 +57,7 @@ varSdSmthTmp = 2.5
 
 # Extent of spatial smoothing for fMRI data [standard deviation of the Gaussian
 # kernel, in mm]
-varSdSmthSpt = 0.0
+varSdSmthSpt = 1.0
 
 # Perform linear trend removal on fMRI data?
 lgcLinTrnd = True
@@ -81,20 +81,20 @@ varVslSpcSzeY = 300
 # functional runs. The order of functional volumes, and their number, has to
 # correspond to the order and number of PNG files containing the stimulus
 # information. Note: Do not insert a line break.
-lstPathNiiFunc = ['/home/john/Desktop/tmp/retinotopy/func_prepro/filtered_func_aniso_smth_n6_k90_g0p2.nii.gz']  #noqa
+lstPathNiiFunc = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/feat_level_1/func_07.feat/filtered_func_data.nii.gz']  #noqa
 
 # Path of mask (to restrict pRF model finding):
-strPathNiiMask = '/home/john/Desktop/tmp/retinotopy/func_prepro/gmmask.nii.gz'  #noqa
+strPathNiiMask = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/retinotopy/mask/brainmask.nii.gz'  #noqa
 
 # Output basename:
-strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/retinotopy/pRF_results/filtered_func_aniso_smth_n6_k90_g0p2/pRF_results'  #noqa
+strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/retinotopy/pRF_results/pRF_results'  #noqa
 
 # Which version to use for pRF finding. 'numpy' or 'cython' for pRF finding on
 # CPU, 'gpu' for using GPU.
 strVersion = 'cython'
 
 # Create pRF time course models?
-lgcCrteMdl = True
+lgcCrteMdl = False
 
 # If we create new pRF time course models, the following parameters have to
 # be provided:
@@ -102,7 +102,7 @@ lgcCrteMdl = True
 # Basename of the 'binary stimulus files'. The files need to be in png
 # format and number in the order of their presentation during the
 # experiment.
-strPathPng = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/retinotopy/pRF_stimuli/run_01_frame_'  #noqa
+strPathPng = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/pyprf_Metadata/pRF_stimuli/run_01_frame_'  #noqa
 
 # Start index of PNG files. For instance, `varStrtIdx = 0` if the name of
 # the first PNG file is `file_000.png`, or `varStrtIdx = 1` if it is
@@ -116,4 +116,4 @@ varZfill = 3
 
 # Path to npy file with pRF time course models (to save or laod). Without file
 # extension.
-strPathMdl = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/retinotopy/pRF_results/pRF_model_tc'  #noqa
+strPathMdl = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/pyprf_Metadata/pRF_time_course_models/pRF_model_tc'  #noqa

@@ -60,10 +60,12 @@ fslreorient2std ${strRaw}cmrrmbep2dseRLs006a001 ${sreSeOp}func_00
 #------------------------------------------------------------------------------
 # *** Copy mp2rage images
 
-fslreorient2std ${strRaw}mp2rage07isop2s015a1001 ${strAnat}mp2rage_inv1
-fslreorient2std ${strRaw}mp2rage07isop2s016a1001 ${strAnat}mp2rage_inv1_phase
-fslreorient2std ${strRaw}mp2rage07isop2s017a1001 ${strAnat}mp2rage_pdw
-fslreorient2std ${strRaw}mp2rage07isop2s018a1001 ${strAnat}mp2rage_pdw_phase
-fslreorient2std ${strRaw}mp2rage07isop2s019a1001 ${strAnat}mp2rage_t1
-fslreorient2std ${strRaw}mp2rage07isop2s020a1001 ${strAnat}mp2rage_uni
+# Note: Because the first MP2RAGEs was affected by a motion artefact, a second
+# MP2RAGE was acquired for this subject at the end of the session.
+fslreorient2std ${strRaw}mp2rage07isop2s029a1001 ${strAnat}mp2rage_inv1
+fslreorient2std ${strRaw}mp2rage07isop2s030a1001 ${strAnat}mp2rage_inv1_phase
+fslreorient2std ${strRaw}mp2rage07isop2s031a1001 ${strAnat}mp2rage_t1
+fslreorient2std ${strRaw}mp2rage07isop2s032a1001 ${strAnat}mp2rage_uni
+fslreorient2std ${strRaw}mp2rage07isop2s033a1001 ${strAnat}mp2rage_pdw
+fslreorient2std ${strRaw}mp2rage07isop2s034a1001 ${strAnat}mp2rage_pdw_phase
 #------------------------------------------------------------------------------
