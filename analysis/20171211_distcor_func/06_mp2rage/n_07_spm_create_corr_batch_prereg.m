@@ -16,7 +16,7 @@ strPathSrc = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/mp2r
 % INV2):
 strPathOtr = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/mp2rage/03_reg/03_prereg/mp2rage_other/';
 % Name of the 'SPM batch' to be created:
-strPathBatch = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/mp2rage/03_reg/03_prereg/spm_moco_batch.mat';
+strPathBatch = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/mp2rage/03_reg/03_prereg/spm_corr_batch.mat';
 % Resolution of input images in mm (is assumed to be isotropic):
 varRes = 0.4;
 %--------------------------------------------------------------------------
