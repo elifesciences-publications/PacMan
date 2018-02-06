@@ -75,12 +75,12 @@ do
   echo "---Running CBS layout: ${strPthCbsTmp}"
 
   # Run CBS layout through mipav:
-  #mipavjava edu.jhu.ece.iacl.jist.cli.runLayout \
-  #${strPthCbsTmp} \
-  #-xRunOutOfProcess \
-  #-xJreLoc /home/john/mipav/jre/bin/java \
-  #-xDir ${strPthWd} \
-  #-xClean
+  mipavjava edu.jhu.ece.iacl.jist.cli.runLayout \
+  ${strPthCbsTmp} \
+  -xRunOutOfProcess \
+  -xJreLoc /home/john/mipav/jre/bin/java \
+  -xDir ${strPthWd} \
+  -xClean
 
   # Remove working directory (results are copied to destination directory
   # within the CBS layout):
@@ -102,6 +102,6 @@ do
   echo "---Running: ${strPyTmp}"
 
   # Run the python script:
-  #python ${strPyTmp}
+  python ${strPyTmp}
 done
 #------------------------------------------------------------------------------

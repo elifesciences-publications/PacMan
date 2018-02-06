@@ -64,10 +64,10 @@ print('-vtk to npy conversion')
 # Loop through target directories:
 for strDirTmp in lstDir:
 
+    print(('--Target directory: ' + strDirTmp))
+
     # Condition name (needed for file names):
     strCondTmp = os.path.split(lstDir[0])[1]
-
-    print(('--Condition: ' + strCondTmp))
 
     # Get list of files in target directory:
     lstFls = listdir(strDirTmp)
@@ -86,8 +86,11 @@ for strDirTmp in lstDir:
 
         print(('---Volume: ' + str(idxVol)))
 
+        # Path of current vtk file:
+        strPthVtkTmp = os.path.join(strDirTmp, lstFls[idxVol])
+
         # Load vtk mesh for current timepoint:
-        aryTmp = funcLoadVtkMulti(lstFls[idxVol],
+        aryTmp = funcLoadVtkMulti(strPthVtkTmp,
                                   strPrcdData,
                                   varNumLne,
                                   varNumDpth).astype(np.float32)
@@ -107,10 +110,10 @@ for strDirTmp in lstDir:
         aryErt[:, idxVol, :] = aryTmp.T
 
         # Delete vtk file:
-        # os.remove(lstFls[idxVol])
+        os.remove(strPthVtkTmp)
 
     # Save array to disk:
-    strPthNpy = (strDirTmp + 'aryErt_' + strCondTmp + '.npy')
+    strPthNpy = os.path.join(strDirTmp, ('aryErt_' + strCondTmp + '.npy'))
     print(('--Saving to disk: ' + strPthNpy))
     np.save(strPthNpy, aryErt)
 # *****************************************************************************
