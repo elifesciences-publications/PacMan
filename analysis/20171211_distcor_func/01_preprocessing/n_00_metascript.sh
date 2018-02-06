@@ -24,6 +24,7 @@ read -r -s -d $'o'
 
 echo "---Manual: Adjust file names in n_03_sh_reorient.sh so that functional"
 echo "   and anatomical data is renamed correctly."
+echo "   Type 'go' to continue"
 read -r -s -d $'g'
 read -r -s -d $'o'
 date
