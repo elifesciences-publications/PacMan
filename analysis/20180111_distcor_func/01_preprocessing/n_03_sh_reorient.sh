@@ -52,8 +52,8 @@ fslreorient2std ${strRaw}BPep3dboldfunc08FOVRLlongs031a001 ${strFunc}func_08
 #------------------------------------------------------------------------------
 # *** Copy opposite-phase-polarity SE images
 
-fslreorient2std ${strRaw}cmrrmbep2dseLRs007a001 ${strSe}func_00
-fslreorient2std ${strRaw}cmrrmbep2dseRLs008a001 ${sreSeOp}func_00
+fslreorient2std ${strRaw}cmrrmbep2dseLRs007a001 ${strSeOp}func_00
+fslreorient2std ${strRaw}cmrrmbep2dseRLs008a001 ${sreSe}func_00
 #------------------------------------------------------------------------------
 
 

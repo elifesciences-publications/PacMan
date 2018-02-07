@@ -55,8 +55,8 @@ fslreorient2std ${strRaw}BPep3dboldfunc01FOVRLrun08s032a001 ${strFunc}func_09
 
 # Note: The 'RL' image is copied as 'lr' on purpose (and vice versa), because
 #       the original naming of files during the session was wrong.
-fslreorient2std ${strRaw}cmrrmbep2dseLRs006a001 ${strSe}func_00
-fslreorient2std ${strRaw}cmrrmbep2dseRLs005a001 ${sreSeOp}func_00
+fslreorient2std ${strRaw}cmrrmbep2dseLRs006a001 ${strSeOp}func_00
+fslreorient2std ${strRaw}cmrrmbep2dseRLs005a001 ${sreSe}func_00
 #------------------------------------------------------------------------------
 
 
