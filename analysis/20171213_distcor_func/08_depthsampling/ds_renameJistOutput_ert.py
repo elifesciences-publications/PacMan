@@ -43,7 +43,10 @@ from os import rename
 dicSubId = {'20171213': 6}
 
 # Paths with files to be renamed (subject ID left open):
-lstPths = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/lh_era/control_dynamic/',
+lstPths = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/rh_era/control_dynamic/',
+           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/rh_era/pacman_dynamic/',
+           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/rh_era/pacman_static/',
+           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/lh_era/control_dynamic/',
            '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/lh_era/pacman_dynamic/',
            '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/lh_era/pacman_static/']  #noqa
 
