@@ -28,7 +28,7 @@ strFunc="${strPthPrnt}/func/"
 strSe="${strPthPrnt}/func_se/"
 
 # Destination directory for opposite-phase-polarity SE images:
-sreSeOp="${strPthPrnt}/func_se_op/"
+strSeOp="${strPthPrnt}/func_se_op/"
 
 # Destination directory for mp2rage images:
 strAnat="${strPthPrnt}/mp2rage/01_orig/"
@@ -56,7 +56,7 @@ fslreorient2std ${strRaw}BPep3dboldfunc01FOVRLrun08s032a001 ${strFunc}func_09
 # Note: The 'RL' image is copied as 'lr' on purpose (and vice versa), because
 #       the original naming of files during the session was wrong.
 fslreorient2std ${strRaw}cmrrmbep2dseLRs006a001 ${strSeOp}func_00
-fslreorient2std ${strRaw}cmrrmbep2dseRLs005a001 ${sreSe}func_00
+fslreorient2std ${strRaw}cmrrmbep2dseRLs005a001 ${strSe}func_00
 #------------------------------------------------------------------------------
 
 
