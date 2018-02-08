@@ -24,6 +24,7 @@ read -r -s -d $'o'
 
 echo "---Manual: Adjust file names in n_03_sh_reorient.sh so that functional"
 echo "   and anatomical data is renamed correctly."
+echo "   Type 'go' to continue"
 read -r -s -d $'g'
 read -r -s -d $'o'
 date
@@ -38,14 +39,14 @@ echo "   > ~/01_preprocessing/n_04_inverse_order_func_op"
 python ${strPathPrnt}01_preprocessing/n_04_py_inverse_order_func_op.py
 date
 
-echo "---Automatic: Prepare moco"
-echo "   > ~/01_preprocessing/n_05a_sh_fsl_preprocessing"
+echo "---Automatic: Prepare moco of SE EPI images"
+echo "   > ~/01_preprocessing/n_05b_sh_fsl_preprocessing_1"
 source ${strPathPrnt}01_preprocessing/n_05a_sh_prepare_moco.sh
+source ${strPathPrnt}01_preprocessing/n_05b_sh_prepare_moco.sh
 date
 
-echo "---Automatic: Prepare moco of opposite PE images"
-echo "   > ~/01_preprocessing/n_05b_sh_fsl_preprocessing_1"
-source ${strPathPrnt}01_preprocessing/n_05b_sh_prepare_moco.sh
+echo "---Automatic: Prepare moco"
+echo "   > ~/01_preprocessing/n_05a_sh_fsl_preprocessing"
 source ${strPathPrnt}01_preprocessing/n_05c_sh_prepare_moco.sh
 date
 
@@ -209,6 +210,33 @@ echo "   > ~/05_postprocessing/n_08_upsample_stats_trans.sh"
 source ${strPathPrnt}05_postprocessing/n_08_upsample_stats_trans.sh
 date
 
+echo "---Automatic: Prepare pRF analysis."
+echo "   > ~/07_pRF/01_py_prepare_prf.py"
+python ${strPathPrnt}07_pRF/01_py_prepare_prf.py
+date
+
+echo "---Automatic: Activate py_devel virtual environment for pRF analysis."
+source activate py_devel
+date
+
+echo "---Automatic: Perform pRF analysis with pyprf"
+pyprf -config ${strPathPrnt}07_pRF/02_pRF_config_volumesmoothing.csv
+date
+
+echo "---Automatic: Activate default python environment (py_main)."
+source activate py_main
+date
+
+echo "---Automatic: Upsample pRF results."
+echo "   > ~/07_pRF/03_upsample_retinotopy.sh"
+source ${strPathPrnt}07_pRF/03_upsample_retinotopy.sh
+date
+
+echo "---Automatic: Calculate overlap between voxel pRFs and stimulus."
+echo "   > ~/07_pRF/04_PacMan_pRF_overlap.py"
+python ${strPathPrnt}07_pRF/04_PacMan_pRF_overlap.py
+date
+
 echo "---Automatic: Copy input files for SPM bias field correction."
 echo "   > ~/06_mp2rage/n_01_prepare_spm_bf_correction.sh"
 source ${strPathPrnt}06_mp2rage/n_01_prepare_spm_bf_correction.sh
@@ -273,7 +301,6 @@ date
 
 echo "---Manual:"
 echo "   (1) Tissue type segmentation."
-echo "   (2) pRF analysis."
-echo "   (3) Cortical depth sampling."
+echo "   (2) Cortical depth sampling."
 
 echo "-Done"

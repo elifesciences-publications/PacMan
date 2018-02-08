@@ -43,7 +43,8 @@ from os import rename
 dicSubId = {'20171109': 9}
 
 # Paths with files to be renamed (subject ID left open):
-lstPths = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/lh/']  #noqa
+lstPths = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/lh/',
+           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/rh/']  #noqa
 
 # File type (suffix):
 strFleTpe = '.vtk'

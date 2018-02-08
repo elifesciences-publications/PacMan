@@ -102,7 +102,7 @@ lgcCrteMdl = False
 # Basename of the 'binary stimulus files'. The files need to be in png
 # format and number in the order of their presentation during the
 # experiment.
-strPathPng = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/retinotopy/pRF_stimuli/run_01_frame_'  #noqa
+strPathPng = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/pyprf_Metadata/pRF_stimuli/run_01_frame_'  #noqa
 
 # Start index of PNG files. For instance, `varStrtIdx = 0` if the name of
 # the first PNG file is `file_000.png`, or `varStrtIdx = 1` if it is
@@ -116,4 +116,4 @@ varZfill = 3
 
 # Path to npy file with pRF time course models (to save or laod). Without file
 # extension.
-strPathMdl = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/retinotopy/pRF_results/pRF_model_tc'  #noqa
+strPathMdl = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/pyprf_Metadata/pRF_time_course_models/pRF_model_tc'  #noqa

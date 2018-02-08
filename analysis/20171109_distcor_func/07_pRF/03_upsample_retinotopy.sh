@@ -2,7 +2,7 @@
 
 
 ###############################################################################
-# Upsample pRF results and clean up (remove upsampled functional data.        #
+# Upsample pRF results.                                                       #
 ###############################################################################
 
 
@@ -18,28 +18,13 @@ strPthOut="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/retinot
 # Upsampling factor (e.g. 0.5 for half the previous voxel size, 0.25 for a
 # quater of the previous voxel size):
 varUpFac=0.5
-
-# Files to remove (from previous analysis steps):
-strPthRmv01="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/retinotopy/func_prepro/filtered_func_up.nii.gz"
-# -----------------------------------------------------------------------------
-
-
-# -----------------------------------------------------------------------------
-# *** Clean up
-
-echo "-Upsampling of pRF results"
-
-echo "---Cleaining up intermediate results"
-
-rm ${strPthRmv01}
 # -----------------------------------------------------------------------------
 
 
 # -----------------------------------------------------------------------------
 # *** Upsample images
 
-echo "---Upsample images"
-date
+echo "-Upsampling of pRF results"
 
 # Calculate inverse of upsampling factor (for caculation of new matrix size):
 varUpInv=`bc <<< 1/${varUpFac}`
