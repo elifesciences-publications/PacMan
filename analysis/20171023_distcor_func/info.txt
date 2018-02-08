@@ -1,0 +1,5 @@
+The processing pipeline for this subject is not up to date (re metascript and
+feat with transient predictors). This was a pilot session with a different
+number and order of conditions. Moreover, there was a bug due to which the last
+rest block was not presented. Therefore, different design matrices have to be
+used (version_03a and version_03b).

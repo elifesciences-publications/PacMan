@@ -39,14 +39,14 @@ echo "   > ~/01_preprocessing/n_04_inverse_order_func_op"
 python ${strPathPrnt}01_preprocessing/n_04_py_inverse_order_func_op.py
 date
 
-echo "---Automatic: Prepare moco"
-echo "   > ~/01_preprocessing/n_05a_sh_fsl_preprocessing"
+echo "---Automatic: Prepare moco of SE EPI images"
+echo "   > ~/01_preprocessing/n_05b_sh_fsl_preprocessing_1"
 source ${strPathPrnt}01_preprocessing/n_05a_sh_prepare_moco.sh
+source ${strPathPrnt}01_preprocessing/n_05b_sh_prepare_moco.sh
 date
 
-echo "---Automatic: Prepare moco of opposite PE images"
-echo "   > ~/01_preprocessing/n_05b_sh_fsl_preprocessing_1"
-source ${strPathPrnt}01_preprocessing/n_05b_sh_prepare_moco.sh
+echo "---Automatic: Prepare moco"
+echo "   > ~/01_preprocessing/n_05a_sh_fsl_preprocessing"
 source ${strPathPrnt}01_preprocessing/n_05c_sh_prepare_moco.sh
 date
 
