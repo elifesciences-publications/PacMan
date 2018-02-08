@@ -67,7 +67,7 @@ for strDirTmp in lstDir:
     print(('--Target directory: ' + strDirTmp))
 
     # Condition name (needed for file names):
-    strCondTmp = os.path.split(lstDir[0])[1]
+    strCondTmp = os.path.split(strDirTmp)[1]
 
     # Get list of files in target directory:
     lstFls = listdir(strDirTmp)
