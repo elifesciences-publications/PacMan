@@ -4,8 +4,8 @@
 # Metascript for the ParMan analysis pipeline.                                 #
 ################################################################################
 
-echo "Sleep for 48h"
-sleep 48h
+echo "Sleep for 24h"
+sleep 24h
 
 # Analysis parent directory:
 strPathPrnt="/home/john/PhD/GitHub/PacMan/analysis/20171211_distcor_func/"
