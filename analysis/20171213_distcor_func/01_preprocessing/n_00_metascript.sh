@@ -160,11 +160,11 @@ python ${strPathPrnt}03_intermediate_steps/n_12_py_spatial_correlation.py
 date
 
 echo "---Automatic: 2nd level FSL FEAT with sustained predictors."
-source ${strPathPrnt}04_feat/n_01_feat_level_2_parallel.sh
+source ${strPathPrnt}04_feat/n_01_feat_level_2.sh
 date
 
 echo "---Automatic: 2nd level FSL FEAT with transient predictors."
-source ${strPathPrnt}04_feat/n_02_feat_level_2_parallel_trans.sh
+source ${strPathPrnt}04_feat/n_02_feat_level_2_trans.sh
 date
 
 echo "---Automatic: Copy FEAT results."
