@@ -97,8 +97,8 @@ print('---Saving results')
 # Create output nii object:
 niiOt = nib.Nifti1Image(aryLbls,
                         niiIn.affine,
- 
-                       header=niiIn.header)
+                        header=niiIn.header)
+
 # Save image:
 nib.save(niiOt, (strPathOut + strMsk))
 # *****************************************************************************

@@ -25,11 +25,11 @@ from skimage.measure import label
 # *** Define parameters
 
 # Path & filename of combined mean image:
-strPthCombMean = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/func_reg_tsnr/'  #noqa
+strPthCombMean = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor_prf_smth/func_reg_tsnr/'  #noqa
 strCombMean = 'combined_mean.nii.gz'
 
 # Path & filename of output (binary brain mask):
-strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/retinotopy/mask/'  #noqa
+strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor_prf_smth/retinotopy/mask/'  #noqa
 strMsk = 'brainmask.nii.gz'
 
 # Intensity threshold:
