@@ -21,8 +21,7 @@ import os
 import numpy as np  #noqa
 import nibabel as nb
 
-
-def load_nii(strPathIn, varSzeThr=1000.0):
+def load_nii(strPathIn, varSzeThr=3000.0):
     """
     Load nii file.
 
