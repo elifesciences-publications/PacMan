@@ -31,12 +31,12 @@
 strPthCbs="/home/john/PhD/GitHub/PacMan/analysis/20171213_distcor_func/08_depthsampling/"
 
 # Names of CBS layouts to run (xml files):
-aryCbs=(20171213_mp2rage_lh_equivol_ert.LayoutXML \
-        20171213_mp2rage_lh_equivol_ert_long.LayoutXML \
-        20171213_mp2rage_lh_equivol_retino_stats.LayoutXML \
+aryCbs=(20171213_mp2rage_lh_equivol_retino_stats.LayoutXML \
+        20171213_mp2rage_rh_equivol_retino_stats.LayoutXML
+        20171213_mp2rage_lh_equivol_ert.LayoutXML \
         20171213_mp2rage_rh_equivol_ert.LayoutXML \
-        20171213_mp2rage_rh_equivol_ert_long.LayoutXML \
-        20171213_mp2rage_rh_equivol_retino_stats.LayoutXML)
+        20171213_mp2rage_lh_equivol_ert_long.LayoutXML \
+        20171213_mp2rage_rh_equivol_ert_long.LayoutXML)
 
 # Names of python scripts to run:
 aryPy=(ds_renameJistOutput.py \
