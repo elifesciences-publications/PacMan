@@ -9,6 +9,8 @@
 #------------------------------------------------------------------------------
 # *** Define paths:
 
+# /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/log
+
 # Session ID:
 strSess="20180118"
 
