@@ -1,6 +1,5 @@
 #!/bin/sh
 
-sleep 10h
 
 # Copyright (C) 2018  Ingo Marquardt
 #
