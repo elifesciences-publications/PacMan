@@ -69,7 +69,7 @@ strSrcStat="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${strSess}/nii_distcor/stat
 strTrgStat="/home/john/Documents/smb_research_data/DM0412_IM_Pacman/09\ -\ Data\ after\ cleaning/${strSess}/stat_maps_up"
 
 # Source directory spatial correlation plots:
-strSrcMocoPlt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${strSess}/nii_distcor/spm_reg_moco_params"
+strSrcMocoPlt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${strSess}/nii_distcor/spm_reg_moco_params/"
 
 # Target directory spatial correlation plots:
 strTrgMocoPlt="/home/john/Documents/smb_research_data/DM0412_IM_Pacman/09\ -\ Data\ after\ cleaning/${strSess}/spm_reg_moco_params"
@@ -99,10 +99,10 @@ sudo mount -t cifs ${strTrgt} ${strMnt} -o username=ingo.marquardt
 # *** Copy log files
 
 # Create target directory (if it does not exist yet):
-sudo mkdir -p ${strTrgLog}
+# sudo mkdir -p ${strTrgLog}
 
 # Copy data to server using rsync:
-sudo rsync -a -v -c "${strSrcLog} ${strTrgLog}"
+# sudo rsync -a -v -c "${strSrcLog} ${strTrgLog}"
 #------------------------------------------------------------------------------
 
 
@@ -122,7 +122,7 @@ aryNii=(BPep3dboldfunc01FOVRLs008a001.nii.gz \
         cmrrmbep2dseRLs006a001.nii.gz)
 
 # Create directory (if it does not exist yet):
-mkdir -p ${strTrgtFunc}
+# sudo mkdir -p ${strTrgtFunc}
 
 for idxFile in ${aryNii[@]}
 do
@@ -144,7 +144,7 @@ aryNii=(mp2rage07isop2s015a1001.nii.gz \
         mp2rage07isop2s020a1001.nii.gz)
 
 # Create directory (if it does not exist yet):
-mkdir -p ${strTrgAnat}
+# sudo mkdir -p ${strTrgAnat}
 
 for idxFile in ${aryNii[@]}
 do
@@ -170,7 +170,7 @@ aryNii=(pRF_results_eccentricity.nii.gz \
         pRF_results_y_pos.nii.gz)
 
 # Create directory (if it does not exist yet):
-mkdir -p ${strTrgPrf}
+# sudo mkdir -p ${strTrgPrf}
 
 for idxFile in ${aryNii[@]}
 do
@@ -184,11 +184,11 @@ done
 # *** Copy statistical maps (intermediate result)
 
 # Create target directory (if it does not exist yet):
-sudo mkdir -p ${strTrgStat}
+# sudo mkdir -p ${strTrgStat}
 
 # Copy data to server using rsync:
-echo "sudo rsync -a -v -c ${strTrgStat} ${strTrgStat}/"
-# sudo rsync -a -v -c "${strTrgStat} ${strTrgStat}/"
+echo "sudo rsync -a -v -c ${strSrcStat} ${strTrgStat}/"
+# sudo rsync -a -v -c "${strSrcStat} ${strTrgStat}/"
 #------------------------------------------------------------------------------
 
 
@@ -196,7 +196,7 @@ echo "sudo rsync -a -v -c ${strTrgStat} ${strTrgStat}/"
 # *** Copy spatial correlation plot (intermediate result)
 
 # Create target directory (if it does not exist yet):
-sudo mkdir -p ${strTrgMocoPlt}
+# sudo mkdir -p ${strTrgMocoPlt}
 
 # Copy data to server using rsync:
 echo "sudo rsync -a -v -c ${strSrcMocoPlt} ${strTrgMocoPlt}/"
@@ -216,7 +216,7 @@ aryNii=(combined_mean.nii.gz \
         mp2rage_uni.nii.gz)
 
 # Create directory (if it does not exist yet):
-mkdir -p ${strTrgRegAnat}
+# sudo mkdir -p ${strTrgRegAnat}
 
 for idxFile in ${aryNii[@]}
 do
