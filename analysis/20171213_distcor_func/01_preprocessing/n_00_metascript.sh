@@ -185,8 +185,8 @@ echo "---Automatic: Prepare pRF analysis."
 python ${strPathPrnt}07_pRF/01_py_prepare_prf.py
 date
 
-echo "---Automatic: Activate py_devel virtual environment for pRF analysis."
-source activate py_devel
+echo "---Automatic: Activate py2_pyprf virtual environment for pRF analysis."
+source activate py2_pyprf
 date
 
 echo "---Automatic: Perform pRF analysis with pyprf"
