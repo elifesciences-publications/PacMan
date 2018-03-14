@@ -38,14 +38,14 @@ strAnat="${strPthPrnt}/mp2rage/01_orig/"
 #------------------------------------------------------------------------------
 # *** Copy functional data
 
-fslreorient2std ${strRaw}BPep3dboldfunc01FOVRLs009a001 ${strFunc}func_01
-fslreorient2std ${strRaw}BPep3dboldfunc02FOVRLs011a001 ${strFunc}func_02
-fslreorient2std ${strRaw}BPep3dboldfunc03FOVRLs013a001 ${strFunc}func_03
-fslreorient2std ${strRaw}BPep3dboldfunc04FOVRLs021a001 ${strFunc}func_04
-fslreorient2std ${strRaw}BPep3dboldfunc05FOVRLs023a001 ${strFunc}func_05
-fslreorient2std ${strRaw}BPep3dboldfunc06FOVRLs025a001 ${strFunc}func_06
-fslreorient2std ${strRaw}BPep3dboldfunc07pRFFOVRLs027a001 ${strFunc}func_07
-fslreorient2std ${strRaw}BPep3dboldfunc08longFOVRLs029a001 ${strFunc}func_08
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_SERIES_009_c32 ${strFunc}func_01
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func02_FOV_RL_SERIES_011_c32 ${strFunc}func_02
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func03_FOV_RL_SERIES_013_c32 ${strFunc}func_03
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func04_FOV_RL_SERIES_021_c32 ${strFunc}func_04
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func05_FOV_RL_SERIES_023_c32 ${strFunc}func_05
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func06_FOV_RL_SERIES_025_c32 ${strFunc}func_06
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func07pRF_FOV_RL_SERIES_027_c32 ${strFunc}func_07
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func08long_FOV_RL_SERIES_029_c32 ${strFunc}func_08
 #------------------------------------------------------------------------------
 
 
@@ -53,20 +53,20 @@ fslreorient2std ${strRaw}BPep3dboldfunc08longFOVRLs029a001 ${strFunc}func_08
 # *** Copy opposite-phase-polarity SE images
 
 # Note: The original file name ('RL') was wrong.
-fslreorient2std ${strRaw}cmrrmbep2dseRLs006a001 ${strSeOp}func_00
-fslreorient2std ${strRaw}cmrrmbep2dseRLs007a001 ${strSe}func_00
+fslreorient2std ${strRaw}cmrrmbep2dseRL_SERIES_006_c32 ${strSeOp}func_00
+fslreorient2std ${strRaw}cmrrmbep2dseRL_SERIES_007_c32 ${strSe}func_00
 #------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------
 # *** Copy mp2rage images
 
-# fslreorient2std ${strRaw}mp2rage07isop2s014a1001 ${strAnat}mp2rage_inv1
-# fslreorient2std ${strRaw}mp2rage07isop2s015a1001 ${strAnat}mp2rage_inv1_phase
-# fslreorient2std ${strRaw}mp2rage07isop2s016a1001 ${strAnat}mp2rage_pdw
-# fslreorient2std ${strRaw}mp2rage07isop2s017a1001 ${strAnat}mp2rage_pdw_phase
-# fslreorient2std ${strRaw}mp2rage07isop2s018a1001 ${strAnat}mp2rage_t1
-# fslreorient2std ${strRaw}mp2rage07isop2s019a1001 ${strAnat}mp2rage_uni
+# fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_014_c32 ${strAnat}mp2rage_inv1
+# fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_015_c32 ${strAnat}mp2rage_inv1_phase
+# fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_016_c32 ${strAnat}mp2rage_pdw
+# fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_017_c32 ${strAnat}mp2rage_pdw_phase
+# fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_018_c32 ${strAnat}mp2rage_t1
+# fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_019_c32 ${strAnat}mp2rage_uni
 
 # The mp2rage images obtained during session 20171109 were of inferior quality.
 # Extrassession mp2rage images are used for segmentaion instead.

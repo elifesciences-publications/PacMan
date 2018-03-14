@@ -38,22 +38,22 @@ strAnat="${strPthPrnt}/mp2rage/01_orig/"
 #------------------------------------------------------------------------------
 # *** Copy functional data
 
-fslreorient2std ${strRaw}BPep3dboldfunc01FOVLRs008a001 ${strFunc}func_01
-fslreorient2std ${strRaw}BPep3dboldfunc02FOVRLs010a001 ${strFunc}func_02
-fslreorient2std ${strRaw}BPep3dboldfunc03FOVRLs012a001 ${strFunc}func_03
-fslreorient2std ${strRaw}BPep3dboldfunc04FOVRLs014a001 ${strFunc}func_04
-fslreorient2std ${strRaw}BPep3dboldfunc05FOVRLs022a001 ${strFunc}func_05
-fslreorient2std ${strRaw}BPep3dboldfunc06FOVRLs024a001 ${strFunc}func_06
-fslreorient2std ${strRaw}BPep3dboldfunc07FOVRLpRFs026a001 ${strFunc}func_07
-fslreorient2std ${strRaw}BPep3dboldfunc08FOVRLlongs028a001 ${strFunc}func_08
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_LR_SERIES_008_c32 ${strFunc}func_01
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func02_FOV_RL_SERIES_010_c32 ${strFunc}func_02
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func03_FOV_RL_SERIES_012_c32 ${strFunc}func_03
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func04_FOV_RL_SERIES_014_c32 ${strFunc}func_04
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func05_FOV_RL_SERIES_022_c32 ${strFunc}func_05
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func06_FOV_RL_SERIES_024_c32 ${strFunc}func_06
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func07_FOV_RL_pRF_SERIES_026_c32 ${strFunc}func_07
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func08_FOV_RL_long_SERIES_028_c32 ${strFunc}func_08
 #------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------
 # *** Copy opposite-phase-polarity SE images
 
-fslreorient2std ${strRaw}cmrrmbep2dseLRs005a001 ${strSeOp}func_00
-fslreorient2std ${strRaw}cmrrmbep2dseRLs006a001 ${strSe}func_00
+fslreorient2std ${strRaw}cmrrmbep2dseLR_SERIES_005_c32 ${strSeOp}func_00
+fslreorient2std ${strRaw}cmrrmbep2dseRL_SERIES_006_c32 ${strSe}func_00
 #------------------------------------------------------------------------------
 
 
@@ -62,10 +62,10 @@ fslreorient2std ${strRaw}cmrrmbep2dseRLs006a001 ${strSe}func_00
 
 # Note: Because the first MP2RAGEs was affected by a motion artefact, a second
 # MP2RAGE was acquired for this subject at the end of the session.
-fslreorient2std ${strRaw}mp2rage07isop2s015a1001 ${strAnat}mp2rage_inv1
-fslreorient2std ${strRaw}mp2rage07isop2s016a1001 ${strAnat}mp2rage_inv1_phase
-fslreorient2std ${strRaw}mp2rage07isop2s017a1001 ${strAnat}mp2rage_t1
-fslreorient2std ${strRaw}mp2rage07isop2s018a1001 ${strAnat}mp2rage_uni
-fslreorient2std ${strRaw}mp2rage07isop2s019a1001 ${strAnat}mp2rage_pdw
-fslreorient2std ${strRaw}mp2rage07isop2s020a1001 ${strAnat}mp2rage_pdw_phase
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_015_c32 ${strAnat}mp2rage_inv1
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_016_c32 ${strAnat}mp2rage_inv1_phase
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_017_c32 ${strAnat}mp2rage_t1
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_018_c32 ${strAnat}mp2rage_uni
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_019_c32 ${strAnat}mp2rage_pdw
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_020_c32 ${strAnat}mp2rage_pdw_phase
 #------------------------------------------------------------------------------
