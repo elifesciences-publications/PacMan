@@ -50,20 +50,20 @@ strAnat="${strPthPrnt}/mp2rage/01_orig/"
 #------------------------------------------------------------------------------
 # *** Copy functional data
 
-cp -r ${strBidsFunc} ${strFunc}
+cp -r ${strBidsFunc}*.nii.gz ${strFunc}
 #------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------
 # *** Copy opposite-phase-polarity SE images
 
-cp -r ${strBidsSe} ${strSe}
-cp -r ${strBidsSeOp} ${strSeOp}
+cp -r ${strBidsSe}*.nii.gz ${strSe}
+cp -r ${strBidsSeOp}*.nii.gz ${strSeOp}
 #------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------
 # *** Copy mp2rage images
 
-cp -r ${strBidsAnat} ${strAnat}
+cp -r ${strBidsAnat}*.nii.gz ${strAnat}
 #------------------------------------------------------------------------------

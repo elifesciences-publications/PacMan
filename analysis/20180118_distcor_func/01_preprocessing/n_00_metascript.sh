@@ -49,9 +49,9 @@ date
 echo "---Manual: Prepare reference weights for motion correction of functional"
 echo "   data and opposite-phase polarity data (based on SE EPI images, i.e."
 echo "   ~/func_se/func_00 and ~/func_se_op/func_00) and place them at:"
-echo "   ~/nii_distcor/spm_reg/ref_weighting/"
+echo "   ~/nii/spm_reg/ref_weighting/"
 echo "   and"
-echo "   ~/nii_distcor/spm_reg_op/ref_weighting/"
+echo "   ~/nii/spm_reg_op/ref_weighting/"
 echo "   in UNCOMPRESSED nii format."
 echo "   Type 'go' to continue"
 read -r -s -d $'g'

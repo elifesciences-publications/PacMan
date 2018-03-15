@@ -10,7 +10,7 @@ dcm2niix \
 -g n \
 -i n \
 -m n \
--o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/raw_data/ \
+-o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/raw_data/ \
 -p n \
 -s n \
 -t n \

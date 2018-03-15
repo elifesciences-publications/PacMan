@@ -7,4 +7,4 @@ the pre-registration.
 
 Place the brain mask in the following folder:
 
-~/nii_distcor/mp2rage/03_reg/02_brainmask
+~/nii/mp2rage/03_reg/02_brainmask

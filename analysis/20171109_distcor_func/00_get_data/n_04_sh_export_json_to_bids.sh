@@ -13,7 +13,7 @@
 strSess="20171109"
 
 # Parent directory:
-strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${strSess}/nii_distcor"
+strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${strSess}/nii"
 
 # BIDS directory:
 strBidsDir="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/"
@@ -73,8 +73,8 @@ cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_007_c32.json ${strSe}func_00.json
 
 # The mp2rage images obtained during session 20171109 were of inferior quality.
 # Extrassession mp2rage images are used for segmentaion instead.
-cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/raw_data_extrasession/mp2rage_inv1.nii.gz ${strAnat}mp2rage_inv1.json
-cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/raw_data_extrasession/mp2rage_pdw.nii.gz ${strAnat}mp2rage_pdw.json
-cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/raw_data_extrasession/mp2rage_t1.nii.gz ${strAnat}mp2rage_t1.json
-cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii_distcor/raw_data_extrasession/mp2rage_uni.nii.gz ${strAnat}mp2rage_uni.json
+cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_inv1.nii.gz ${strAnat}mp2rage_inv1.json
+cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_pdw.nii.gz ${strAnat}mp2rage_pdw.json
+cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_t1.nii.gz ${strAnat}mp2rage_t1.json
+cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_uni.nii.gz ${strAnat}mp2rage_uni.json
 #------------------------------------------------------------------------------

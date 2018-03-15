@@ -40,7 +40,8 @@ docker run \
     > /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_01.txt
 
 # Build image from dockerfile:
-docker build -t dockerimage_pacman_01 -f /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_01.txt
+cd /home/john/PhD/GitHub/PacMan/docker
+docker build -t dockerimage_pacman_01 -f /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_01.txt .
 
 # Run docker from image with shared folders (analysis folder is read-only):
 docker run -it --rm \
@@ -49,7 +50,7 @@ docker run -it --rm \
     dockerimage_pacman_01 bash
 
 # Save image to tar file:
-docker save dockerimage_pacman -o /Users/john/1_Docker/dockerimage_pacman.tar
+docker save dockerimage_pacman_01 -o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/dockerimage_pacman_01.tar
 
 
 

@@ -26,21 +26,21 @@ from shutil import copyfile
 # *** Define parameters
 
 # Path & filename of combined mean image:
-strPthCombMean = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/mp2rage/03_reg/01_in/'  #noqa
+strPthCombMean = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/01_in/'  #noqa
 strCombMean = 'combined_mean'
 
 # Path & filenames of mp2rage images:
-strPathIn = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/mp2rage/03_reg/04_reg/01_in/'  #noqa
+strPathIn = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/04_reg/01_in/'  #noqa
 strT1 = 'mp2rage_t1'
 strInv2 = 'mp2rage_inv2'
 strPdw = 'mp2rage_pdw'
 strT1w = 'mp2rage_uni'
 
 # BBR directory I (BBR input files):
-strPthBbr01 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/mp2rage/03_reg/04_reg/01_in/'  #noqa
+strPthBbr01 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/04_reg/01_in/'  #noqa
 
 # BBR directory II (brainmask):
-strPthBbr02 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/mp2rage/03_reg/04_reg/02_bbr_prep/'  #noqa
+strPthBbr02 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/04_reg/02_bbr_prep/'  #noqa
 
 # Cluster size threshold:
 varCluSzeThr = 200

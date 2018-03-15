@@ -26,10 +26,10 @@ import nibabel as nib
 # *** Define parameters
 
 # Path to images to be swapped:
-lstPathIn = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/func_se_op/func_00.nii.gz']
+lstPathIn = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/func_se_op/func_00.nii.gz']
 
 # Output file paths:
-lstPathOt = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/func_se_op_inv/func_00.nii.gz']
+lstPathOt = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/func_se_op_inv/func_00.nii.gz']
 # *****************************************************************************
 
 

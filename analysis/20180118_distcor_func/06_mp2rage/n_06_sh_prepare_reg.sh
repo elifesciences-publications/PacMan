@@ -15,7 +15,7 @@
 # *** Define session IDs & paths
 
 # Parent directory:
-strParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/"
+strParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/"
 
 # Subdirectories:
 strSub01="${strParent}mp2rage/03_reg/01_in/"

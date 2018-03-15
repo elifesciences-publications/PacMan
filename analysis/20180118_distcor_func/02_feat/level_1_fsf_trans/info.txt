@@ -7,6 +7,6 @@ instead of
 /home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/version_03c/
 
 Output directory:
-/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/*/nii_distcor/feat_level_1_trans/
+/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/*/nii/feat_level_1_trans/
 instead of
-/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/*/nii_distcor/feat_level_1/
+/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/*/nii/feat_level_1/

@@ -36,13 +36,13 @@ varThr = 0.93
 dicSubId = {'20180118': ['01', '02', '03', '04', '05', '06', '07', '08']}
 
 # The path of the 3D reference images (subject ID left open):
-strPathRef = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/func_reg_tsnr/combined_mean.nii.gz')  #noqa
+strPathRef = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii/func_reg_tsnr/combined_mean.nii.gz')  #noqa
 
 # The path of the 4D images (subject ID and run ID left open):
-strPathIn = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/func_reg_distcorUnwrp/func_{}.nii.gz')  #noqa
+strPathIn = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii/func_reg_distcorUnwrp/func_{}.nii.gz')  #noqa
 
 # The output directory & name (for the plot; subject ID left open twice):
-strPathOut = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/spm_reg_moco_params/{}_correlation_plot_refweight.png')  #noqa
+strPathOut = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii/spm_reg_moco_params/{}_correlation_plot_refweight.png')  #noqa
 
 # Use mask? If yes, only voxels that are greater than zero in the mask
 # image are considered. The reason for using the mask is that if
@@ -51,7 +51,7 @@ strPathOut = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/spm_reg_m
 # weighted highly. (Subject ID left open twice.)
 lgcMsk = True
 if lgcMsk:
-    strPathMsk = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/spm_reg_reference_weighting/n_06b_{}_spm_refweight.nii.gz'  #noqa
+    strPathMsk = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii/spm_reg_reference_weighting/n_06b_{}_spm_refweight.nii.gz'  #noqa
 
 # *** Loop through subjects:
 

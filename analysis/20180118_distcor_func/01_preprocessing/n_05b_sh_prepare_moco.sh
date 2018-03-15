@@ -13,7 +13,7 @@
 # Define session IDs & paths:
 
 # Parent directory:
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/"
+strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/"
 
 # Functional runs (input):
 arySessionIDs=(func_00)

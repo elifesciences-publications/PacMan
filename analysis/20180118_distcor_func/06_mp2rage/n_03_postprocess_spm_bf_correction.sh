@@ -10,7 +10,7 @@
 # *** Define parameters:
 
 # Parent directory:
-strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/"
+strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/"
 
 # Input folder:
 strPthIn="mp2rage/02_spm_bf_correction/"

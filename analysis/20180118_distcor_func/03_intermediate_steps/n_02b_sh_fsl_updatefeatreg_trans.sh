@@ -20,7 +20,7 @@
 # Define session IDs & paths:
 
 # The parent directory:
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/"
+strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/"
 
 # The directory with the first level feat results:
 strPathFeat="${strPathParent}feat_level_1_trans/"

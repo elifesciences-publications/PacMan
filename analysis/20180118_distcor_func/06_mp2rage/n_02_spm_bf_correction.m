@@ -9,7 +9,7 @@ clear;
 % Path of the default SPM batch:
 strPthDflt = '/home/john/PhD/GitHub/PacMan/analysis/SPM_Metadata/spm_default_bf_correction_batch.mat';
 % Directory with images to be corrected:
-strPthIn = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/mp2rage/02_spm_bf_correction/';
+strPthIn = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/02_spm_bf_correction/';
 %--------------------------------------------------------------------------
 %% Prepare input cell array
 % The cell array with the file name of the images to be bias field

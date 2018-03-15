@@ -30,7 +30,7 @@ varTme_01 = time.clock()
 # *** Define parameters
 
 # Parent directory:
-strPathParent = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/feat_level_1/'  #noqa
+strPathParent = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/feat_level_1/'  #noqa
 
 # List of 4D nii files (location within parent directory):
 lstIn_01 = ['func_08.feat/filtered_func_data.nii.gz']
@@ -43,7 +43,7 @@ strPathEV = '/home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/version_03c/
 lstIn_02 = ['EV_func_08_Stimulus.txt']
 
 # Output directory:
-strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/func_reg_averages/'  #noqa
+strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/func_reg_averages/'  #noqa
 
 # Output file name:
 strOutFileName = 'ERA_PacMan_Dynamic_Long.nii.gz'

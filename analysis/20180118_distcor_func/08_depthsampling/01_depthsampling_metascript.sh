@@ -47,7 +47,7 @@ aryPy=(ds_renameJistOutput.py \
        py_vtk_to_npy_conversion.py)
 
 # Working directory:
-strPthWd="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs_distcor/cbs_wd"
+strPthWd="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/cbs_wd"
 #------------------------------------------------------------------------------
 
 

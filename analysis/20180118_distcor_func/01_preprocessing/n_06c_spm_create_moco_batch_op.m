@@ -12,7 +12,7 @@
 %% Define variable parameters:
 clear;
 % Path of the SPM moco directory:
-strPathParent = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii_distcor/spm_reg_op/';
+strPathParent = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/spm_reg_op/';
 % The number of functional runs:
 varNumRuns = 1;
 % Name of the 'SPM batch' to be created:
