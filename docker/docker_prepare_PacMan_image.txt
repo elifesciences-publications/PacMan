@@ -40,9 +40,45 @@ docker run \
 
 
 
-
     --run-bash "echo \"export PATH=/root/miniconda3/envs/py_main/bin:$PATH\" >> /root/.bashrc" \
     --run-bash "echo \"export PATH=/root/miniconda3/envs/py_main/bin:$PATH\" >> /root/.profile" \
+
+
+
+non-root:
+
+
+docker run \
+    --rm kaczmarj/neurodocker:v0.3.2 \
+    generate \
+    -b debian:stretch \
+    -p apt \
+    --user=john \
+    --install gcc g++ tree nano htop rsync pigz git \
+    --neurodebian os_codename="stretch" download_server="germany-magdeburg" pkgs="dcm2niix fsl-complete" \
+    --add-to-entrypoint ". /etc/fsl/5.0/fsl.sh" \
+    --miniconda \
+        env_name="py_main" \
+        conda_install="python=2.7 numpy scipy pip nibabel cython" \
+        conda_opts="-c conda-forge" \
+        activate=True \
+    --run-bash "source activate py_main && pip install pyprf" \
+    --run-bash "echo \"export USER=john\" > /home/john.bashrc" \
+    --run-bash "echo \"export USER=john\" > /home/john.profile" \
+    --run-bash "echo \"export OPENBLAS_NUM_THREADS=1\" >> /home/john.bashrc" \
+    --run-bash "echo \"export OPENBLAS_NUM_THREADS=1\" >> /home/john.profile" \
+    --run-bash "echo \"export MKL_NUM_THREADS=1\" >> /home/john.bashrc" \
+    --run-bash "echo \"export MKL_NUM_THREADS=1\" >> /home/john.profile" \
+    --run-bash "echo \"export NUMEXPR_NUM_THREADS=1\" >> /home/john.bashrc" \
+    --run-bash "echo \"export NUMEXPR_NUM_THREADS=1\" >> /home/john.profile" \
+    --run-bash "echo \"source activate py_main\" >> /home/john.bashrc" \
+    --run-bash "echo \"source activate py_main\" >> /home/john.profile" \
+    --workdir /home/john \
+    --spm version=12 matlab_version=R2017a \
+    > /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/Dockerfile_PacMan_John.txt
+
+
+
 
 # Build image from dockerfile:
 docker build -t dockerimage_pacman -f /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/Dockerfile_PacMan.txt .
