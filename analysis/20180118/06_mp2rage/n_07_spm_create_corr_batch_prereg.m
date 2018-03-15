@@ -8,15 +8,18 @@
 %--------------------------------------------------------------------------
 %% Define variable parameters:
 clear;
+% Get environmental variables (for input & output path):
+pacman_sub_id = getenv('pacman_sub_id');
+pacman_data_path = getenv('pacman_data_path');
 % Directory of reference image (combined mean):
-strPathRef = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/03_prereg/combined_mean/';
+strPathRef = strcat(pacman_data_path, pacman_sub_id, '/nii/mp2rage/03_reg/03_prereg/combined_mean/');
 % Directory of source image (T1-weighted mp2rage image):
-strPathSrc = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/03_prereg/mp2rage_t1w/';
+strPathSrc = strcat(pacman_data_path, pacman_sub_id, '/nii/mp2rage/03_reg/03_prereg/mp2rage_t1w/');
 % Directory of other images to be registered along source image (T1, PDw,
 % INV2):
-strPathOtr = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/03_prereg/mp2rage_other/';
+strPathOtr = strcat(pacman_data_path, pacman_sub_id, '/nii/mp2rage/03_reg/03_prereg/mp2rage_other/');
 % Name of the 'SPM batch' to be created:
-strPathBatch = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/03_prereg/spm_corr_batch.mat';
+strPathBatch = strcat(pacman_data_path, pacman_sub_id, '/nii/mp2rage/03_reg/03_prereg/spm_corr_batch.mat');
 % Resolution of input images in mm (is assumed to be isotropic):
 varRes = 0.4;
 %--------------------------------------------------------------------------

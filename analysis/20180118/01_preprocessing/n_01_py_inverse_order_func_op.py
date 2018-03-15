@@ -27,7 +27,6 @@ import nibabel as nib
 
 # Load environmental variables defining the input data path:
 pacman_data_path = str(os.environ['pacman_data_path'])
-
 pacman_sub_id = str(os.environ['pacman_sub_id'])
 
 # Path to images to be swapped:

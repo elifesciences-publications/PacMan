@@ -10,7 +10,7 @@
 # *** Define parameters:
 
 # Parent directory:
-strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/"
+strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii/"
 
 # Input folder:
 strPthIn="mp2rage/01_orig/"

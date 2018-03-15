@@ -20,7 +20,7 @@
 # Define session IDs & paths:
 
 # Parent path:
-strPathParent="/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/02_feat/level_1_fsf/"
+strPathParent="${pacman_anly_path}${pacman_sub_id}/02_feat/level_1_fsf/"
 
 # Array with the file names of the fsf file (first entry = existing fsf file)
 arySessionIDs01=(feat_level_1_func_01 \

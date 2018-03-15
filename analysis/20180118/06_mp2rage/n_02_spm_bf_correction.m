@@ -6,10 +6,14 @@
 %--------------------------------------------------------------------------
 %% Define parameters
 clear;
+% Get environmental variables (for input & output path):
+pacman_sub_id = getenv('pacman_sub_id');
+pacman_anly_path = getenv('pacman_anly_path');
+pacman_data_path = getenv('pacman_data_path');
 % Path of the default SPM batch:
-strPthDflt = '/home/john/PhD/GitHub/PacMan/analysis/SPM_Metadata/spm_default_bf_correction_batch.mat';
+strPthDflt = strcat(pacman_anly_path, 'SPM_Metadata/spm_default_bf_correction_batch.mat');
 % Directory with images to be corrected:
-strPthIn = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/02_spm_bf_correction/';
+strPthIn = strcat(pacman_data_path, pacman_sub_id, '/nii/mp2rage/02_spm_bf_correction/');
 %--------------------------------------------------------------------------
 %% Prepare input cell array
 % The cell array with the file name of the images to be bias field

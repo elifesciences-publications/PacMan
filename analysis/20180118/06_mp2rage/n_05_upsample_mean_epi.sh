@@ -18,13 +18,13 @@
 echo "---Define parameters"
 
 # Input path:
-strPthIn="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/func_reg_tsnr/"
+strPthIn="${pacman_data_path}${pacman_sub_id}/nii/func_reg_tsnr/"
 
 # Input image name:
 strNmeIn="combined_mean"
 
 # Output image path:
-strPthOut="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/01_in/"
+strPthOut="${pacman_data_path}${pacman_sub_id}/nii/mp2rage/03_reg/01_in/"
 
 # Upsampling factor (e.g. 0.5 for half the previous voxel size, 0.25 for a
 # quater of the previous voxel size):

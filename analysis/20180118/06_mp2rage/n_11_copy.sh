@@ -7,13 +7,13 @@
 echo "-Copy registered images for segmentation"
 
 cp \
-/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/04_reg/04_inv_bbr/*.nii.gz \
-/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/04_seg/
+${pacman_data_path}${pacman_sub_id}/nii/mp2rage/03_reg/04_reg/04_inv_bbr/*.nii.gz \
+${pacman_data_path}${pacman_sub_id}/nii/mp2rage/04_seg/
 
 cp \
-/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/01_in/combined_mean.nii.gz \
-/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/04_seg/
+${pacman_data_path}${pacman_sub_id}/nii/mp2rage/03_reg/01_in/combined_mean.nii.gz \
+${pacman_data_path}${pacman_sub_id}/nii/mp2rage/04_seg/
 
 cp \
-/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/03_reg/01_in/combined_mean_tSNR.nii.gz \
-/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/mp2rage/04_seg/
+${pacman_data_path}${pacman_sub_id}/nii/mp2rage/03_reg/01_in/combined_mean_tSNR.nii.gz \
+${pacman_data_path}${pacman_sub_id}/nii/mp2rage/04_seg/
