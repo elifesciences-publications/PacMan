@@ -27,6 +27,14 @@ pacman_data_path="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/"
 # Whether to load data from BIDS structure. If 'true', data is loaded from BIDS
 # structure. If 'false', DICOM data is converted into BIDS-compatible nii first.
 pacman_from_bids=false
+
+# Wait for manual user input? When running the analysis for the first time, some
+# steps need to be performed manually (e.g. creation of brain masks for moco
+# reference weighting, and for registration). The script will pause and wait
+# until the user provides the manual input. However, if the manual input is
+# already available (when re-running the analysis), these breaks can be skipped.
+# Set to 'true' if script should wait.
+pacman_wait=false
 #-------------------------------------------------------------------------------
 
 
@@ -39,6 +47,7 @@ export pacman_sub_id_bids
 export pacman_anly_path
 export pacman_data_path
 export pacman_from_bids
+export pacman_wait
 #-------------------------------------------------------------------------------
 
 
@@ -55,12 +64,13 @@ docker run -it --rm \
     -e pacman_anly_path \
     -e pacman_data_path \
     -e pacman_from_bids \
+    -e pacman_wait \
     dockerimage_pacman_01 bash
 #-------------------------------------------------------------------------------
 
 
 #-------------------------------------------------------------------------------
-# Analysis
+# ### Get data
 
 # Analysis parent directory:
 strPathPrnt="${pacman_anly_path}${pacman_sub_id}/"
@@ -103,98 +113,103 @@ else
 	source ${strPathPrnt}/00_get_data/n_05_py_deface.sh
 fi
 
+echo "---Automatic: Import nii data from bids."
+source ${strPathPrnt}/00_get_data/n_06_sh_import_from_bids.sh
+#-------------------------------------------------------------------------------
 
 
-echo "---Automatic: DICOM to nii conversion using:"
-
-
-
-
-echo "---Automatic: Reorient & rename images:"
-source ${strPathPrnt}01_preprocessing/n_03_sh_reorient.sh
-date
+#-------------------------------------------------------------------------------
+# ### Preprocessing
 
 echo "---Automatic: Reverse order of opposite PE images"
-python ${strPathPrnt}01_preprocessing/n_04_py_inverse_order_func_op.py
+python ${strPathPrnt}01_preprocessing/n_01_py_inverse_order_func_op.py
 date
 
 echo "---Automatic: Prepare moco of SE EPI images"
-source ${strPathPrnt}01_preprocessing/n_05a_sh_prepare_moco.sh
-source ${strPathPrnt}01_preprocessing/n_05b_sh_prepare_moco.sh
+source ${strPathPrnt}01_preprocessing/n_02a_sh_prepare_moco.sh
+source ${strPathPrnt}01_preprocessing/n_02b_sh_prepare_moco.sh
 date
 
 echo "---Automatic: Prepare moco"
-source ${strPathPrnt}01_preprocessing/n_05c_sh_prepare_moco.sh
+source ${strPathPrnt}01_preprocessing/n_02c_sh_prepare_moco.sh
 date
 
-echo "---Manual: Prepare reference weights for motion correction of functional"
-echo "   data and opposite-phase polarity data (based on SE EPI images, i.e."
-echo "   ~/func_se/func_00 and ~/func_se_op/func_00) and place them at:"
-echo "   ~/nii/spm_reg/ref_weighting/"
-echo "   and"
-echo "   ~/nii/spm_reg_op/ref_weighting/"
-echo "   in UNCOMPRESSED nii format."
-echo "   Type 'go' to continue"
-read -r -s -d $'g'
-read -r -s -d $'o'
-date
+if ${pacman_wait};
+then
+	echo "---Manual:"
+	echo "   Prepare reference weights for motion correction of functional"
+	echo "   data and opposite-phase polarity data (based on SE EPI images,"
+	echo "   i.e. ~/func_se/func_00 and ~/func_se_op/func_00) and place"
+	echo "   them at:"
+	echo "       ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03b_${pacman_sub_id}_spm_refweight.nii.gz"
+	echo "   and"
+	echo "       ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03d_${pacman_sub_id}_spm_refweight_op.nii.gz"
+	echo "   Type 'go' to continue"
+	read -r -s -d $'g'
+	read -r -s -d $'o'
+	date
+else
+	:
+fi
+
+# Copy reference weight to spm directory:
+fslchfiletype \
+    NIFTI \
+    ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03b_${pacman_sub_id}_spm_refweight \
+    ${pacman_data_path}${pacman_sub_id}/nii_distcor/spm_reg/ref_weighting/n_03b_${pacman_sub_id}_spm_refweight
+
+# Copy reference weight for opposite-phase encoding data to spm directory:
+fslchfiletype \
+    NIFTI \
+    ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03d_${pacman_sub_id}_spm_refweight_op \
+    ${pacman_data_path}${pacman_sub_id}/nii_distcor/spm_reg_op/ref_weighting/n_03d_${pacman_sub_id}_spm_refweight_op
 
 echo "---Automatic: Run SPM motion correction on functional data"
 # matlab -nodisplay -nojvm -nosplash -nodesktop \
 #   -r "run('/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/01_preprocessing/n_06a_spm_create_moco_batch.m');"
-/opt/spm12/run_spm12.sh /opt/mcr/v92/ batch /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/TMP_SCRIPTS_FOR_DOCKER/01_preprocessing/n_06a_spm_create_moco_batch.m
+/opt/spm12/run_spm12.sh /opt/mcr/v92/ batch ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03a_spm_create_moco_batch.m
 date
 
 echo "---Automatic: Run SPM motion correction on opposite-phase polarity data"
-matlab -nodisplay -nojvm -nosplash -nodesktop \
-  -r "run('/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/01_preprocessing/n_06c_spm_create_moco_batch_op.m');"
+# matlab -nodisplay -nojvm -nosplash -nodesktop \
+#   -r "run('/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/01_preprocessing/n_06c_spm_create_moco_batch_op.m');"
+/opt/spm12/run_spm12.sh /opt/mcr/v92/ batch ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03c_spm_create_moco_batch_op.m
 date
 
 echo "---Automatic: Copy moco results"
-source ${strPathPrnt}01_preprocessing/n_07a_sh_postprocess_moco.sh
+source ${strPathPrnt}01_preprocessing/n_04a_sh_postprocess_moco.sh
 date
 
 echo "---Automatic: Copy moco results of SE EPI images"
-source ${strPathPrnt}01_preprocessing/n_07b_sh_postprocess_moco.sh
+source ${strPathPrnt}01_preprocessing/n_04b_sh_postprocess_moco.sh
 date
 
 echo "---Automatic: Copy moco results of opposite-phase polarity SE EPI images"
-source ${strPathPrnt}01_preprocessing/n_07c_sh_postprocess_moco.sh
+source ${strPathPrnt}01_preprocessing/n_04c_sh_postprocess_moco.sh
 date
 
-#echo "---Manual: Check the following:"
-#echo "   (1) Is the information about phase-encoding in the files"
-#echo "           n_08c_datain_topup.txt"
-#echo "       &"
-#echo "           n_09c_datain_applytopup.txt"
-#echo "       correct?"
-#echo "   Type 'go' to continue"
-#read -r -s -d $'g'
-#read -r -s -d $'o'
-#echo "   (2) Do the files"
-#echo "           n_08a_sh_fsl_topup.s"
-#echo "       &"
-#echo "           n_09a_fsl_applytopup.sh"
-#echo "       refer to those two above mentioned text files?"
-#echo "   Type 'go' to continue"
-#read -r -s -d $'g'
-#read -r -s -d $'o'
-
 echo "---Automatic: Calculate fieldmaps"
-source ${strPathPrnt}01_preprocessing/n_08a_sh_fsl_topup.sh
+source ${strPathPrnt}01_preprocessing/n_05a_sh_fsl_topup.sh
 date
 
 echo "---Automatic: Apply TOPUP on functional data"
-source ${strPathPrnt}01_preprocessing/n_09a_fsl_applytopup.sh
+source ${strPathPrnt}01_preprocessing/n_06a_fsl_applytopup.sh
 date
 
 echo "---Automatic: Apply TOPUP on SE EPI data"
-source ${strPathPrnt}01_preprocessing/n_09b_fsl_applytopup.sh
+source ${strPathPrnt}01_preprocessing/n_06b_fsl_applytopup.sh
 date
 
 echo "---Automatic: Create mean undistorted SE EPI image."
-source ${strPathPrnt}01_preprocessing/n_10_sh_mean_se.sh
+source ${strPathPrnt}01_preprocessing/n_07_sh_mean_se.sh
 date
+
+#-------------------------------------------------------------------------------
+
+
+#-------------------------------------------------------------------------------
+# ### First level FEAT
+
 
 echo "---Automatic: 1st level FSL FEAT with sustained predictors."
 source ${strPathPrnt}02_feat/n_01_feat_level_1_script_parallel.sh

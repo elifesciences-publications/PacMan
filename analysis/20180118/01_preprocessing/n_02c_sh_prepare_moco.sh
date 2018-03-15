@@ -5,6 +5,7 @@
 # The purpose of this script is to preprocess data of the PacMan experiment.  #
 # The following steps are performed in this script:                           #
 #   - Copy files into SPM directory tree                                      #
+#   - Remove input files                                                      #
 # Motion correction and registrations are performed with SPM afterwards.      #
 ###############################################################################
 
@@ -13,16 +14,23 @@
 # Define session IDs & paths:
 
 # Parent directory:
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/"
+strPathParent="${pacman_data_path}${pacman_sub_id}/nii/"
 
 # Functional runs (input):
-arySessionIDs=(func_00)
+arySessionIDs=(func_01 \
+               func_02 \
+               func_03 \
+               func_04 \
+               func_05 \
+               func_06 \
+               func_07 \
+               func_08)
 
 # Input directory:
-strPathInput="${strPathParent}func_se_op_inv/"
+strPathInput="${strPathParent}func/"
 
 # SPM directory:
-strPathSpmParent="${strPathParent}spm_reg_op/"
+strPathSpmParent="${strPathParent}spm_reg/"
 #-------------------------------------------------------------------------------
 
 
@@ -45,8 +53,8 @@ do
 	fslchfiletype NIFTI ${strTmp01} ${strTmp02}
 
 	# Remove input:
-	# echo "---rm ${strTmp01}.nii.gz"
-	# rm "${strTmp01}.nii.gz"
+	echo "---rm ${strTmp01}.nii.gz"
+	rm "${strTmp01}.nii.gz"
 done
 
 date

@@ -4,7 +4,7 @@
 # ### Prepare fsf files
 
 # Get path of fsf files from environmental variables:
-str_path="${pacman_anly_path}${pacman_sub_id}/02_feat/level_1_fsf_trans/"
+str_path="${pacman_anly_path}${pacman_sub_id}/02_feat/level_1_fsf/"
 
 # Replace path placeholders in fsf files, creating temporary fsf files (it does
 # not seem to be possible to pipe the result from sed directly into feat).
@@ -18,6 +18,7 @@ arySessionIDs=(func_01 \
                func_04 \
                func_05 \
                func_06 \
+               func_07 \
                func_08)
 
 for index01 in ${arySessionIDs[@]}
@@ -31,32 +32,3 @@ do
 done
 #-------------------------------------------------------------------------------
 
-
-#-------------------------------------------------------------------------------
-# ### Run FEAT analysis
-
-# Note: Run func_07 is ommited because it is the pRF run.
-
-echo "-----------First level feat:-----------"
-
-echo "---Runs 01, 02, 03"
-
-date
-feat "${str_path}feat_level_1_func_01_sed.fsf" &
-feat "${str_path}feat_level_1_func_02_sed.fsf" &
-feat "${str_path}feat_level_1_func_03_sed.fsf" &
-wait
-
-echo "---Runs 04, 05, 06, 08"
-
-date
-feat "${str_path}feat_level_1_func_04_sed.fsf" &
-feat "${str_path}feat_level_1_func_05_sed.fsf" &
-feat "${str_path}feat_level_1_func_06_sed.fsf" &
-feat "${str_path}feat_level_1_func_08_sed.fsf" &
-wait
-
-date
-
-echo "done"
-#-------------------------------------------------------------------------------

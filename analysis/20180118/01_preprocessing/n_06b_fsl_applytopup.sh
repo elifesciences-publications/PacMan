@@ -11,51 +11,44 @@
 echo "-Distortion correction"
 
 
-#------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Define session IDs & paths:
 
 # Parent directory"
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/"
+strPathParent="${pacman_data_path}${pacman_sub_id}/nii/"
 
 # Functional runs (input & output):
-aryRun=(func_01 \
-        func_02 \
-        func_03 \
-        func_04 \
-        func_05 \
-        func_06 \
-        func_07 \
-        func_08)
+aryRun=(func_00)
 
 # Path for 'datain' text file with acquisition parameters for applytopup (see
 # TOPUP documentation for details):
-strDatain02="/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/01_preprocessing/n_09c_datain_applytopup.txt"
+strDatain02="${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_06c_datain_applytopup.txt"
 
 # Parallelisation factor:
-varPar=5
+varPar=1
 
 # Path of images to be undistorted (input):
-strPathFunc="${strPathParent}func_reg/"
+strPathFunc="${strPathParent}func_se_reg/"
 
 # Path for bias field (input):
 strPathRes01="${strPathParent}func_distcorField/"
 
 # Path for undistorted images (output):
 strPathRes02="${strPathParent}func_reg_distcorUnwrp/"
-#------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 
-#------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Preparations
 
 echo "---Preparations"
 
 # Number of runs:
 varNumRun=${#aryRun[@]}
-#------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 
-#------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Apply distortion correction:
 
 echo "---Apply distortion correction"
@@ -91,4 +84,4 @@ do
 done
 wait
 date
-#------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------

@@ -1,8 +1,5 @@
 %--------------------------------------------------------------------------
-% The purpose of this script is to create a 'batch' file for SPM motion
-% correction. This batch can then be run using the SPM GUI, with the
-% advantage that a plot of the motion parameters is automatically created
-% by SPM.
+% Create a 'batch' file for SPM motion correction.
 %--------------------------------------------------------------------------
 % NOTE: This version is used for creating a moco batch for opposite phase
 % polarity data, assuming the file name to be 'func_00'.
@@ -11,8 +8,11 @@
 %--------------------------------------------------------------------------
 %% Define variable parameters:
 clear;
+% Get environmental variables (for input & output path):
+pacman_sub_id = getenv('pacman_sub_id');
+pacman_anly_path = getenv('pacman_anly_path');
 % Path of the SPM moco directory:
-strPathParent = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/spm_reg_op/';
+strPathParent = strcat(pacman_anly_path, pacman_sub_id, '/nii/spm_reg_op/');
 % The number of functional runs:
 varNumRuns = 1;
 % Name of the 'SPM batch' to be created:

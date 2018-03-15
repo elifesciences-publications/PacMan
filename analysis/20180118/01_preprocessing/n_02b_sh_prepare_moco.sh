@@ -13,16 +13,16 @@
 # Define session IDs & paths:
 
 # Parent directory:
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/"
+strPathParent="${pacman_data_path}${pacman_sub_id}/nii/"
 
 # Functional runs (input):
 arySessionIDs=(func_00)
 
 # Input directory:
-strPathInput="${strPathParent}func_se/"
+strPathInput="${strPathParent}func_se_op_inv/"
 
 # SPM directory:
-strPathSpmParent="${strPathParent}spm_reg/"
+strPathSpmParent="${strPathParent}spm_reg_op/"
 #-------------------------------------------------------------------------------
 
 

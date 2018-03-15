@@ -16,7 +16,7 @@ workaround.
 # *****************************************************************************
 # *** Import modules
 
-# import os
+import os
 import numpy as np  #noqa
 import nibabel as nib
 # *****************************************************************************
@@ -25,11 +25,20 @@ import nibabel as nib
 # *****************************************************************************
 # *** Define parameters
 
+# Load environmental variables defining the input data path:
+pacman_data_path = str(os.environ['pacman_data_path'])
+
+pacman_sub_id = str(os.environ['pacman_sub_id'])
+
 # Path to images to be swapped:
-lstPathIn = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/func_se_op/func_00.nii.gz']
+lstPathIn = [(pacman_data_path
+              + pacman_sub_id
+              + '/nii/func_se_op/func_00.nii.gz')]
 
 # Output file paths:
-lstPathOt = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/func_se_op_inv/func_00.nii.gz']
+lstPathOt = [(pacman_data_path
+              + pacman_sub_id
+              + '/nii/func_se_op_inv/func_00.nii.gz')]
 # *****************************************************************************
 
 

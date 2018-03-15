@@ -15,17 +15,18 @@ echo "-Distortion correction"
 # Define session IDs & paths:
 
 # Parent directory:
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/"
+strPathParent="${pacman_data_path}${pacman_sub_id}/nii/"
 
 # Functional runs (input & output):
 aryRun=(func_00)
 
 # Name of configuration file:
-strPathCnf="/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/01_preprocessing/n_08b_highres.cnf"
+strPathCnf="${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_05b_highres.cnf"
+
 
 # Path for 'datain' text file with acquisition parameters for topup (see TOPUP
 # documentation for details):
-strDatain01="/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/01_preprocessing/n_08c_datain_topup.txt"
+strDatain01="${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_05c_datain_topup.txt"
 
 # Parallelisation factor:
 varPar=1
