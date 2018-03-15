@@ -59,8 +59,9 @@ read -r -s -d $'o'
 date
 
 echo "---Automatic: Run SPM motion correction on functional data"
-matlab -nodisplay -nojvm -nosplash -nodesktop \
-  -r "run('/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/01_preprocessing/n_06a_spm_create_moco_batch.m');"
+# matlab -nodisplay -nojvm -nosplash -nodesktop \
+#   -r "run('/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/01_preprocessing/n_06a_spm_create_moco_batch.m');"
+/opt/spm12/run_spm12.sh /opt/mcr/v92/ batch /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/TMP_SCRIPTS_FOR_DOCKER/01_preprocessing/n_06a_spm_create_moco_batch.m
 date
 
 echo "---Automatic: Run SPM motion correction on opposite-phase polarity data"
