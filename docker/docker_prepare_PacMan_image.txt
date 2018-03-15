@@ -5,43 +5,10 @@
 # Pull neurodocker image (for creating docker images):
 docker pull kaczmarj/neurodocker:v0.3.2
 
+# For info:
 docker run --rm kaczmarj/neurodocker:v0.3.2 --help
 
-
-docker run \
-    --rm kaczmarj/neurodocker:v0.3.2 \
-    generate \
-    -b debian:stretch \
-    -p apt \
-    --user=root \
-    --install gcc g++ tree nano htop rsync pigz git \
-    --neurodebian os_codename="stretch" download_server="germany-magdeburg" pkgs="dcm2niix fsl-complete" \
-    --add-to-entrypoint ". /etc/fsl/5.0/fsl.sh" \
-    --miniconda \
-        env_name="py_main" \
-        conda_install="python=2.7 numpy scipy pip nibabel cython" \
-        conda_opts="-c conda-forge" \
-        activate=True \
-    --run-bash "source activate py_main && pip install pyprf" \
-    --run-bash "echo \"export USER=root\" > /root/.bashrc" \
-    --run-bash "echo \"export USER=root\" > /root/.profile" \
-    --run-bash "echo \"export OPENBLAS_NUM_THREADS=1\" >> /root/.bashrc" \
-    --run-bash "echo \"export OPENBLAS_NUM_THREADS=1\" >> /root/.profile" \
-    --run-bash "echo \"export MKL_NUM_THREADS=1\" >> /root/.bashrc" \
-    --run-bash "echo \"export MKL_NUM_THREADS=1\" >> /root/.profile" \
-    --run-bash "echo \"export NUMEXPR_NUM_THREADS=1\" >> /root/.bashrc" \
-    --run-bash "echo \"export NUMEXPR_NUM_THREADS=1\" >> /root/.profile" \
-    --run-bash "echo \"source activate py_main\" >> /root/.bashrc" \
-    --run-bash "echo \"source activate py_main\" >> /root/.profile" \
-    --workdir /home/john \
-    --spm version=12 matlab_version=R2017a \
-    > /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/Dockerfile_PacMan.txt
-
-    --run-bash "echo \"export PATH=/root/miniconda3/envs/py_main/bin:$PATH\" >> /root/.bashrc" \
-    --run-bash "echo \"export PATH=/root/miniconda3/envs/py_main/bin:$PATH\" >> /root/.profile" \
-
-non-root:
-
+# Create dockerfile (using neurodocker image):
 docker run \
     --rm kaczmarj/neurodocker:v0.3.2 \
     generate \
@@ -70,30 +37,24 @@ docker run \
     --run-bash "echo \"source activate py_main\" >> /home/john/.bashrc" \
     --run-bash "echo \"source activate py_main\" >> /home/john/.profile" \
     --workdir /home/john \
-    > /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/Dockerfile_PacMan_John.txt
-
-docker build -t dockerimage_pacman_john -f /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/Dockerfile_PacMan_John.txt .
-
+    > /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_01.txt
 
 # Build image from dockerfile:
-docker build -t dockerimage_pacman -f /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/Dockerfile_PacMan.txt .
+docker build -t dockerimage_pacman_01 -f /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_01.txt
 
-# Run debian docker from image:
-docker run -it --rm dockerimage_pacman bash
-
-# Run debian docker from image with shared folder:
-docker run -it --rm -v /media/:/media/ dockerimage_pacman bash
-
+# Run docker from image with shared folders (analysis folder is read-only):
 docker run -it --rm \
     -v /media/:/media/ \
-    -v /home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/:/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/:ro \
-    dockerimage_pacman_john bash
-
-# Run PacMan SPM moco:
-/opt/spm12/run_spm12.sh /opt/mcr/v92/ batch /media/sf_D_DRIVE/n_06a_spm_create_moco_batch.m
+    -v /home/john/PhD/GitHub/PacMan/analysis/:/home/john/PhD/GitHub/PacMan/analysis/:ro \
+    dockerimage_pacman_01 bash
 
 # Save image to tar file:
 docker save dockerimage_pacman -o /Users/john/1_Docker/dockerimage_pacman.tar
+
+
+
+# Run PacMan SPM moco:
+/opt/spm12/run_spm12.sh /opt/mcr/v92/ batch /media/sf_D_DRIVE/n_06a_spm_create_moco_batch.m
 
 # Using SPM with MATLAB Common Runtime
 # http://nipype.readthedocs.io/en/latest/users/spmmcr.html
