@@ -18,20 +18,48 @@ strSess="20180111"
 # Parent directory:
 strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${strSess}/nii_distcor"
 
+# BIDS directory:
+strBidsDir="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/"
+
+# BIDS subject ID:
+strBidsSess="sub-08"
+
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"
 
 # Destination directory for functional data:
-strFunc="${strPthPrnt}/func/"
+strFunc="${strBidsDir}${strBidsSess}/func/"
 
 # Destination directory for same-phase-polarity SE images:
-strSe="${strPthPrnt}/func_se/"
+strSe="${strBidsDir}${strBidsSess}/func_se/"
 
 # Destination directory for opposite-phase-polarity SE images:
-strSeOp="${strPthPrnt}/func_se_op/"
+strSeOp="${strBidsDir}${strBidsSess}/func_se_op/"
 
 # Destination directory for mp2rage images:
-strAnat="${strPthPrnt}/mp2rage/01_orig/"
+strAnat="${strBidsDir}${strBidsSess}/anat/"
+#------------------------------------------------------------------------------
+
+
+#------------------------------------------------------------------------------
+# *** Create BIDS directory tree
+
+# Check whether the session directory already exists:
+if [ ! -d "${strBidsDir}${strBidsSess}" ];
+then
+	echo "Create BIDS directory for ${strBidsDir}${strBidsSess}"
+
+	# Create BIDS subject parent directory:
+	mkdir "${strBidsDir}${strBidsSess}"
+
+	# Create BIDS directory tree:
+	mkdir "${strAnat}"
+	mkdir "${strFunc}"
+	mkdir "${strSe}"
+	mkdir "${strSeOp}"
+else
+	echo "Directory for ${strBidsDir}${strBidsSess} does already exist."
+fi
 #------------------------------------------------------------------------------
 
 

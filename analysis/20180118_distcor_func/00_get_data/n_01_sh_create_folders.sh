@@ -11,7 +11,7 @@
 # *** Define parameters:
 
 # Define session ID of the new session:
-str_session_ID="19680801_distcor"
+str_session_ID="19680801"
 
 # Parent directory:
 str_path_parent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${str_session_ID}"
@@ -40,6 +40,7 @@ then
 	echo "Creating directory tree for ${str_session_ID}"
 
 	mkdir "${str_path_parent}"
+
 	mkdir "${str_path_parent}/nii_distcor"
 
 	mkdir "${str_path_parent}/nii_distcor/feat_level_1"
@@ -57,9 +58,9 @@ then
 
 	mkdir "${str_path_parent}/nii_distcor/func_se"
 	mkdir "${str_path_parent}/nii_distcor/func_se_reg"
-  mkdir "${str_path_parent}/nii_distcor/func_se_op"
-  mkdir "${str_path_parent}/nii_distcor/func_se_op_inv"
-  mkdir "${str_path_parent}/nii_distcor/func_se_op_inv_reg"
+	mkdir "${str_path_parent}/nii_distcor/func_se_op"
+	mkdir "${str_path_parent}/nii_distcor/func_se_op_inv"
+	mkdir "${str_path_parent}/nii_distcor/func_se_op_inv_reg"
 	mkdir "${str_path_parent}/nii_distcor/func_se_merged"
 
 	mkdir "${str_path_parent}/nii_distcor/mp2rage"
@@ -97,7 +98,7 @@ then
 		mkdir "${str_tmp_1}"
 	done
 
-  # Create SPM subfolder for SE run:
+	# Create SPM subfolder for SE run:
 	mkdir "${str_path_parent}/nii_distcor/spm_reg/func_00"
 
 	# Create SPM subfolders for SE run - opposite-phase-polarity:
