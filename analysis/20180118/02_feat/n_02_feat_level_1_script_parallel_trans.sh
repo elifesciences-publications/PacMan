@@ -26,8 +26,8 @@ do
 	cp ${str_path}feat_level_1_${index01}.fsf ${str_path}feat_level_1_${index01}_sed.fsf
 
 	# Replace placeholders with path of current subject:
-	sed -i "s/${PLACEHOLDER_FOR_DATA_PATH}/${NEW_DATA_PATH}/g" ${str_path}feat_level_1_${index01}_sed.fsf
-	sed -i "s/${PLACEHOLDER_FOR_ANALYSIS_PATH}/${NEW_ANALYSIS_PATH}/g"
+	sed -i "s|PLACEHOLDER_FOR_DATA_PATH|${NEW_DATA_PATH}|g" ${str_path}feat_level_1_${index01}_sed.fsf
+	sed -i "s|PLACEHOLDER_FOR_ANALYSIS_PATH|${NEW_ANALYSIS_PATH}|g" ${str_path}feat_level_1_${index01}_sed.fsf
 done
 #-------------------------------------------------------------------------------
 
