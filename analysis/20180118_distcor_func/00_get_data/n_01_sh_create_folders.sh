@@ -2,8 +2,7 @@
 
 
 ###############################################################################
-# The purpose of this script is to create a directory tree for the PacMan     #
-# Experiment.                                                                 #
+# Create subject's directory tree for the PacMan analusis pipeline.           #
 ###############################################################################
 
 
@@ -32,7 +31,7 @@ ary_run_IDs=(func_01 \
 # *** Create folders:
 
 # Number of runs:
-#var_include=${#ary_run_IDs[@]}
+# var_include=${#ary_run_IDs[@]}
 
 # Check whether the session directory already exists:
 if [ ! -d "${str_path_parent}" ];
