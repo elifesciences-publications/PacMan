@@ -11,7 +11,7 @@
 # *** Define parameters:
 
 # Define session ID of the new session:
-str_session_ID="19680801"
+str_session_ID="20180118"
 
 # Parent directory:
 str_path_parent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${str_session_ID}"

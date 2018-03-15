@@ -1,4 +1,6 @@
-# Conversion of dicom to nii:
+#!/bin/sh
+
+# Conversion of dicom to nii
 
 dcm2niix \
 -6 \
