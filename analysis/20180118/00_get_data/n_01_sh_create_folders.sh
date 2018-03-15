@@ -9,11 +9,11 @@
 # -----------------------------------------------------------------------------
 # *** Define parameters:
 
-# Define session ID of the new session:
-str_session_ID="20180118"
+# Get session ID (from environmental variable, which is defined in metascript):
+str_session_ID="${pacman_sub_id}"
 
-# Parent directory:
-str_path_parent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${str_session_ID}"
+# Get data directory (from environmental variable, which is defined in metascript):
+str_path_parent="${pacman_data_path}${str_session_ID}"
 
 # Nii directory (main analysis directory):
 str_nii="${str_path_parent}/nii"

@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # Conversion of dicom to nii
-
 dcm2niix \
 -6 \
 -b y \
@@ -10,11 +9,11 @@ dcm2niix \
 -g n \
 -i n \
 -m n \
--o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/raw_data/ \
+-o ${pacman_data_path}${pacman_sub_id}/nii/raw_data/ \
 -p n \
 -s n \
 -t n \
 -v 0 \
 -x n \
 -z y \
-/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/dicoms/
+${pacman_data_path}${pacman_sub_id}/dicoms/

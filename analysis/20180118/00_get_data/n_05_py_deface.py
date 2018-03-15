@@ -109,21 +109,34 @@ def load_nii(strPathIn, varSzeThr=5000.0):
 
 print('-Deface MP2RAGE images')
 
+# Load environmental variables defining the input data path:
+pacman_data_path = str(os.environ['pacman_data_path'])
+pacman_sub_id_bids = str(os.environ['pacman_sub_id_bids'])
+
+# Full input data path:
+strPathIn = (pacman_data_path
+             + 'BIDS/'
+             + pacman_sub_id_bids
+             + '/anat/')
+
 # List of images to deface:
-lstIn = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/sub-09/anat/mp2rage_inv1.nii.gz',
-         '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/sub-09/anat/mp2rage_inv1_phase.nii.gz',
-         '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/sub-09/anat/mp2rage_pdw.nii.gz',
-         '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/sub-09/anat/mp2rage_pdw_phase.nii.gz',
-         '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/sub-09/anat/mp2rage_t1.nii.gz',
-         '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/sub-09/anat/mp2rage_uni.nii.gz']
+lstIn = ['mp2rage_inv1.nii.gz',
+         'mp2rage_inv1_phase.nii.gz',
+         'mp2rage_pdw.nii.gz',
+         'mp2rage_pdw_phase.nii.gz',
+         'mp2rage_t1.nii.gz',
+         'mp2rage_uni.nii.gz']
 
 # Loop through images:
-for strIn in lstIn:
+for strImage in lstIn:
 
-    print(('---Defacing: ' + strIn))
+    # Complete path of image to load:
+    strPthTmp = (strPathIn + strImage)
+
+    print(('---Defacing: ' + strPthTmp))
 
     # Load image:
-    aryNiiTmp, objHdrTmp, aryAffTmp = load_nii(strIn)
+    aryNiiTmp, objHdrTmp, aryAffTmp = load_nii(strPthTmp)
 
     # Set anterior voxels to zero:
     aryNiiTmp[:, 250:, :] = 0.0
@@ -134,5 +147,5 @@ for strIn in lstIn:
                             header=objHdrTmp
                             )
     # Save nii:
-    nb.save(niiOut, strIn)
+    nb.save(niiOut, strPthTmp)
 # ------------------------------------------------------------------------------

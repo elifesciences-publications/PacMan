@@ -13,31 +13,31 @@
 # *** Define paths:
 
 # Session ID:
-strSess="20171213"
+# strSess="20171213"
 
 # Parent directory:
-strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${strSess}/nii"
+strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii"
 
 # BIDS directory:
-strBidsDir="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/"
+strBidsDir="${pacman_data_path}BIDS/"
 
 # BIDS subject ID:
-strBidsSess="sub-07"
+# pacman_sub_id_bids="sub-07"
 
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"
 
 # Destination directory for functional data:
-strFunc="${strBidsDir}${strBidsSess}/func/"
+strFunc="${strBidsDir}${pacman_sub_id_bids}/func/"
 
 # Destination directory for same-phase-polarity SE images:
-strSe="${strBidsDir}${strBidsSess}/func_se/"
+strSe="${strBidsDir}${pacman_sub_id_bids}/func_se/"
 
 # Destination directory for opposite-phase-polarity SE images:
-strSeOp="${strBidsDir}${strBidsSess}/func_se_op/"
+strSeOp="${strBidsDir}${pacman_sub_id_bids}/func_se_op/"
 
 # Destination directory for mp2rage images:
-strAnat="${strBidsDir}${strBidsSess}/anat/"
+strAnat="${strBidsDir}${pacman_sub_id_bids}/anat/"
 #------------------------------------------------------------------------------
 
 
@@ -45,12 +45,12 @@ strAnat="${strBidsDir}${strBidsSess}/anat/"
 # *** Create BIDS directory tree
 
 # Check whether the session directory already exists:
-if [ ! -d "${strBidsDir}${strBidsSess}" ];
+if [ ! -d "${strBidsDir}${pacman_sub_id_bids}" ];
 then
-	echo "Create BIDS directory for ${strBidsDir}${strBidsSess}"
+	echo "Create BIDS directory for ${strBidsDir}${pacman_sub_id_bids}"
 
 	# Create BIDS subject parent directory:
-	mkdir "${strBidsDir}${strBidsSess}"
+	mkdir "${strBidsDir}${pacman_sub_id_bids}"
 
 	# Create BIDS directory tree:
 	mkdir "${strAnat}"
@@ -58,7 +58,7 @@ then
 	mkdir "${strSe}"
 	mkdir "${strSeOp}"
 else
-	echo "Directory for ${strBidsDir}${strBidsSess} does already exist."
+	echo "Directory for ${strBidsDir}${pacman_sub_id_bids} does already exist."
 fi
 #------------------------------------------------------------------------------
 

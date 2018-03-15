@@ -10,31 +10,31 @@
 # *** Define paths:
 
 # Session ID:
-strSess="20171109"
+# strSess="20171109"
 
 # Parent directory:
-strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${strSess}/nii"
+strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii"
 
 # BIDS directory:
-strBidsDir="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/"
+strBidsDir="${pacman_data_path}BIDS/"
 
 # BIDS subject ID:
-strBidsSess="sub-02"
+# strBidsSess="sub-02"
 
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"
 
 # Destination directory for functional data:
-strFunc="${strBidsDir}${strBidsSess}/func/"
+strFunc="${strBidsDir}${pacman_sub_id_bids}/func/"
 
 # Destination directory for same-phase-polarity SE images:
-strSe="${strBidsDir}${strBidsSess}/func_se/"
+strSe="${strBidsDir}${pacman_sub_id_bids}/func_se/"
 
 # Destination directory for opposite-phase-polarity SE images:
-strSeOp="${strBidsDir}${strBidsSess}/func_se_op/"
+strSeOp="${strBidsDir}${pacman_sub_id_bids}/func_se_op/"
 
 # Destination directory for mp2rage images:
-strAnat="${strBidsDir}${strBidsSess}/anat/"
+strAnat="${strBidsDir}${pacman_sub_id_bids}/anat/"
 #------------------------------------------------------------------------------
 
 
@@ -73,8 +73,8 @@ cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_007_c32.json ${strSe}func_00.json
 
 # The mp2rage images obtained during session 20171109 were of inferior quality.
 # Extrassession mp2rage images are used for segmentaion instead.
-cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_inv1.nii.gz ${strAnat}mp2rage_inv1.json
-cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_pdw.nii.gz ${strAnat}mp2rage_pdw.json
-cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_t1.nii.gz ${strAnat}mp2rage_t1.json
-cp /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_uni.nii.gz ${strAnat}mp2rage_uni.json
+# cp ${pacman_data_path}20171109/raw_data_extrasession/mp2rage_inv1.nii.gz ${strAnat}mp2rage_inv1.json
+# cp ${pacman_data_path}20171109/raw_data_extrasession/mp2rage_pdw.nii.gz ${strAnat}mp2rage_pdw.json
+# cp ${pacman_data_path}20171109/raw_data_extrasession/mp2rage_t1.nii.gz ${strAnat}mp2rage_t1.json
+# cp ${pacman_data_path}20171109/raw_data_extrasession/mp2rage_uni.nii.gz ${strAnat}mp2rage_uni.json
 #------------------------------------------------------------------------------

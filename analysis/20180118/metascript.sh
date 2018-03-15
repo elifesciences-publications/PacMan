@@ -1,33 +1,114 @@
 #!/bin/sh
 
+
 ################################################################################
 # Metascript for the ParMan analysis pipeline.                                 #
 ################################################################################
 
+
+#-------------------------------------------------------------------------------
+# ### Define paths
+
+# Subject ID:
+pacman_sub_id="20180118"
+
+# BIDS subject ID:
+pacman_sub_id_bids="sub-09"
+
+# Analysis parent directory (containing scripts):
+pacman_anly_path="/home/john/PhD/GitHub/PacMan/analysis/"
+
+# Data parent directory (containing MRI data). If working with the BIDS data,
+# this data should be placed here (i.e. this folder should contain a folder
+# called 'BIDS', which in turn contains the subject directories, such as
+# '~/BIDS/sub-01/...').
+pacman_data_path="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/"
+
+# Whether to load data from BIDS structure. If 'true', data is loaded from BIDS
+# structure. If 'false', DICOM data is converted into BIDS-compatible nii first.
+pacman_from_bids=false
+#-------------------------------------------------------------------------------
+
+
+#-------------------------------------------------------------------------------
+# Export paths
+
+# Export paths so that all other scripts can use them.
+export pacman_sub_id
+export pacman_sub_id_bids
+export pacman_anly_path
+export pacman_data_path
+export pacman_from_bids
+#-------------------------------------------------------------------------------
+
+
+#-------------------------------------------------------------------------------
+# ### Activate docker image
+
+# Run dockerfrom image with shared folders (analysis folder is read-only).
+# Environmental variables are passed in with the '-e' flag.
+docker run -it --rm \
+    -v ${strPathData}:${strPathData} \
+    -v ${strPathAnly}:${strPathAnly}:ro \
+    -e pacman_sub_id \
+    -e pacman_sub_id_bids \
+    -e pacman_anly_path \
+    -e pacman_data_path \
+    -e pacman_from_bids \
+    dockerimage_pacman_01 bash
+#-------------------------------------------------------------------------------
+
+
+#-------------------------------------------------------------------------------
+# Analysis
+
 # Analysis parent directory:
-strPathPrnt="/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/"
+strPathPrnt="${pacman_anly_path}${pacman_sub_id}/"
 
-echo "-ParCon Analysis Pipleline --- 20180118"
+echo "-PacMan Analysis Pipleline --- ${pacman_sub_id}"
 date
 
-echo "---Manual: Prepare directory tree using:"
-echo "   > ~/01_preprocessing/n_01_sh_create_folders.sh"
-echo "   Type 'go' to continue"
-read -r -s -d $'g'
-read -r -s -d $'o'
+echo "---Automatic: Prepare directory tree using:"
+source ${strPathPrnt}/00_get_data/n_01_sh_create_folders.sh
 
-echo "---Manual: DICOM to nii conversion using:"
-echo "   > ~/01_preprocessing/n_02_sh_dcm2nii"
-echo "   Type 'go' to continue"
-read -r -s -d $'g'
-read -r -s -d $'o'
+if ${pacman_from_bids};
+then
+	echo "---Skipping DICOM to nii conversion (will look for BIDS data)."
+else
+	echo "---Automatic: DICOM to nii conversion."
+	source ${strPathPrnt}/00_get_data/n_02_sh_dcm2nii.sh
+fi
 
-echo "---Manual: Adjust file names in n_03_sh_reorient.sh so that functional"
-echo "   and anatomical data is renamed correctly."
-echo "   Type 'go' to continue"
-read -r -s -d $'g'
-read -r -s -d $'o'
-date
+if ${pacman_from_bids};
+then
+	:
+else
+	echo "---Automatic: Export nii to bids."
+	source ${strPathPrnt}/00_get_data/n_03_sh_export_nii_to_bids.sh
+fi
+
+if ${pacman_from_bids};
+then
+	:
+else
+	echo "---Automatic: Export json metadata to bids."
+	source ${strPathPrnt}/00_get_data/n_04_sh_export_json_to_bids.sh
+fi
+
+if ${pacman_from_bids};
+then
+	:
+else
+	echo "---Automatic: Deface nii data in bids folder."
+	source ${strPathPrnt}/00_get_data/n_05_py_deface.sh
+fi
+
+
+
+echo "---Automatic: DICOM to nii conversion using:"
+
+
+
 
 echo "---Automatic: Reorient & rename images:"
 source ${strPathPrnt}01_preprocessing/n_03_sh_reorient.sh

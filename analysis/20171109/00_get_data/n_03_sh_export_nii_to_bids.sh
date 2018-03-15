@@ -13,31 +13,31 @@
 # *** Define paths:
 
 # Session ID:
-strSess="20171109"
+# strSess="20171109"
 
 # Parent directory:
-strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${strSess}/nii"
+strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii"
 
 # BIDS directory:
-strBidsDir="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/"
+strBidsDir="${pacman_data_path}BIDS/"
 
 # BIDS subject ID:
-strBidsSess="sub-02"
+# pacman_sub_id_bids="sub-02"
 
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"
 
 # Destination directory for functional data:
-strFunc="${strBidsDir}${strBidsSess}/func/"
+strFunc="${strBidsDir}${pacman_sub_id_bids}/func/"
 
 # Destination directory for same-phase-polarity SE images:
-strSe="${strBidsDir}${strBidsSess}/func_se/"
+strSe="${strBidsDir}${pacman_sub_id_bids}/func_se/"
 
 # Destination directory for opposite-phase-polarity SE images:
-strSeOp="${strBidsDir}${strBidsSess}/func_se_op/"
+strSeOp="${strBidsDir}${pacman_sub_id_bids}/func_se_op/"
 
 # Destination directory for mp2rage images:
-strAnat="${strBidsDir}${strBidsSess}/anat/"
+strAnat="${strBidsDir}${pacman_sub_id_bids}/anat/"
 #------------------------------------------------------------------------------
 
 
@@ -45,12 +45,12 @@ strAnat="${strBidsDir}${strBidsSess}/anat/"
 # *** Create BIDS directory tree
 
 # Check whether the session directory already exists:
-if [ ! -d "${strBidsDir}${strBidsSess}" ];
+if [ ! -d "${strBidsDir}${pacman_sub_id_bids}" ];
 then
-	echo "Create BIDS directory for ${strBidsDir}${strBidsSess}"
+	echo "Create BIDS directory for ${strBidsDir}${pacman_sub_id_bids}"
 
 	# Create BIDS subject parent directory:
-	mkdir "${strBidsDir}${strBidsSess}"
+	mkdir "${strBidsDir}${pacman_sub_id_bids}"
 
 	# Create BIDS directory tree:
 	mkdir "${strAnat}"
@@ -58,7 +58,7 @@ then
 	mkdir "${strSe}"
 	mkdir "${strSeOp}"
 else
-	echo "Directory for ${strBidsDir}${strBidsSess} does already exist."
+	echo "Directory for ${strBidsDir}${pacman_sub_id_bids} does already exist."
 fi
 #------------------------------------------------------------------------------
 
@@ -98,8 +98,8 @@ fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_007_c32 ${strSe}func_
 
 # The mp2rage images obtained during session 20171109 were of inferior quality.
 # Extrassession mp2rage images are used for segmentaion instead.
-fslreorient2std /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_inv1.nii.gz ${strAnat}mp2rage_inv1
-fslreorient2std /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_pdw.nii.gz ${strAnat}mp2rage_pdw
-fslreorient2std /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_t1.nii.gz ${strAnat}mp2rage_t1
-fslreorient2std /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/nii/raw_data_extrasession/mp2rage_uni.nii.gz ${strAnat}mp2rage_uni
+fslreorient2std ${pacman_data_path}20171109/raw_data_extrasession/mp2rage_inv1.nii.gz ${strAnat}mp2rage_inv1
+fslreorient2std ${pacman_data_path}20171109/raw_data_extrasession/mp2rage_pdw.nii.gz ${strAnat}mp2rage_pdw
+fslreorient2std ${pacman_data_path}20171109/raw_data_extrasession/mp2rage_t1.nii.gz ${strAnat}mp2rage_t1
+fslreorient2std ${pacman_data_path}20171109/raw_data_extrasession/mp2rage_uni.nii.gz ${strAnat}mp2rage_uni
 #------------------------------------------------------------------------------

@@ -10,31 +10,31 @@
 # *** Define paths:
 
 # Session ID:
-strSess="20171211"
+# strSess="20171211"
 
 # Parent directory:
-strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/${strSess}/nii"
+strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii"
 
 # BIDS directory:
-strBidsDir="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/BIDS/"
+strBidsDir="${pacman_data_path}BIDS/"
 
 # BIDS subject ID:
-strBidsSess="sub-06"
+# strBidsSess="sub-06"
 
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"
 
 # Destination directory for functional data:
-strFunc="${strBidsDir}${strBidsSess}/func/"
+strFunc="${strBidsDir}${pacman_sub_id_bids}/func/"
 
 # Destination directory for same-phase-polarity SE images:
-strSe="${strBidsDir}${strBidsSess}/func_se/"
+strSe="${strBidsDir}${pacman_sub_id_bids}/func_se/"
 
 # Destination directory for opposite-phase-polarity SE images:
-strSeOp="${strBidsDir}${strBidsSess}/func_se_op/"
+strSeOp="${strBidsDir}${pacman_sub_id_bids}/func_se_op/"
 
 # Destination directory for mp2rage images:
-strAnat="${strBidsDir}${strBidsSess}/anat/"
+strAnat="${strBidsDir}${pacman_sub_id_bids}/anat/"
 #------------------------------------------------------------------------------
 
 
