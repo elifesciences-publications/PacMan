@@ -77,7 +77,7 @@ docker run \
     --spm version=12 matlab_version=R2017a \
     > /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/Dockerfile_PacMan_John.txt
 
-
+docker build -t dockerimage_pacman_john -f /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/Dockerfile_PacMan_John.txt .
 
 
 # Build image from dockerfile:
