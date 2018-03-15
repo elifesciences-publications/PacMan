@@ -47,7 +47,7 @@ then
 	:
 else
 	echo "---Automatic: Deface nii data in bids folder."
-	source ${strPathPrnt}/00_get_data/n_05_py_deface.sh
+	python ${strPathPrnt}/00_get_data/n_05_py_deface.py
 fi
 
 echo "---Automatic: Import nii data from bids."
