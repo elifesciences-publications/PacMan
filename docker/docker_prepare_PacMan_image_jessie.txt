@@ -21,7 +21,7 @@ docker run \
     --user=john \
     --miniconda \
         env_name="py_main" \
-        conda_install="python=2.7 numpy scipy pip" \
+        conda_install="python=2.7 numpy scipy pip scikit-image" \
         conda_opts="-c conda-forge" \
         activate=True \
     --run-bash "source activate py_main && pip install pyprf" \
