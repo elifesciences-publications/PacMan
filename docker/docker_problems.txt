@@ -3,6 +3,11 @@ http://www.fil.ion.ucl.ac.uk/spm/download/restricted/utopia/dev/
 
 Problem: fsl topup 5.0.9 not compatible with debian 9 (v5.1.0 perhaps is compatible, but not available in neurodebian).
 
+Problem:
+from skimage import morphology as skimrp
+from skimage.measure import label
+not accounted for.
+
 Dockerimages:
 
 /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_01.txt	               <-- Debian 9, FSL 5.0.9, SPM/MATLAB 2017a --- Problem: topup 5.0.9 does not work with debian 9

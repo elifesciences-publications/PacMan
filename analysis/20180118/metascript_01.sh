@@ -48,6 +48,7 @@ export pacman_anly_path
 export pacman_data_path
 export pacman_from_bids
 export pacman_wait
+export USER=john
 #-------------------------------------------------------------------------------
 
 
@@ -58,15 +59,14 @@ export pacman_wait
 # Environmental variables are passed in with the '-e' flag.
 docker run -it --rm \
     -v ${pacman_data_path}:${pacman_data_path} \
-    -v ${pacman_anly_path}:${pacman_anly_path}:ro \
+    -v ${pacman_anly_path}:${pacman_anly_path} \
     -e pacman_sub_id \
     -e pacman_sub_id_bids \
     -e pacman_anly_path \
     -e pacman_data_path \
     -e pacman_from_bids \
     -e pacman_wait \
-    dockerimage_pacman_jessie /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/docker_log.txt
-
-#    dockerimage_pacman_01 /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/docker_log.txt
+    -e USER \
+    dockerimage_pacman_jessie /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /home/john/Dropbox/Sonstiges/docker_log.txt
 #-------------------------------------------------------------------------------
 
