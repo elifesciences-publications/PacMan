@@ -1,0 +1,10 @@
+Problem: neurodocker compatible matlab version not available anymore.
+http://www.fil.ion.ucl.ac.uk/spm/download/restricted/utopia/dev/
+
+Problem: fsl topup 5.0.9 not compatible with debian 9 (v5.1.0 perhaps is compatible, but not available in neurodebian).
+
+Dockerimages:
+
+/home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_01.txt	               <-- Debian 9, FSL 5.0.9, SPM/MATLAB 2017a --- Problem: topup 5.0.9 does not work with debian 9
+/home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie.txt               <-- Debian 8, FSL 5.0.9, no SPM/MATLAB
+/home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie_Abomination.txt   <-- Debian 8, FSL 5.0.9 --- FAILS because SPM not available.

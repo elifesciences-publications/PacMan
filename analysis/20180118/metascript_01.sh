@@ -65,6 +65,8 @@ docker run -it --rm \
     -e pacman_data_path \
     -e pacman_from_bids \
     -e pacman_wait \
-    dockerimage_pacman_01 /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh
+    dockerimage_pacman_jessie /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/docker_log.txt
+
+#    dockerimage_pacman_01 /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/docker_log.txt
 #-------------------------------------------------------------------------------
 
