@@ -74,22 +74,22 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends libxext6 l
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && echo "Downloading MATLAB Compiler Runtime ..." \
-    && curl -sSL --retry 5 -o /tmp/mcr.zip https://www.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip \
+    && curl -sSL --retry 5 -o /tmp/mcr.zip https://www.mathworks.com/supportfiles/downloads/R2016b/deployment_files/R2016b/installers/glnxa64/MCR_R2016b_glnxa64_installer.zip \
     && unzip -q /tmp/mcr.zip -d /tmp/mcrtmp \
     && /tmp/mcrtmp/install -destinationFolder /opt/mcr -mode silent -agreeToLicense yes \
     && rm -rf /tmp/*
 
 # Install standalone SPM
 RUN echo "Downloading standalone SPM ..." \
-    && curl -sSL --retry 5 -o spm.zip http://www.fil.ion.ucl.ac.uk/spm/download/restricted/utopia/dev/spm12_latest_Linux_R2017a.zip \
+    && curl -sSL --retry 5 -o spm.zip http://www.fil.ion.ucl.ac.uk/spm/download/restricted/utopia/dev/spm12_r6876_Linux_R2016b.zip \
     && unzip -q spm.zip -d /opt \
     && chmod -R 777 /opt/spm* \
     && rm -rf spm.zip \
-    && /opt/spm12/run_spm12.sh /opt/mcr/v92/ quit \
-    && sed -i '$iexport SPMMCRCMD=\"/opt/spm12/run_spm12.sh /opt/mcr/v92/ script\"' $ND_ENTRYPOINT
-ENV MATLABCMD=/opt/mcr/v92/toolbox/matlab \
+    && /opt/spm12/run_spm12.sh /opt/mcr/v91/ quit \
+    && sed -i '$iexport SPMMCRCMD=\"/opt/spm12/run_spm12.sh /opt/mcr/v91/ script\"' $ND_ENTRYPOINT
+ENV MATLABCMD=/opt/mcr/v91/toolbox/matlab \
     FORCE_SPMMCR=1 \
-    LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/opt/mcr/v92/runtime/glnxa64:/opt/mcr/v92/bin/glnxa64:/opt/mcr/v92/sys/os/glnxa64:$LD_LIBRARY_PATH
+    LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/opt/mcr/v91/runtime/glnxa64:/opt/mcr/v91/bin/glnxa64:/opt/mcr/v91/sys/os/glnxa64:$LD_LIBRARY_PATH
 
 # Add command(s) to entrypoint
 RUN sed -i '$i. /etc/fsl/5.0/fsl.sh' $ND_ENTRYPOINT

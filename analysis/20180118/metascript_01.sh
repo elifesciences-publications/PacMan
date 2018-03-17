@@ -67,6 +67,6 @@ docker run -it --rm \
     -e pacman_from_bids \
     -e pacman_wait \
     -e USER \
-    dockerimage_pacman_jessie /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /home/john/Dropbox/Sonstiges/docker_log.txt
+    dockerimage_pacman_jessie_abomination /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /home/john/Dropbox/Sonstiges/docker_log.txt
 #-------------------------------------------------------------------------------
 
