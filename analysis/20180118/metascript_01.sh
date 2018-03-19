@@ -16,7 +16,7 @@ pacman_sub_id="20180118"
 pacman_sub_id_bids="sub-09"
 
 # Analysis parent directory (containing scripts):
-pacman_anly_path="/Users/john/1_PhD/GitHub/PacMan/analysis/"
+pacman_anly_path="/home/john/1_PhD/GitHub/PacMan/analysis/"
 
 # Data parent directory (containing MRI data). If working with the BIDS data,
 # this data should be placed here (i.e. this folder should contain a folder
@@ -35,19 +35,23 @@ pacman_from_bids=false
 # already available (when re-running the analysis), these breaks can be skipped.
 # Set to 'true' if script should wait.
 pacman_wait=false
+
+# Number of parallel processes to use (for pRF finding):
+pacman_cpu="11"
 #-------------------------------------------------------------------------------
 
 
 #-------------------------------------------------------------------------------
 # Export paths
 
-# Export paths so that all other scripts can use them.
+# Export paths and variables so that all other scripts can use them.
 export pacman_sub_id
 export pacman_sub_id_bids
 export pacman_anly_path
 export pacman_data_path
 export pacman_from_bids
 export pacman_wait
+export pacman_cpu
 export USER=john
 #-------------------------------------------------------------------------------
 
@@ -66,7 +70,8 @@ docker run -it --rm \
     -e pacman_data_path \
     -e pacman_from_bids \
     -e pacman_wait \
+    -e pacman_cpu \
     -e USER \
-    dockerimage_pacman_jessie_abomination /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /home/john/Dropbox/Sonstiges/docker_log.txt
+    dockerimage_pacman_jessie /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /home/john/Dropbox/Sonstiges/docker_log_${pacman_sub_id}.txt
 #-------------------------------------------------------------------------------
 

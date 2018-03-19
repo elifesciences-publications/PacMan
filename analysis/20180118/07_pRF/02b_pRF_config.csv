@@ -66,7 +66,7 @@ lgcLinTrnd = True
 varNumVol = 400
 
 # Number of processes to run in parallel:
-varPar = 11
+varPar = PLACEHOLDER_FOR_CPU_USAGE
 
 # Size of high-resolution visual space model in which the pRF models are
 # created (x- and y-dimension). The x and y dimensions specified here need to
@@ -81,13 +81,13 @@ varVslSpcSzeY = 300
 # functional runs. The order of functional volumes, and their number, has to
 # correspond to the order and number of PNG files containing the stimulus
 # information. Note: Do not insert a line break.
-lstPathNiiFunc = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/feat_level_1/func_07.feat/filtered_func_data.nii.gz']  #noqa
+lstPathNiiFunc = ['PLACEHOLDER_FOR_DATA_PATHPLACEHOLDER_FOR_SUBJECT_ID/nii/feat_level_1/func_07.feat/filtered_func_data.nii.gz']  #noqa
 
 # Path of mask (to restrict pRF model finding):
-strPathNiiMask = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/retinotopy/mask/brainmask.nii.gz'  #noqa
+strPathNiiMask = 'PLACEHOLDER_FOR_DATA_PATHPLACEHOLDER_FOR_SUBJECT_ID/nii/retinotopy/mask/brainmask.nii.gz'  #noqa
 
 # Output basename:
-strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/retinotopy/pRF_results/pRF_results'  #noqa
+strPathOut = 'PLACEHOLDER_FOR_DATA_PATHPLACEHOLDER_FOR_SUBJECT_ID/nii/retinotopy/pRF_results/pRF_results'  #noqa
 
 # Which version to use for pRF finding. 'numpy' or 'cython' for pRF finding on
 # CPU, 'gpu' for using GPU.
@@ -102,7 +102,7 @@ lgcCrteMdl = False
 # Basename of the 'binary stimulus files'. The files need to be in png
 # format and number in the order of their presentation during the
 # experiment.
-strPathPng = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/pyprf_Metadata/pRF_stimuli/run_01_frame_'  #noqa
+strPathPng = 'PLACEHOLDER_FOR_DATA_PATHBIDS/stimuli/pyprf/pRF_stimuli/run_01_frame_'
 
 # Start index of PNG files. For instance, `varStrtIdx = 0` if the name of
 # the first PNG file is `file_000.png`, or `varStrtIdx = 1` if it is
@@ -114,6 +114,6 @@ varStrtIdx = 1
 # `file_0007.png`.
 varZfill = 3
 
-# Path to npy file with pRF time course models (to save or laod). Without file
-# extension.
-strPathMdl = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/pyprf_Metadata/pRF_time_course_models/pRF_model_tc'  #noqa
+# Path to npy file with pRF time course models (to save or to load). Without
+# file extension.
+strPathMdl = 'PLACEHOLDER_FOR_DATA_PATHBIDS/stimuli/pyprf/pRF_time_course_models/pRF_model_tc'
