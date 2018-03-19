@@ -12,9 +12,7 @@ Dockerimages:
 
 /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_01.txt	               <-- Debian 9, FSL 5.0.9, SPM/MATLAB 2017a --- Problem: topup 5.0.9 does not work with debian 9
 /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie.txt               <-- Debian 8, FSL 5.0.9, no SPM/MATLAB
-/home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie_Abomination.txt   <-- Debian 8, FSL 5.0.9, spm12_r6876_Linux_R2016b.zip = v91
+/home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie_Modified.txt   <-- Debian 8, FSL 5.0.9, spm12_r7219_Linux_R2017b.zip = v93
 
+https://nl.mathworks.com/products/compiler/matlab-runtime.html
 
-spm12_r6876_Linux_R2016b.zip
-mcr version from v92 to v91
-docker build -t dockerimage_pacman_jessie_abomination -f /Users/john/1_PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie_Abomination.txt .

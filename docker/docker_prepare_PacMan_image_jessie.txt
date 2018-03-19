@@ -36,29 +36,53 @@ docker run \
     --run-bash "echo \"source activate py_main\" >> /home/john/.bashrc" \
     --run-bash "echo \"source activate py_main\" >> /home/john/.profile" \
     --workdir /home/john \
-    > /Users/john/1_PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie.txt
+    > /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie.txt
 
-#    --spm version=12 matlab_version=R2018a \
+# Because of neurodocker bug relating to SPM and MRC version numbers,
+# `Dockerfile_PacMan_Jessie.txt` needs to be modified to include th following
+# code (instead of `--spm version=12 matlab_version=R2018a \`):
+
+```
+# Install NeuroDebian packages
+RUN apt-get update -qq && apt-get install -yq --no-install-recommends dcm2niix fsl-complete \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+#----------------------
+# Install MCR and SPM12
+#----------------------
+# Install MATLAB Compiler Runtime
+RUN apt-get update -qq && apt-get install -yq --no-install-recommends libxext6 libxt6 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && echo "Downloading MATLAB Compiler Runtime ..." \
+    && curl -sSL --retry 5 -o /tmp/mcr.zip https://www.mathworks.com/supportfiles/downloads/R2017b/deployment_files/R2017b/installers/glnxa64/MCR_R2017b_glnxa64_installer.zip \
+    && unzip -q /tmp/mcr.zip -d /tmp/mcrtmp \
+    && /tmp/mcrtmp/install -destinationFolder /opt/mcr -mode silent -agreeToLicense yes \
+    && rm -rf /tmp/*
+
+# Install standalone SPM
+RUN echo "Downloading standalone SPM ..." \
+    && curl -sSL --retry 5 -o spm.zip http://www.fil.ion.ucl.ac.uk/spm/download/restricted/bids/spm12_r7219_Linux_R2017b.zip \
+    && unzip -q spm.zip -d /opt \
+    && chmod -R 777 /opt/spm* \
+    && rm -rf spm.zip \
+    && /opt/spm12/run_spm12.sh /opt/mcr/v93/ quit \
+    && sed -i '$iexport SPMMCRCMD=\"/opt/spm12/run_spm12.sh /opt/mcr/v93/ script\"' $ND_ENTRYPOINT
+ENV MATLABCMD=/opt/mcr/v93/toolbox/matlab \
+    FORCE_SPMMCR=1 \
+    LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/opt/mcr/v93/runtime/glnxa64:/opt/mcr/v93/bin/glnxa64:/opt/mcr/v93/sys/os/glnxa64:$LD_LIBRARY_PATH
+```
 
 # Build image from dockerfile:
 cd /home/john/PhD/GitHub/PacMan/docker
-# docker build -t dockerimage_pacman_jessie -f /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie.txt .
-docker build -t dockerimage_pacman_jessie_abomination -f /Users/john/1_PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie_Abomination.txt .
+docker build -t dockerimage_pacman_jessie -f /home/john/PhD/GitHub/PacMan/docker/Dockerfile_PacMan_Jessie_Modified.txt .
 
 # Run docker from image with shared folders (analysis folder is read-only):
 docker run -it --rm \
     -v /media/:/media/ \
     -v /home/john/PhD/GitHub/PacMan/analysis/:/home/john/PhD/GitHub/PacMan/analysis/:ro \
-    dockerimage_pacman_jessie_abomination bash
+    dockerimage_pacman_jessie bash
 
 # Save image to tar file:
 docker save dockerimage_pacman_jessie -o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/dockerimage_pacman_jessie.tar
-
-
-
-# Run PacMan SPM moco:
-/opt/spm12/run_spm12.sh /opt/mcr/v92/ batch /media/sf_D_DRIVE/n_06a_spm_create_moco_batch.m
-
-# Using SPM with MATLAB Common Runtime
-# http://nipype.readthedocs.io/en/latest/users/spmmcr.html
-

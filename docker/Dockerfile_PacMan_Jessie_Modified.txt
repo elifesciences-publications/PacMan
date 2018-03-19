@@ -5,9 +5,9 @@
 # pull request on our GitHub repository:
 #     https://github.com/kaczmarj/neurodocker
 #
-# Timestamp: 2018-03-15 14:18:36
+# Timestamp: 2018-03-17 12:29:08
 
-FROM debian:stretch
+FROM debian:jessie
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -54,7 +54,7 @@ RUN apt-get update -qq \
 RUN apt-get update -qq && apt-get install -yq --no-install-recommends dirmngr gnupg \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && curl -sSL http://neuro.debian.net/lists/stretch.de-md.full \
+    && curl -sSL http://neuro.debian.net/lists/jessie.de-md.full \
     > /etc/apt/sources.list.d/neurodebian.sources.list \
     && curl -sSL https://dl.dropbox.com/s/zxs209o955q6vkg/neurodebian.gpg \
     | apt-key add - \
@@ -74,22 +74,22 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends libxext6 l
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && echo "Downloading MATLAB Compiler Runtime ..." \
-    && curl -sSL --retry 5 -o /tmp/mcr.zip https://www.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip \
+    && curl -sSL --retry 5 -o /tmp/mcr.zip https://www.mathworks.com/supportfiles/downloads/R2017b/deployment_files/R2017b/installers/glnxa64/MCR_R2017b_glnxa64_installer.zip \
     && unzip -q /tmp/mcr.zip -d /tmp/mcrtmp \
     && /tmp/mcrtmp/install -destinationFolder /opt/mcr -mode silent -agreeToLicense yes \
     && rm -rf /tmp/*
 
 # Install standalone SPM
 RUN echo "Downloading standalone SPM ..." \
-    && curl -sSL --retry 5 -o spm.zip http://www.fil.ion.ucl.ac.uk/spm/download/restricted/utopia/dev/spm12_latest_Linux_R2017a.zip \
+    && curl -sSL --retry 5 -o spm.zip http://www.fil.ion.ucl.ac.uk/spm/download/restricted/bids/spm12_r7219_Linux_R2017b.zip \
     && unzip -q spm.zip -d /opt \
     && chmod -R 777 /opt/spm* \
     && rm -rf spm.zip \
-    && /opt/spm12/run_spm12.sh /opt/mcr/v92/ quit \
-    && sed -i '$iexport SPMMCRCMD=\"/opt/spm12/run_spm12.sh /opt/mcr/v92/ script\"' $ND_ENTRYPOINT
-ENV MATLABCMD=/opt/mcr/v92/toolbox/matlab \
+    && /opt/spm12/run_spm12.sh /opt/mcr/v93/ quit \
+    && sed -i '$iexport SPMMCRCMD=\"/opt/spm12/run_spm12.sh /opt/mcr/v93/ script\"' $ND_ENTRYPOINT
+ENV MATLABCMD=/opt/mcr/v93/toolbox/matlab \
     FORCE_SPMMCR=1 \
-    LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/opt/mcr/v92/runtime/glnxa64:/opt/mcr/v92/bin/glnxa64:/opt/mcr/v92/sys/os/glnxa64:$LD_LIBRARY_PATH
+    LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/opt/mcr/v93/runtime/glnxa64:/opt/mcr/v93/bin/glnxa64:/opt/mcr/v93/sys/os/glnxa64:$LD_LIBRARY_PATH
 
 # Add command(s) to entrypoint
 RUN sed -i '$i. /etc/fsl/5.0/fsl.sh' $ND_ENTRYPOINT
@@ -120,6 +120,7 @@ RUN conda create -y -q --name py_main -c conda-forge python=2.7 \
                                                      numpy \
                                                      scipy \
                                                      pip \
+                                                     scikit-image \
     && sync && conda clean -tipsy && sync \
     && sed -i '$isource activate py_main' $ND_ENTRYPOINT
 
@@ -167,7 +168,7 @@ RUN echo '{ \
     \n  "instructions": [ \
     \n    [ \
     \n      "base", \
-    \n      "debian:stretch" \
+    \n      "debian:jessie" \
     \n    ], \
     \n    [ \
     \n      "user", \
@@ -189,16 +190,9 @@ RUN echo '{ \
     \n    [ \
     \n      "neurodebian", \
     \n      { \
-    \n        "os_codename": "stretch", \
+    \n        "os_codename": "jessie", \
     \n        "download_server": "germany-magdeburg", \
     \n        "pkgs": "dcm2niix fsl-complete" \
-    \n      } \
-    \n    ], \
-    \n    [ \
-    \n      "spm", \
-    \n      { \
-    \n        "version": "12", \
-    \n        "matlab_version": "R2017a" \
     \n      } \
     \n    ], \
     \n    [ \
@@ -215,7 +209,7 @@ RUN echo '{ \
     \n      "miniconda", \
     \n      { \
     \n        "env_name": "py_main", \
-    \n        "conda_install": "python=2.7 numpy scipy pip", \
+    \n        "conda_install": "python=2.7 numpy scipy pip scikit-image", \
     \n        "conda_opts": "-c conda-forge", \
     \n        "activate": true \
     \n      } \
@@ -269,6 +263,6 @@ RUN echo '{ \
     \n      "/home/john" \
     \n    ] \
     \n  ], \
-    \n  "generation_timestamp": "2018-03-15 14:18:36", \
+    \n  "generation_timestamp": "2018-03-17 12:29:08", \
     \n  "neurodocker_version": "0.3.2" \
     \n}' > /neurodocker/neurodocker_specs.json
