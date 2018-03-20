@@ -1,0 +1,19 @@
+# Conversion of dicom to nii:
+
+dcm2niix \
+-6 \
+-b y \
+-ba y \
+-f PROTOCOL_%p_SERIES_%3s \
+-g n \
+-i n \
+-m n \
+-o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/nii_distcor/raw_data/ \
+-p n \
+-s n \
+-t n \
+-v 0 \
+-x n \
+-z y \
+/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171023/dicoms/
+
