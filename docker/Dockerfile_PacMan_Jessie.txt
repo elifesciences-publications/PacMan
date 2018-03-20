@@ -5,7 +5,7 @@
 # pull request on our GitHub repository:
 #     https://github.com/kaczmarj/neurodocker
 #
-# Timestamp: 2018-03-20 13:30:44
+# Timestamp: 2018-03-20 19:48:33
 
 FROM debian:jessie
 
@@ -63,7 +63,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends dirmngr gn
     && apt-get update
 
 # Install NeuroDebian packages
-RUN apt-get update -qq && apt-get install -yq --no-install-recommends dcm2niix fsl \
+RUN apt-get update -qq && apt-get install -yq --no-install-recommends dcm2niix fsl-complete \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -169,7 +169,7 @@ RUN echo '{ \
     \n      { \
     \n        "os_codename": "jessie", \
     \n        "download_server": "germany-magdeburg", \
-    \n        "pkgs": "dcm2niix fsl" \
+    \n        "pkgs": "dcm2niix fsl-complete" \
     \n      } \
     \n    ], \
     \n    [ \
@@ -240,6 +240,6 @@ RUN echo '{ \
     \n      "/home/john" \
     \n    ] \
     \n  ], \
-    \n  "generation_timestamp": "2018-03-20 13:30:44", \
+    \n  "generation_timestamp": "2018-03-20 19:48:33", \
     \n  "neurodocker_version": "0.3.2" \
     \n}' > /neurodocker/neurodocker_specs.json

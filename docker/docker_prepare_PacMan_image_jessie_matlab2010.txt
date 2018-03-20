@@ -16,7 +16,7 @@ docker run \
     -p apt \
     --user=root \
     --install gcc g++ tree nano htop rsync pigz git file \
-    --neurodebian os_codename="jessie" download_server="germany-magdeburg" pkgs="dcm2niix fsl" \
+    --neurodebian os_codename="jessie" download_server="germany-magdeburg" pkgs="dcm2niix fsl-complete" \
     --add-to-entrypoint "source /etc/fsl/5.0/fsl.sh" \
     --user=john \
     --miniconda \
