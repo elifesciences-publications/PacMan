@@ -16,7 +16,7 @@ pacman_sub_id="20180118"
 pacman_sub_id_bids="sub-09"
 
 # Analysis parent directory (containing scripts):
-pacman_anly_path="/home/john/1_PhD/GitHub/PacMan/analysis/"
+pacman_anly_path="/home/john/PhD/GitHub/PacMan/analysis/"
 
 # Data parent directory (containing MRI data). If working with the BIDS data,
 # this data should be placed here (i.e. this folder should contain a folder
@@ -72,6 +72,7 @@ docker run -it --rm \
     -e pacman_wait \
     -e pacman_cpu \
     -e USER \
-    dockerimage_pacman_jessie /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /home/john/Dropbox/Sonstiges/docker_log_${pacman_sub_id}.txt
+    dockerimage_pacman_jessie /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02b.sh
+#    dockerimage_pacman_jessie /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /home/john/Dropbox/Sonstiges/docker_log_${pacman_sub_id}.txt
 #-------------------------------------------------------------------------------
 

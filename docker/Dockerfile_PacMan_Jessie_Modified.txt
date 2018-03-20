@@ -5,7 +5,7 @@
 # pull request on our GitHub repository:
 #     https://github.com/kaczmarj/neurodocker
 #
-# Timestamp: 2018-03-17 12:29:08
+# Timestamp: 2018-03-20 13:30:44
 
 FROM debian:jessie
 
@@ -43,6 +43,7 @@ RUN apt-get update -qq \
                                                      rsync \
                                                      pigz \
                                                      git \
+                                                     file \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -62,7 +63,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends dirmngr gn
     && apt-get update
 
 # Install NeuroDebian packages
-RUN apt-get update -qq && apt-get install -yq --no-install-recommends dcm2niix fsl-complete \
+RUN apt-get update -qq && apt-get install -yq --no-install-recommends dcm2niix fsl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -92,7 +93,7 @@ ENV MATLABCMD=/opt/mcr/v93/toolbox/matlab \
     LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/opt/mcr/v93/runtime/glnxa64:/opt/mcr/v93/bin/glnxa64:/opt/mcr/v93/sys/os/glnxa64:$LD_LIBRARY_PATH
 
 # Add command(s) to entrypoint
-RUN sed -i '$i. /etc/fsl/5.0/fsl.sh' $ND_ENTRYPOINT
+RUN sed -i '$isource /etc/fsl/5.0/fsl.sh' $ND_ENTRYPOINT
 
 # Create new user: john
 RUN useradd --no-user-group --create-home --shell /bin/bash john
@@ -184,7 +185,8 @@ RUN echo '{ \
     \n        "htop", \
     \n        "rsync", \
     \n        "pigz", \
-    \n        "git" \
+    \n        "git", \
+    \n        "file" \
     \n      ] \
     \n    ], \
     \n    [ \
@@ -192,13 +194,13 @@ RUN echo '{ \
     \n      { \
     \n        "os_codename": "jessie", \
     \n        "download_server": "germany-magdeburg", \
-    \n        "pkgs": "dcm2niix fsl-complete" \
+    \n        "pkgs": "dcm2niix fsl" \
     \n      } \
     \n    ], \
     \n    [ \
     \n      "add_to_entrypoint", \
     \n      [ \
-    \n        ". /etc/fsl/5.0/fsl.sh" \
+    \n        "source /etc/fsl/5.0/fsl.sh" \
     \n      ] \
     \n    ], \
     \n    [ \
@@ -263,6 +265,6 @@ RUN echo '{ \
     \n      "/home/john" \
     \n    ] \
     \n  ], \
-    \n  "generation_timestamp": "2018-03-17 12:29:08", \
+    \n  "generation_timestamp": "2018-03-20 13:30:44", \
     \n  "neurodocker_version": "0.3.2" \
     \n}' > /neurodocker/neurodocker_specs.json

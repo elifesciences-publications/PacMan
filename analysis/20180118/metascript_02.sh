@@ -93,13 +93,13 @@ fi
 fslchfiletype \
    NIFTI \
    ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03b_${pacman_sub_id}_spm_refweight \
-   ${pacman_data_path}${pacman_sub_id}/nii_distcor/spm_reg/ref_weighting/n_03b_${pacman_sub_id}_spm_refweight
+   ${pacman_data_path}${pacman_sub_id}/nii/spm_reg/ref_weighting/n_03b_${pacman_sub_id}_spm_refweight
 
 # Copy reference weight for opposite-phase encoding data to spm directory:
 fslchfiletype \
    NIFTI \
    ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03d_${pacman_sub_id}_spm_refweight_op \
-   ${pacman_data_path}${pacman_sub_id}/nii_distcor/spm_reg_op/ref_weighting/n_03d_${pacman_sub_id}_spm_refweight_op
+   ${pacman_data_path}${pacman_sub_id}/nii/spm_reg_op/ref_weighting/n_03d_${pacman_sub_id}_spm_refweight_op
 
 echo "---Automatic: Run SPM motion correction on functional data"
 # matlab -nodisplay -nojvm -nosplash -nodesktop \
@@ -236,10 +236,11 @@ date
 
 echo "---Automatic: Prepare pRF analysis."
 python ${strPathPrnt}07_pRF/01_py_prepare_prf.py
+source ${strPathPrnt}07_pRF/02a_prepare_pRF_config.sh
 date
 
 echo "---Automatic: Perform pRF analysis with pyprf"
-pyprf -config ${strPathPrnt}07_pRF/02_pRF_config_volumesmoothing.csv
+pyprf -config ${strPathPrnt}07_pRF/02b_pRF_config_sed.csv
 date
 
 echo "---Automatic: Upsample pRF results."
