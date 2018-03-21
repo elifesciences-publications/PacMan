@@ -288,8 +288,8 @@ fi
 cp ${pacman_anly_path}${pacman_sub_id}/06_mp2rage/n_04b_${pacman_sub_id}_pwd_brainmask.nii.gz \
    ${pacman_data_path}${pacman_sub_id}/nii/mp2rage/03_reg/02_brainmask/
 
-echo "---Automatic: Upsample combined mean for MP2RAGE registration."
-source ${strPathPrnt}06_mp2rage/n_05_upsample_mean_epi.sh
+echo "---Automatic: Upsample & smooth mean EPI before MP2RAGE registration."
+source ${strPathPrnt}06_mp2rage/n_05_prepare_mean_epi.sh
 date
 
 echo "---Automatic: Prepare MP2RAGE to combined mean registration pipeline."
