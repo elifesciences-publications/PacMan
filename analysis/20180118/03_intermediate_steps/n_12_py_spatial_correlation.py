@@ -34,7 +34,7 @@ pacman_anly_path = str(os.environ['pacman_anly_path'])
 # Minimum acceptable correlation coefficient. If the mean correlation
 # coefficient of any run is below this value, the run is highlighted in the
 # graph.
-varThr = 0.93
+varThr = 0.9
 
 # Dictionary with subject IDs and run IDs for each subject. (For some subjects,
 # runs are excluded at an earlier stage, e.g. because of low behavioural
@@ -60,8 +60,11 @@ strPathOut = (pacman_data_path
 # weighted highly. (Subject ID left open twice.)
 lgcMsk = True
 if lgcMsk:
-    strPathMsk = (pacman_data_path
-                  + '{}/nii/spm_reg_reference_weighting/n_06b_{}_spm_refweight.nii.gz')  #noqa
+    strPathMsk = (pacman_anly_path
+                  + '{}'
+                  + '/01_preprocessing/n_03b_'
+                  + '{}'
+                  + '_spm_refweight.nii.gz')
 
 # *** Loop through subjects:
 
