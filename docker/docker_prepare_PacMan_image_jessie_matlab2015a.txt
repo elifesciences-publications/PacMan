@@ -96,7 +96,7 @@ docker build -t dockerimage_pacman_jessie_mcr2015 -f /home/john/PhD/GitHub/PacMa
 docker run -it --rm \
     -v /media/:/media/ \
     -v /home/john/PhD/GitHub/PacMan/analysis/:/home/john/PhD/GitHub/PacMan/analysis/:ro \
-    dockerimage_pacman_jessie bash
+    dockerimage_pacman_jessie_mcr2015 bash
 
 # Save image to tar file:
-docker save dockerimage_pacman_jessie -o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/dockerimage_pacman_jessie.tar
+docker save dockerimage_pacman_jessie_mcr2015 -o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/dockerimage_pacman_jessie_mcr2015.tar

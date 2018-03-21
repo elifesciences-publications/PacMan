@@ -2,10 +2,10 @@
 
 
 ###############################################################################
-# The purpose of this script is to upsample the mean EPI image before         #
-# registration of MP2RAGE to mean EPI. The reason for this is that the        #
-# MP2RAGE image is of a higher resolution (0.7 mm iso) than the mean EPI      #
-# image (0.8 mm iso). Thus, registration of MP2RAGE to mean EPI without       #
+# Upsample and smooth (anisotropic diffusion smoothing) the mean EPI image    #
+# before registration of MP2RAGE to mean EPI. The reason for upsampling is    #
+# that the MP2RAGE image is of a higher resolution (0.7 mm iso) than the mean #
+# EPI image (0.8 mm iso). Thus, registration of MP2RAGE to mean EPI without   #
 # previous upsampling would result in an implicit downsampling and loss of    #
 # information (the image would still have to be upsampled afterwards for      #
 # segmenataion, because segmentation is performed at a high resolution).      #
@@ -137,3 +137,26 @@ cd "${strPathOrig}"
 
 done
 # -----------------------------------------------------------------------------
+
+
+# -----------------------------------------------------------------------------
+# *** Smoothing
+
+# Perform anisotropic diffusion based smoothing in order to enhance contrast
+# between grey matter and white matter.
+
+# Activate segmentator conda environment
+source activate py_segmentator
+
+# Perform smoothing:
+segmentator_filters \
+    ${strPthOut}${strNmeIn}.nii.gz \
+    --smoothing cCED \
+    --nr_iterations 7 \
+    --save_every 7
+
+# Rename output:
+rm ${strPthOut}${strNmeIn}.nii.gz
+mv -T ${strPthOut}${strNmeIn}*cCED*.nii.gz ${strPthOut}${strNmeIn}.nii.gz
+# -----------------------------------------------------------------------------
+

@@ -121,7 +121,7 @@ set fmri(temphp_yn) 1
 set fmri(templp_yn) 0
 
 # MELODIC ICA data exploration
-set fmri(melodic_yn) 1
+set fmri(melodic_yn) 0
 
 # Carry out main stats?
 set fmri(stats_yn) 0

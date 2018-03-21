@@ -72,6 +72,6 @@ docker run -it --rm \
     -e pacman_wait \
     -e pacman_cpu \
     -e USER \
-    dockerimage_pacman_jessie_mcr2016 /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /home/john/Dropbox/Sonstiges/docker_log_${pacman_sub_id}.txt
+    dockerimage_pacman_jessie_mcr2015 /home/john/PhD/GitHub/PacMan/analysis/20180118/metascript_02.sh &> /home/john/Dropbox/Sonstiges/docker_log_${pacman_sub_id}.txt
 #-------------------------------------------------------------------------------
 
