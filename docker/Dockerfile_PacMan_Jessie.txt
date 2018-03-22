@@ -5,7 +5,7 @@
 # pull request on our GitHub repository:
 #     https://github.com/kaczmarj/neurodocker
 #
-# Timestamp: 2018-03-21 19:26:07
+# Timestamp: 2018-03-22 14:36:46
 
 FROM debian:jessie
 
@@ -67,6 +67,31 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends dcm2niix f
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+#----------------------
+# Install MCR and SPM12
+#----------------------
+# Install MATLAB Compiler Runtime
+RUN apt-get update -qq && apt-get install -yq --no-install-recommends libxext6 libxt6 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && echo "Downloading MATLAB Compiler Runtime ..." \
+    && curl -sSL --retry 5 -o /tmp/mcr.zip https://www.mathworks.com/supportfiles/downloads/R2015a/deployment_files/R2015a/installers/glnxa64/MCR_R2015a_glnxa64_installer.zip \
+    && unzip -q /tmp/mcr.zip -d /tmp/mcrtmp \
+    && /tmp/mcrtmp/install -destinationFolder /opt/mcr -mode silent -agreeToLicense yes \
+    && rm -rf /tmp/*
+
+# Install standalone SPM
+RUN echo "Downloading standalone SPM ..." \
+    && curl -sSL --retry 5 -o spm.zip http://www.fil.ion.ucl.ac.uk/spm/download/restricted/utopia/dev/spm12_r6472_Linux_R2015a.zip \
+    && unzip -q spm.zip -d /opt \
+    && chmod -R 777 /opt/spm* \
+    && rm -rf spm.zip \
+    && /opt/spm12/run_spm12.sh /opt/mcr/v85/ quit \
+    && sed -i '$iexport SPMMCRCMD=\"/opt/spm12/run_spm12.sh /opt/mcr/v85/ script\"' $ND_ENTRYPOINT
+ENV MATLABCMD=/opt/mcr/v85/toolbox/matlab \
+    FORCE_SPMMCR=1 \
+    LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/opt/mcr/v85/runtime/glnxa64:/opt/mcr/v85/bin/glnxa64:/opt/mcr/v85/sys/os/glnxa64:$LD_LIBRARY_PATH
+
 # Add command(s) to entrypoint
 RUN sed -i '$isource /etc/fsl/5.0/fsl.sh' $ND_ENTRYPOINT
 
@@ -108,7 +133,7 @@ RUN conda create -y -q --name py_segmentator -c conda-forge python=2.7 \
     && sync && conda clean -tipsy && sync
 
 # User-defined BASH instruction
-RUN bash -c "mkdir /home/john/github                 && cd /home/john/github                 && git clone https://github.com/ingo-m/segmentator.git                 && cd /home/john/github/segmentator                 && git checkout devel-EED                 && source activate py_segmentator                 && pip install -r requirements.txt                 && python setup.py install"
+RUN bash -c "mkdir /home/john/github                 && cd /home/john/github                 && git clone https://github.com/ingo-m/segmentator.git                 && cd /home/john/github/segmentator                 && git checkout devel                 && source activate py_segmentator                 && pip install -r requirements.txt                 && python setup.py install"
 
 # User-defined BASH instruction
 RUN bash -c "source activate py_main && pip install pyprf"
@@ -212,7 +237,7 @@ RUN echo '{ \
     \n    ], \
     \n    [ \
     \n      "run_bash", \
-    \n      "mkdir /home/john/github                 && cd /home/john/github                 && git clone https://github.com/ingo-m/segmentator.git                 && cd /home/john/github/segmentator                 && git checkout devel-EED                 && source activate py_segmentator                 && pip install -r requirements.txt                 && python setup.py install" \
+    \n      "mkdir /home/john/github                 && cd /home/john/github                 && git clone https://github.com/ingo-m/segmentator.git                 && cd /home/john/github/segmentator                 && git checkout devel                 && source activate py_segmentator                 && pip install -r requirements.txt                 && python setup.py install" \
     \n    ], \
     \n    [ \
     \n      "run_bash", \
@@ -263,6 +288,6 @@ RUN echo '{ \
     \n      "/home/john" \
     \n    ] \
     \n  ], \
-    \n  "generation_timestamp": "2018-03-21 19:26:07", \
+    \n  "generation_timestamp": "2018-03-22 14:36:46", \
     \n  "neurodocker_version": "0.3.2" \
     \n}' > /neurodocker/neurodocker_specs.json
