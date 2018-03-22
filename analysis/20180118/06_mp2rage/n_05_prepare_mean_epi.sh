@@ -158,5 +158,7 @@ segmentator_filters \
 # Rename output:
 rm ${strPthOut}${strNmeIn}.nii.gz
 mv -T ${strPthOut}${strNmeIn}*cCED*.nii.gz ${strPthOut}${strNmeIn}.nii.gz
-# -----------------------------------------------------------------------------
 
+# Switch back to default conda environment
+source activate py_main
+# -----------------------------------------------------------------------------
