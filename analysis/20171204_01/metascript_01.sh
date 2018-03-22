@@ -10,10 +10,10 @@
 # ### Define paths
 
 # Subject ID:
-pacman_sub_id="20180118"
+pacman_sub_id="20171204_01"
 
 # BIDS subject ID:
-pacman_sub_id_bids="sub-09"
+pacman_sub_id_bids="sub-04"
 
 # Analysis parent directory (containing scripts):
 pacman_anly_path="/home/john/PhD/GitHub/PacMan/analysis/"
@@ -34,7 +34,7 @@ pacman_from_bids=false
 # until the user provides the manual input. However, if the manual input is
 # already available (when re-running the analysis), these breaks can be skipped.
 # Set to 'true' if script should wait.
-pacman_wait=false
+pacman_wait=true
 
 # Number of parallel processes to use (for pRF finding):
 pacman_cpu="11"
