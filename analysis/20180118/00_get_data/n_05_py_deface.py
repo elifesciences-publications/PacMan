@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Deface MP2RAGE images by setting anterior voxels to zero."""
+"""
+Deface MP2RAGE images and correct truncation error in T1 image.
+
+MP2RAGE images are anonymised (i.e. 'defaced') by setting anterior voxels to
+zero. Additionally, truncation errors in the T1 image are removed (high
+intensity voxels have a value of zero in these images, probably due to a bug
+in the reconstruction software). These voxels are set to the maximum value in
+the images.
+"""
 
 # Part of PacMan analysis pipeline.
 # Copyright (C) 2018  Ingo Marquardt
@@ -148,4 +156,56 @@ for strImage in lstIn:
                             )
     # Save nii:
     nb.save(niiOut, strPthTmp)
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# ### Correct truncation errors in T1 image
+
+print('-Correct truncation errors in T1 image')
+
+# Load environmental variables defining the input data path:
+# pacman_data_path = str(os.environ['pacman_data_path'])
+# pacman_sub_id_bids = str(os.environ['pacman_sub_id_bids'])
+
+# Full input data path:
+# strPathIn = (pacman_data_path
+#              + 'BIDS/'
+#              + pacman_sub_id_bids
+#              + '/anat/')
+
+# List of images to deface:
+lstIn = ['mp2rage_inv1.nii.gz',
+         'mp2rage_inv1_phase.nii.gz',
+         'mp2rage_pdw.nii.gz',
+         'mp2rage_pdw_phase.nii.gz',
+         'mp2rage_t1.nii.gz',
+         'mp2rage_uni.nii.gz']
+
+# Complete paths of images to load:
+strPthT1 = (strPathIn + 'mp2rage_t1.nii.gz')
+strPthPdw = (strPathIn + 'mp2rage_pdw.nii.gz')
+
+# Load images:
+aryNiiT1, objHdrT1, aryAffT1 = load_nii(strPthT1)
+aryNiiPwd, _, _ = load_nii(strPthPdw)
+
+# Minimum and maximum in T1 image:
+varMin = np.amin(aryNiiT1)
+varMax = np.amax(aryNiiT1)
+
+# Find voxels that are minimum (zero) in the T1 image, but not in the PDw
+# image, and set them to max:
+aryLgc01 = np.equal(aryNiiT1, varMin)
+aryLgc02 = np.not_equal(aryNiiPwd, varMin)
+aryLgc03 = np.logical_and(aryLgc01, aryLgc02)
+aryNiiT1[aryLgc03] = varMax
+
+# Create output nii object:
+niiT1Out = nb.Nifti1Image(aryNiiT1,
+                          aryAffT1,
+                          header=objHdrT1
+                          )
+# Save nii:
+nb.save(niiT1Out, strPthT1)
 # ------------------------------------------------------------------------------

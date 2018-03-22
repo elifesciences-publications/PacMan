@@ -104,13 +104,13 @@ fslchfiletype \
 echo "---Automatic: Run SPM motion correction on functional data"
 # matlab -nodisplay -nojvm -nosplash -nodesktop \
 #   -r "run('/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/01_preprocessing/n_06a_spm_create_moco_batch.m');"
-/opt/spm12/run_spm12.sh /opt/mcr/v93/ batch ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03a_spm_create_moco_batch.m
+/opt/spm12/run_spm12.sh /opt/mcr/v85/ batch ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03a_spm_create_moco_batch.m
 date
 
 echo "---Automatic: Run SPM motion correction on opposite-phase polarity data"
 # matlab -nodisplay -nojvm -nosplash -nodesktop \
 #   -r "run('/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/01_preprocessing/n_06c_spm_create_moco_batch_op.m');"
-/opt/spm12/run_spm12.sh /opt/mcr/v93/ batch ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03c_spm_create_moco_batch_op.m
+/opt/spm12/run_spm12.sh /opt/mcr/v85/ batch ${pacman_anly_path}${pacman_sub_id}/01_preprocessing/n_03c_spm_create_moco_batch_op.m
 date
 
 echo "---Automatic: Copy moco results"
@@ -263,7 +263,7 @@ date
 echo "---Automatic: SPM bias field correction."
 #matlab -nodisplay -nojvm -nosplash -nodesktop \
 #	-r "run('/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/06_mp2rage/n_02_spm_bf_correction.m');"
-/opt/spm12/run_spm12.sh /opt/mcr/v93/ batch ${pacman_anly_path}${pacman_sub_id}/06_mp2rage/n_02_spm_bf_correction.m
+/opt/spm12/run_spm12.sh /opt/mcr/v85/ batch ${pacman_anly_path}${pacman_sub_id}/06_mp2rage/n_02_spm_bf_correction.m
 date
 
 echo "---Automatic: Copy results of SPM bias field correction, and remove"
@@ -288,8 +288,8 @@ fi
 cp ${pacman_anly_path}${pacman_sub_id}/06_mp2rage/n_04b_${pacman_sub_id}_pwd_brainmask.nii.gz \
    ${pacman_data_path}${pacman_sub_id}/nii/mp2rage/03_reg/02_brainmask/
 
-echo "---Automatic: Upsample combined mean for MP2RAGE registration."
-source ${strPathPrnt}06_mp2rage/n_05_upsample_mean_epi.sh
+echo "---Automatic: Upsample & smooth mean EPI before MP2RAGE registration."
+source ${strPathPrnt}06_mp2rage/n_05_prepare_mean_epi.sh
 date
 
 echo "---Automatic: Prepare MP2RAGE to combined mean registration pipeline."
@@ -299,7 +299,7 @@ date
 echo "---Automatic: Register MP2RAGE image to mean EPI"
 #matlab -nodisplay -nojvm -nosplash -nodesktop \
 #	-r "run('/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/06_mp2rage/n_07_spm_create_corr_batch_prereg.m');"
-/opt/spm12/run_spm12.sh /opt/mcr/v93/ batch ${pacman_anly_path}${pacman_sub_id}/06_mp2rage/n_07_spm_create_corr_batch_prereg.m
+/opt/spm12/run_spm12.sh /opt/mcr/v85/ batch ${pacman_anly_path}${pacman_sub_id}/06_mp2rage/n_07_spm_create_corr_batch_prereg.m
 date
 
 echo "---Automatic: Postprocess SPM registration results."
