@@ -33,7 +33,8 @@ docker run \
                 && cd /home/john/github \
                 && git clone https://github.com/ingo-m/segmentator.git \
                 && cd /home/john/github/segmentator \
-                && git checkout devel \
+                && git checkout docker-EED \
+                && git checkout a77bcda769e9f252db8c6c9cf74047d901f4eca1 \
                 && source activate py_segmentator \
                 && pip install -r requirements.txt \
                 && python setup.py install" \
