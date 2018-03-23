@@ -34,7 +34,7 @@ pacman_from_bids=false
 # until the user provides the manual input. However, if the manual input is
 # already available (when re-running the analysis), these breaks can be skipped.
 # Set to 'true' if script should wait.
-pacman_wait=true
+pacman_wait=false
 
 # Number of parallel processes to use (for pRF finding):
 pacman_cpu="11"
