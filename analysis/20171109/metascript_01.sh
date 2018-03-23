@@ -10,10 +10,10 @@
 # ### Define paths
 
 # Subject ID:
-pacman_sub_id="20180118"
+pacman_sub_id="20171109"
 
 # BIDS subject ID:
-pacman_sub_id_bids="sub-09"
+pacman_sub_id_bids="sub-02"
 
 # Analysis parent directory (containing scripts):
 pacman_anly_path="/home/john/PhD/GitHub/PacMan/analysis/"
