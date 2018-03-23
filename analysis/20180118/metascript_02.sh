@@ -291,6 +291,9 @@ then
 	echo "---Manual:"
 	cat ${strPathPrnt}06_mp2rage/n_04a_info_brainmask.txt
 	echo " "
+	echo "   Place the brain mask in the following folder:"
+	echo "   ${strPathPrnt}06_mp2rage/n_04b_${pacman_sub_id}_pwd_brainmask.nii.gz"
+	echo " "
 	echo "   Type 'go' to continue"
 	read -r -s -d $'g'
 	read -r -s -d $'o'
