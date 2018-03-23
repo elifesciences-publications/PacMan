@@ -129,9 +129,7 @@ strPathIn = (pacman_data_path
 
 # List of images to deface:
 lstIn = ['mp2rage_inv1.nii.gz',
-         'mp2rage_inv1_phase.nii.gz',
          'mp2rage_pdw.nii.gz',
-         'mp2rage_pdw_phase.nii.gz',
          'mp2rage_t1.nii.gz',
          'mp2rage_uni.nii.gz']
 
@@ -176,9 +174,7 @@ print('-Correct truncation errors in T1 image')
 
 # List of images to deface:
 lstIn = ['mp2rage_inv1.nii.gz',
-         'mp2rage_inv1_phase.nii.gz',
          'mp2rage_pdw.nii.gz',
-         'mp2rage_pdw_phase.nii.gz',
          'mp2rage_t1.nii.gz',
          'mp2rage_uni.nii.gz']
 

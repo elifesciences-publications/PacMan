@@ -41,8 +41,8 @@ cp ${strRaw}PROTOCOL_BP_ep3d_bold_func03_FOV_RL_SERIES_013_c32.json ${strFunc}fu
 cp ${strRaw}PROTOCOL_BP_ep3d_bold_func04_FOV_RL_SERIES_021_c32.json ${strFunc}func_04.json
 cp ${strRaw}PROTOCOL_BP_ep3d_bold_func05_FOV_RL_SERIES_023_c32.json ${strFunc}func_05.json
 cp ${strRaw}PROTOCOL_BP_ep3d_bold_func06_FOV_RL_SERIES_025_c32.json ${strFunc}func_06.json
-cp ${strRaw}PROTOCOL_BP_ep3d_bold_func07pRF_FOV_RL_SERIES_027_c32.json ${strFunc}func_07.json
-cp ${strRaw}PROTOCOL_BP_ep3d_bold_func08long_FOV_RL_SERIES_029_c32.json ${strFunc}func_08.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func07_pRF_FOV_RL_SERIES_027_c32.json ${strFunc}func_07.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func08_long_FOV_RL_SERIES_029_c32.json ${strFunc}func_08.json
 #------------------------------------------------------------------------------
 
 
