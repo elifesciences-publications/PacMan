@@ -26,7 +26,7 @@ format for faster access and to conserve disk space.
 import os
 from os import listdir
 import numpy as np
-from ds_loadVtkMulti import funcLoadVtkMulti
+from loadVtkMulti import funcLoadVtkMulti
 
 
 # *****************************************************************************
