@@ -30,7 +30,7 @@
 strPthCbs="${pacman_anly_path}${pacman_sub_id}/08_depthsampling/"
 
 # Location of segmentation files:
-seg_path="${strPthCbs}${PLACEHOLDER_SUBJECT_ID}_mp2rage_seg_${pacman_seg_version}"
+seg_path="${strPthCbs}${pacman_sub_id}_mp2rage_seg_${pacman_seg_version}"
 
 # Names of CBS layouts to run (xml files):
 aryCbs=(cbs_mp2rage_lh_equivol_retino_stats.LayoutXML \
@@ -57,6 +57,8 @@ strPthWd="${pacman_data_path}${pacman_sub_id}/cbs/cbs_wd"
 # ### Prepare xml layout files
 
 echo "-Depth sampling"
+
+date
 
 echo "--Prepare xml layouts"
 
@@ -88,7 +90,6 @@ echo "--CBS depth sampling"
 # \*.jar | sed 's#/home/john/mipav/#:/home/john/mipav/#' | tr -d '\n' | sed \
 # 's/^://'`"
 long_mipavjava_alias="/home/john/mipav/jre/bin/java -classpath /home/john/mipav/plugins/:/home/john/mipav/:`find /home/john/mipav/ -name \*.jar | sed 's#/home/john/mipav/#:/home/john/mipav/#' | tr -d '\n' | sed 's/^://'`"
-# alias mipavjava="${long_mipavjava_alias}"
 
 for idx01 in ${aryCbs[@]}
 do
@@ -131,4 +132,8 @@ do
     # Run the python script:
     python ${strPyTmp}
 done
+
+date
+
+echo "-Done,"
 #------------------------------------------------------------------------------

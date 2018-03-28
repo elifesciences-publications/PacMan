@@ -83,12 +83,5 @@ docker commit fd62205b8e96 dockerimage_cbs
 # Exit the docker container:
 exit
 
-
-
 # Save image to tar file:
 docker save dockerimage_cbs -o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/dockerimage_cbs.tar
-
-
-?
-#echo "export mipavjava" >> /home/john/.bashrc
-#echo "export mipavjava" >> /home/john/.profile
