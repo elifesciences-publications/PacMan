@@ -30,7 +30,7 @@ set fmri(featwatcher_yn) 0
 set fmri(sscleanup_yn) 0
 
 # Output directory
-set fmri(outputdir) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/feat_level_2/feat_level_2_PacMan_Static"
+set fmri(outputdir) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii/feat_level_2/feat_level_2_PacMan_Static"
 
 # TR(s)
 set fmri(tr) 3
@@ -267,10 +267,10 @@ set fmri(totalVoxels) 1413760
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/feat_level_1/func_03.feat/stats/cope1.nii.gz"
+set feat_files(1) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii/feat_level_1/func_03.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (2)
-set feat_files(2) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/nii/feat_level_1/func_06.feat/stats/cope1.nii.gz"
+set feat_files(2) "/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii/feat_level_1/func_06.feat/stats/cope1.nii.gz"
 
 # Add confound EVs text file
 set fmri(confoundevs) 0
