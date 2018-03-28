@@ -83,10 +83,12 @@ done
 echo "--CBS depth sampling"
 
 # Create an alias for mipav:
-alias mipavjava="/home/john/mipav/jre/bin/java -classpath \
-/home/john/mipav/plugins/:/home/john/mipav/:`find /home/john/mipav/ -name \
-\*.jar | sed 's#/home/john/mipav/#:/home/john/mipav/#' | tr -d '\n' | sed \
-'s/^://'`"
+# alias mipavjava="/home/john/mipav/jre/bin/java -classpath \
+# /home/john/mipav/plugins/:/home/john/mipav/:`find /home/john/mipav/ -name \
+# \*.jar | sed 's#/home/john/mipav/#:/home/john/mipav/#' | tr -d '\n' | sed \
+# 's/^://'`"
+long_mipavjava_alias="/home/john/mipav/jre/bin/java -classpath /home/john/mipav/plugins/:/home/john/mipav/:`find /home/john/mipav/ -name \*.jar | sed 's#/home/john/mipav/#:/home/john/mipav/#' | tr -d '\n' | sed 's/^://'`"
+# alias mipavjava="${long_mipavjava_alias}"
 
 for idx01 in ${aryCbs[@]}
 do
@@ -94,12 +96,13 @@ do
     mkdir ${strPthWd}
 
     # Absolute path of current CBS layout:
-    strPthCbsTmp=${strPthCbs}${idx01}
+    strPthCbsTmp=${strPthCbs}sed_${idx01}
 
     echo "---Running CBS layout: ${strPthCbsTmp}"
 
     # Run CBS layout through mipav:
-    mipavjava edu.jhu.ece.iacl.jist.cli.runLayout \
+    # mipavjava edu.jhu.ece.iacl.jist.cli.runLayout \
+    ${long_mipavjava_alias} edu.jhu.ece.iacl.jist.cli.runLayout \
     ${strPthCbsTmp} \
     -xRunOutOfProcess \
     -xJreLoc /home/john/mipav/jre/bin/java \
