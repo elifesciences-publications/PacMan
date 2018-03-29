@@ -57,7 +57,7 @@ export pacman_seg_version
 # Enable x11 clients (at the host)
 xhost +local:all
 
-# Run dockerfrom image with shared folders. Environmental variables are passed
+# Run docker from image with shared folders. Environmental variables are passed
 # in with the '-e' flag.
 docker run -it --rm \
     -e DISPLAY=$DISPLAY \

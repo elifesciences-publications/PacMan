@@ -33,22 +33,27 @@ CBS depth sampling has a python interface.
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+import os
 from os import listdir
 from os import rename
 
 
 # %% Define parameters
 
+# Load environmental variables defining the input data path:
+pacman_data_path = str(os.environ['pacman_data_path'])
+pacman_sub_id = str(os.environ['pacman_sub_id'])
+
 # Subject IDs & number of prefixes to remove for that subject:
-dicSubId = {'20180118': 6}
+dicSubId = {pacman_sub_id: 6}
 
 # Paths with files to be renamed (subject ID left open):
-lstPths = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/rh_era/control_dynamic/',
-           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/rh_era/pacman_dynamic/',
-           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/rh_era/pacman_static/',
-           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/lh_era/control_dynamic/',
-           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/lh_era/pacman_dynamic/',
-           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/lh_era/pacman_static/']  #noqa
+lstPths = [pacman_data_path + '{}/cbs/rh_era/control_dynamic/',
+           pacman_data_path + '{}/cbs/rh_era/pacman_dynamic/',
+           pacman_data_path + '{}/cbs/rh_era/pacman_static/',
+           pacman_data_path + '{}/cbs/lh_era/control_dynamic/',
+           pacman_data_path + '{}/cbs/lh_era/pacman_dynamic/',
+           pacman_data_path + '{}/cbs/lh_era/pacman_static/']
 
 # File type (suffix):
 strFleTpe = '.vtk'

@@ -32,15 +32,19 @@ from loadVtkMulti import funcLoadVtkMulti
 # *****************************************************************************
 # *** Parameters
 
+# Load environmental variables defining the input data path:
+pacman_data_path = str(os.environ['pacman_data_path'])
+pacman_sub_id = str(os.environ['pacman_sub_id'])
+
 # List of directories with vtk files to be converted:
-lstDir = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh_era/control_dynamic',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh_era/pacman_dynamic',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh_era/pacman_dynamic_long',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh_era/pacman_static',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/rh_era/control_dynamic',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/rh_era/pacman_dynamic',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/rh_era/pacman_dynamic_long',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/rh_era/pacman_static']
+lstDir = [(pacman_data_path + pacman_sub_id + '/cbs/lh_era/control_dynamic'),
+          (pacman_data_path + pacman_sub_id + '/cbs/lh_era/pacman_dynamic'),
+          (pacman_data_path + pacman_sub_id + '/cbs/lh_era/pacman_dynamic_long'),
+          (pacman_data_path + pacman_sub_id + '/cbs/lh_era/pacman_static'),
+          (pacman_data_path + pacman_sub_id + '/cbs/rh_era/control_dynamic'),
+          (pacman_data_path + pacman_sub_id + '/cbs/rh_era/pacman_dynamic'),
+          (pacman_data_path + pacman_sub_id + '/cbs/rh_era/pacman_dynamic_long'),
+          (pacman_data_path + pacman_sub_id + '/cbs/rh_era/pacman_static')]
 
 # Number of cortical depths:
 varNumDpth = 11

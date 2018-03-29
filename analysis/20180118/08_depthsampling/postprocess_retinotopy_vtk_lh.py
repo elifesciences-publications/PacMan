@@ -16,6 +16,7 @@ o'clock and moving clockwise); this may improve visualisation in paraview.
 
 # *****************************************************************************
 # *** Import modules
+import os
 import numpy as np
 import csv
 # *****************************************************************************
@@ -25,14 +26,24 @@ print('-VTK masking')
 # *****************************************************************************
 # *** Define parameters
 
+# Load environmental variables defining the input data path:
+pacman_data_path = str(os.environ['pacman_data_path'])
+pacman_sub_id = str(os.environ['pacman_sub_id'])
+
 # Path of the vtk file to be masked:
-strVtkIn = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh/polar_angle.vtk'
+strVtkIn = (pacman_data_path
+            + pacman_sub_id
+            + '/cbs/lh/polar_angle.vtk')
 
 # Output file path:
-strVtkOt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh/polar_angle_thr.vtk'
+strVtkOt = (pacman_data_path
+            + pacman_sub_id
+            + '/cbs/lh/polar_angle_thr.vtk')
 
 # Path of the vtk file used for thresholding (reference):
-strVtkRf = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh/R2_midGM.vtk'
+strVtkRf = (pacman_data_path
+            + pacman_sub_id
+            + '/cbs/lh/R2_midGM.vtk')
 
 # Lower threhold (vertices with a value below this in the reference image will
 # be set to the substitute value in the input vtk file):

@@ -33,18 +33,23 @@ CBS depth sampling has a python interface.
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+import os
 from os import listdir
 from os import rename
 
 
 # %% Define parameters
 
+# Load environmental variables defining the input data path:
+pacman_data_path = str(os.environ['pacman_data_path'])
+pacman_sub_id = str(os.environ['pacman_sub_id'])
+
 # Subject IDs & number of prefixes to remove for that subject:
-dicSubId = {'20180118': 9}
+dicSubId = {pacman_sub_id: 9}
 
 # Paths with files to be renamed (subject ID left open):
-lstPths = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/lh/',
-           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/rh/']  #noqa
+lstPths = [pacman_data_path + '{}/cbs/lh/',
+           pacman_data_path + '{}/cbs/rh/']  #noqa
 
 # File type (suffix):
 strFleTpe = '.vtk'
