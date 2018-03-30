@@ -10,13 +10,15 @@
 # ### Define paths
 
 # Subject ID:
-pacman_sub_id="20171109"
+pacman_sub_id="20171023"
 
 # BIDS subject ID:
-pacman_sub_id_bids="sub-02"
+pacman_sub_id_bids="sub-01"
 
 # Analysis parent directory (containing scripts):
-pacman_anly_path="/home/john/PhD/GitHub/PacMan/analysis/"
+# pacman_anly_path="/home/john/PhD/GitHub/PacMan/analysis/"
+pacman_anly_path="/Users/john/1_PhD/GitHub/PacMan/analysis/"
+
 
 # Data parent directory (containing MRI data). If working with the BIDS data,
 # this data should be placed here (i.e. this folder should contain a folder
@@ -34,7 +36,7 @@ pacman_from_bids=false
 # until the user provides the manual input. However, if the manual input is
 # already available (when re-running the analysis), these breaks can be skipped.
 # Set to 'true' if script should wait.
-pacman_wait=false
+pacman_wait=true
 
 # Number of parallel processes to use (for pRF finding):
 pacman_cpu="11"
