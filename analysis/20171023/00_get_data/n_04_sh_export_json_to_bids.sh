@@ -36,29 +36,31 @@ strAnat="${strBidsDir}${pacman_sub_id_bids}/anat/"
 # *** Copy metadata for functional images
 
 cp ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_SERIES_010_c32.json ${strFunc}func_01.json
-cp ${strRaw}PROTOCOL_BP_ep3d_bold_func02_FOV_RL_SERIES_012_c32.json ${strFunc}func_02.json
-cp ${strRaw}PROTOCOL_BP_ep3d_bold_func03_FOV_RL_SERIES_014_c32.json ${strFunc}func_03.json
-cp ${strRaw}PROTOCOL_BP_ep3d_bold_func04_FOV_RL_SERIES_022_c32.json ${strFunc}func_04.json
-cp ${strRaw}PROTOCOL_BP_ep3d_bold_func05_FOV_RL_SERIES_024_c32.json ${strFunc}func_05.json
-cp ${strRaw}PROTOCOL_BP_ep3d_bold_func06_FOV_RL_SERIES_026_c32.json ${strFunc}func_06.json
-cp ${strRaw}PROTOCOL_BP_ep3d_bold_func07_FOV_RL_pRF_SERIES_028_c32_e1.json ${strFunc}func_07.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run02_SERIES_012_c32.json ${strFunc}func_02.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run03_SERIES_014_c32.json ${strFunc}func_03.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run04_SERIES_022_c32.json ${strFunc}func_04.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run05_SERIES_024_c32.json ${strFunc}func_05.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run06_SERIES_026_c32.json ${strFunc}func_06.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_prf_run01_SERIES_028_c32.json ${strFunc}func_07.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run07_SERIES_030_c32.json ${strFunc}func_08.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run08_SERIES_032_c32.json ${strFunc}func_09.json
 #------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------
 # *** Copy metadata for opposite-phase-polarity SE images
 
-cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_LR_SERIES_007_c32_e1.json ${strSeOp}func_00.json
-cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_008_c32.json ${strSe}func_00.json
+cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_LR_SERIES_006_c32.json ${strSeOp}func_00.json
+cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_005_c32_e1.json ${strSe}func_00.json
 #------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------
 # *** Copy metadata for mp2rage images
 
-cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_015_c32.json ${strAnat}mp2rage_inv1.json
+cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_015_c32_e1.json ${strAnat}mp2rage_inv1.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_016_c32.json ${strAnat}mp2rage_inv1_phase.json
-cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_017_c32_e1.json ${strAnat}mp2rage_pdw.json
+cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_017_c32.json ${strAnat}mp2rage_pdw.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_018_c32.json ${strAnat}mp2rage_pdw_phase.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_019_c32.json ${strAnat}mp2rage_t1.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_020_c32.json ${strAnat}mp2rage_uni.json

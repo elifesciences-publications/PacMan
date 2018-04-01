@@ -60,30 +60,35 @@ fi
 #------------------------------------------------------------------------------
 # *** Copy functional data
 
+# The retinotopic mapping run is referred to as 'func_07'. The last two runs,
+# correpsonding to an additional control condition ('PacMan static'), are named
+# 'func_08' and 'func_09'.
 fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_SERIES_010_c32 ${strFunc}func_01
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func02_FOV_RL_SERIES_012_c32 ${strFunc}func_02
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func03_FOV_RL_SERIES_014_c32 ${strFunc}func_03
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func04_FOV_RL_SERIES_022_c32 ${strFunc}func_04
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func05_FOV_RL_SERIES_024_c32 ${strFunc}func_05
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func06_FOV_RL_SERIES_026_c32 ${strFunc}func_06
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func07_FOV_RL_pRF_SERIES_028_c32_e1 ${strFunc}func_07
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run02_SERIES_012_c32 ${strFunc}func_02
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run03_SERIES_014_c32 ${strFunc}func_03
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run04_SERIES_022_c32 ${strFunc}func_04
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run05_SERIES_024_c32 ${strFunc}func_05
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run06_SERIES_026_c32 ${strFunc}func_06
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_prf_run01_SERIES_028_c32 ${strFunc}func_07
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run07_SERIES_030_c32 ${strFunc}func_08
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run08_SERIES_032_c32 ${strFunc}func_09
 #------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------
 # *** Copy opposite-phase-polarity SE images
 
-fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_LR_SERIES_007_c32_e1 ${strSeOp}func_00
-fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_008_c32 ${strSe}func_00
+fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_LR_SERIES_006_c32 ${strSeOp}func_00
+fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_005_c32_e1 ${strSe}func_00
 #------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------
 # *** Copy mp2rage images
 
-fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_015_c32 ${strAnat}mp2rage_inv1
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_015_c32_e1 ${strAnat}mp2rage_inv1
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_016_c32 ${strAnat}mp2rage_inv1_phase
-fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_017_c32_e1 ${strAnat}mp2rage_pdw
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_017_c32 ${strAnat}mp2rage_pdw
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_018_c32 ${strAnat}mp2rage_pdw_phase
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_019_c32 ${strAnat}mp2rage_t1
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_020_c32 ${strAnat}mp2rage_uni

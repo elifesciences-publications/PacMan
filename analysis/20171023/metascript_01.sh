@@ -39,7 +39,7 @@ pacman_from_bids=false
 pacman_wait=true
 
 # Number of parallel processes to use (for pRF finding):
-pacman_cpu="11"
+pacman_cpu="4"
 #-------------------------------------------------------------------------------
 
 
@@ -74,6 +74,6 @@ docker run -it --rm \
     -e pacman_wait \
     -e pacman_cpu \
     -e USER \
-    dockerimage_pacman_jessie ${pacman_anly_path}${pacman_sub_id}/metascript_02.sh
+    dockerimage_pacman_jessie_formac ${pacman_anly_path}${pacman_sub_id}/metascript_02.sh
 #-------------------------------------------------------------------------------
 
