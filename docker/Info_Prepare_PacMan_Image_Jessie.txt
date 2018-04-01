@@ -102,4 +102,4 @@ docker run -it --rm \
     dockerimage_pacman_jessie bash
 
 # Save image to tar file:
-docker save dockerimage_pacman_jessie -o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/dockerimage_pacman_jessie.tar
+docker save -o /media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/Docker_Metadata/dockerimage_pacman_jessie.tar dockerimage_pacman_jessie
