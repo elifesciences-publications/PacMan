@@ -42,7 +42,8 @@ varThr = 0.95
 # Dictionary with subject IDs and run IDs for each subject. (For some subjects,
 # runs are excluded at an earlier stage, e.g. because of low behavioural
 # performance.)
-dicSubId = {pacman_sub_id: ['01', '02', '03', '04', '05', '06', '07']}
+dicSubId = {pacman_sub_id: ['01', '02', '03', '04', '05', '06', '07', '08',
+                            '09']}
 
 # The path of the 3D reference images (subject ID left open):
 strPathRef = (pacman_data_path +
