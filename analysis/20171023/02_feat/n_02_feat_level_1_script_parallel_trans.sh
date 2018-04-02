@@ -17,7 +17,9 @@ arySessionIDs=(func_01 \
                func_03 \
                func_04 \
                func_05 \
-               func_06)
+               func_06 \
+               func_08 \
+               func_09)
 
 for index01 in ${arySessionIDs[@]}
 do
@@ -38,20 +40,24 @@ done
 
 echo "-----------First level feat:-----------"
 
-echo "---Runs 01, 02, 03"
+echo "---Runs 01, 02, 03, 04"
 
 date
+
 feat "${str_path}feat_level_1_func_01_sed.fsf" &
 feat "${str_path}feat_level_1_func_02_sed.fsf" &
 feat "${str_path}feat_level_1_func_03_sed.fsf" &
+feat "${str_path}feat_level_1_func_04_sed.fsf" &
 wait
 
-echo "---Runs 04, 05, 06"
-
 date
-feat "${str_path}feat_level_1_func_04_sed.fsf" &
+
+echo "---Runs 05, 06, 08, 09"
+
 feat "${str_path}feat_level_1_func_05_sed.fsf" &
 feat "${str_path}feat_level_1_func_06_sed.fsf" &
+feat "${str_path}feat_level_1_func_08_sed.fsf" &
+feat "${str_path}feat_level_1_func_09_sed.fsf" &
 wait
 
 date
