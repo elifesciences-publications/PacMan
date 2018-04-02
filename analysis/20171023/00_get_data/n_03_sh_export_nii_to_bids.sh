@@ -78,8 +78,9 @@ fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run08_SERIES_032_c3
 #------------------------------------------------------------------------------
 # *** Copy opposite-phase-polarity SE images
 
-fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_LR_SERIES_006_c32 ${strSeOp}func_00
-fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_005_c32_e1 ${strSe}func_00
+# Naming seems to be wrong (LR and RL wrong way around).
+fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_005_c32_e1 ${strSeOp}func_00
+fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_LR_SERIES_006_c32 ${strSe}func_00
 #------------------------------------------------------------------------------
 
 

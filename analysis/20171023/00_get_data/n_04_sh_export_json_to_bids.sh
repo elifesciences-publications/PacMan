@@ -50,8 +50,9 @@ cp ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_RL_run08_SERIES_032_c32.json ${strF
 #------------------------------------------------------------------------------
 # *** Copy metadata for opposite-phase-polarity SE images
 
-cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_LR_SERIES_006_c32.json ${strSeOp}func_00.json
-cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_005_c32_e1.json ${strSe}func_00.json
+# Naming seems to be wrong (LR and RL wrong way around).
+cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_005_c32_e1.json ${strSeOp}func_00.json
+cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_LR_SERIES_006_c32.json ${strSe}func_00.json
 #------------------------------------------------------------------------------
 
 
