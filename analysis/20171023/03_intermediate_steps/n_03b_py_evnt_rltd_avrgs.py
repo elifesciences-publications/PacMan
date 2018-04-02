@@ -36,15 +36,17 @@ strPathParent = (pacman_data_path
 
 # List of 4D nii files (location within parent directory):
 lstIn_01 = ['func_02.feat/filtered_func_data.nii.gz',
-            'func_05.feat/filtered_func_data.nii.gz']
+            'func_04.feat/filtered_func_data.nii.gz',
+            'func_06.feat/filtered_func_data.nii.gz']
 
 # Directory containing design matrices (EV files):
-strPathEV = (pacman_anly_path + 'FSL_MRI_Metadata/version_03c/')
+strPathEV = (pacman_anly_path + 'FSL_MRI_Metadata/version_03b/')
 
 # List of design matrices (EV files), in the same order as input 4D nii files
 # (location within parent directory):
 lstIn_02 = ['EV_func_02_Stimulus.txt',
-            'EV_func_05_Stimulus.txt']
+            'EV_func_04_Stimulus.txt',
+            'EV_func_06_Stimulus.txt']
 
 # Output directory:
 strPathOut = (pacman_data_path

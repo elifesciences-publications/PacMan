@@ -29,22 +29,27 @@ pacman_data_path = str(os.environ['pacman_data_path'])
 pacman_sub_id = str(os.environ['pacman_sub_id'])
 pacman_anly_path = str(os.environ['pacman_anly_path'])
 
+# Load environmental variables defining the input data path:
+pacman_data_path = str(os.environ['pacman_data_path'])
+pacman_sub_id = str(os.environ['pacman_sub_id'])
+pacman_anly_path = str(os.environ['pacman_anly_path'])
+
 # Parent directory:
 strPathParent = (pacman_data_path
                  + pacman_sub_id
                  + '/nii/feat_level_1/')
 
 # List of 4D nii files (location within parent directory):
-lstIn_01 = ['func_03.feat/filtered_func_data.nii.gz',
-            'func_06.feat/filtered_func_data.nii.gz']
+lstIn_01 = ['func_08.feat/filtered_func_data.nii.gz',
+            'func_09.feat/filtered_func_data.nii.gz']
 
 # Directory containing design matrices (EV files):
-strPathEV = (pacman_anly_path + 'FSL_MRI_Metadata/version_03c/')
+strPathEV = (pacman_anly_path + 'FSL_MRI_Metadata/version_03b/')
 
 # List of design matrices (EV files), in the same order as input 4D nii files
 # (location within parent directory):
-lstIn_02 = ['EV_func_03_Stimulus.txt',
-            'EV_func_06_Stimulus.txt']
+lstIn_02 = ['EV_func_08_Stimulus.txt',
+            'EV_func_09_Stimulus.txt']
 
 # Output directory:
 strPathOut = (pacman_data_path
