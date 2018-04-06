@@ -30,13 +30,13 @@ set fmri(featwatcher_yn) 0
 set fmri(sscleanup_yn) 0
 
 # Output directory
-set fmri(outputdir) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_2/feat_level_2_PacMan_Dynamic"
+set fmri(outputdir) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_2_trans/feat_level_2_PacMan_Dynamic_minus_PacMan_Static"
 
 # TR(s)
 set fmri(tr) 3
 
 # Total volumes
-set fmri(npts) 3
+set fmri(npts) 5
 
 # Delete volumes
 set fmri(ndelete) 0
@@ -45,7 +45,7 @@ set fmri(ndelete) 0
 set fmri(tagfirst) 1
 
 # Number of first-level analyses
-set fmri(multiple) 3
+set fmri(multiple) 5
 
 # Higher-level input type
 # 1 : Inputs are lower-level FEAT directories
@@ -259,23 +259,33 @@ set fmri(regstandard_nonlinear_warpres) 10
 # High pass filter cutoff
 set fmri(paradigm_hp) 100
 
+# Total voxels
+set fmri(totalVoxels) 1413760
+
+
 # Number of lower-level copes feeding into higher-level analysis
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1/func_01.feat/stats/cope1.nii.gz"
+set feat_files(1) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_trans/func_01.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (2)
-set feat_files(2) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1/func_03.feat/stats/cope1.nii.gz"
+set feat_files(2) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_trans/func_03.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (3)
-set feat_files(3) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1/func_05.feat/stats/cope1.nii.gz"
+set feat_files(3) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_trans/func_05.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (4)
+set feat_files(4) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_trans/func_08.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (5)
+set feat_files(5) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_trans/func_09.feat/stats/cope1.nii.gz"
 
 # Add confound EVs text file
 set fmri(confoundevs) 0
 
 # EV 1 title
-set fmri(evtitle1) "stim"
+set fmri(evtitle1) "Pd_min_Ps"
 
 # Basic waveform shape (EV 1)
 # 0 : Square
@@ -323,6 +333,12 @@ set fmri(evg2.1) 1
 # Higher-level EV value for EV 1 and input 3
 set fmri(evg3.1) 1
 
+# Higher-level EV value for EV 1 and input 4
+set fmri(evg4.1) -1.0
+
+# Higher-level EV value for EV 1 and input 5
+set fmri(evg5.1) -1.0
+
 # Group membership for input 1
 set fmri(groupmem.1) 1
 
@@ -331,6 +347,12 @@ set fmri(groupmem.2) 1
 
 # Group membership for input 3
 set fmri(groupmem.3) 1
+
+# Group membership for input 4
+set fmri(groupmem.4) 1
+
+# Group membership for input 5
+set fmri(groupmem.5) 1
 
 # Contrast & F-tests mode
 # real : control real EVs
@@ -342,7 +364,7 @@ set fmri(con_mode) real
 set fmri(conpic_real.1) 0
 
 # Title for contrast_real 1
-set fmri(conname_real.1) "stim"
+set fmri(conname_real.1) "Pd_min_Ps"
 
 # Real contrast_real vector 1 element 1
 set fmri(con_real1.1) 1
