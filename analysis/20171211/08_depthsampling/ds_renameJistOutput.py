@@ -40,11 +40,11 @@ from os import rename
 # %% Define parameters
 
 # Subject IDs & number of prefixes to remove for that subject:
-dicSubId = {'20171211': 9}
+dicSubId = {'20180118': 9}
 
 # Paths with files to be renamed (subject ID left open):
-lstPths = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/lh/',
-           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs_distcor/rh/']  #noqa
+lstPths = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/lh/',
+           '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/rh/']  #noqa
 
 # File type (suffix):
 strFleTpe = '.vtk'

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ################################################################################
@@ -9,13 +9,13 @@
 #-------------------------------------------------------------------------------
 # Define session IDs & paths:
 
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171213/nii_distcor/func_reg_tsnr/"
+strPathParent="${pacman_data_path}${pacman_sub_id}/nii/func_reg_tsnr/"
 
 # Functional runs (input & output):
 lstIn=(combined_mean \
        combined_mean_tSNR)
 
-strPathOutput="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171213/nii_distcor/stat_maps/"
+strPathOutput="${pacman_data_path}${pacman_sub_id}/nii/stat_maps/"
 #-------------------------------------------------------------------------------
 
 

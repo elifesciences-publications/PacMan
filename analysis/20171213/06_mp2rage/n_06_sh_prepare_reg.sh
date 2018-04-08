@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ###############################################################################
@@ -15,7 +15,7 @@
 # *** Define session IDs & paths
 
 # Parent directory:
-strParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171213/nii_distcor/"
+strParent="${pacman_data_path}${pacman_sub_id}/nii/"
 
 # Subdirectories:
 strSub01="${strParent}mp2rage/03_reg/01_in/"
@@ -26,7 +26,7 @@ strSub03="${strParent}mp2rage/03_reg/03_prereg/"
 strCombmean="combined_mean"
 
 # Brain mask:
-strBrainMsk="n_04b_20171213_pwd_brainmask"
+strBrainMsk="n_04b_${pacman_sub_id}_pwd_brainmask"
 
 # Names of mp2rage image components (without file suffix):
 strT1="mp2rage_t1"

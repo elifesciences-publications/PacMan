@@ -26,6 +26,7 @@ containing information about the overlap of the pRFs and a visual stimulus.
 
 # *****************************************************************************
 # *** Import modules
+import os
 import numpy as np
 import nibabel as nib
 import time
@@ -39,20 +40,34 @@ print('-Stimulus-pRF overlap calculation')
 # *****************************************************************************
 # *** Define parameters
 
+# Load environmental variables defining the input data path:
+pacman_data_path = str(os.environ['pacman_data_path'])
+pacman_sub_id = str(os.environ['pacman_sub_id'])
+
 # Path of nii file with x-coordinates of pRFs:
-strNiiX = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/retinotopy/pRF_results_up/pRF_results_x_pos.nii.gz'  #noqa
+strNiiX = (pacman_data_path
+           + pacman_sub_id
+           + '/nii/retinotopy/pRF_results_up/pRF_results_x_pos.nii.gz')
 
 # Path of nii file with y-coordinates of pRFs:
-strNiiY = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/retinotopy/pRF_results_up/pRF_results_y_pos.nii.gz'  #noqa
+strNiiY = (pacman_data_path
+           + pacman_sub_id
+           + '/nii/retinotopy/pRF_results_up/pRF_results_y_pos.nii.gz')
 
 # Path of nii file with pRF size estimates (SD):
-strNiiSd = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/retinotopy/pRF_results_up/pRF_results_SD.nii.gz'  #noqa
+strNiiSd = (pacman_data_path
+            + pacman_sub_id
+            + '/nii/retinotopy/pRF_results_up/pRF_results_SD.nii.gz')
 
 # Path of nii file with R2 values:
-strNiiR2 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/retinotopy/pRF_results_up/pRF_results_R2.nii.gz'  #noqa
+strNiiR2 = (pacman_data_path
+            + pacman_sub_id
+            + '/nii/retinotopy/pRF_results_up/pRF_results_R2.nii.gz')
 
 # Output file base name:
-strNiiOt = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/retinotopy/pRF_results_up/pRF_results_'  #noqa
+strNiiOt = (pacman_data_path
+            + pacman_sub_id
+            + '/nii/retinotopy/pRF_results_up/pRF_results_')
 
 # Define the area  of the visual field that was covered by the pRF mapping
 # stimuli (this is the area of the visual field for which pRFs are defined) in

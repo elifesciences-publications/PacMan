@@ -11,6 +11,7 @@ for stimulus presentation.
 # -----------------------------------------------------------------------------
 # *** Import modules
 
+import os
 import numpy as np
 # -----------------------------------------------------------------------------
 
@@ -18,18 +19,22 @@ import numpy as np
 # -----------------------------------------------------------------------------
 # *** Define parameters
 
-# The name of the events, in the order of their indexing in the event matrix.
-# I.e., if REST is coded as 1 and TARGET as 2, REST needs to be first, and
-# TARGET second in this list, etc.
+# Load environmental variable defining the input data path:
+pacman_anly_path = str(os.environ['pacman_anly_path'])
 
 # Input directory:
-strPathInput  = '/home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/version_03c_transients/'  #noqa
+strPathInput  = (pacman_anly_path
+                 + 'FSL_MRI_Metadata/version_03c_transients/')
 
 # Output directory:
 strPathOutput = strPathInput
 
 # Input file name (with run number left open):
 strFleNme = 'PacMan_run_{}_eventmatrix.txt'
+
+# The name of the events, in the order of their indexing in the event matrix.
+# I.e., if REST is coded as 1 and TARGET as 2, REST needs to be first, and
+# TARGET second in this list, etc.
 
 # PacMan version 03c:
 # * Runs 01, 03, 05 are 'PacMan_Dynamic'

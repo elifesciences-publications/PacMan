@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ################################################################################
@@ -17,10 +17,10 @@ echo "-Preparing depth-sampling of event-related timecourses."
 # *** Define session IDs & paths
 
 # Subject IDs:
-arySubIDs=(20171211)
+arySubIDs=(${pacman_sub_id})
 
 # Input parent directory ('SUBJECT_ID' will be replaced):
-strIn="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/SUBJECT_ID/nii_distcor/func_reg_averages/"
+strIn="${pacman_data_path}SUBJECT_ID/nii/func_reg_averages/"
 
 # Input file names (within parent directory):
 aryNiiIn=(ERA_Control_Dynamic \
@@ -29,7 +29,7 @@ aryNiiIn=(ERA_Control_Dynamic \
           ERA_PacMan_Static)
 
 # Output parent directory ('SUBJECT_ID' will be replaced):
-strOt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/SUBJECT_ID/nii_distcor/func_reg_averages/"
+strOt="${pacman_data_path}SUBJECT_ID/nii/func_reg_averages/"
 
 # Upsampling factor (e.g. 0.5 for half the previous voxel size, 0.25 for a
 # quater of the previous voxel size):

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ###############################################################################
@@ -10,7 +10,7 @@
 # *** Define parameters:
 
 # Parent directory:
-strPthPrnt="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/"
+strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii/"
 
 # Input folder:
 strPthIn="mp2rage/02_spm_bf_correction/"

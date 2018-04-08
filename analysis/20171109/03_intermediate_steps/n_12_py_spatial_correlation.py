@@ -18,31 +18,43 @@ motion correction can be assessed.
 
 # *** Import modules
 
+import os
 import numpy as np
 import nibabel as nb
+import matplotlib
+# Configure matplotlib for use in docker container (i.e. without display):
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
 # *** Define parameters
 
+# Load environmental variables defining the input data path:
+pacman_data_path = str(os.environ['pacman_data_path'])
+pacman_sub_id = str(os.environ['pacman_sub_id'])
+pacman_anly_path = str(os.environ['pacman_anly_path'])
+
 # Minimum acceptable correlation coefficient. If the mean correlation
 # coefficient of any run is below this value, the run is highlighted in the
 # graph.
-varThr = 0.93
+varThr = 0.95
 
 # Dictionary with subject IDs and run IDs for each subject. (For some subjects,
 # runs are excluded at an earlier stage, e.g. because of low behavioural
 # performance.)
-dicSubId = {'20171109': ['01', '02', '03', '04', '05', '06', '07', '08']}
+dicSubId = {pacman_sub_id: ['01', '02', '03', '04', '05', '06', '07', '08']}
 
 # The path of the 3D reference images (subject ID left open):
-strPathRef = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/func_reg_tsnr/combined_mean.nii.gz')  #noqa
+strPathRef = (pacman_data_path +
+              '{}/nii/func_reg_tsnr/combined_mean.nii.gz')
 
 # The path of the 4D images (subject ID and run ID left open):
-strPathIn = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/func_reg_distcorUnwrp/func_{}.nii.gz')  #noqa
+strPathIn = (pacman_data_path
+             + '{}/nii/func_reg_distcorUnwrp/func_{}.nii.gz')
 
 # The output directory & name (for the plot; subject ID left open twice):
-strPathOut = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/spm_reg_moco_params/{}_correlation_plot_refweight.png')  #noqa
+strPathOut = (pacman_data_path
+              + '{}/nii/spm_reg_moco_params/{}_correlation_plot_refweight.png')  #noqa
 
 # Use mask? If yes, only voxels that are greater than zero in the mask
 # image are considered. The reason for using the mask is that if
@@ -51,7 +63,11 @@ strPathOut = ('/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/spm_reg_m
 # weighted highly. (Subject ID left open twice.)
 lgcMsk = True
 if lgcMsk:
-    strPathMsk = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/nii_distcor/spm_reg_reference_weighting/n_06b_{}_spm_refweight.nii.gz'  #noqa
+    strPathMsk = (pacman_anly_path
+                  + '{}'
+                  + '/01_preprocessing/n_03b_'
+                  + '{}'
+                  + '_spm_refweight.nii.gz')
 
 # *** Loop through subjects:
 

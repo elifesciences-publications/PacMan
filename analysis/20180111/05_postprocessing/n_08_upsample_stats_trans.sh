@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ################################################################################
@@ -14,10 +14,10 @@
 echo "---Define parameters"
 
 # Input directory:
-strPthIn="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/stat_maps_trans/"
+strPthIn="${pacman_data_path}${pacman_sub_id}/nii/stat_maps_trans/"
 
 # Output directory:
-strPthOut="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/stat_maps_trans_up/"
+strPthOut="${pacman_data_path}${pacman_sub_id}/nii/stat_maps_trans_up/"
 
 # Upsampling factor (e.g. 0.5 for half the previous voxel size, 0.25 for a
 # quater of the previous voxel size):

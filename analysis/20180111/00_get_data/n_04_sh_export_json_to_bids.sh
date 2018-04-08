@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ###############################################################################
@@ -9,17 +9,11 @@
 #------------------------------------------------------------------------------
 # *** Define paths:
 
-# Session ID:
-# strSess="20180111"
-
 # Parent directory:
 strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii"
 
 # BIDS directory:
 strBidsDir="${pacman_data_path}BIDS/"
-
-# BIDS subject ID:
-# strBidsSess="sub-08"
 
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"
@@ -46,7 +40,7 @@ cp ${strRaw}PROTOCOL_BP_ep3d_bold_func02_FOV_RL_SERIES_013_c32.json ${strFunc}fu
 cp ${strRaw}PROTOCOL_BP_ep3d_bold_func03_FOV_RL_SERIES_015_c32.json ${strFunc}func_03.json
 cp ${strRaw}PROTOCOL_BP_ep3d_bold_func04_FOV_RL_SERIES_017_c32.json ${strFunc}func_04.json
 cp ${strRaw}PROTOCOL_BP_ep3d_bold_func05_FOV_RL_SERIES_025_c32.json ${strFunc}func_05.json
-cp ${strRaw}PROTOCOL_BP_ep3d_bold_func06_FOV_RL_SERIES_027_c32.json ${strFunc}func_06.json
+cp ${strRaw}PROTOCOL_BP_ep3d_bold_func06_FOV_RL_SERIES_027_c32_e1.json ${strFunc}func_06.json
 cp ${strRaw}PROTOCOL_BP_ep3d_bold_func07_FOV_RL_pRF_SERIES_029_c32.json ${strFunc}func_07.json
 cp ${strRaw}PROTOCOL_BP_ep3d_bold_func08_FOV_RL_long_SERIES_031_c32.json ${strFunc}func_08.json
 #------------------------------------------------------------------------------
@@ -63,9 +57,7 @@ cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_008_c32.json ${strSe}func_00.json
 #------------------------------------------------------------------------------
 # *** Copy metadata for mp2rage images
 
-# Note: Because the first MP2RAGEs was affected by a motion artefact, a second
-# MP2RAGE was acquired for this subject at the end of the session.
-cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_018_c32.json ${strAnat}mp2rage_inv1.json
+cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_018_c32_e1.json ${strAnat}mp2rage_inv1.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_019_c32.json ${strAnat}mp2rage_inv1_phase.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_020_c32.json ${strAnat}mp2rage_t1.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_021_c32.json ${strAnat}mp2rage_uni.json

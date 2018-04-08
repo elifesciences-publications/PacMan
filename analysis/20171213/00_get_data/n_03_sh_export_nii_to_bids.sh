@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ###############################################################################
@@ -12,17 +12,11 @@
 #------------------------------------------------------------------------------
 # *** Define paths:
 
-# Session ID:
-# strSess="20171213"
-
 # Parent directory:
 strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii"
 
 # BIDS directory:
 strBidsDir="${pacman_data_path}BIDS/"
-
-# BIDS subject ID:
-# pacman_sub_id_bids="sub-07"
 
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"
@@ -66,13 +60,14 @@ fi
 #------------------------------------------------------------------------------
 # *** Copy functional data
 
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_LR_SERIES_008_c32 ${strFunc}func_01
+# Wrong file name for func_01 (‘LR’, phase encoding was RL as intended).
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func01_FOV_LR_SERIES_008_c32_e1 ${strFunc}func_01
 fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func02_FOV_RL_SERIES_010_c32 ${strFunc}func_02
 fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func03_FOV_RL_SERIES_012_c32 ${strFunc}func_03
 fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func04_FOV_RL_SERIES_014_c32 ${strFunc}func_04
 fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func05_FOV_RL_SERIES_022_c32 ${strFunc}func_05
 fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func06_FOV_RL_SERIES_024_c32 ${strFunc}func_06
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func07_FOV_RL_pRF_SERIES_026_c32 ${strFunc}func_07
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func07_FOV_RL_pRF_SERIES_026_c32_e1 ${strFunc}func_07
 fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func08_FOV_RL_long_SERIES_028_c32 ${strFunc}func_08
 #------------------------------------------------------------------------------
 
@@ -88,8 +83,6 @@ fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_006_c32 ${strSe}func_
 #------------------------------------------------------------------------------
 # *** Copy mp2rage images
 
-# Note: Because the first MP2RAGEs was affected by a motion artefact, a second
-# MP2RAGE was acquired for this subject at the end of the session.
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_015_c32 ${strAnat}mp2rage_inv1
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_016_c32 ${strAnat}mp2rage_inv1_phase
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_017_c32 ${strAnat}mp2rage_t1

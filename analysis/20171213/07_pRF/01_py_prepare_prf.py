@@ -14,6 +14,7 @@ EPI image followed by a cluster size threshold and morphological operations
 # *****************************************************************************
 # *** Import modules
 
+import os
 import numpy as np
 import nibabel as nib
 from skimage import morphology as skimrp
@@ -24,12 +25,20 @@ from skimage.measure import label
 # *****************************************************************************
 # *** Define parameters
 
+# Load environmental variables defining the input data path:
+pacman_data_path = str(os.environ['pacman_data_path'])
+pacman_sub_id = str(os.environ['pacman_sub_id'])
+
 # Path & filename of combined mean image:
-strPthCombMean = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171213/nii_distcor/func_reg_tsnr/'  #noqa
+strPthCombMean = (pacman_data_path
+                  + pacman_sub_id
+                  + '/nii/func_reg_tsnr/')
 strCombMean = 'combined_mean.nii.gz'
 
 # Path & filename of output (binary brain mask):
-strPathOut = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171213/nii_distcor/retinotopy/mask/'  #noqa
+strPathOut = (pacman_data_path
+              + pacman_sub_id
+              + '/nii/retinotopy/mask/')
 strMsk = 'brainmask.nii.gz'
 
 # Intensity threshold:

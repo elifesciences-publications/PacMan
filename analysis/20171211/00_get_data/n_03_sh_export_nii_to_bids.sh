@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ###############################################################################
@@ -12,17 +12,11 @@
 #------------------------------------------------------------------------------
 # *** Define paths:
 
-# Session ID:
-# strSess="20171211"
-
 # Parent directory:
 strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii"
 
 # BIDS directory:
 strBidsDir="${pacman_data_path}BIDS/"
-
-# BIDS subject ID:
-# pacman_sub_id_bids="sub-06"
 
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"
@@ -92,7 +86,7 @@ fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_006_c32 ${strSe}func_
 # MP2RAGE was acquired for this subject at the end of the session.
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_029_c32 ${strAnat}mp2rage_inv1
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_030_c32 ${strAnat}mp2rage_inv1_phase
-fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_031_c32 ${strAnat}mp2rage_t1
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_031_c32_e1 ${strAnat}mp2rage_t1
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_032_c32 ${strAnat}mp2rage_uni
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_033_c32 ${strAnat}mp2rage_pdw
 fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_034_c32 ${strAnat}mp2rage_pdw_phase

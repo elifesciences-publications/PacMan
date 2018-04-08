@@ -1,10 +1,6 @@
-Please create a liberal brain mask based on the PDw mp2rage image. (For example
-using itksnap.)
+   Please create a liberal brain mask based on the PDw mp2rage image. (For
+   example using itksnap.)
 
-This brain mask should not miss any brain tissue, and can include some non-brain
-tissue (skull etc.). It is only needed for removing noise outside the head for
-the pre-registration.
-
-Place the brain mask in the following folder:
-
-${pacman_anly_path}${pacman_sub_id}/06_mp2rage/n_04b_${pacman_sub_id}_pwd_brainmask.nii.gz
+   This brain mask should not miss any brain tissue, and can include some
+   non-brain tissue (skull etc.). It is only needed for removing noise outside
+   the head for the pre-registration.

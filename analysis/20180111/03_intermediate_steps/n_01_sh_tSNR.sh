@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ################################################################################
@@ -20,7 +20,7 @@ arySessionIDs=(func_01 \
                func_08)
 
 # Parent path:
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/"
+strPathParent="${pacman_data_path}${pacman_sub_id}/nii/"
 
 # Path to feat directories:
 strPathInput="${strPathParent}feat_level_1/"

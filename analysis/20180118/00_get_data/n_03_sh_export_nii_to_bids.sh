@@ -12,17 +12,11 @@
 #------------------------------------------------------------------------------
 # *** Define paths:
 
-# Session ID:
-# strSess="20180118"
-
 # Parent directory:
 strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii"
 
 # BIDS directory:
 strBidsDir="${pacman_data_path}BIDS/"
-
-# BIDS subject ID:
-# pacman_sub_id_bids="sub-09"
 
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"

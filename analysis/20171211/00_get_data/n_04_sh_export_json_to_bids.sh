@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ###############################################################################
@@ -9,17 +9,11 @@
 #------------------------------------------------------------------------------
 # *** Define paths:
 
-# Session ID:
-# strSess="20171211"
-
 # Parent directory:
 strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii"
 
 # BIDS directory:
 strBidsDir="${pacman_data_path}BIDS/"
-
-# BIDS subject ID:
-# strBidsSess="sub-06"
 
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"
@@ -67,7 +61,7 @@ cp ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_006_c32.json ${strSe}func_00.json
 # MP2RAGE was acquired for this subject at the end of the session.
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_029_c32.json ${strAnat}mp2rage_inv1.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_030_c32.json ${strAnat}mp2rage_inv1_phase.json
-cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_031_c32.json ${strAnat}mp2rage_t1.json
+cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_031_c32_e1.json ${strAnat}mp2rage_t1.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_032_c32.json ${strAnat}mp2rage_uni.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_033_c32.json ${strAnat}mp2rage_pdw.json
 cp ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_034_c32.json ${strAnat}mp2rage_pdw_phase.json

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ################################################################################
@@ -20,7 +20,7 @@
 # Define session IDs & paths:
 
 # The parent directory:
-strPathParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171211/nii_distcor/"
+strPathParent="${pacman_data_path}${pacman_sub_id}/nii/"
 
 # The directory with the first level feat results:
 strPathFeat="${strPathParent}feat_level_1/"
@@ -38,7 +38,7 @@ aryFeatIDs=(func_01.feat \
 strPathStd="${strPathParent}func_reg_tsnr/combined_mean.nii.gz"
 
 # The path of the identity matrix:
-strPathMatIdent="/home/john/PhD/GitHub/PacMan/analysis/FSL_MRI_Metadata/mat_reg_identity"
+strPathMatIdent="${pacman_anly_path}FSL_MRI_Metadata/mat_reg_identity"
 #-------------------------------------------------------------------------------
 
 

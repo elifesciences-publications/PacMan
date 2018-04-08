@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ###############################################################################
@@ -14,7 +14,7 @@ echo "-BBR registration"
 # *** Define session IDs & paths
 
 # Parent directory:
-strParent="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/"
+strParent="${pacman_data_path}${pacman_sub_id}/nii/"
 
 # Subdirectories:
 strSub01="${strParent}mp2rage/03_reg/04_reg/01_in/"

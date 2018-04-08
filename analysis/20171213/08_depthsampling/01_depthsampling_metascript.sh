@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 # Copyright (C) 2018  Ingo Marquardt
@@ -28,15 +28,15 @@
 # ### Preparations
 
 # Location of CBS layouts & python scripts to run:
-strPthCbs="/home/john/PhD/GitHub/PacMan/analysis/20171213_distcor_func/08_depthsampling/"
+strPthCbs="/home/john/PhD/GitHub/PacMan/analysis/20180118_distcor_func/08_depthsampling/"
 
 # Names of CBS layouts to run (xml files):
-aryCbs=(20171213_mp2rage_lh_equivol_retino_stats.LayoutXML \
-        20171213_mp2rage_rh_equivol_retino_stats.LayoutXML
-        20171213_mp2rage_lh_equivol_ert.LayoutXML \
-        20171213_mp2rage_rh_equivol_ert.LayoutXML \
-        20171213_mp2rage_lh_equivol_ert_long.LayoutXML \
-        20171213_mp2rage_rh_equivol_ert_long.LayoutXML)
+aryCbs=(20180118_mp2rage_lh_equivol_retino_stats.LayoutXML \
+        20180118_mp2rage_rh_equivol_retino_stats.LayoutXML
+        20180118_mp2rage_lh_equivol_ert.LayoutXML \
+        20180118_mp2rage_rh_equivol_ert.LayoutXML \
+        20180118_mp2rage_lh_equivol_ert_long.LayoutXML \
+        20180118_mp2rage_rh_equivol_ert_long.LayoutXML)
 
 # Names of python scripts to run:
 aryPy=(ds_renameJistOutput.py \
@@ -47,7 +47,7 @@ aryPy=(ds_renameJistOutput.py \
        py_vtk_to_npy_conversion.py)
 
 # Working directory:
-strPthWd="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171213/cbs_distcor/cbs_wd"
+strPthWd="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/cbs_wd"
 #------------------------------------------------------------------------------
 
 

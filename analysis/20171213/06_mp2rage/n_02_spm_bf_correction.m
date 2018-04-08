@@ -1,15 +1,18 @@
 %--------------------------------------------------------------------------
-% Load default 'batch' file for SPM bias field correction of MP2RAGE
-% images, adjust file paths for current subject, and run the batch.
+% SPM bias field correction of MP2RAGE images.
 %--------------------------------------------------------------------------
 % Ingo Marquardt, 2018
 %--------------------------------------------------------------------------
 %% Define parameters
 clear;
+% Get environmental variables (for input & output path):
+pacman_sub_id = getenv('pacman_sub_id');
+pacman_anly_path = getenv('pacman_anly_path');
+pacman_data_path = getenv('pacman_data_path');
 % Path of the default SPM batch:
-strPthDflt = '/home/john/PhD/GitHub/PacMan/analysis/SPM_Metadata/spm_default_bf_correction_batch.mat';
+strPthDflt = strcat(pacman_anly_path, 'SPM_Metadata/spm_default_bf_correction_batch.mat');
 % Directory with images to be corrected:
-strPthIn = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171213/nii_distcor/mp2rage/02_spm_bf_correction/';
+strPthIn = strcat(pacman_data_path, pacman_sub_id, '/nii/mp2rage/02_spm_bf_correction/');
 %--------------------------------------------------------------------------
 %% Prepare input cell array
 % The cell array with the file name of the images to be bias field
@@ -22,22 +25,20 @@ cllPthIn = cellstr(cllPthIn);
 for idxIn = 1:length(cllPthIn)
     cllPthIn{idxIn} = strcat(strPthIn, cllPthIn{idxIn});
 end
-%% Load default batch
-matlabbatch = load(strPthDflt);
-% The 'batch' is initially loaded as a 'cell array' within a 'structure
-% array' (matlab elegance...). Get the 'cell array' out of the 'strucutre
-% array':
-matlabbatch = matlabbatch.matlabbatch;
 %--------------------------------------------------------------------------
-%% Adjust default batch
+%% Prepare SPM batch
+clear matlabbatch;
 matlabbatch{1}.spm.spatial.preproc.channel.vols = cllPthIn;
+matlabbatch{1}.spm.spatial.preproc.channel.biasreg = 0.001;
+matlabbatch{1}.spm.spatial.preproc.channel.biasfwhm = 60;
+matlabbatch{1}.spm.spatial.preproc.channel.write = [1, 1];
 %--------------------------------------------------------------------------
-%% Save SPM batch file:
+%% Save SPM batch file
 strOut = strcat(strPthIn, 'spm_bf_correction_batch');
 save(strOut, 'matlabbatch');
 %--------------------------------------------------------------------------
 %% Bias field correction
-% Initialise "job configuration":
+% Initialise 'job configuration':
 spm_jobman('initcfg');
 % Run 'job':
 spm_jobman('run', matlabbatch);

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ###############################################################################
@@ -12,17 +12,11 @@
 #------------------------------------------------------------------------------
 # *** Define paths:
 
-# Session ID:
-# strSess="20171109"
-
 # Parent directory:
 strPthPrnt="${pacman_data_path}${pacman_sub_id}/nii"
 
 # BIDS directory:
 strBidsDir="${pacman_data_path}BIDS/"
-
-# BIDS subject ID:
-# pacman_sub_id_bids="sub-02"
 
 # 'Raw' data directory, containing nii images after DICOM->nii conversion:
 strRaw="${strPthPrnt}/raw_data/"
@@ -72,8 +66,8 @@ fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func03_FOV_RL_SERIES_013_c32 ${st
 fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func04_FOV_RL_SERIES_021_c32 ${strFunc}func_04
 fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func05_FOV_RL_SERIES_023_c32 ${strFunc}func_05
 fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func06_FOV_RL_SERIES_025_c32 ${strFunc}func_06
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func07pRF_FOV_RL_SERIES_027_c32 ${strFunc}func_07
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func08long_FOV_RL_SERIES_029_c32 ${strFunc}func_08
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func07_pRF_FOV_RL_SERIES_027_c32 ${strFunc}func_07
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func08_long_FOV_RL_SERIES_029_c32 ${strFunc}func_08
 #------------------------------------------------------------------------------
 
 

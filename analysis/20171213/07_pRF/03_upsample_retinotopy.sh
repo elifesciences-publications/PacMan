@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ###############################################################################
@@ -10,10 +10,10 @@
 # *** Define parameters
 
 # Input directory:
-strPthIn="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171213/nii_distcor/retinotopy/pRF_results/"
+strPthIn="${pacman_data_path}${pacman_sub_id}/nii/retinotopy/pRF_results/"
 
 # Output directory:
-strPthOut="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171213/nii_distcor/retinotopy/pRF_results_up/"
+strPthOut="${pacman_data_path}${pacman_sub_id}/nii/retinotopy/pRF_results_up/"
 
 # Upsampling factor (e.g. 0.5 for half the previous voxel size, 0.25 for a
 # quater of the previous voxel size):

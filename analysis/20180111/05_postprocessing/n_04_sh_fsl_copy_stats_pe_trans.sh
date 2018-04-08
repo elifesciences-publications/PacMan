@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 ################################################################################
@@ -9,7 +9,7 @@
 #-------------------------------------------------------------------------------
 # Define session IDs & paths:
 
-strPathParent01="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/feat_level_2_trans/"
+strPathParent01="${pacman_data_path}${pacman_sub_id}/nii/feat_level_2_trans/"
 
 # Functional runs (input & output):
 lstIn=(feat_level_2_Control_Dynamic \
@@ -20,7 +20,7 @@ lstIn=(feat_level_2_Control_Dynamic \
 
 strPathParent02=".gfeat/cope1.feat/stats/pe1.nii.gz"
 
-strPathOutput="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180111/nii_distcor/stat_maps_trans/"
+strPathOutput="${pacman_data_path}${pacman_sub_id}/nii/stat_maps_trans/"
 #-------------------------------------------------------------------------------
 
 

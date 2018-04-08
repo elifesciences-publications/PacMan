@@ -33,14 +33,14 @@ from ds_loadVtkMulti import funcLoadVtkMulti
 # *** Parameters
 
 # List of directories with vtk files to be converted:
-lstDir = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/lh_era/control_dynamic',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/lh_era/pacman_dynamic',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/lh_era/pacman_dynamic_long',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/lh_era/pacman_static',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/rh_era/control_dynamic',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/rh_era/pacman_dynamic',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/rh_era/pacman_dynamic_long',
-          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20171109/cbs_distcor/rh_era/pacman_static']
+lstDir = ['/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh_era/control_dynamic',
+          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh_era/pacman_dynamic',
+          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh_era/pacman_dynamic_long',
+          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/lh_era/pacman_static',
+          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/rh_era/control_dynamic',
+          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/rh_era/pacman_dynamic',
+          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/rh_era/pacman_dynamic_long',
+          '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/20180118/cbs/rh_era/pacman_static']
 
 # Number of cortical depths:
 varNumDpth = 11
