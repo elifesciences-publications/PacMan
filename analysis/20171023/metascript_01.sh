@@ -16,8 +16,8 @@ pacman_sub_id="20171023"
 pacman_sub_id_bids="sub-01"
 
 # Analysis parent directory (containing scripts):
-# pacman_anly_path="/home/john/PhD/GitHub/PacMan/analysis/"
-pacman_anly_path="/Users/john/1_PhD/GitHub/PacMan/analysis/"
+pacman_anly_path="/home/john/PhD/GitHub/PacMan/analysis/"
+# pacman_anly_path="/Users/john/1_PhD/GitHub/PacMan/analysis/"
 
 
 # Data parent directory (containing MRI data). If working with the BIDS data,
@@ -39,7 +39,7 @@ pacman_from_bids=false
 pacman_wait=true
 
 # Number of parallel processes to use (for pRF finding):
-pacman_cpu="4"
+pacman_cpu="11"
 #-------------------------------------------------------------------------------
 
 
@@ -74,6 +74,6 @@ docker run -it --rm \
     -e pacman_wait \
     -e pacman_cpu \
     -e USER \
-    dockerimage_pacman_jessie_formac ${pacman_anly_path}${pacman_sub_id}/metascript_02.sh
+    dockerimage_pacman_jessie ${pacman_anly_path}${pacman_sub_id}/metascript_02.sh &> /home/john/Dropbox/Sonstiges/docker_log_20171023.txt
 #-------------------------------------------------------------------------------
 

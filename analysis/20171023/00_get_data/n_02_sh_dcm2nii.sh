@@ -8,7 +8,7 @@ dcm2niix \
 -f PROTOCOL_%p_SERIES_%3s \
 -g n \
 -i n \
--m n \
+-m y \
 -o ${pacman_data_path}${pacman_sub_id}/nii/raw_data/ \
 -p n \
 -s n \
