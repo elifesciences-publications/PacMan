@@ -36,7 +36,7 @@ pacman_data_path="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/"
 # Segmentation version (segmentation files need to be at `${pacman_anly_path}
 # ${pacman_sub_id}/08_depthsampling/${pacman_sub_id}_mp2rage_seg_
 # ${pacman_seg_version}`):
-pacman_seg_version="v31"
+pacman_seg_version="v34"
 #-------------------------------------------------------------------------------
 
 
