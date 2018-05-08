@@ -9,18 +9,20 @@
 #-------------------------------------------------------------------------------
 # Define session IDs & paths:
 
-strPathParent01="${pacman_data_path}${pacman_sub_id}/nii/feat_level_2_trans/"
+strPathParent01="${pacman_data_path}${pacman_sub_id}/nii/feat_level_2_comb/"
 
-# Functional runs (input & output):
+# Input (feat directories):
 lstIn=(feat_level_2_Control_Dynamic \
+       feat_level_2_Control_Dynamic_minus_PacMan_Static \
        feat_level_2_PacMan_Dynamic \
        feat_level_2_PacMan_Dynamic_minus_Control_Dynamic \
        feat_level_2_PacMan_Static \
-       feat_level_2_PacMan_Dynamic_minus_PacMan_Static)
+       feat_level_2_PacMan_Dynamic_minus_PacMan_Static \
+       feat_level_2_Linear)
 
-strPathParent02=".gfeat/cope1.feat/stats/pe1.nii.gz"
+strPathParent02=".gfeat/cope1.feat/stats/zstat1.nii.gz"
 
-strPathOutput="${pacman_data_path}${pacman_sub_id}/nii/stat_maps_trans/"
+strPathOutput="${pacman_data_path}${pacman_sub_id}/nii/stat_maps_comb/"
 #-------------------------------------------------------------------------------
 
 
@@ -34,7 +36,7 @@ for index01 in ${lstIn[@]}
 do
 
 	strTmpIn="${strPathParent01}${index01}${strPathParent02}"
-	strTmpOut="${strPathOutput}${index01}_pe1.nii.gz"
+	strTmpOut="${strPathOutput}${index01}_zstat1.nii.gz"
 	echo "------cp ${strTmpIn} ${strTmpOut}"
 	cp ${strTmpIn} ${strTmpOut}
 

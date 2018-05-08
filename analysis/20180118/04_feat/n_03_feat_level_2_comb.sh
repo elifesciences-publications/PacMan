@@ -4,7 +4,7 @@
 # ### Prepare fsf files
 
 # Get path of fsf files from environmental variables:
-str_path="${pacman_anly_path}${pacman_sub_id}/04_feat/level_2_fsf_trans/"
+str_path="${pacman_anly_path}${pacman_sub_id}/04_feat/level_2_fsf_comb/"
 
 # Replace path placeholders in fsf files, creating temporary fsf files (it does
 # not seem to be possible to pipe the result from sed directly into feat).

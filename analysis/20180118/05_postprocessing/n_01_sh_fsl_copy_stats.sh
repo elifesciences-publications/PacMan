@@ -11,12 +11,14 @@
 
 strPathParent01="${pacman_data_path}${pacman_sub_id}/nii/feat_level_2/"
 
-# Functional runs (input & output):
+# Input (feat directories):
 lstIn=(feat_level_2_Control_Dynamic \
+       feat_level_2_Control_Dynamic_minus_PacMan_Static \
        feat_level_2_PacMan_Dynamic \
        feat_level_2_PacMan_Dynamic_minus_Control_Dynamic \
        feat_level_2_PacMan_Static \
-       feat_level_2_PacMan_Dynamic_minus_PacMan_Static)
+       feat_level_2_PacMan_Dynamic_minus_PacMan_Static \
+       feat_level_2_Linear)
 
 strPathParent02=".gfeat/cope1.feat/stats/zstat1.nii.gz"
 
@@ -43,4 +45,3 @@ done
 date
 echo "done"
 #-------------------------------------------------------------------------------
-
