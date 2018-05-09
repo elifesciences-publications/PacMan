@@ -2,39 +2,34 @@
 
 
 ################################################################################
-# The purpose of this script is to copy and rename statistical maps.           #
+# The purpose of this script is to copy the mean & tSNR images.                #
 ################################################################################
 
 
 #-------------------------------------------------------------------------------
 # Define session IDs & paths:
 
-strPathParent01="${pacman_data_path}${pacman_sub_id}/nii/feat_level_2/"
+strPathParent="${pacman_data_path}${pacman_sub_id}/nii/func_reg_tsnr/"
 
 # Functional runs (input & output):
-lstIn=(feat_level_2_Control_Dynamic \
-       feat_level_2_PacMan_Dynamic \
-       feat_level_2_PacMan_Dynamic_minus_Control_Dynamic \
-       feat_level_2_PacMan_Static \
-       feat_level_2_PacMan_Dynamic_minus_PacMan_Static)
+lstIn=(combined_mean \
+       combined_mean_tSNR)
 
-strPathParent02=".gfeat/cope1.feat/stats/pe1.nii.gz"
-
-strPathOutput="${pacman_data_path}${pacman_sub_id}/nii/stat_maps/"
+strPathOutput="${pacman_data_path}${pacman_sub_id}/nii/stat_maps_comb/"
 #-------------------------------------------------------------------------------
 
 
 #-------------------------------------------------------------------------------
-# Copy and rename statistical maps:
+# Copy images:
 
-echo "---Copy and rename statistical maps---"
+echo "---Copy images---"
 date
 
 for index01 in ${lstIn[@]}
 do
 
-	strTmpIn="${strPathParent01}${index01}${strPathParent02}"
-	strTmpOut="${strPathOutput}${index01}_pe1.nii.gz"
+	strTmpIn="${strPathParent}${index01}.nii.gz"
+	strTmpOut="${strPathOutput}${index01}.nii.gz"
 	echo "------cp ${strTmpIn} ${strTmpOut}"
 	cp ${strTmpIn} ${strTmpOut}
 
@@ -43,4 +38,3 @@ done
 date
 echo "done"
 #-------------------------------------------------------------------------------
-
