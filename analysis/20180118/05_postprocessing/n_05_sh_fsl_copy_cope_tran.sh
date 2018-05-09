@@ -22,14 +22,14 @@ strPathParent01="${pacman_data_path}${pacman_sub_id}/nii/feat_level_2_trans/"
 #     cope 8: Pd_min_Cd_Ps
 
 # Input (feat directories):
-lstIn=(feat_level_2.gfeat/cope1.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope2.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope3.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope4.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope5.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope6.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope7.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope8.feat/stats/pe1.nii.gz)
+lstIn=(feat_level_2.gfeat/cope1.feat/stats/cope1.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope2.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope3.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope4.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope5.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope6.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope7.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope8.nii.gz)
 
 # Output (file names):
 lstOt=(Pd \
@@ -61,7 +61,7 @@ for index01 in $(seq 0 $varNumIn)
 do
 
 	strTmpIn="${strPathParent01}${lstIn[index01]}"
-	strTmpOut="${strPathOutput}feat_level_2_${lstOt[index01]}_pe1.nii.gz"
+	strTmpOut="${strPathOutput}feat_level_2_${lstOt[index01]}_cope.nii.gz"
 	echo "------cp ${strTmpIn} ${strTmpOut}"
 	cp ${strTmpIn} ${strTmpOut}
 

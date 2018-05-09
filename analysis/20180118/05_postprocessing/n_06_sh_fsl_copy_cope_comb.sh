@@ -31,23 +31,23 @@ strPathParent01="${pacman_data_path}${pacman_sub_id}/nii/feat_level_2_comb/"
 #     cope 17: sst_min_trn
 
 # Input (feat directories):
-lstIn=(feat_level_2.gfeat/cope1.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope2.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope3.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope4.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope5.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope6.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope7.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope8.feat/stats/pe1.nii.gz
-       feat_level_2.gfeat/cope9.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope10.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope11.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope12.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope13.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope14.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope15.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope16.feat/stats/pe1.nii.gz \
-       feat_level_2.gfeat/cope17.feat/stats/pe1.nii.gz)
+lstIn=(feat_level_2.gfeat/cope1.feat/stats/cope1.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope2.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope3.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope4.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope5.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope6.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope7.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope8.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope9.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope10.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope11.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope12.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope13.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope14.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope15.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope16.nii.gz \
+       feat_level_2.gfeat/cope1.feat/stats/cope17.nii.gz)
 
 # Output (file names):
 lstOt=(Pd_sst \
@@ -88,7 +88,7 @@ for index01 in $(seq 0 $varNumIn)
 do
 
 	strTmpIn="${strPathParent01}${lstIn[index01]}"
-	strTmpOut="${strPathOutput}feat_level_2_${lstOt[index01]}_pe1.nii.gz"
+	strTmpOut="${strPathOutput}feat_level_2_${lstOt[index01]}_cope.nii.gz"
 	echo "------cp ${strTmpIn} ${strTmpOut}"
 	cp ${strTmpIn} ${strTmpOut}
 
