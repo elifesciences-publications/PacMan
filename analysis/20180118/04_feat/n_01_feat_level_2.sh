@@ -12,13 +12,9 @@ NEW_DATA_PATH="${pacman_data_path}${pacman_sub_id}/"
 NEW_ANALYSIS_PATH="${pacman_anly_path}"
 
 # fsf files:
-aryFsfFiles=(feat_level_2_Control_Dynamic \
-             feat_level_2_Control_Dynamic_minus_PacMan_Static \
-             feat_level_2_PacMan_Dynamic \
-             feat_level_2_PacMan_Dynamic_minus_Control_Dynamic \
-             feat_level_2_PacMan_Static \
-             feat_level_2_PacMan_Dynamic_minus_PacMan_Static \
-             feat_level_2_Linear)
+aryFsfFiles=(feat_level_2_combined \
+             feat_level_2_sustained \
+             feat_level_2_transient)
 
 for index01 in ${aryFsfFiles[@]}
 do
@@ -39,14 +35,9 @@ echo "-----------Second level feat:-----------"
 
 date
 
-feat "${str_path}feat_level_2_Control_Dynamic_sed.fsf"
-feat "${str_path}feat_level_2_Control_Dynamic_minus_PacMan_Static_sed.fsf"
-feat "${str_path}feat_level_2_PacMan_Dynamic_sed.fsf"
-feat "${str_path}feat_level_2_PacMan_Dynamic_minus_Control_Dynamic_sed.fsf"
-feat "${str_path}feat_level_2_PacMan_Static_sed.fsf"
-feat "${str_path}feat_level_2_PacMan_Dynamic_minus_PacMan_Static_sed.fsf"
-feat "${str_path}feat_level_2_Linear_sed.fsf"
-
+feat "${str_path}feat_level_2_combined_sed.fsf"
+feat "${str_path}feat_level_2_sustained_sed.fsf"
+feat "${str_path}feat_level_2_transient_sed.fsf"
 date
 
 echo "done"

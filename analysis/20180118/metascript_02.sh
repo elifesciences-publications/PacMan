@@ -226,16 +226,8 @@ date
 #-------------------------------------------------------------------------------
 # ### Second level FEAT
 
-echo "---Automatic: 2nd level FSL FEAT with sustained predictors."
+echo "---Automatic: 2nd level FSL FEAT."
 source ${strPathPrnt}04_feat/n_01_feat_level_2.sh
-date
-
-echo "---Automatic: 2nd level FSL FEAT with transient predictors."
-source ${strPathPrnt}04_feat/n_02_feat_level_2_trans.sh
-date
-
-echo "---Automatic: 2nd level FSL FEAT with sustained and transient predictors."
-source ${strPathPrnt}04_feat/n_03_feat_level_2_comb.sh
 date
 #-------------------------------------------------------------------------------
 
