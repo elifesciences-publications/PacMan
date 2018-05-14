@@ -29,9 +29,6 @@
 # Location of CBS layouts & python scripts to run:
 strPthCbs="${pacman_anly_path}${pacman_sub_id}/08_depthsampling/"
 
-# Location of segmentation files:
-seg_path="${strPthCbs}${pacman_sub_id}_mp2rage_seg_${pacman_seg_version}"
-
 # Names of CBS layouts to run (xml files):
 aryCbs=(cbs_lh_glm_prf.LayoutXML \
         cbs_rh_glm_prf.LayoutXML
@@ -68,10 +65,10 @@ do
     cp ${strPthCbs}${index01} ${strPthCbs}sed_${index01}
 
     # Replace placeholders with path of current subject:
-    sed -i "s|PLACEHOLDER_SUBJECT_ID|${pacman_sub_id}|g" ${strPthCbs}sed_${index01}
-    sed -i "s|PLACEHOLDER_SEG_PATH|${seg_path}|g" ${strPthCbs}sed_${index01}
-    sed -i "s|PLACEHOLDER_DATA_PATH|${pacman_data_path}|g" ${strPthCbs}sed_${index01}
-    sed -i "s|PLACEHOLDER_SEG_VERSION|${pacman_seg_version}|g" ${strPthCbs}sed_${index01}
+    sed -i "s|pacman_sub_id|${pacman_sub_id}|g" ${strPthCbs}sed_${index01}
+    sed -i "s|pacman_anly_path|${pacman_anly_path}|g" ${strPthCbs}sed_${index01}
+    sed -i "s|pacman_data_path|${pacman_data_path}|g" ${strPthCbs}sed_${index01}
+    sed -i "s|pacman_seg_version|${pacman_seg_version}|g" ${strPthCbs}sed_${index01}
 done
 #------------------------------------------------------------------------------
 
