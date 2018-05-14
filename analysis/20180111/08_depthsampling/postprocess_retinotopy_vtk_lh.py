@@ -33,17 +33,17 @@ pacman_sub_id = str(os.environ['pacman_sub_id'])
 # Path of the vtk file to be masked:
 strVtkIn = (pacman_data_path
             + pacman_sub_id
-            + '/cbs/lh/polar_angle.vtk')
+            + '/cbs/lh/pRF_results_polar_angle_mid_GM.vtk')
 
 # Output file path:
 strVtkOt = (pacman_data_path
             + pacman_sub_id
-            + '/cbs/lh/polar_angle_thr.vtk')
+            + '/cbs/lh/pRF_results_polar_angle_mid_GM_thr.vtk')
 
 # Path of the vtk file used for thresholding (reference):
 strVtkRf = (pacman_data_path
             + pacman_sub_id
-            + '/cbs/lh/R2_midGM.vtk')
+            + '/cbs/lh/pRF_results_R2_mid_GM.vtk')
 
 # Lower threhold (vertices with a value below this in the reference image will
 # be set to the substitute value in the input vtk file):
