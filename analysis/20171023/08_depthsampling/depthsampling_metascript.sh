@@ -33,10 +33,10 @@ strPthCbs="${pacman_anly_path}${pacman_sub_id}/08_depthsampling/"
 seg_path="${strPthCbs}${pacman_sub_id}_mp2rage_seg_${pacman_seg_version}"
 
 # Names of CBS layouts to run (xml files):
-aryCbs=(cbs_mp2rage_lh_equivol_retino_stats.LayoutXML \
-        cbs_mp2rage_rh_equivol_retino_stats.LayoutXML
-        cbs_mp2rage_lh_equivol_ert.LayoutXML \
-        cbs_mp2rage_rh_equivol_ert.LayoutXML)
+aryCbs=(cbs_lh_glm_prf.LayoutXML \
+        cbs_rh_glm_prf.LayoutXML
+        cbs_lh_ert.LayoutXML \
+        cbs_rh_ert.LayoutXML)
 
 # Names of python scripts to run:
 aryPy=(renameJistOutput.py \
