@@ -12,7 +12,8 @@
 # Get session ID (from environmental variable, which is defined in metascript):
 str_session_ID="${pacman_sub_id}"
 
-# Get data directory (from environmental variable, which is defined in metascript):
+# Get data directory (from environmental variable, which is defined in
+# metascript):
 str_path_parent="${pacman_data_path}${str_session_ID}"
 
 # Nii directory (main analysis directory):
@@ -69,6 +70,9 @@ then
 
 	mkdir "${str_nii}/feat_level_1_trans"
 	mkdir "${str_nii}/feat_level_2_trans"
+
+	mkdir "${str_nii}/feat_level_1_comb"
+	mkdir "${str_nii}/feat_level_2_comb"
 
 	mkdir "${str_nii}/func"
 	mkdir "${str_nii}/func_distcorField"
