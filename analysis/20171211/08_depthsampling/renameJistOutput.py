@@ -45,7 +45,7 @@ pacman_data_path = str(os.environ['pacman_data_path'])
 pacman_sub_id = str(os.environ['pacman_sub_id'])
 
 # Subject IDs & number of prefixes to remove for that subject:
-dicSubId = {pacman_sub_id: 9}
+dicSubId = {pacman_sub_id: 6}
 
 # Paths with files to be renamed (subject ID left open):
 lstPths = [pacman_data_path + '{}/cbs/lh/',

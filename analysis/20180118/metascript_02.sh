@@ -168,6 +168,10 @@ date
 echo "---Automatic: 1st level FSL FEAT with transient predictors."
 source ${strPathPrnt}02_feat/n_02_feat_level_1_script_parallel_trans.sh
 date
+
+echo "---Automatic: 1st level FSL FEAT with sustained and transient predictors."
+source ${strPathPrnt}02_feat/n_03_feat_level_1_script_parallel_comb.sh
+date
 #-------------------------------------------------------------------------------
 
 
@@ -186,6 +190,11 @@ date
 echo "---Automatic: Update FEAT directories (dummy registration) for transient"
 echo "   predictors."
 source ${strPathPrnt}03_intermediate_steps/n_02b_sh_fsl_updatefeatreg_trans.sh
+date
+
+echo "---Automatic: Update FEAT directories (dummy registration) for combined"
+echo "   sustained and transient predictors."
+source ${strPathPrnt}03_intermediate_steps/n_02c_sh_fsl_updatefeatreg_comb.sh
 date
 
 echo "---Automatic: Create event related averages."
@@ -217,12 +226,8 @@ date
 #-------------------------------------------------------------------------------
 # ### Second level FEAT
 
-echo "---Automatic: 2nd level FSL FEAT with sustained predictors."
+echo "---Automatic: 2nd level FSL FEAT."
 source ${strPathPrnt}04_feat/n_01_feat_level_2.sh
-date
-
-echo "---Automatic: 2nd level FSL FEAT with transient predictors."
-source ${strPathPrnt}04_feat/n_02_feat_level_2_trans.sh
 date
 #-------------------------------------------------------------------------------
 
@@ -231,17 +236,21 @@ date
 # ### Postprocessing
 
 echo "---Automatic: Copy FEAT results."
-source ${strPathPrnt}05_postprocessing/n_01_sh_fsl_copy_stats.sh
-source ${strPathPrnt}05_postprocessing/n_02_sh_fsl_copy_stats_trans.sh
-source ${strPathPrnt}05_postprocessing/n_03_sh_fsl_copy_stats_pe.sh
-source ${strPathPrnt}05_postprocessing/n_04_sh_fsl_copy_stats_pe_trans.sh
-source ${strPathPrnt}05_postprocessing/n_05_sh_fsl_copy_mean.sh
-source ${strPathPrnt}05_postprocessing/n_06_sh_fsl_copy_mean_trans.sh
+source ${strPathPrnt}05_postprocessing/n_01_sh_fsl_copy_zstat_sst.sh
+source ${strPathPrnt}05_postprocessing/n_02_sh_fsl_copy_zstat_tran.sh
+source ${strPathPrnt}05_postprocessing/n_03_sh_fsl_copy_zstat_comb.sh
+source ${strPathPrnt}05_postprocessing/n_04_sh_fsl_copy_cope_sst.sh
+source ${strPathPrnt}05_postprocessing/n_05_sh_fsl_copy_cope_tran.sh
+source ${strPathPrnt}05_postprocessing/n_06_sh_fsl_copy_cope_comb.sh
+source ${strPathPrnt}05_postprocessing/n_08_sh_fsl_copy_mean.sh
+source ${strPathPrnt}05_postprocessing/n_09_sh_fsl_copy_mean_trans.sh
+source ${strPathPrnt}05_postprocessing/n_10_sh_fsl_copy_mean_comb.sh
 date
 
 echo "---Automatic: Upsample FEAT results."
-source ${strPathPrnt}05_postprocessing/n_07_upsample_stats.sh
-source ${strPathPrnt}05_postprocessing/n_08_upsample_stats_trans.sh
+source ${strPathPrnt}05_postprocessing/n_11_upsample_stats.sh
+source ${strPathPrnt}05_postprocessing/n_12_upsample_stats_trans.sh
+source ${strPathPrnt}05_postprocessing/n_13_upsample_stats_comb.sh
 date
 #-------------------------------------------------------------------------------
 
