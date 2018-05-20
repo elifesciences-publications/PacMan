@@ -31,7 +31,7 @@ strPthCbs="${pacman_anly_path}${pacman_sub_id}/08_depthsampling/"
 
 # Names of CBS layouts to run (xml files):
 aryCbs=(cbs_lh_glm_prf.LayoutXML \
-        cbs_rh_glm_prf.LayoutXML
+        cbs_rh_glm_prf.LayoutXML \
         cbs_lh_ert.LayoutXML \
         cbs_rh_ert.LayoutXML)
 
