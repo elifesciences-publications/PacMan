@@ -1,0 +1,4 @@
+
+pRF analysis without spatial smoothing (for depthsampling of pRF parameters)
+
+only implemented for 20180118

@@ -260,19 +260,26 @@ date
 
 echo "---Automatic: Prepare pRF analysis."
 python ${strPathPrnt}07_pRF/01_py_prepare_prf.py
+# pRF analysis with spatial smoothing, for V1/V2/V3 ROI definition:
 source ${strPathPrnt}07_pRF/02a_prepare_pRF_config.sh
+# pRF analysis without spatial smoothing (for depthsampling of pRF parameters):
+source ${strPathPrnt}07_pRF/03a_prepare_pRF_config_nosmth.sh
 date
 
 echo "---Automatic: Perform pRF analysis with pyprf"
-pyprf -config ${strPathPrnt}07_pRF/02b_pRF_config_sed.csv
+pyprf -config ${strPathPrnt}07_pRF/02c_pRF_config_sed.csv
+date
+
+echo "---Automatic: Perform pRF analysis with pyprf (without spatial smoothing)"
+pyprf -config ${strPathPrnt}07_pRF/03c_pRF_config_nosmth_sed.csv
 date
 
 echo "---Automatic: Upsample pRF results."
-source ${strPathPrnt}07_pRF/03_upsample_retinotopy.sh
+source ${strPathPrnt}07_pRF/04_upsample_retinotopy.sh
 date
 
 echo "---Automatic: Calculate overlap between voxel pRFs and stimulus."
-python ${strPathPrnt}07_pRF/04_PacMan_pRF_overlap.py
+python ${strPathPrnt}07_pRF/05_PacMan_pRF_overlap.py
 date
 #-------------------------------------------------------------------------------
 
