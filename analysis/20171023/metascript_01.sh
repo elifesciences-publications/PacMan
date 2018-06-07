@@ -16,8 +16,8 @@ pacman_sub_id="20171023"
 pacman_sub_id_bids="sub-01"
 
 # Analysis parent directory (containing scripts):
-pacman_anly_path="/home/john/PhD/GitHub/PacMan/analysis/"
-# pacman_anly_path="/Users/john/1_PhD/GitHub/PacMan/analysis/"
+pacman_anly_path="/home/john/PhD/GitLab/PacMan/analysis/"
+# pacman_anly_path="/Users/john/1_PhD/GitLab/PacMan/analysis/"
 
 
 # Data parent directory (containing MRI data). If working with the BIDS data,

@@ -28,7 +28,7 @@
 pacman_sub_id="20171109"
 
 # Analysis parent directory (containing scripts):
-pacman_anly_path="/home/john/PhD/GitHub/PacMan/analysis/"
+pacman_anly_path="/home/john/PhD/GitLab/PacMan/analysis/"
 
 # Data parent directory (containing MRI data):
 pacman_data_path="/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/"
