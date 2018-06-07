@@ -23,6 +23,7 @@ central fixation task is evaluated.
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+import glob
 import numpy as np
 from load_csv_log import load_csv_log
 
@@ -30,17 +31,10 @@ from load_csv_log import load_csv_log
 # *****************************************************************************
 # *** Define parameters
 
-# Meta-condition (within or outside of retinotopic stimulus area):
-lstMetaCon = ['stimulus', 'periphery']
-
-# Region of interest ('v1' or 'v2'):
-lstRoi = ['v1', 'v2', 'v3']
-
-# Hemispheres ('lh' or 'rh'):
-lstHmsph = ['lh', 'rh']
-
 # List of subject identifiers:
-lstSubIds = ['20171023',  # '20171109',
+lstSubIds = ['20171023',
+             '20171109',
+             '20171129',
              '20171204_01',
              '20171204_02',
              '20171211',
@@ -48,118 +42,55 @@ lstSubIds = ['20171023',  # '20171109',
              '20180111',
              '20180118']
 
-# Condition levels (used to complete file names) - nested list:
-lstNstCon = [['Pd_sst', 'Cd_sst', 'Ps_sst'],
-             ['Pd_min_Ps_sst'],
-             ['Pd_min_Cd_sst'],
-             ['Linear_sst'],
-             ['Pd_trn', 'Cd_trn', 'Ps_trn'],
-             ['Pd_min_Ps_trn'],
-             ['Pd_min_Cd_trn'],
-             ['Linear_trn']]
+# Path of log files. Subject ID, subject ID, and filname left open.
+strPthLog = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/log/PacMan/log/{}/{}.log'
+# *****************************************************************************
 
-# Condition labels:
-lstNstConLbl = [['PacMan Dynamic Sustained',
-                 'Control Dynamic Sustained',
-                 'PacMan Static Sustained'],
-                ['PacMan D - PacMan S (Sustained)'],
-                ['PacMan D - Control D (Sustained)'],
-                ['Linear (Sustained)'],
-                ['PacMan Dynamic Transient',
-                 'Control Dynamic Transient',
-                 'PacMan Static Transient'],
-                ['PacMan D - PacMan S (Transient)'],
-                ['PacMan D - Control D (Transient)'],
-                ['Linear (Transient)']]
 
-# Base path of vtk files with depth-sampled data, e.g. parameter estimates
-# (with subject ID, hemisphere, and stimulus level left open):
-strVtkDpth01 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/{}/feat_level_2_{}_cope.vtk'  #noqa
+# *****************************************************************************
+# *** Read log files
 
-# (1)
-# Restrict vertex selection to region of interest (ROI)?
-lgcSlct01 = True
-# Base path of csv files with ROI definition (i.e. patch of cortex selected on
-# the surface, e.g. V1 or V2) - i.e. the first vertex selection criterion (with
-# subject ID, hemisphere, and ROI left open):
-# NOTE: The '_mod' subscript indicates that the csv files have been processed
-# by the funtion `py_depthsampling.misc.fix_roi_csv.fix_roi_csv` in order to
-# ensure that the indices of the ROI definition and the vtk meshes are
-# congruent.
-strCsvRoi = '/home/john/PhD/GitHub/PacMan/analysis/{}/08_depthsampling/{}/{}_mod.csv'  #noqa
-# Number of header lines in ROI CSV file:
-varNumHdrRoi = 1
+print('-Evaluiate behavioural performance')
 
-# (2)
-# Use vertex selection criterion 2 (vertices that are BELOW threshold are
-# excluded - median across depth levels):
-lgcSlct02 = True
-# Path of vtk files with for vertex selection criterion. This vtk file is
-# supposed to contain one set of data values for each depth level. (With
-# subject ID and hemisphere left open.)
-strVtkSlct02 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/{}/pRF_results_R2.vtk'  #noqa
-# Threshold for vertex selection:
-varThrSlct02 = 0.15
+# Number of subjects:
+varNumSub = len(lstSubIds)
 
-# (3)
-# Use vertex selection criterion 3 (vertices that are BELOW threshold are
-# excluded - minimum across depth levels):
-lgcSlct03 = True
-# Path of vtk files with for vertex selection criterion. This vtk file is
-# supposed to contain one set of data values for each depth level. (With
-# subject ID and hemisphere left open.)
-strVtkSlct03 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/{}/combined_mean.vtk'  #noqa
-# Threshold for vertex selection:
-varThrSlct03 = 7000.0
+# List for percent hits:
+lstHits = []
 
-# (4)
-# Use vertex selection criterion 4 (vertices that are WITHIN INTERVAL are
-# included - median across depth levels):
-lgcSlct04 = True
-# Path of vtk files with for vertex selection criterion. This vtk file is
-# supposed to contain one set of data values for each depth level. (With
-# subject ID and hemisphere left open.)
-strVtkSlct04 = '/media/sf_D_DRIVE/MRI_Data_PhD/05_PacMan/{}/cbs/{}/pRF_results_eccentricity.vtk'  #noqa
-# Threshold for vertex selection - list of tuples (interval per meta-condition,
-# e.g. within & outside stimulus area):
-lstThrSlct04 = [(0.0, 3.0), (3.5, 4.0)]
+for idxSub in range(varNumSub):
 
-# Number of cortical depths:
-varNumDpth = 11
+    print(('--Subject ' + lstSubIds[idxSub]))
 
-# Beginning of string which precedes vertex data in data vtk files (i.e. in the
-# statistical maps):
-strPrcdData = 'SCALARS'
+    # Current log directory path (with wildcard for filname):
+    strTmp = strPthLog.format(lstSubIds[idxSub], lstSubIds[idxSub], '*')
 
-# Number of lines between vertex-identification-string and first data point:
-varNumLne = 2
+    # Get list of log files for current subjcet:
+    lstFls = sorted(glob.glob(strTmp))
 
-# Label for axes:
-strXlabel = 'Cortical depth level (equivolume)'
-strYlabel = 'fMRI signal [a.u.]'
+    # Loop through log files (i.e. runs):
+    for idxRun in range(len(lstFls)):
 
-# Output path for plots - prefix:
-strPltOtPre = '/home/john/PhD/PacMan_Plots/pe/{}/plots_{}/'
+        try:
+            # Get percent of hits from log file:
+            varPcntHit = load_csv_log(lstFls[idxRun])
 
-# Output path for plots - suffix:
-strPltOtSuf = '_{}_{}_{}.png'
+            print(('---Run ' + str(idxRun + 1) + ': ' + str(varPcntHit)))
 
-# Figure scaling factor:
-varDpi = 80.0
+            lstHits.append(varPcntHit)
 
-# If normalisation - data from which input file to divide by?
-# (Indexing starts at zero.) Note: This functionality is not used at the
-# moment. Instead of dividing by a reference condition, all profiles are
-# divided by the grand mean within subjects before averaging across subjects
-# (if lgcNormDiv is true).
-varNormIdx = 0
+        except StopIteration:
+            # If the run was aborted, there is no information on percent hits
+            # in the log file.
+            pass
 
-# Normalise by division?
-lgcNormDiv = False
+# List to array:
+aryHits = np.array(lstHits)
 
-# Output path for depth samling results (within subject means):
-strDpthMeans = '/home/john/PhD/PacMan_Depth_Data/Higher_Level_Analysis/{}/{}_{}_{}.npy'  #noqa
+# Average performance across subjects:
+varMne = np.mean(aryHits)
+varSd = np.std(aryHits)
 
-# Maximum number of processes to run in parallel: *** NOT IMPLEMENTED
-# varPar = 10
+print(('--Mean percent hits across subjects: ' + str(varMne)))
+print(('--Standard deviation:                ' + str(varSd)))
 # *****************************************************************************

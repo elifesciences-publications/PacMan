@@ -20,13 +20,12 @@ Function of PacMan project.
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import csv
-import numpy as np
 
 
 def load_csv_log(strCsvLog):
     """
     Extract percentage of hits from PacMan experiment log file.
-    
+
     Parameters
     ----------
     strCsvLog : str
