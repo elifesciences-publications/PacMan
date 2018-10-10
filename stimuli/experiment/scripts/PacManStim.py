@@ -91,6 +91,14 @@ dicExpInfo = {'Run': lstRuns,
 objGui = gui.DlgFromDict(dictionary=dicExpInfo,
                          title=strExpNme)
 
+# On some systems (windows) the return values from the GUI are not as expected.
+# Set their types explicitly:
+dicExpInfo['Run'] = str(dicExpInfo['Run'])
+dicExpInfo['Stimulus'] = str(dicExpInfo['Stimulus'])
+dicExpInfo['Condition'] = str(dicExpInfo['Condition'])
+dicExpInfo['Test mode'] = str(dicExpInfo['Test mode'])
+dicExpInfo['Subject_ID'] = str(dicExpInfo['Subject_ID'])
+
 # Close if user presses 'cancel':
 if objGui.OK is False:
     core.quit()
@@ -535,7 +543,7 @@ strPthDsgn = (strPthPrnt
               + 'design_matrices'
               + os.path.sep
               + 'PacMan_run_'
-              + str(dicExpInfo['Run'])
+              + dicExpInfo['Run']
               + '_eventmatrix.txt')
 
 # Read design matrix:
