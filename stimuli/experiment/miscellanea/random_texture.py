@@ -56,7 +56,7 @@ aryRndnS = np.around(aryRndnS).astype(np.uint8)
 objImg = Image.fromarray(aryRndnS, mode='L')
 
 # Save image to disk:
-objImg.save(strPthOut.format(str(np.around(varPix)),
-                             str(np.around(varSd)),
+objImg.save(strPthOut.format(str(np.around(varPix)).split('.')[0],
+                             str(np.around(varSd)).split('.')[0],
                              str(varUniFlt)))
 # -----------------------------------------------------------------------------
