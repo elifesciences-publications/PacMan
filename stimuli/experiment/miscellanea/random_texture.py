@@ -15,12 +15,12 @@ tplSze = (1920, 1200)
 # Size of uniform filter [pixels]:
 varUniFlt = 6
 
-# Mean pixel intensity [RGB intensity, 0 tp 255]:
+# Mean pixel intensity [RGB intensity, 0 to 255]:
 varPix = ((-0.71 + 1.0) * 0.5) * 255.0  # 37
 
 # Standard deviation of pixel intensity before smoothing [RGB intensity, 0 to
 # 255]:
-varSd = 60.0
+varSd = ((-0.5294117647058824 + 1.0) * 0.5) * 255.0  # 60.0
 
 # Output path (mean intensity, standard deviation, and filter size left open):
 strPthOut = '/home/john/Desktop/random_texture_mne_{}_sd_{}_fltr_{}.png'
@@ -56,7 +56,7 @@ aryRndnS = np.around(aryRndnS).astype(np.uint8)
 objImg = Image.fromarray(aryRndnS, mode='L')
 
 # Save image to disk:
-objImg.save(strPthOut.format(str(np.around(varPix)),
-                             str(np.around(varSd)),
+objImg.save(strPthOut.format(str(np.around(varPix)).split('.')[0],
+                             str(np.around(varSd)).split('.')[0],
                              str(varUniFlt)))
 # -----------------------------------------------------------------------------
