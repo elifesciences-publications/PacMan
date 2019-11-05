@@ -72,7 +72,7 @@ strBidsTrg="${strMnt}/${strPub}/07_Raw_data/"
 # *** Preparations
 
 # Mount the server:
-sudo mount -t cifs ${strTrgt} ${strMnt} -o username=ingo.marquardt
+sudo mount -t cifs ${strTrgt} ${strMnt} -o username=ingo.marquardt,vers=2.0
 
 # Change owner & group (probably because the server is using a windows file
 # system this does not work):
