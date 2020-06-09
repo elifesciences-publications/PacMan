@@ -1,3 +1,7 @@
+This code is associated with the paper from Marquardt et al., "Feedback contribution to surface motion perception in the human early visual cortex". eLife, 2020. http://doi.org/10.7554/eLife.50933
+
+
+
 # PacMan
 Analysis pipeline for the PacMan project.
 
